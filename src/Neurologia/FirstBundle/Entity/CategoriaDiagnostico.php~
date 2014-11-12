@@ -1,0 +1,65 @@
+<?php
+
+namespace Neurologia\FirstBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CategoriaDiagnostico
+ *
+ * @ORM\Table(name="categoria_diagnostico")
+ * @ORM\Entity
+ */
+class CategoriaDiagnostico
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_categoria_diagnostico", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCategoriaDiagnostico;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+
+
+    /**
+     * Get idCategoriaDiagnostico
+     *
+     * @return integer 
+     */
+    public function getIdCategoriaDiagnostico()
+    {
+        return $this->idCategoriaDiagnostico;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return CategoriaDiagnostico
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+}

@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block menu %}
+	<a href="{{ asset('index') }}">Home</a> |
+
+	{% if rol=='Administrador' %}
+		<a href="{{path('neurologia_first_admin',{ 'name':datos })}}">Administrar</a> |
+		
+
+		
+	{% endif %}	
+	
+	<a href="{{path('neurologia_first_logout')}}" >Salir</a> |
+	<span style="float:right">{{ datos }}</span>
+{% endblock %}
+
+{% block container %}
+<p> Esto es el index </p>
+<img style="padding-left: 10%; opacity:0.5; width:80%; height:500px;" src="{{asset('bundles/firstbundle/images/portada.jpg')}}"></img>
+<!--{% include 'NeurologiaFirstBundle:Default:datosPersonales.html.twig' %}-->
+
+{% endblock %}
+

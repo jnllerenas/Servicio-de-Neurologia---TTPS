@@ -1,0 +1,209 @@
+<?php
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Acme\UserBundle\Entity;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=3,
+     *     max="255",
+     *     minMessage="The name is too short.",
+     *     maxMessage="The name is too long.",
+     *     groups={"Registration", "Profile"}
+     * )
+     */
+    protected $nombre;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $apellido;
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    protected $numero_documento;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $telefono; 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $fecha_de_nacimiento;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $direccion;
+    
+    
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Usuario
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set apellido
+     *
+     * @param string $apellido
+     * @return Usuario
+     */
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    /**
+     * Get apellido
+     *
+     * @return string 
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    /**
+     * Set numero_documento
+     *
+     * @param string $numeroDocumento
+     * @return Usuario
+     */
+    public function setNumeroDocumento($numeroDocumento)
+    {
+        $this->numero_documento = $numeroDocumento;
+
+        return $this;
+    }
+
+    /**
+     * Get numero_documento
+     *
+     * @return string 
+     */
+    public function getNumeroDocumento()
+    {
+        return $this->numero_documento;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Usuario
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set fecha_de_nacimiento
+     *
+     * @param string $fechaDeNacimiento
+     * @return Usuario
+     */
+    public function setFechaDeNacimiento($fechaDeNacimiento)
+    {
+        $this->fecha_de_nacimiento = $fechaDeNacimiento;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha_de_nacimiento
+     *
+     * @return string 
+     */
+    public function getFechaDeNacimiento()
+    {
+        return $this->fecha_de_nacimiento;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Usuario
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

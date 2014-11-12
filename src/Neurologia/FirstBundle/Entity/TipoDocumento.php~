@@ -1,0 +1,65 @@
+<?php
+
+namespace Neurologia\FirstBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TipoDocumento
+ *
+ * @ORM\Table(name="tipo_documento")
+ * @ORM\Entity
+ */
+class TipoDocumento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_tipo_documento", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idTipoDocumento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+
+
+    /**
+     * Get idTipoDocumento
+     *
+     * @return integer 
+     */
+    public function getIdTipoDocumento()
+    {
+        return $this->idTipoDocumento;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return TipoDocumento
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+}

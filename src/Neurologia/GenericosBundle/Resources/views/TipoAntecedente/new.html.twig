@@ -1,0 +1,15 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+    <h1>TipoAntecedente creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tipoantecedente') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

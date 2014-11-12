@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="HistoriaClinica" table="historia_clinica">
+    <id name="idPaciente" association-key="true"/>
+    <one-to-one field="idPaciente" target-entity="Paciente">
+      <join-columns>
+        <join-column name="id_paciente" referenced-column-name="id_persona"/>
+      </join-columns>
+    </one-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,41 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+    <h1>TipoAntecedente list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descripcion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tipoantecedente_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.descripcion }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('tipoantecedente_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('tipoantecedente_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('tipoantecedente_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

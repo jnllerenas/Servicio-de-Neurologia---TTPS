@@ -1,0 +1,30 @@
+categoriadiagnostico:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:index" }
+
+categoriadiagnostico_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:show" }
+
+categoriadiagnostico_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:new" }
+
+categoriadiagnostico_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:create" }
+    requirements: { _method: post }
+
+categoriadiagnostico_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:edit" }
+
+categoriadiagnostico_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:update" }
+    requirements: { _method: post|put }
+
+categoriadiagnostico_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:CategoriaDiagnostico:delete" }
+    requirements: { _method: post|delete }

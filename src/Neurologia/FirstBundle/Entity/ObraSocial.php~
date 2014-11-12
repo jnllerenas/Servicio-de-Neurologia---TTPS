@@ -1,0 +1,65 @@
+<?php
+
+namespace Neurologia\FirstBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ObraSocial
+ *
+ * @ORM\Table(name="obra_social")
+ * @ORM\Entity
+ */
+class ObraSocial
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_obra_social", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idObraSocial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+
+
+    /**
+     * Get idObraSocial
+     *
+     * @return integer 
+     */
+    public function getIdObraSocial()
+    {
+        return $this->idObraSocial;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return ObraSocial
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+}

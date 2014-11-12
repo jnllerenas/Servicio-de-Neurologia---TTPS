@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Paciente" table="paciente">
+    <indexes>
+      <index name="id_nivel_educacional" columns="id_nivel_educacional"/>
+      <index name="id_obra_social" columns="id_obra_social"/>
+      <index name="id_usuario" columns="id_usuario"/>
+      <index name="id_departamento" columns="id_departamento"/>
+    </indexes>
+    <id name="idPersona" type="integer" column="id_persona">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ocupacion" type="string" column="ocupacion" length="255" nullable="true"/>
+    <field name="otros" type="string" column="otros" length="255" nullable="true"/>
+    <many-to-one field="idUsuario" target-entity="Usuario">
+      <join-columns>
+        <join-column name="id_usuario" referenced-column-name="id_persona"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idObraSocial" target-entity="ObraSocial">
+      <join-columns>
+        <join-column name="id_obra_social" referenced-column-name="id_obra_social"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idNivelEducacional" target-entity="NivelEducacional">
+      <join-columns>
+        <join-column name="id_nivel_educacional" referenced-column-name="id_nivel_educacional"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idDepartamento" target-entity="Departamento">
+      <join-columns>
+        <join-column name="id_departamento" referenced-column-name="id_departamento"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

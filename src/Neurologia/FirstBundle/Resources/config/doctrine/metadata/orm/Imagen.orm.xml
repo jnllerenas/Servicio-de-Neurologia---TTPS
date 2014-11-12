@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Imagen" table="imagen">
+    <indexes>
+      <index name="id_estudio" columns="id_estudio"/>
+    </indexes>
+    <id name="idImagen" type="integer" column="id_imagen">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="descripcion" length="255" nullable="true"/>
+    <field name="archivo" type="string" column="archivo" length="255" nullable="true"/>
+    <many-to-one field="idEstudio" target-entity="Estudio">
+      <join-columns>
+        <join-column name="id_estudio" referenced-column-name="id_estudio"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

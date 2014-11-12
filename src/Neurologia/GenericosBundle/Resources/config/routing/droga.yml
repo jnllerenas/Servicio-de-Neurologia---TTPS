@@ -1,0 +1,30 @@
+droga:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:index" }
+
+droga_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:show" }
+
+droga_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:new" }
+
+droga_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:create" }
+    requirements: { _method: post }
+
+droga_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:edit" }
+
+droga_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:update" }
+    requirements: { _method: post|put }
+
+droga_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:Droga:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,70 @@
+<?php
+
+namespace Neurologia\FirstBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Sexo
+ *
+ * @ORM\Table(name="sexo")
+ * @ORM\Entity
+ */
+class Sexo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_sexo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idSexo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+
+
+    /**
+     * Get idSexo
+     *
+     * @return integer 
+     */
+    public function getIdSexo()
+    {
+        return $this->idSexo;
+    }
+	
+	public function getId() //SOBREESCRITO PARA LA GENERACION DEL CRUD
+    {
+        return $this->idSexo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Sexo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+}

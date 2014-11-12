@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Estudio" table="estudio">
+    <indexes>
+      <index name="id_evolucion" columns="id_evolucion"/>
+      <index name="id_tipo_estudio" columns="id_tipo_estudio"/>
+    </indexes>
+    <id name="idEstudio" type="integer" column="id_estudio">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="descripcion" type="string" column="descripcion" length="255" nullable="true"/>
+    <field name="fecha" type="date" column="fecha" nullable="true"/>
+    <field name="institucion" type="string" column="institucion" length="255" nullable="true"/>
+    <many-to-one field="idEvolucion" target-entity="Evolucion">
+      <join-columns>
+        <join-column name="id_evolucion" referenced-column-name="id_evolucion"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idTipoEstudio" target-entity="TipoEstudio">
+      <join-columns>
+        <join-column name="id_tipo_estudio" referenced-column-name="id_tipo_estudio"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

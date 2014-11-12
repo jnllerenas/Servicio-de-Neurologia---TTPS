@@ -1,0 +1,47 @@
+<?php
+
+namespace Acme\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="paciente")
+ */
+class Paciente {
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $nombre;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $apellido;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $numero_documento;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $telefono;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $email;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $fecha_de_nacimiento;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $direccion;
+
+    /** @ORM\Column(type="string", length=100) */
+    protected $ocupacion;
+
+    /** @ORM\Column(type="string", length=200) */
+    protected $otros;
+
+}

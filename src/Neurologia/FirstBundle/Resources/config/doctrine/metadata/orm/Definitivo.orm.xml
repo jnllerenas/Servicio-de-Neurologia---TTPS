@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Definitivo" table="definitivo">
+    <indexes>
+      <index name="id_categoria_diagnostico" columns="id_categoria_diagnostico"/>
+    </indexes>
+    <id name="idDiagnostico" association-key="true"/>
+    <one-to-one field="idDiagnostico" target-entity="Diagnostico">
+      <join-columns>
+        <join-column name="id_diagnostico" referenced-column-name="id_diagnostico"/>
+      </join-columns>
+    </one-to-one>
+    <many-to-one field="idCategoriaDiagnostico" target-entity="CategoriaDiagnostico">
+      <join-columns>
+        <join-column name="id_categoria_diagnostico" referenced-column-name="id_categoria_diagnostico"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
