@@ -27,10 +27,7 @@ class TranslatorPassTest extends \PHPUnit_Framework_TestCase
             ->method('addMethodCall')
             ->with('addLoader', array('xlf', new Reference('xliff')));
 
-        $container = $this->getMock(
-            'Symfony\Component\DependencyInjection\ContainerBuilder',
-            array('hasDefinition', 'getDefinition', 'findTaggedServiceIds', 'findDefinition')
-        );
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
         $container->expects($this->any())
             ->method('hasDefinition')
             ->will($this->returnValue(true));
@@ -43,6 +40,8 @@ class TranslatorPassTest extends \PHPUnit_Framework_TestCase
         $container->expects($this->once())
             ->method('findDefinition')
             ->will($this->returnValue($this->getMock('Symfony\Component\DependencyInjection\Definition')));
+        ;
+
         $pass = new TranslatorPass();
         $pass->process($container);
     }

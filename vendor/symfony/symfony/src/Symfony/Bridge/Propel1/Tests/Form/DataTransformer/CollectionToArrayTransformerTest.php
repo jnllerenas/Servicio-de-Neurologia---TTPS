@@ -108,6 +108,4 @@ class CollectionToArrayTransformerTest extends Propel1TestCase
     }
 }
 
-class DummyObject
-{
-}
+class DummyObject {}

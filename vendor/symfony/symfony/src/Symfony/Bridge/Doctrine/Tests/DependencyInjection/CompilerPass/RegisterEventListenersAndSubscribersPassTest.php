@@ -139,11 +139,7 @@ class RegisterEventListenersAndSubscribersPassTest extends \PHPUnit_Framework_Te
         ;
 
         $this->process($container);
-        $serviceOrder = $this->getServiceOrder($container, 'addEventSubscriber');
-        $unordered = array_splice($serviceOrder, 0, 3);
-        sort($unordered);
-        $this->assertEquals(array('c', 'd', 'e'), $unordered);
-        $this->assertEquals(array('b', 'a'), $serviceOrder);
+        $this->assertEquals(array('c', 'd', 'e', 'b', 'a'), $this->getServiceOrder($container, 'addEventSubscriber'));
     }
 
     private function process(ContainerBuilder $container)

@@ -138,4 +138,5 @@ class DbalLoggerTest extends \PHPUnit_Framework_TestCase
                 'long'  => $longString,
             ));
     }
+
 }

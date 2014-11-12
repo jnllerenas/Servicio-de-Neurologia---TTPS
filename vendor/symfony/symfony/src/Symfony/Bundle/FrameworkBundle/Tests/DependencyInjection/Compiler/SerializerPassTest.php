@@ -22,9 +22,10 @@ use Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\SerializerPass;
  */
 class SerializerPassTest extends \PHPUnit_Framework_TestCase
 {
+
     public function testThrowExceptionWhenNoNormalizers()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder', array('hasDefinition', 'findTaggedServiceIds'));
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
 
         $container->expects($this->once())
             ->method('hasDefinition')
@@ -45,10 +46,7 @@ class SerializerPassTest extends \PHPUnit_Framework_TestCase
     public function testThrowExceptionWhenNoEncoders()
     {
         $definition = $this->getMock('Symfony\Component\DependencyInjection\Definition');
-        $container = $this->getMock(
-            'Symfony\Component\DependencyInjection\ContainerBuilder',
-            array('hasDefinition', 'findTaggedServiceIds', 'getDefinition')
-        );
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
 
         $container->expects($this->once())
             ->method('hasDefinition')
@@ -74,19 +72,19 @@ class SerializerPassTest extends \PHPUnit_Framework_TestCase
 
     public function testServicesAreOrderedAccordingToPriority()
     {
-        $services = array(
+       $services = array(
             'n3' => array('tag' => array()),
             'n1' => array('tag' => array('priority' => 200)),
-            'n2' => array('tag' => array('priority' => 100)),
+            'n2' => array('tag' => array('priority' => 100))
         );
 
-        $expected = array(
+       $expected = array(
            new Reference('n1'),
            new Reference('n2'),
-           new Reference('n3'),
+           new Reference('n3')
        );
 
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder', array('findTaggedServiceIds'));
+        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
 
         $container->expects($this->atLeastOnce())
             ->method('findTaggedServiceIds')
