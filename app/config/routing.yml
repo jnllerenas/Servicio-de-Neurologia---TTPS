@@ -1,0 +1,23 @@
+neurologia_historia_clinica:
+    resource: "@NeurologiaHistoriaClinicaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+neurologia_main:
+    resource: "@NeurologiaMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#neurologia_first:
+#    resource: "@NeurologiaFirstBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+neurologia_genericos:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing.yml"
+    prefix:   /
+
+neurologia_user:
+    resource: "@NeurologiaUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    

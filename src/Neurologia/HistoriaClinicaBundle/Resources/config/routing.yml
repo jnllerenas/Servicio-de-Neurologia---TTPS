@@ -1,0 +1,3 @@
+neurologia_historia_clinica_homepage:
+    path:     /historia
+    defaults: { _controller: NeurologiaHistoriaClinicaBundle:Default:index }
