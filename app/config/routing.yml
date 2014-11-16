@@ -12,7 +12,6 @@ neurologia_main:
 
 #neurologia_first:
 #    resource: "@NeurologiaFirstBundle/Resources/config/routing.yml"
-
 #    prefix:   /
 
 neurologia_genericos:
