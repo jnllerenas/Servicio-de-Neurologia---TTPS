@@ -1,0 +1,16 @@
+{{ form_start(iniciar) }}
+    {{ form_errors(iniciar) }}
+
+    {{ form_row(iniciar.atendido) }}
+    <br>
+    {{ form_row(iniciar.derivado) }}
+    <br>
+    {{ form_row(iniciar.motivo) }}
+    <br>
+    {{ form_row(iniciar.enfermedad) }}
+    <br>
+    * Los campos son obligatorios
+    <br>
+    {{ form_row(iniciar.enviar) }}         {{ form_row(iniciar.cancelar) }}
+    
+{{ form_end(iniciar) }}
