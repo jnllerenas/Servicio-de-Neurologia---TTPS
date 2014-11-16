@@ -1,0 +1,4 @@
+neurologia_antecedente_antecedente:
+    resource: "@NeurologiaAntecedenteBundle/Resources/config/routing/antecedente.yml"
+    prefix:   /antecedente
+

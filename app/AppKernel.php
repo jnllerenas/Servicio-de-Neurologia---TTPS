@@ -24,7 +24,9 @@ class AppKernel extends Kernel
             new Neurologia\MainBundle\NeurologiaMainBundle(),
             new Neurologia\HistoriaClinicaBundle\NeurologiaHistoriaClinicaBundle(),
 			new Neurologia\BDBundle\NeurologiaBDBundle(),	
-		);
+            new Neurologia\AntecedenteBundle\NeurologiaAntecedenteBundle(),
+        );
+
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             //$bundles[] = new Acme\DemoBundle\AcmeDemoBundle();

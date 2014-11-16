@@ -1,6 +1,8 @@
 neurologia_diagnostico:
     resource: "@NeurologiaDiagnosticoBundle/Resources/config/routing.yml"
-    prefix:   /
+
+neurologia_antecedente:
+    resource: "@NeurologiaAntecedenteBundle/Resources/config/routing.yml"
 
 neurologia_historia_clinica:
     resource: "@NeurologiaHistoriaClinicaBundle/Resources/config/routing.yml"
