@@ -45,7 +45,7 @@ class DefaultController extends Controller
               //guardo los datos
               $this->guardarHistoria($form,$idpaciente);
            }
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $idpaciente)));
         }
         $params['iniciar'] = $form->createView();
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:iniciar.html.twig', $params);
@@ -67,7 +67,7 @@ class DefaultController extends Controller
                $em->flush();
                $historiaNueva = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
                 array(
-                        'paciente' => 1,
+                        'paciente' => $idpaciente,
                 ));
         //motivo
                $motivo = new Motivo();
@@ -94,7 +94,7 @@ class DefaultController extends Controller
                 array(
                         'paciente' => $paciente->getId(),
                 ));
-       
+       if ($historia){
        $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m";
        $query1 = $em->createQuery($dql1);
        $idEnfermedad = $query1->getResult();
@@ -121,6 +121,9 @@ class DefaultController extends Controller
        $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
        $aux['departamento'] = $departamento->getDescripcion();
        return $aux;
+       }
+       else {
+       return false;}
    }
     
 }
