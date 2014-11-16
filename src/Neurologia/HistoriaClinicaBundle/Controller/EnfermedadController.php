@@ -5,7 +5,7 @@ namespace Neurologia\HistoriaClinicaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Neurologia\HistoriaClinicaBundle\Form\Formularios;
-use Neurologia\DBBundle\Entity\EnfermedadActual;
+use Neurologia\BDBundle\Entity\EnfermedadActual;
 
 class EnfermedadController extends Controller
 {
@@ -13,7 +13,7 @@ class EnfermedadController extends Controller
     {
        $em = $this->getDoctrine()->getManager();
        $params = array();
-       $params['enfermedad'] = $em->getRepository('NeurologiaDBBundle:EnfermedadActual')->findby(
+       $params['enfermedad'] = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findby(
                array(
 		'historiaClinica' => $id,
 		 ));
@@ -26,7 +26,7 @@ class EnfermedadController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $params = array();
-        $historia = $em->getRepository('NeurologiaDBBundle:HistoriaClinica')->find($id);
+        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
         $form = Formularios::nuevaEnfermedadForm($this,$id);
         $form->handleRequest($request);
         if ($form->isValid()) {

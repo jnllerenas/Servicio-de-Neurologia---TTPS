@@ -5,7 +5,7 @@ namespace Neurologia\HistoriaClinicaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Neurologia\HistoriaClinicaBundle\Form\Formularios;
-use Neurologia\DBBundle\Entity\Motivo;
+use Neurologia\BDBundle\Entity\Motivo;
 
 class MotivoController extends Controller
 {
@@ -13,7 +13,7 @@ class MotivoController extends Controller
     {
        $em = $this->getDoctrine()->getManager();
        $params = array();
-       $params['motivo'] = $em->getRepository('NeurologiaDBBundle:Motivo')->findby(
+       $params['motivo'] = $em->getRepository('NeurologiaBDBundle:Motivo')->findby(
                array(
 		'historiaClinica' => $id,
 		 ));
@@ -26,7 +26,7 @@ class MotivoController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $params = array();
-        $historia = $em->getRepository('NeurologiaDBBundle:HistoriaClinica')->find($id);
+        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
         $form = Formularios::nuevoMotivoForm($this,$id);
         $form->handleRequest($request);
         if ($form->isValid()) {
