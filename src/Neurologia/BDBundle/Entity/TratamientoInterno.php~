@@ -1,0 +1,56 @@
+<?php
+
+namespace Neurologia\BDBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TratamientoInterno
+ *
+ * @ORM\Table(name="tratamiento_interno", indexes={@ORM\Index(name="FK_tratamiento_interno", columns={"evolucion_id"})})
+ * @ORM\Entity
+ */
+class TratamientoInterno
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="inicio", type="date", nullable=false)
+     */
+    private $inicio;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean", nullable=true)
+     */
+    private $activo;
+
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
+
+
+}

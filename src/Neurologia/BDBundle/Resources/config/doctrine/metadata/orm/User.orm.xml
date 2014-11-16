@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="User" table="user">
+    <indexes>
+      <index name="FK_user" columns="estado_civil_id"/>
+      <index name="FK_user2" columns="sexo_id"/>
+      <index name="FK_user3" columns="tipo_documento_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="UNIQ_8D93D64992FC23A8" columns="username_canonical"/>
+      <unique-constraint name="UNIQ_8D93D649A0D96FBF" columns="email_canonical"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="255" nullable="false"/>
+    <field name="usernameCanonical" type="string" column="username_canonical" length="255" nullable="false"/>
+    <field name="email" type="string" column="email" length="255" nullable="false"/>
+    <field name="emailCanonical" type="string" column="email_canonical" length="255" nullable="false"/>
+    <field name="enabled" type="boolean" column="enabled" nullable="false"/>
+    <field name="salt" type="string" column="salt" length="255" nullable="false"/>
+    <field name="password" type="string" column="password" length="255" nullable="false"/>
+    <field name="lastLogin" type="datetime" column="last_login" nullable="true"/>
+    <field name="locked" type="boolean" column="locked" nullable="false"/>
+    <field name="expired" type="boolean" column="expired" nullable="false"/>
+    <field name="expiresAt" type="datetime" column="expires_at" nullable="true"/>
+    <field name="confirmationToken" type="string" column="confirmation_token" length="255" nullable="true"/>
+    <field name="passwordRequestedAt" type="datetime" column="password_requested_at" nullable="true"/>
+    <field name="roles" type="array" column="roles" nullable="false"/>
+    <field name="credentialsExpired" type="boolean" column="credentials_expired" nullable="false"/>
+    <field name="credentialsExpireAt" type="datetime" column="credentials_expire_at" nullable="true"/>
+    <field name="nombre" type="string" column="nombre" length="100" nullable="false"/>
+    <field name="apellido" type="string" column="apellido" length="100" nullable="false"/>
+    <field name="numeroDocumento" type="string" column="numero_documento" length="15" nullable="false"/>
+    <field name="telefono" type="string" column="telefono" length="100" nullable="false"/>
+    <field name="fechaDeNacimiento" type="string" column="fecha_de_nacimiento" length="100" nullable="false"/>
+    <field name="direccion" type="string" column="direccion" length="100" nullable="false"/>
+    <many-to-one field="sexo" target-entity="Sexo">
+      <join-columns>
+        <join-column name="sexo_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="estadoCivil" target-entity="EstadoCivil">
+      <join-columns>
+        <join-column name="estado_civil_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="tipoDocumento" target-entity="TipoDocumento">
+      <join-columns>
+        <join-column name="tipo_documento_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

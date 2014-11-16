@@ -1,0 +1,61 @@
+<?php
+
+namespace Neurologia\BDBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DrogaTratamiento
+ *
+ * @ORM\Table(name="droga_tratamiento", indexes={@ORM\Index(name="FK_droga_tratamiento", columns={"efecto_adverso_id"}), @ORM\Index(name="FK_droga_tratamiento3", columns={"tratamiento_id"}), @ORM\Index(name="IDX_F9CB63A7825E2ABC", columns={"droga_id"})})
+ * @ORM\Entity
+ */
+class DrogaTratamiento
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dosis", type="string", length=255, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $dosis;
+
+    /**
+     * @var \TratamientoInterno
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="TratamientoInterno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
+     * })
+     */
+    private $tratamiento;
+
+    /**
+     * @var \EfectoAdverso
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="EfectoAdverso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="efecto_adverso_id", referencedColumnName="id")
+     * })
+     */
+    private $efectoAdverso;
+
+    /**
+     * @var \Droga
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Droga")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="droga_id", referencedColumnName="id")
+     * })
+     */
+    private $droga;
+
+
+}

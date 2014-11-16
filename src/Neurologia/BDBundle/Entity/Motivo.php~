@@ -1,0 +1,42 @@
+<?php
+
+namespace Neurologia\BDBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Motivo
+ *
+ * @ORM\Table(name="motivo", indexes={@ORM\Index(name="FK_motivo", columns={"historia_clinica_id"})})
+ * @ORM\Entity
+ */
+class Motivo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle", type="string", length=255, nullable=false)
+     */
+    private $detalle;
+
+    /**
+     * @var \HistoriaClinica
+     *
+     * @ORM\ManyToOne(targetEntity="HistoriaClinica")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="historia_clinica_id", referencedColumnName="id")
+     * })
+     */
+    private $historiaClinica;
+
+
+}

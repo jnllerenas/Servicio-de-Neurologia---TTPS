@@ -1,0 +1,42 @@
+<?php
+
+namespace Neurologia\BDBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TratamientoExterno
+ *
+ * @ORM\Table(name="tratamiento_externo", indexes={@ORM\Index(name="FK_tratamiento_externo", columns={"evolucion_id"})})
+ * @ORM\Entity
+ */
+class TratamientoExterno
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="detalle", type="string", length=255, nullable=false)
+     */
+    private $detalle;
+
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
+
+
+}
