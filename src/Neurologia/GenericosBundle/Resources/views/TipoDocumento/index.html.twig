@@ -1,41 +1,42 @@
 {% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
 
 {% block container %}
-    <h1>TipoDocumento list</h1>
-
-    <table class="records_list">
+	<div align="center" style="text-align:center">
+		<h1>Listado de Tipo de Documentos </h1>
+	</div>
+	
+	{% include 'NeurologiaGenericosBundle:Default:mensajes.html.twig' %}
+	
+    <div class="table-responsive">
+	<table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Descripcion</th>
-                <th>Actions</th>
+                <!--<th>Ver</th>-->
+				<th>Editar</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('tipodocumento_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
+                <!--<td>
+					<a href="{{ path('tipodocumento_show', { 'id': entity.id }) }}">
+						<img src="{{ asset('bundles/firstbundle/images/ver.png') }}" alt="Ver" />
+					</a>
+				</td>-->
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('tipodocumento_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('tipodocumento_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
+					<a href="{{ path('tipodocumento_edit', { 'id': entity.id }) }}">
+						<img src="{{ asset('bundles/firstbundle/images/edit.png') }}" alt="Editar" />
+					</a>
+				</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+	</div>
 
-        <ul>
-        <li>
-            <a href="{{ path('tipodocumento_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+	<a style="float:right" class="btn btn-primary" href="{{ path('tipodocumento_new') }}">
+		Nuevo
+	</a>
+{% endblock %}

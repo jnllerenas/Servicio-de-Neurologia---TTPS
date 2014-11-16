@@ -5,7 +5,7 @@ namespace Neurologia\GenericosBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Neurologia\GenericosBundle\Entity\Droga;
+use Neurologia\BDBundle\Entity\Droga;
 use Neurologia\GenericosBundle\Form\DrogaType;
 
 /**
@@ -19,14 +19,16 @@ class DrogaController extends Controller
      * Lists all Droga entities.
      *
      */
-    public function indexAction()
+    public function indexAction($error=null, $msj=null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('NeurologiaGenericosBundle:Droga')->findAll();
+        $entities = $em->getRepository('NeurologiaBDBundle:Droga')->findAll();
 
         return $this->render('NeurologiaGenericosBundle:Droga:index.html.twig', array(
             'entities' => $entities,
+			'error'=>$error,
+			'msj'=>$msj,
         ));
     }
     /**
@@ -44,7 +46,8 @@ class DrogaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('droga_show', array('id' => $entity->getId())));
+			return $this->forward('NeurologiaGenericosBundle:Droga:index', array('msj'=>'Registro creado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('droga_show', array('id' => $entity->getId())));
         }
 
         return $this->render('NeurologiaGenericosBundle:Droga:new.html.twig', array(
@@ -67,7 +70,7 @@ class DrogaController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -95,7 +98,7 @@ class DrogaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:Droga')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:Droga')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Droga entity.');
@@ -117,7 +120,7 @@ class DrogaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:Droga')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:Droga')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Droga entity.');
@@ -147,7 +150,7 @@ class DrogaController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -159,7 +162,7 @@ class DrogaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:Droga')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:Droga')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Droga entity.');
@@ -171,8 +174,9 @@ class DrogaController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('droga_edit', array('id' => $id)));
+			
+			return $this->forward('NeurologiaGenericosBundle:Droga:index', array('msj'=>'Registro modificado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('droga_edit', array('id' => $id)));
         }
 
         return $this->render('NeurologiaGenericosBundle:Droga:edit.html.twig', array(
@@ -192,17 +196,33 @@ class DrogaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NeurologiaGenericosBundle:Droga')->find($id);
+            $entity = $em->getRepository('NeurologiaBDBundle:Droga')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Droga entity.');
             }
 
             $em->remove($entity);
-            $em->flush();
-        }
+            
+			try {	
+				$em->flush();
+				
+			} catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:Droga:index', array('error'=>'Imposible eliminar por integridad referencial'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}				
+		}
 
-        return $this->redirect($this->generateUrl('droga'));
+        return $this->forward('NeurologiaGenericosBundle:Droga:index', array('msj'=>'Registro eliminado satisfactoriamente'));
     }
 
     /**
@@ -217,7 +237,7 @@ class DrogaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('droga_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;
     }

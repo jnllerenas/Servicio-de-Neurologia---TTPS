@@ -1,0 +1,15 @@
+{% if error is null %}
+	<div class="alert alert-danger" role="alert" style="display:none">
+{% else %}
+	<div class="alert alert-danger" role="alert" style="display:block">
+		{{ error }}
+{% endif %}
+</div>
+
+{% if msj is null %}
+	<div class="alert alert-success" role="alert" style="display:none">
+{% else %}
+	<div id="alertDiv" class="alert alert-success" role="alert" style="display:block">
+		{{ msj }}
+{% endif %}
+</div>

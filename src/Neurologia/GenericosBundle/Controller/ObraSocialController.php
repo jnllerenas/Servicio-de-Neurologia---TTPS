@@ -5,7 +5,7 @@ namespace Neurologia\GenericosBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Neurologia\GenericosBundle\Entity\ObraSocial;
+use Neurologia\BDBundle\Entity\ObraSocial;
 use Neurologia\GenericosBundle\Form\ObraSocialType;
 
 /**
@@ -19,14 +19,16 @@ class ObraSocialController extends Controller
      * Lists all ObraSocial entities.
      *
      */
-    public function indexAction()
+    public function indexAction($error=null, $msj=null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('NeurologiaGenericosBundle:ObraSocial')->findAll();
+        $entities = $em->getRepository('NeurologiaBDBundle:ObraSocial')->findAll();
 
         return $this->render('NeurologiaGenericosBundle:ObraSocial:index.html.twig', array(
             'entities' => $entities,
+			'error'=>$error,
+			'msj'=>$msj,
         ));
     }
     /**
@@ -44,7 +46,8 @@ class ObraSocialController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('obrasocial_show', array('id' => $entity->getId())));
+			return $this->forward('NeurologiaGenericosBundle:ObraSocial:index', array('msj'=>'Registro creado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('obrasocial_show', array('id' => $entity->getId())));
         }
 
         return $this->render('NeurologiaGenericosBundle:ObraSocial:new.html.twig', array(
@@ -67,7 +70,7 @@ class ObraSocialController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -95,7 +98,7 @@ class ObraSocialController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:ObraSocial')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:ObraSocial')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ObraSocial entity.');
@@ -117,7 +120,7 @@ class ObraSocialController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:ObraSocial')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:ObraSocial')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ObraSocial entity.');
@@ -147,7 +150,7 @@ class ObraSocialController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -159,7 +162,7 @@ class ObraSocialController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:ObraSocial')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:ObraSocial')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ObraSocial entity.');
@@ -172,7 +175,8 @@ class ObraSocialController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('obrasocial_edit', array('id' => $id)));
+			return $this->forward('NeurologiaGenericosBundle:ObraSocial:index', array('msj'=>'Registro modificado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('obrasocial_edit', array('id' => $id)));
         }
 
         return $this->render('NeurologiaGenericosBundle:ObraSocial:edit.html.twig', array(
@@ -192,17 +196,33 @@ class ObraSocialController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NeurologiaGenericosBundle:ObraSocial')->find($id);
+            $entity = $em->getRepository('NeurologiaBDBundle:ObraSocial')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find ObraSocial entity.');
             }
 
             $em->remove($entity);
-            $em->flush();
-        }
+            
+			try {	
+				$em->flush();
+				
+			} catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:ObraSocial:index', array('error'=>'Imposible eliminar por integridad referencial'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}				
+		}
 
-        return $this->redirect($this->generateUrl('obrasocial'));
+        return $this->forward('NeurologiaGenericosBundle:ObraSocial:index', array('msj'=>'Registro eliminado satisfactoriamente'));
     }
 
     /**
@@ -217,7 +237,7 @@ class ObraSocialController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('obrasocial_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;
     }

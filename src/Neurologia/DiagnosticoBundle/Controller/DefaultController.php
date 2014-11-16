@@ -10,7 +10,7 @@ use Neurologia\BDBundle\Entity\DiagnosticoDefinitivo;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction($error=null, $msj=null)
     {
 		$datos=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoPresuntivo')->findAll();
 		//$datosB=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoDefinitivo')->findAll();
@@ -28,7 +28,9 @@ class DefaultController extends Controller
 		
 		return $this->render('NeurologiaDiagnosticoBundle:Default:index.html.twig',
 			array(	'datos'=>$datos, 
-					'datosB'=>$datosB)
+					'datosB'=>$datosB,
+					'msj'=>$msj,
+					'error'=>$error)
 		);
     }    
 	
@@ -90,20 +92,7 @@ class DefaultController extends Controller
 					break;
 			}
 
-			$datos=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoPresuntivo')->findAll();
-					
-			$em = $this->getDoctrine()->getManager();
-			$query = $em->createQuery(
-				'SELECT p, c FROM NeurologiaBDBundle:DiagnosticoDefinitivo p
-				JOIN p.categoriaDiagnostico c'
-			);
-
-			$datosB = $query->getResult();
-			
-			return $this->render('NeurologiaDiagnosticoBundle:Default:index.html.twig',
-				array(	'datos'=>$datos, 
-						'datosB'=>$datosB)
-			);
+			return $this->forward('NeurologiaDiagnosticoBundle:Default:index', array('msj'=>'Diagnostico agregado'));
 		}
 		
 		$categorias = $this->getDoctrine()->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->findAll();

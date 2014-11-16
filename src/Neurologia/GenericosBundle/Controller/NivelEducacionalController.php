@@ -5,7 +5,7 @@ namespace Neurologia\GenericosBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Neurologia\GenericosBundle\Entity\NivelEducacional;
+use Neurologia\BDBundle\Entity\NivelEducacional;
 use Neurologia\GenericosBundle\Form\NivelEducacionalType;
 
 /**
@@ -19,14 +19,16 @@ class NivelEducacionalController extends Controller
      * Lists all NivelEducacional entities.
      *
      */
-    public function indexAction()
+    public function indexAction($error=null, $msj=null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('NeurologiaGenericosBundle:NivelEducacional')->findAll();
+        $entities = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->findAll();
 
         return $this->render('NeurologiaGenericosBundle:NivelEducacional:index.html.twig', array(
             'entities' => $entities,
+			'error'=>$error,
+			'msj'=>$msj,
         ));
     }
     /**
@@ -44,7 +46,8 @@ class NivelEducacionalController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('niveleducacional_show', array('id' => $entity->getId())));
+			return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('msj'=>'Registro creado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('niveleducacional_show', array('id' => $entity->getId())));
         }
 
         return $this->render('NeurologiaGenericosBundle:NivelEducacional:new.html.twig', array(
@@ -67,7 +70,7 @@ class NivelEducacionalController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -95,7 +98,7 @@ class NivelEducacionalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:NivelEducacional')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
@@ -117,7 +120,7 @@ class NivelEducacionalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:NivelEducacional')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
@@ -147,7 +150,7 @@ class NivelEducacionalController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar', 'attr' => array('class' => 'btn btn-success',)));
 
         return $form;
     }
@@ -159,7 +162,7 @@ class NivelEducacionalController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NeurologiaGenericosBundle:NivelEducacional')->find($id);
+        $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
@@ -172,7 +175,8 @@ class NivelEducacionalController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('niveleducacional_edit', array('id' => $id)));
+			return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('msj'=>'Registro modificado satisfactoriamente'));
+            //return $this->redirect($this->generateUrl('niveleducacional_edit', array('id' => $id)));
         }
 
         return $this->render('NeurologiaGenericosBundle:NivelEducacional:edit.html.twig', array(
@@ -192,17 +196,33 @@ class NivelEducacionalController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NeurologiaGenericosBundle:NivelEducacional')->find($id);
+            $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
             }
 
             $em->remove($entity);
-            $em->flush();
-        }
+           
+ 		    try {	
+				$em->flush();
+				
+			} catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'Imposible eliminar por integridad referencial'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}				
+		}
 
-        return $this->redirect($this->generateUrl('niveleducacional'));
+        return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('msj'=>'Registro eliminado satisfactoriamente'));
     }
 
     /**
@@ -217,7 +237,7 @@ class NivelEducacionalController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('niveleducacional_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;
     }

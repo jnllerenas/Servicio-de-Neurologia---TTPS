@@ -25,7 +25,7 @@ class DrogaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\GenericosBundle\Entity\Droga'
+            'data_class' => 'Neurologia\BDBundle\Entity\Droga'
         ));
     }
 

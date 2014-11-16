@@ -25,7 +25,7 @@ class TipoDocumentoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\GenericosBundle\Entity\TipoDocumento'
+            'data_class' => 'Neurologia\BDBundle\Entity\TipoDocumento'
         ));
     }
 

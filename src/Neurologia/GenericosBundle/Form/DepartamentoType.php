@@ -25,7 +25,7 @@ class DepartamentoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\GenericosBundle\Entity\Departamento'
+            'data_class' => 'Neurologia\BDBundle\Entity\Departamento'
         ));
     }
 

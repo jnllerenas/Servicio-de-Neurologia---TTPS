@@ -25,7 +25,7 @@ class EstadoCivilType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\GenericosBundle\Entity\EstadoCivil'
+            'data_class' => 'Neurologia\BDBundle\Entity\EstadoCivil'
         ));
     }
 

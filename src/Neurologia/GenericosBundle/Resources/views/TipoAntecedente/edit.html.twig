@@ -1,16 +1,15 @@
 {% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
 
 {% block container %}
-    <h1>TipoAntecedente edit</h1>
+	<div align="center" style="text-align:center">
+		<h1>Edicion Tipo de Antecedente</h1>
 
-    {{ form(edit_form) }}
+		{{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('tipoantecedente') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+		<a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('tipoantecedente') }}">
+			Volver
+		</a>
+		
+		{{ form(delete_form) }}
+	</div>
 {% endblock %}

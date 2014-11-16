@@ -24,4 +24,7 @@ neurologia_user:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    
+
+neurologia_bd:
+    resource: "@NeurologiaBDBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,15 +1,13 @@
 {% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
 
 {% block container %}
-    <h1>EstadoCivil creation</h1>
+	<div align="center" style="text-align:center">
+		<h1>Nuevo Estado Civil</h1>
 
-    {{ form(form) }}
+		{{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('estadocivil') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+		<a class="btn btn-primary" href="{{ path('estadocivil') }}">
+			Volver
+		</a>
+	</div>
 {% endblock %}
