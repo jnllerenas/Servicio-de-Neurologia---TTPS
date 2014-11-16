@@ -5,9 +5,9 @@ namespace Neurologia\HistoriaClinicaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Neurologia\HistoriaClinicaBundle\Form\Formularios;
-use Neurologia\DBBundle\Entity\Motivo;
-use Neurologia\DBBundle\Entity\HistoriaClinica;
-use Neurologia\DBBundle\Entity\EnfermedadActual;
+use Neurologia\BDBundle\Entity\Motivo;
+use Neurologia\BDBundle\Entity\HistoriaClinica;
+use Neurologia\BDBundle\Entity\EnfermedadActual;
 class DefaultController extends Controller
 {
     public function indexAction($idpaciente)
@@ -17,7 +17,7 @@ class DefaultController extends Controller
         //Cargo datos paciente
         $paciente = $idpaciente;
         $em = $this->getDoctrine()->getManager();
-        $params['paciente'] = $em->getRepository('NeurologiaDBBundle:Paciente')->find($paciente);
+        $params['paciente'] = $em->getRepository('NeurologiaBDBundle:Paciente')->find($paciente);
         
         
         //Cargo la Historia clinica si tiene, sino viene vacio
@@ -33,7 +33,7 @@ class DefaultController extends Controller
     {
         $params=array();
         $em = $this->getDoctrine()->getManager();
-        $departamentos = $em->getRepository('NeurologiaDBBundle:Departamento')->findAll();
+        $departamentos = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
         $list = array();        
         foreach ($departamentos as $row) {
             $list[$row->getId()] = $row->getDescripcion();
@@ -55,8 +55,8 @@ class DefaultController extends Controller
        //derivado
                //$var = $form->get('yourformfieldname')->getData();
                $em = $this->getDoctrine()->getManager();
-               $paciente = $em->getRepository('NeurologiaDBBundle:Paciente')->find($idpaciente);
-               $derivado = $em->getRepository('NeurologiaDBBundle:Departamento')->find($form->get('derivado')->getData());
+               $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+               $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
                $paciente->setDerivadoPor($derivado);
                $em->persist($paciente);
                $em->flush();
@@ -65,7 +65,7 @@ class DefaultController extends Controller
                $historia->setPaciente($paciente);
                $em->persist($historia);
                $em->flush();
-               $historiaNueva = $em->getRepository('NeurologiaDBBundle:HistoriaClinica')->findOneBy(
+               $historiaNueva = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
                 array(
                         'paciente' => 1,
                 ));
@@ -89,16 +89,16 @@ class DefaultController extends Controller
        $aux = array();
        $em = $this->getDoctrine()->getManager();
        
-       $paciente = $em->getRepository('NeurologiaDBBundle:Paciente')->find($idpaciente);
-       $historia = $em->getRepository('NeurologiaDBBundle:HistoriaClinica')->findOneBy(
+       $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
                 array(
                         'paciente' => $paciente->getId(),
                 ));
        
-       $dql1 = "select MAX(m.id) as id from NeurologiaDBBundle:EnfermedadActual m";
+       $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m";
        $query1 = $em->createQuery($dql1);
        $idEnfermedad = $query1->getResult();
-       $enfermedad = $em->getRepository('NeurologiaDBBundle:EnfermedadActual')->findOneBy(
+       $enfermedad = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
                 array(
                         'historiaClinica' => $historia->getId(),
                         'id' => $idEnfermedad[0]['id'],
@@ -108,17 +108,17 @@ class DefaultController extends Controller
        
        $aux['usuario'] = 'usuariolog';
        
-       $dql = "select MAX(m.id) as id from NeurologiaDBBundle:Motivo m";
+       $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m";
        $query = $em->createQuery($dql);
        $idMotivo = $query->getResult();
-       $motivo = $em->getRepository('NeurologiaDBBundle:Motivo')->findOneBy(
+       $motivo = $em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
                 array(
                         'historiaClinica' => $historia->getId(),
                         'id' => $idMotivo[0]['id'],
                 ));
        $aux['motivo'] = $motivo->getDetalle();
        
-       $departamento = $em->getRepository('NeurologiaDBBundle:Departamento')->find($paciente->getDerivadoPor());
+       $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
        $aux['departamento'] = $departamento->getDescripcion();
        return $aux;
    }
