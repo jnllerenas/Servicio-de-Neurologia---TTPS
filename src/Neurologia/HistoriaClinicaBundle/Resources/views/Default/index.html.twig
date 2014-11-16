@@ -1,1 +1,41 @@
-Prueba de integridad
+<html>
+<head></head>
+<body>
+MENU
+<hr>
+{% if paciente %}
+    <div>    
+        <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
+        <h4>+ datos personales</h4>
+    </div>
+        <br>
+    <div>
+        <hr>
+        <h2>HISTORIA CLINICA</h2>
+        {% if historia %}
+            <h5>Enfermedad Actual:</h5> {{ historia.enfermedad }}<br>
+            <h5>Atendido Por:</h5> {{ historia.usuario }} <br>
+            <h5>Motivo:</h5> {{ historia.motivo }} <br>
+            <h5>Derivado por:</h5> {{ historia.departamento }} <br>
+            <hr><br>
+            Necesito generar una evolucion para mostrar lo de aca
+        {% else %}
+            {{ form(iniciar) }}
+            <hr>
+        {% endif %}
+    </div>  
+        <br>
+        <div>
+        {% if historia %}
+            seleccione una solapa
+            <a href="{{ url('neurologia_historia_clinica_motivo', {'id': historia.id }) }}">Motivo</a>
+            <a href="{{ url('neurologia_historia_clinica_enfermedad', {'id': historia.id}) }}">Enfermadad Actual</a>
+        {% else %}
+            Inicie la historia para empezar
+        {% endif %}
+        </div>
+{% else %}
+    error
+{% endif %}
+</body>
+</html>
