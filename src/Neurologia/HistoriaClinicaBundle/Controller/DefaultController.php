@@ -8,6 +8,7 @@ use Neurologia\HistoriaClinicaBundle\Form\Formularios;
 use Neurologia\BDBundle\Entity\Motivo;
 use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\BDBundle\Entity\EnfermedadActual;
+use Neurologia\BDBundle\Entity\Paciente;
 class DefaultController extends Controller
 {
     public function indexAction($idpaciente)
@@ -52,10 +53,11 @@ class DefaultController extends Controller
     }
     
    public function guardarHistoria($form,$idpaciente) {
-       //derivado
-               //$var = $form->get('yourformfieldname')->getData();
+       //paciente
                $em = $this->getDoctrine()->getManager();
                $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+               $usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
+               $paciente->setAdmitidoPor($usuario);
                $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
                $paciente->setDerivadoPor($derivado);
                $em->persist($paciente);
@@ -81,7 +83,8 @@ class DefaultController extends Controller
                $enfermedad->setHistoriaClinica($historiaNueva);
                $em->persist($enfermedad);
                $em->flush();
-        //faltaria crear la evolucion pero no tengo manera de agregar un usuario
+        //evolucion?
+               
                
    }
    
@@ -106,7 +109,8 @@ class DefaultController extends Controller
        $aux['id']= $historia->getId();
        $aux['enfermedad'] = $enfermedad->getDetalle();
        
-       $aux['usuario'] = 'usuariolog';
+       $usu = $em->getRepository('NeurologiaBDBundle:User')->find($paciente->getAdmitidoPor());
+       $aux['usuario'] = $usu->getNombre();
        
        $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m";
        $query = $em->createQuery($dql);
