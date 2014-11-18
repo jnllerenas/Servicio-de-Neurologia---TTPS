@@ -24,9 +24,9 @@ class TratamientoExterno
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=255, nullable=false)
+     * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
      */
-    private $detalle;
+    private $descripcion;
 
     /**
      * @var \Evolucion
@@ -51,26 +51,26 @@ class TratamientoExterno
     }
 
     /**
-     * Set detalle
+     * Set descripcion
      *
-     * @param string $detalle
+     * @param string $descripcion
      * @return TratamientoExterno
      */
-    public function setDetalle($detalle)
+    public function setDetalle($descripcion)
     {
-        $this->detalle = $detalle;
+        $this->descripcion = $descripcion;
 
         return $this;
     }
 
     /**
-     * Get detalle
+     * Get descripcion
      *
      * @return string 
      */
     public function getDetalle()
     {
-        return $this->detalle;
+        return $this->descripcion;
     }
 
     /**
