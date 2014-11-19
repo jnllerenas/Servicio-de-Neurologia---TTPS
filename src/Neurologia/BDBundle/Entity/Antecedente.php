@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Antecedente
  *
- * @ORM\Table(name="antecedente", indexes={@ORM\Index(name="FK_antecedente", columns={"tipo_antecedente_id"}), @ORM\Index(name="FK_antecedente2", columns={"historia_clinica_id"})})
+ * @ORM\Table(name="antecedente", indexes={@ORM\Index(name="FK_antecedente", columns={"tipo_antecedente_id"}), @ORM\Index(name="FK_antecedente2", columns={"historia_clinica_id"}), @ORM\Index(name="FK_antecedente3", columns={"usuario_id"})})
  * @ORM\Entity
  */
 class Antecedente
@@ -29,14 +29,21 @@ class Antecedente
     private $descripcion;
 
     /**
-     * @var \HistoriaClinica
+     * @var \DateTime
      *
-     * @ORM\ManyToOne(targetEntity="HistoriaClinica")
+     * @ORM\Column(name="fecha", type="date", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="historia_clinica_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      * })
      */
-    private $historiaClinica;
+    private $usuario;
 
     /**
      * @var \TipoAntecedente
@@ -47,6 +54,16 @@ class Antecedente
      * })
      */
     private $tipoAntecedente;
+
+    /**
+     * @var \HistoriaClinica
+     *
+     * @ORM\ManyToOne(targetEntity="HistoriaClinica")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="historia_clinica_id", referencedColumnName="id")
+     * })
+     */
+    private $historiaClinica;
 
 
 
@@ -84,26 +101,49 @@ class Antecedente
     }
 
     /**
-     * Set historiaClinica
+     * Set fecha
      *
-     * @param \Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica
+     * @param \DateTime $fecha
      * @return Antecedente
      */
-    public function setHistoriaClinica(\Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica = null)
+    public function setFecha($fecha)
     {
-        $this->historiaClinica = $historiaClinica;
+        $this->fecha = $fecha;
 
         return $this;
     }
 
     /**
-     * Get historiaClinica
+     * Get fecha
      *
-     * @return \Neurologia\BDBundle\Entity\HistoriaClinica 
+     * @return \DateTime 
      */
-    public function getHistoriaClinica()
+    public function getFecha()
     {
-        return $this->historiaClinica;
+        return $this->fecha;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Neurologia\BDBundle\Entity\User $usuario
+     * @return Antecedente
+     */
+    public function setUsuario(\Neurologia\BDBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Neurologia\BDBundle\Entity\User 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 
     /**
@@ -127,5 +167,28 @@ class Antecedente
     public function getTipoAntecedente()
     {
         return $this->tipoAntecedente;
+    }
+
+    /**
+     * Set historiaClinica
+     *
+     * @param \Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica
+     * @return Antecedente
+     */
+    public function setHistoriaClinica(\Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica = null)
+    {
+        $this->historiaClinica = $historiaClinica;
+
+        return $this;
+    }
+
+    /**
+     * Get historiaClinica
+     *
+     * @return \Neurologia\BDBundle\Entity\HistoriaClinica 
+     */
+    public function getHistoriaClinica()
+    {
+        return $this->historiaClinica;
     }
 }

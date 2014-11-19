@@ -22,18 +22,6 @@ class DrogaTratamiento
     private $dosis;
 
     /**
-     * @var \TratamientoInterno
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="TratamientoInterno")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
-     * })
-     */
-    private $tratamiento;
-
-    /**
      * @var \EfectoAdverso
      *
      * @ORM\Id
@@ -56,6 +44,18 @@ class DrogaTratamiento
      * })
      */
     private $droga;
+
+    /**
+     * @var \TratamientoInterno
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="TratamientoInterno")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
+     * })
+     */
+    private $tratamiento;
 
 
 
@@ -80,29 +80,6 @@ class DrogaTratamiento
     public function getDosis()
     {
         return $this->dosis;
-    }
-
-    /**
-     * Set tratamiento
-     *
-     * @param \Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento
-     * @return DrogaTratamiento
-     */
-    public function setTratamiento(\Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento)
-    {
-        $this->tratamiento = $tratamiento;
-
-        return $this;
-    }
-
-    /**
-     * Get tratamiento
-     *
-     * @return \Neurologia\BDBundle\Entity\TratamientoInterno 
-     */
-    public function getTratamiento()
-    {
-        return $this->tratamiento;
     }
 
     /**
@@ -149,5 +126,28 @@ class DrogaTratamiento
     public function getDroga()
     {
         return $this->droga;
+    }
+
+    /**
+     * Set tratamiento
+     *
+     * @param \Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento
+     * @return DrogaTratamiento
+     */
+    public function setTratamiento(\Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento)
+    {
+        $this->tratamiento = $tratamiento;
+
+        return $this;
+    }
+
+    /**
+     * Get tratamiento
+     *
+     * @return \Neurologia\BDBundle\Entity\TratamientoInterno 
+     */
+    public function getTratamiento()
+    {
+        return $this->tratamiento;
     }
 }

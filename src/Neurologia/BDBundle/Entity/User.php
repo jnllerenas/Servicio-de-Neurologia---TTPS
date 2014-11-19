@@ -176,16 +176,6 @@ class User
     private $direccion;
 
     /**
-     * @var \TipoDocumento
-     *
-     * @ORM\ManyToOne(targetEntity="TipoDocumento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
-     * })
-     */
-    private $tipoDocumento;
-
-    /**
      * @var \EstadoCivil
      *
      * @ORM\ManyToOne(targetEntity="EstadoCivil")
@@ -204,6 +194,16 @@ class User
      * })
      */
     private $sexo;
+
+    /**
+     * @var \TipoDocumento
+     *
+     * @ORM\ManyToOne(targetEntity="TipoDocumento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
+     * })
+     */
+    private $tipoDocumento;
 
 
 
@@ -724,29 +724,6 @@ class User
     }
 
     /**
-     * Set tipoDocumento
-     *
-     * @param \Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento
-     * @return User
-     */
-    public function setTipoDocumento(\Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento = null)
-    {
-        $this->tipoDocumento = $tipoDocumento;
-
-        return $this;
-    }
-
-    /**
-     * Get tipoDocumento
-     *
-     * @return \Neurologia\BDBundle\Entity\TipoDocumento 
-     */
-    public function getTipoDocumento()
-    {
-        return $this->tipoDocumento;
-    }
-
-    /**
      * Set estadoCivil
      *
      * @param \Neurologia\BDBundle\Entity\EstadoCivil $estadoCivil
@@ -790,5 +767,28 @@ class User
     public function getSexo()
     {
         return $this->sexo;
+    }
+
+    /**
+     * Set tipoDocumento
+     *
+     * @param \Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento
+     * @return User
+     */
+    public function setTipoDocumento(\Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento = null)
+    {
+        $this->tipoDocumento = $tipoDocumento;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoDocumento
+     *
+     * @return \Neurologia\BDBundle\Entity\TipoDocumento 
+     */
+    public function getTipoDocumento()
+    {
+        return $this->tipoDocumento;
     }
 }

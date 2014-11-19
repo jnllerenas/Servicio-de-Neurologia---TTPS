@@ -80,7 +80,7 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_carnet", type="string", length=255, nullable=false)
+     * @ORM\Column(name="numero_carnet", type="string", length=255, nullable=true)
      */
     private $numeroCarnet;
 
@@ -90,16 +90,6 @@ class Paciente
      * @ORM\Column(name="email", type="blob", length=255, nullable=true)
      */
     private $email;
-
-    /**
-     * @var \NivelEducacional
-     *
-     * @ORM\ManyToOne(targetEntity="NivelEducacional")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="nivel_educacional_id", referencedColumnName="id")
-     * })
-     */
-    private $nivelEducacional;
 
     /**
      * @var \ObraSocial
@@ -160,6 +150,16 @@ class Paciente
      * })
      */
     private $sexo;
+
+    /**
+     * @var \NivelEducacional
+     *
+     * @ORM\ManyToOne(targetEntity="NivelEducacional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nivel_educacional_id", referencedColumnName="id")
+     * })
+     */
+    private $nivelEducacional;
 
 
 
@@ -404,29 +404,6 @@ class Paciente
     }
 
     /**
-     * Set nivelEducacional
-     *
-     * @param \Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional
-     * @return Paciente
-     */
-    public function setNivelEducacional(\Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional = null)
-    {
-        $this->nivelEducacional = $nivelEducacional;
-
-        return $this;
-    }
-
-    /**
-     * Get nivelEducacional
-     *
-     * @return \Neurologia\BDBundle\Entity\NivelEducacional 
-     */
-    public function getNivelEducacional()
-    {
-        return $this->nivelEducacional;
-    }
-
-    /**
      * Set obraSocial
      *
      * @param \Neurologia\BDBundle\Entity\ObraSocial $obraSocial
@@ -562,5 +539,28 @@ class Paciente
     public function getSexo()
     {
         return $this->sexo;
+    }
+
+    /**
+     * Set nivelEducacional
+     *
+     * @param \Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional
+     * @return Paciente
+     */
+    public function setNivelEducacional(\Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional = null)
+    {
+        $this->nivelEducacional = $nivelEducacional;
+
+        return $this;
+    }
+
+    /**
+     * Get nivelEducacional
+     *
+     * @return \Neurologia\BDBundle\Entity\NivelEducacional 
+     */
+    public function getNivelEducacional()
+    {
+        return $this->nivelEducacional;
     }
 }

@@ -28,13 +28,13 @@ class DiagnosticoPresuntivo
      */
     private $descripcion;
 
-	/**
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date", nullable=false)
      */
     private $fecha;
-	
+
     /**
      * @var \Evolucion
      *
@@ -79,12 +79,12 @@ class DiagnosticoPresuntivo
     {
         return $this->descripcion;
     }
-	    
-	/**
+
+    /**
      * Set fecha
      *
      * @param \DateTime $fecha
-     * @return Estudio
+     * @return DiagnosticoPresuntivo
      */
     public function setFecha($fecha)
     {
@@ -98,7 +98,6 @@ class DiagnosticoPresuntivo
      *
      * @return \DateTime 
      */
-	 
     public function getFecha()
     {
         return $this->fecha;

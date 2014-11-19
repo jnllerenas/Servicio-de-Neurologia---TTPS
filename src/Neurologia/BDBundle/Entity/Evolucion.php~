@@ -36,16 +36,6 @@ class Evolucion
     private $fechaHora;
 
     /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
-     * })
-     */
-    private $usuario;
-
-    /**
      * @var \HistoriaClinica
      *
      * @ORM\ManyToOne(targetEntity="HistoriaClinica")
@@ -54,6 +44,16 @@ class Evolucion
      * })
      */
     private $historiaClinica;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
 
 
 }

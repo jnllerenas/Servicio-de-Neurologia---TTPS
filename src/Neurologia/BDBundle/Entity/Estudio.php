@@ -43,16 +43,6 @@ class Estudio
     private $institucion;
 
     /**
-     * @var \Evolucion
-     *
-     * @ORM\ManyToOne(targetEntity="Evolucion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
-     * })
-     */
-    private $evolucion;
-
-    /**
      * @var \TipoEstudio
      *
      * @ORM\ManyToOne(targetEntity="TipoEstudio")
@@ -61,6 +51,16 @@ class Estudio
      * })
      */
     private $tipoEstudio;
+
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
 
 
 
@@ -144,29 +144,6 @@ class Estudio
     }
 
     /**
-     * Set evolucion
-     *
-     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
-     * @return Estudio
-     */
-    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
-    {
-        $this->evolucion = $evolucion;
-
-        return $this;
-    }
-
-    /**
-     * Get evolucion
-     *
-     * @return \Neurologia\BDBundle\Entity\Evolucion 
-     */
-    public function getEvolucion()
-    {
-        return $this->evolucion;
-    }
-
-    /**
      * Set tipoEstudio
      *
      * @param \Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio
@@ -187,5 +164,28 @@ class Estudio
     public function getTipoEstudio()
     {
         return $this->tipoEstudio;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @return Estudio
+     */
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
     }
 }

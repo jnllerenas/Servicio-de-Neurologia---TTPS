@@ -28,22 +28,12 @@ class DiagnosticoDefinitivo
      */
     private $descripcion;
 
-	/**
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date", nullable=false)
      */
     private $fecha;
-	
-    /**
-     * @var \Evolucion
-     *
-     * @ORM\ManyToOne(targetEntity="Evolucion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
-     * })
-     */
-    private $evolucion;
 
     /**
      * @var \CategoriaDiagnostico
@@ -54,6 +44,16 @@ class DiagnosticoDefinitivo
      * })
      */
     private $categoriaDiagnostico;
+
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
 
 
 
@@ -90,11 +90,11 @@ class DiagnosticoDefinitivo
         return $this->descripcion;
     }
 
-	 /**
+    /**
      * Set fecha
      *
      * @param \DateTime $fecha
-     * @return Estudio
+     * @return DiagnosticoDefinitivo
      */
     public function setFecha($fecha)
     {
@@ -111,29 +111,6 @@ class DiagnosticoDefinitivo
     public function getFecha()
     {
         return $this->fecha;
-    }
-	
-    /**
-     * Set evolucion
-     *
-     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
-     * @return DiagnosticoDefinitivo
-     */
-    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
-    {
-        $this->evolucion = $evolucion;
-
-        return $this;
-    }
-
-    /**
-     * Get evolucion
-     *
-     * @return \Neurologia\BDBundle\Entity\Evolucion 
-     */
-    public function getEvolucion()
-    {
-        return $this->evolucion;
     }
 
     /**
@@ -157,5 +134,28 @@ class DiagnosticoDefinitivo
     public function getCategoriaDiagnostico()
     {
         return $this->categoriaDiagnostico;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @return DiagnosticoDefinitivo
+     */
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
     }
 }

@@ -44,7 +44,22 @@ class TipoAntecedenteController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            $em->flush();
+            try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:TipoAntecedente:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
 
 			return $this->forward('NeurologiaGenericosBundle:TipoAntecedente:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('tipoantecedente_show', array('id' => $entity->getId())));
@@ -173,7 +188,22 @@ class TipoAntecedenteController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
+            try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:TipoAntecedente:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
 
 			return $this->forward('NeurologiaGenericosBundle:TipoAntecedente:index', array('msj'=>'Registro modificado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('tipoantecedente_edit', array('id' => $id)));

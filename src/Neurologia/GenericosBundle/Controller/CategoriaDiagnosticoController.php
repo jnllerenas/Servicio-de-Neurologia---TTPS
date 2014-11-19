@@ -44,7 +44,22 @@ class CategoriaDiagnosticoController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            $em->flush();
+            try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
 			return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('categoriadiagnostico_show', array('id' => $entity->getId())));
         }
@@ -172,7 +187,22 @@ class CategoriaDiagnosticoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
+            try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
 			return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('msj'=>'Registro modificado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('categoriadiagnostico_edit', array('id' => $id)));
         }
@@ -206,7 +236,7 @@ class CategoriaDiagnosticoController extends Controller
 				
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
+					if ($e->getPrevious()->getCode() == 23000){ 	//Error de integridad referencial
 						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Imposible eliminar por integridad referencial'));
 					}
 					else{

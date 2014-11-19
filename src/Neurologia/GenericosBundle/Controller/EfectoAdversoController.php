@@ -44,7 +44,22 @@ class EfectoAdversoController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            $em->flush();
+            try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
 
 			return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('efectoadverso_show', array('id' => $entity->getId())));
@@ -173,8 +188,24 @@ class EfectoAdversoController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
-
+			
+			try {
+				$em->flush();
+			}
+			catch (\Doctrine\DBAL\DBALException $e) {
+				if ($e->getCode() == 0){
+					if ($e->getPrevious()->getCode() == 23000){
+						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'Error de clave duplicada'));
+					}
+					else{
+						throw $e;
+					}
+				}
+				else{
+					throw $e;
+				}
+			}
+			
 			return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('msj'=>'Registro modificado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('efectoadverso_edit', array('id' => $id)));
         }

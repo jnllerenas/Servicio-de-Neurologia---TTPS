@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * NivelEducacional
  *
- * @ORM\Table(name="nivel_educacional")
+ * @ORM\Table(name="nivel_educacional", uniqueConstraints={@ORM\UniqueConstraint(name="descripcion", columns={"descripcion"})})
  * @ORM\Entity
  */
 class NivelEducacional

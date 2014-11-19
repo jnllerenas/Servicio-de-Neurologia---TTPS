@@ -43,16 +43,6 @@ class Estudio
     private $institucion;
 
     /**
-     * @var \Evolucion
-     *
-     * @ORM\ManyToOne(targetEntity="Evolucion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
-     * })
-     */
-    private $evolucion;
-
-    /**
      * @var \TipoEstudio
      *
      * @ORM\ManyToOne(targetEntity="TipoEstudio")
@@ -61,6 +51,16 @@ class Estudio
      * })
      */
     private $tipoEstudio;
+
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
 
 
 }

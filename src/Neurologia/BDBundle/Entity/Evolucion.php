@@ -36,16 +36,6 @@ class Evolucion
     private $fechaHora;
 
     /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
-     * })
-     */
-    private $usuario;
-
-    /**
      * @var \HistoriaClinica
      *
      * @ORM\ManyToOne(targetEntity="HistoriaClinica")
@@ -54,6 +44,16 @@ class Evolucion
      * })
      */
     private $historiaClinica;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
 
 
 
@@ -114,29 +114,6 @@ class Evolucion
     }
 
     /**
-     * Set usuario
-     *
-     * @param \Neurologia\BDBundle\Entity\User $usuario
-     * @return Evolucion
-     */
-    public function setUsuario(\Neurologia\BDBundle\Entity\User $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return \Neurologia\BDBundle\Entity\User 
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    /**
      * Set historiaClinica
      *
      * @param \Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica
@@ -157,5 +134,28 @@ class Evolucion
     public function getHistoriaClinica()
     {
         return $this->historiaClinica;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Neurologia\BDBundle\Entity\User $usuario
+     * @return Evolucion
+     */
+    public function setUsuario(\Neurologia\BDBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Neurologia\BDBundle\Entity\User 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

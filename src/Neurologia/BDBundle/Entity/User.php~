@@ -176,16 +176,6 @@ class User
     private $direccion;
 
     /**
-     * @var \TipoDocumento
-     *
-     * @ORM\ManyToOne(targetEntity="TipoDocumento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
-     * })
-     */
-    private $tipoDocumento;
-
-    /**
      * @var \EstadoCivil
      *
      * @ORM\ManyToOne(targetEntity="EstadoCivil")
@@ -204,6 +194,16 @@ class User
      * })
      */
     private $sexo;
+
+    /**
+     * @var \TipoDocumento
+     *
+     * @ORM\ManyToOne(targetEntity="TipoDocumento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
+     * })
+     */
+    private $tipoDocumento;
 
 
 }

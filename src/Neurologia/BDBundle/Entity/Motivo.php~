@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Motivo
  *
- * @ORM\Table(name="motivo", indexes={@ORM\Index(name="FK_motivo", columns={"historia_clinica_id"})})
+ * @ORM\Table(name="motivo", indexes={@ORM\Index(name="FK_motivo", columns={"historia_clinica_id"}), @ORM\Index(name="FK_motivo2", columns={"usuario_id"})})
  * @ORM\Entity
  */
 class Motivo
@@ -27,6 +27,23 @@ class Motivo
      * @ORM\Column(name="detalle", type="string", length=255, nullable=false)
      */
     private $detalle;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date", nullable=false)
+     */
+    private $fecha;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
 
     /**
      * @var \HistoriaClinica

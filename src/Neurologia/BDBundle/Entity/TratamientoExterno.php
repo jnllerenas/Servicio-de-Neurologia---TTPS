@@ -56,7 +56,7 @@ class TratamientoExterno
      * @param string $descripcion
      * @return TratamientoExterno
      */
-    public function setDetalle($descripcion)
+    public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
 
@@ -68,7 +68,7 @@ class TratamientoExterno
      *
      * @return string 
      */
-    public function getDetalle()
+    public function getDescripcion()
     {
         return $this->descripcion;
     }

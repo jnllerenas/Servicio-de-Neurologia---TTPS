@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TipoDocumento
  *
- * @ORM\Table(name="tipo_documento")
+ * @ORM\Table(name="tipo_documento", uniqueConstraints={@ORM\UniqueConstraint(name="descripcion", columns={"descripcion"})})
  * @ORM\Entity
  */
 class TipoDocumento
