@@ -16,7 +16,6 @@ class AntecedenteType extends AbstractType
     {
         $builder
             ->add('descripcion')
-            ->add('historiaClinica')
             ->add('tipoAntecedente')
         ;
     }
@@ -27,7 +26,7 @@ class AntecedenteType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\AntecedenteBundle\Entity\Antecedente'
+            'data_class' => 'Neurologia\BDBundle\Entity\Antecedente'
         ));
     }
 
@@ -36,6 +35,6 @@ class AntecedenteType extends AbstractType
      */
     public function getName()
     {
-        return 'neurologia_antecedentebundle_antecedente';
+        return 'neurologia_bdbundle_antecedente';
     }
 }

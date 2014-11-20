@@ -5,7 +5,7 @@ namespace Neurologia\AntecedenteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Neurologia\AntecedenteBundle\Entity\Antecedente;
+use Neurologia\BDBundle\Entity\Antecedente;
 use Neurologia\AntecedenteBundle\Form\AntecedenteType;
 
 /**
@@ -19,38 +19,64 @@ class AntecedenteController extends Controller
      * Lists all Antecedente entities.
      *
      */
-    public function indexAction()
+    public function indexAction($idhistoria)
     {
         $em = $this->getDoctrine()->getManager();
+        $vars['historia'] = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
+        $tipoAntecedente= $em->getRepository('NeurologiaBDBundle:TipoAntecedente');
 
-        $entities = $em->getRepository('NeurologiaAntecedenteBundle:Antecedente')->findAll();
+        $vars['familiares'] = $em->getRepository('NeurologiaBDBundle:Antecedente')->findBy(
+            array(
+                'historiaClinica' => $vars['historia']->getId(),
+                'tipoAntecedente' => $tipoAntecedente->findOneBy(['descripcion'=>'familiar'])->getId()
+                ));
+        $vars['personales'] = $em->getRepository('NeurologiaBDBundle:Antecedente')->findBy(
+            array(
+                'historiaClinica' => $vars['historia']->getId(),
+                'tipoAntecedente' => $tipoAntecedente->findOneBy(['descripcion'=>'personal'])->getId()
+                ));
 
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('NeurologiaAntecedenteBundle:Antecedente:index.html.twig', $vars);
     }
     /**
      * Creates a new Antecedente entity.
      *
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request,$idhistoria)
     {
-        $entity = new Antecedente();
-        $form = $this->createCreateForm($entity);
+        $mensaje="";
+        $fecha=new \DateTime("now"); 
+        $antecedente = new Antecedente();
+        $form = $this->createCreateForm($antecedente,$idhistoria);
         $form->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
+        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $tipoAntecedente=$antecedente->getTipoAntecedente();
+            $usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
+            $existe = $em->getRepository('NeurologiaBDBundle:Antecedente')
+                        ->findOneBy(['historiaClinica' => $historia->getId(),
+                                    'tipoAntecedente' => $tipoAntecedente->getId(),
+                                    'descripcion' => $antecedente->getDescripcion()]);
+            if(!$existe){
+                $antecedente->setFecha($fecha);
+                $antecedente->setHistoriaClinica($historia);
+                $antecedente->setUsuario($usuario);
+                $em->persist($antecedente);
+                $em->flush();
+                return $this->redirect($this->generateUrl('antecedente', array('idhistoria' => $historia->getId())));
+            }else{
+                $mensaje="Ya existe un antecedente ".$tipoAntecedente->getDescripcion()." con la descripción: ".$antecedente->getDescripcion()." para este paciente.";
+            }
 
-            return $this->redirect($this->generateUrl('antecedente_show', array('id' => $entity->getId())));
+            
         }
+        $vars=["antecedente" => $antecedente,
+                "form" => $form->createView(),
+                "historia" => $historia,
+                "mensaje" => $mensaje];
 
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', $vars);
     }
 
     /**
@@ -60,14 +86,14 @@ class AntecedenteController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Antecedente $entity)
+    private function createCreateForm(Antecedente $antecedente, $idhistoria)
     {
-        $form = $this->createForm(new AntecedenteType(), $entity, array(
-            'action' => $this->generateUrl('antecedente_create'),
+        $form = $this->createForm(new AntecedenteType(), $antecedente, array(
+            'action' => $this->generateUrl('antecedente_create',['idhistoria'=>$idhistoria]),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear'));
 
         return $form;
     }
@@ -76,149 +102,16 @@ class AntecedenteController extends Controller
      * Displays a form to create a new Antecedente entity.
      *
      */
-    public function newAction()
+    public function newAction($idhistoria)
     {
-        $entity = new Antecedente();
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Antecedente entity.
-     *
-     */
-    public function showAction($id)
-    {
+        $mensaje="";
+        $vars['antecedente'] = new Antecedente();
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaAntecedenteBundle:Antecedente')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Antecedente entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        $vars['historia'] = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
+        $vars['form'] = $this->createCreateForm($vars['antecedente'],$idhistoria)->createView();
+        $vars['mensaje'] = $mensaje;
+        return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', $vars);
     }
 
-    /**
-     * Displays a form to edit an existing Antecedente entity.
-     *
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaAntecedenteBundle:Antecedente')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Antecedente entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-    * Creates a form to edit a Antecedente entity.
-    *
-    * @param Antecedente $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Antecedente $entity)
-    {
-        $form = $this->createForm(new AntecedenteType(), $entity, array(
-            'action' => $this->generateUrl('antecedente_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Antecedente entity.
-     *
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaAntecedenteBundle:Antecedente')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Antecedente entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('antecedente_edit', array('id' => $id)));
-        }
-
-        return $this->render('NeurologiaAntecedenteBundle:Antecedente:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-    /**
-     * Deletes a Antecedente entity.
-     *
-     */
-    public function deleteAction(Request $request, $id)
-    {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NeurologiaAntecedenteBundle:Antecedente')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Antecedente entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('antecedente'));
-    }
-
-    /**
-     * Creates a form to delete a Antecedente entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('antecedente_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
-    }
+    
 }

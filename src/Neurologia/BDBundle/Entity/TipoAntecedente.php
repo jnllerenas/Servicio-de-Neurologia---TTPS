@@ -62,4 +62,7 @@ class TipoAntecedente
     {
         return $this->descripcion;
     }
+    public function __toString(){
+        return $this->getDescripcion();
+    }
 }

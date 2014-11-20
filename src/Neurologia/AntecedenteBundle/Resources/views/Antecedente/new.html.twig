@@ -2,13 +2,15 @@
 
 {% block body -%}
     <h1>Antecedente creation</h1>
-
+{% if mensaje %}
+<span class="">{{ mensaje }}</span>
+{% endif %}
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('antecedente') }}">
-            Back to the list
+        <a href="{{ path('antecedente',{'idhistoria':historia.id}) }}">
+            Volver
         </a>
     </li>
 </ul>
