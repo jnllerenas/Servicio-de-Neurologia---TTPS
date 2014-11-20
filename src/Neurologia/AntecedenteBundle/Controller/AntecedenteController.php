@@ -5,7 +5,7 @@ namespace Neurologia\AntecedenteBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Neurologia\AntecedenteBundle\Entity\Antecedente;
+use Neurologia\BDBundle\Entity\Antecedente;
 use Neurologia\AntecedenteBundle\Form\AntecedenteType;
 
 /**

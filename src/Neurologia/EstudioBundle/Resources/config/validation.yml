@@ -1,0 +1,5 @@
+Neurologia\BDBundle\Entity\Imagen:
+    properties:
+        file:
+            - File:
+                maxSize: 5000000
