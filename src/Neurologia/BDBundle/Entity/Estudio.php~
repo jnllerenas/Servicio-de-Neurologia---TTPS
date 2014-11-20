@@ -63,4 +63,129 @@ class Estudio
     private $evolucion;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Estudio
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return Estudio
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set institucion
+     *
+     * @param string $institucion
+     * @return Estudio
+     */
+    public function setInstitucion($institucion)
+    {
+        $this->institucion = $institucion;
+
+        return $this;
+    }
+
+    /**
+     * Get institucion
+     *
+     * @return string 
+     */
+    public function getInstitucion()
+    {
+        return $this->institucion;
+    }
+
+    /**
+     * Set tipoEstudio
+     *
+     * @param \Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio
+     * @return Estudio
+     */
+    public function setTipoEstudio(\Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio = null)
+    {
+        $this->tipoEstudio = $tipoEstudio;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoEstudio
+     *
+     * @return \Neurologia\BDBundle\Entity\TipoEstudio 
+     */
+    public function getTipoEstudio()
+    {
+        return $this->tipoEstudio;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @return Estudio
+     */
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
+    }
 }

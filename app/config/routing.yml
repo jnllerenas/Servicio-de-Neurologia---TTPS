@@ -1,3 +1,11 @@
+neurologia_pacientes:
+    resource: "@NeurologiaPacientesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+neurologia_estudio:
+    resource: "@NeurologiaEstudioBundle/Resources/config/routing.yml"
+    prefix:   /
+
 neurologia_diagnostico:
     resource: "@NeurologiaDiagnosticoBundle/Resources/config/routing.yml"
 

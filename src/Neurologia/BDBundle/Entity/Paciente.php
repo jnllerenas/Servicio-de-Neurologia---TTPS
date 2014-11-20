@@ -80,21 +80,31 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_carnet", type="string", length=255, nullable=true)
+     * @ORM\Column(name="numero_carnet", type="string", length=255, nullable=false)
      */
     private $numeroCarnet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="blob", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
+     * @var \NivelEducacional
+     *
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\NivelEducacional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nivel_educacional_id", referencedColumnName="id")
+     * })
+     */
+    private $nivelEducacional;
+
+    /**
      * @var \ObraSocial
      *
-     * @ORM\ManyToOne(targetEntity="ObraSocial")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\ObraSocial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="obra_social_id", referencedColumnName="id")
      * })
@@ -104,7 +114,7 @@ class Paciente
     /**
      * @var \EstadoCivil
      *
-     * @ORM\ManyToOne(targetEntity="EstadoCivil")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\EstadoCivil")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estado_civil_id", referencedColumnName="id")
      * })
@@ -114,7 +124,7 @@ class Paciente
     /**
      * @var \TipoDocumento
      *
-     * @ORM\ManyToOne(targetEntity="TipoDocumento")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\TipoDocumento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
      * })
@@ -124,7 +134,7 @@ class Paciente
     /**
      * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\User")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="admitido_por", referencedColumnName="id")
      * })
@@ -134,7 +144,7 @@ class Paciente
     /**
      * @var \Departamento
      *
-     * @ORM\ManyToOne(targetEntity="Departamento")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\Departamento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="derivado_por", referencedColumnName="id")
      * })
@@ -144,22 +154,12 @@ class Paciente
     /**
      * @var \Sexo
      *
-     * @ORM\ManyToOne(targetEntity="Sexo")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\Sexo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sexo_id", referencedColumnName="id")
      * })
      */
     private $sexo;
-
-    /**
-     * @var \NivelEducacional
-     *
-     * @ORM\ManyToOne(targetEntity="NivelEducacional")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="nivel_educacional_id", referencedColumnName="id")
-     * })
-     */
-    private $nivelEducacional;
 
 
 
@@ -404,6 +404,29 @@ class Paciente
     }
 
     /**
+     * Set nivelEducacional
+     *
+     * @param \Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional
+     * @return Paciente
+     */
+    public function setNivelEducacional(\Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional = null)
+    {
+        $this->nivelEducacional = $nivelEducacional;
+
+        return $this;
+    }
+
+    /**
+     * Get nivelEducacional
+     *
+     * @return \Neurologia\BDBundle\Entity\NivelEducacional 
+     */
+    public function getNivelEducacional()
+    {
+        return $this->nivelEducacional;
+    }
+
+    /**
      * Set obraSocial
      *
      * @param \Neurologia\BDBundle\Entity\ObraSocial $obraSocial
@@ -539,28 +562,5 @@ class Paciente
     public function getSexo()
     {
         return $this->sexo;
-    }
-
-    /**
-     * Set nivelEducacional
-     *
-     * @param \Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional
-     * @return Paciente
-     */
-    public function setNivelEducacional(\Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional = null)
-    {
-        $this->nivelEducacional = $nivelEducacional;
-
-        return $this;
-    }
-
-    /**
-     * Get nivelEducacional
-     *
-     * @return \Neurologia\BDBundle\Entity\NivelEducacional 
-     */
-    public function getNivelEducacional()
-    {
-        return $this->nivelEducacional;
     }
 }

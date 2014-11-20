@@ -46,4 +46,83 @@ class Imagen
     private $estudio;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set archivo
+     *
+     * @param string $archivo
+     * @return Imagen
+     */
+    public function setArchivo($archivo)
+    {
+        $this->archivo = $archivo;
+
+        return $this;
+    }
+
+    /**
+     * Get archivo
+     *
+     * @return string 
+     */
+    public function getArchivo()
+    {
+        return $this->archivo;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return Imagen
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set estudio
+     *
+     * @param \Neurologia\BDBundle\Entity\Estudio $estudio
+     * @return Imagen
+     */
+    public function setEstudio(\Neurologia\BDBundle\Entity\Estudio $estudio = null)
+    {
+        $this->estudio = $estudio;
+
+        return $this;
+    }
+
+    /**
+     * Get estudio
+     *
+     * @return \Neurologia\BDBundle\Entity\Estudio 
+     */
+    public function getEstudio()
+    {
+        return $this->estudio;
+    }
 }

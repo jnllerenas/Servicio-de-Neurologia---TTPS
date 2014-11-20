@@ -92,4 +92,10 @@ class TipoEstudio
     {
         return $this->siglas;
     }
+    
+            public function __toString()
+{
+    return $this->descripcion;
+}
+
 }

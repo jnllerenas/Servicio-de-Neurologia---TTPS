@@ -58,4 +58,96 @@ class DrogaTratamiento
     private $tratamiento;
 
 
+
+    /**
+     * Set dosis
+     *
+     * @param string $dosis
+     * @return DrogaTratamiento
+     */
+    public function setDosis($dosis)
+    {
+        $this->dosis = $dosis;
+
+        return $this;
+    }
+
+    /**
+     * Get dosis
+     *
+     * @return string 
+     */
+    public function getDosis()
+    {
+        return $this->dosis;
+    }
+
+    /**
+     * Set efectoAdverso
+     *
+     * @param \Neurologia\BDBundle\Entity\EfectoAdverso $efectoAdverso
+     * @return DrogaTratamiento
+     */
+    public function setEfectoAdverso(\Neurologia\BDBundle\Entity\EfectoAdverso $efectoAdverso)
+    {
+        $this->efectoAdverso = $efectoAdverso;
+
+        return $this;
+    }
+
+    /**
+     * Get efectoAdverso
+     *
+     * @return \Neurologia\BDBundle\Entity\EfectoAdverso 
+     */
+    public function getEfectoAdverso()
+    {
+        return $this->efectoAdverso;
+    }
+
+    /**
+     * Set droga
+     *
+     * @param \Neurologia\BDBundle\Entity\Droga $droga
+     * @return DrogaTratamiento
+     */
+    public function setDroga(\Neurologia\BDBundle\Entity\Droga $droga)
+    {
+        $this->droga = $droga;
+
+        return $this;
+    }
+
+    /**
+     * Get droga
+     *
+     * @return \Neurologia\BDBundle\Entity\Droga 
+     */
+    public function getDroga()
+    {
+        return $this->droga;
+    }
+
+    /**
+     * Set tratamiento
+     *
+     * @param \Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento
+     * @return DrogaTratamiento
+     */
+    public function setTratamiento(\Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento)
+    {
+        $this->tratamiento = $tratamiento;
+
+        return $this;
+    }
+
+    /**
+     * Get tratamiento
+     *
+     * @return \Neurologia\BDBundle\Entity\TratamientoInterno 
+     */
+    public function getTratamiento()
+    {
+        return $this->tratamiento;
+    }
 }

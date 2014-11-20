@@ -12,9 +12,12 @@ class RegistrationFormType extends AbstractType
         // add your custom field
         $builder->add('nombre');
         $builder->add('apellido');
+        $builder->add('sexo');
+        $builder->add('tipoDocumento');
         $builder->add('numero_documento');
+        $builder->add('estadoCivil');
         $builder->add('telefono');
-        $builder->add('fecha_de_nacimiento');
+        $builder->add('fecha_de_nacimiento', 'birthday');
         $builder->add('direccion');
     }
 

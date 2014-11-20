@@ -56,4 +56,106 @@ class Motivo
     private $historiaClinica;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set detalle
+     *
+     * @param string $detalle
+     * @return Motivo
+     */
+    public function setDetalle($detalle)
+    {
+        $this->detalle = $detalle;
+
+        return $this;
+    }
+
+    /**
+     * Get detalle
+     *
+     * @return string 
+     */
+    public function getDetalle()
+    {
+        return $this->detalle;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return Motivo
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Neurologia\BDBundle\Entity\User $usuario
+     * @return Motivo
+     */
+    public function setUsuario(\Neurologia\BDBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Neurologia\BDBundle\Entity\User 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set historiaClinica
+     *
+     * @param \Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica
+     * @return Motivo
+     */
+    public function setHistoriaClinica(\Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica = null)
+    {
+        $this->historiaClinica = $historiaClinica;
+
+        return $this;
+    }
+
+    /**
+     * Get historiaClinica
+     *
+     * @return \Neurologia\BDBundle\Entity\HistoriaClinica 
+     */
+    public function getHistoriaClinica()
+    {
+        return $this->historiaClinica;
+    }
 }
