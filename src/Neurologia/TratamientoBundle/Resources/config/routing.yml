@@ -1,0 +1,23 @@
+tratamiento_index:
+    path:     /tratamiento
+    defaults: { _controller: TratamientoBundle:Tratamiento:index }
+
+tratamiento_index2:
+    path:     /tratamiento/
+    defaults: { _controller: TratamientoBundle:Tratamiento:index }
+    
+tratamiento_interno_new:
+    path:     /tratamiento/agregar-tratamiento-interno
+    defaults: { _controller: TratamientoBundle:TratamientoInterno:new }
+    
+tratamiento_interno_edit:
+    path:     /tratamiento/editar-tratamiento-interno/{id}
+    defaults: { _controller: TratamientoBundle:TratamientoInterno:edit }
+
+tratamiento_externo_new:
+    path:     /tratamiento/agregar-tratamiento-externo
+    defaults: { _controller: TratamientoBundle:TratamientoExterno:new }
+    
+tratamiento_externo_edit:
+    path:     /tratamiento/editar-tratamiento-externo/{id}
+    defaults: { _controller: TratamientoBundle:TratamientoExterno:edit }
