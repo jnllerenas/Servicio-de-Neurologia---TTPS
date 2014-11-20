@@ -11,6 +11,8 @@
     <br>
     * Los campos son obligatorios
     <br>
-    {{ form_row(iniciar.enviar) }}         {{ form_row(iniciar.cancelar) }}
+    {{ form_row(iniciar.enviar) }}         
     
 {{ form_end(iniciar) }}
+
+<a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': historia }) }}">VOLVER</a>

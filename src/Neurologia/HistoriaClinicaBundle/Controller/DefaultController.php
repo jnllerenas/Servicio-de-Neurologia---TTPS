@@ -53,12 +53,18 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $idpaciente)));
         }
         $params['iniciar'] = $form->createView();
+        $params['historia'] = $idpaciente;
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:iniciar.html.twig', $params);
     }
     
    public function guardarHistoria($form,$idpaciente) {
-       //paciente
+       
+       try {
+    
+       
                $em = $this->getDoctrine()->getManager();
+               $em->getConnection()->beginTransaction();
+       //paciente        
                $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
                //$usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
                //$paciente->setAdmitidoPor($usuario);
@@ -95,7 +101,14 @@ class DefaultController extends Controller
                $enfermedad->setFecha($time);
                $em->persist($enfermedad);
                $em->flush();
-        //evolucion?
+               
+               
+               $em->getConnection()->commit();
+        } catch (Exception $e) {
+            // Rollback the failed transaction attempt
+            $em->getConnection()->rollback();
+            throw $e;
+        }
                
                
    }
@@ -131,7 +144,7 @@ class DefaultController extends Controller
       //      throw $this->createNotFoundException('Unable to find Admitido por ');
       //  }
       // $aux['usuario'] = $usu->getNombre();
-      $aux['usuario'] = 'admin'; 
+       $aux['usuario'] = 'admin'; 
        $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m";
        $query = $em->createQuery($dql);
        $idMotivo = $query->getResult();
