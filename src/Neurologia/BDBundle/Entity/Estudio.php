@@ -69,15 +69,15 @@ class Estudio
      */
     private $institucion;
 
-//    /**
-//     * @var \Evolucion
-//     *
-//     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\Evolucion")
-//     * @ORM\JoinColumns({
-//     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
-//     * })
-//     */
-//    private $evolucion;
+    /**
+     * @var \Evolucion
+     *
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\Evolucion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+     * })
+     */
+    private $evolucion;
 
     /**
      * @var \TipoEstudio
