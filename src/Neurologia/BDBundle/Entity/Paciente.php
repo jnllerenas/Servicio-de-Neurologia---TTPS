@@ -94,7 +94,7 @@ class Paciente
     /**
      * @var \NivelEducacional
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\NivelEducacional")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\NivelEducacional")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="nivel_educacional_id", referencedColumnName="id")
      * })
@@ -104,7 +104,7 @@ class Paciente
     /**
      * @var \ObraSocial
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\ObraSocial")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\ObraSocial")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="obra_social_id", referencedColumnName="id")
      * })
@@ -114,7 +114,7 @@ class Paciente
     /**
      * @var \EstadoCivil
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\EstadoCivil")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\EstadoCivil")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estado_civil_id", referencedColumnName="id")
      * })
@@ -124,7 +124,7 @@ class Paciente
     /**
      * @var \TipoDocumento
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\TipoDocumento")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\TipoDocumento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
      * })
@@ -144,7 +144,7 @@ class Paciente
     /**
      * @var \Departamento
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\Departamento")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\Departamento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="derivado_por", referencedColumnName="id")
      * })
@@ -154,7 +154,7 @@ class Paciente
     /**
      * @var \Sexo
      *
-     * @ORM\ManyToOne(targetEntity="\Neurologia\GenericosBundle\Entity\Sexo")
+     * @ORM\ManyToOne(targetEntity="\Neurologia\BDBundle\Entity\Sexo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sexo_id", referencedColumnName="id")
      * })
@@ -406,10 +406,10 @@ class Paciente
     /**
      * Set nivelEducacional
      *
-     * @param \Neurologia\GenericosBundle\Entity\NivelEducacional $nivelEducacional
+     * @param \Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional
      * @return Paciente
      */
-    public function setNivelEducacional(\Neurologia\GenericosBundle\Entity\NivelEducacional $nivelEducacional = null)
+    public function setNivelEducacional(\Neurologia\BDBundle\Entity\NivelEducacional $nivelEducacional = null)
     {
         $this->nivelEducacional = $nivelEducacional;
 
@@ -419,7 +419,7 @@ class Paciente
     /**
      * Get nivelEducacional
      *
-     * @return \Neurologia\GenericosBundle\Entity\NivelEducacional 
+     * @return \Neurologia\BDBundle\Entity\NivelEducacional 
      */
     public function getNivelEducacional()
     {
@@ -429,10 +429,10 @@ class Paciente
     /**
      * Set obraSocial
      *
-     * @param \Neurologia\GenericosBundle\Entity\ObraSocial $obraSocial
+     * @param \Neurologia\BDBundle\Entity\ObraSocial $obraSocial
      * @return Paciente
      */
-    public function setObraSocial(\Neurologia\GenericosBundle\Entity\ObraSocial $obraSocial = null)
+    public function setObraSocial(\Neurologia\BDBundle\Entity\ObraSocial $obraSocial = null)
     {
         $this->obraSocial = $obraSocial;
 
@@ -442,7 +442,7 @@ class Paciente
     /**
      * Get obraSocial
      *
-     * @return \Neurologia\GenericosBundle\Entity\ObraSocial 
+     * @return \Neurologia\BDBundle\Entity\ObraSocial 
      */
     public function getObraSocial()
     {
@@ -452,10 +452,10 @@ class Paciente
     /**
      * Set estadoCivil
      *
-     * @param \Neurologia\GenericosBundle\Entity\EstadoCivil $estadoCivil
+     * @param \Neurologia\BDBundle\Entity\EstadoCivil $estadoCivil
      * @return Paciente
      */
-    public function setEstadoCivil(\Neurologia\GenericosBundle\Entity\EstadoCivil $estadoCivil = null)
+    public function setEstadoCivil(\Neurologia\BDBundle\Entity\EstadoCivil $estadoCivil = null)
     {
         $this->estadoCivil = $estadoCivil;
 
@@ -465,7 +465,7 @@ class Paciente
     /**
      * Get estadoCivil
      *
-     * @return \Neurologia\GenericosBundle\Entity\EstadoCivil 
+     * @return \Neurologia\BDBundle\Entity\EstadoCivil 
      */
     public function getEstadoCivil()
     {
@@ -475,10 +475,10 @@ class Paciente
     /**
      * Set tipoDocumento
      *
-     * @param \Neurologia\GenericosBundle\Entity\TipoDocumento $tipoDocumento
+     * @param \Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento
      * @return Paciente
      */
-    public function setTipoDocumento(\Neurologia\GenericosBundle\Entity\TipoDocumento $tipoDocumento = null)
+    public function setTipoDocumento(\Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento = null)
     {
         $this->tipoDocumento = $tipoDocumento;
 
@@ -488,7 +488,7 @@ class Paciente
     /**
      * Get tipoDocumento
      *
-     * @return \Neurologia\GenericosBundle\Entity\TipoDocumento 
+     * @return \Neurologia\BDBundle\Entity\TipoDocumento 
      */
     public function getTipoDocumento()
     {
@@ -498,7 +498,7 @@ class Paciente
     /**
      * Set admitidoPor
      *
-     * @param \Neurologia\GenericosBundle\Entity\User $admitidoPor
+     * @param \Neurologia\BDBundle\Entity\User $admitidoPor
      * @return Paciente
      */
     public function setAdmitidoPor(\Neurologia\BDBundle\Entity\User $admitidoPor = null)
@@ -511,7 +511,7 @@ class Paciente
     /**
      * Get admitidoPor
      *
-     * @return \Neurologia\GenericosBundle\Entity\User 
+     * @return \Neurologia\BDBundle\Entity\User 
      */
     public function getAdmitidoPor()
     {
@@ -521,10 +521,10 @@ class Paciente
     /**
      * Set derivadoPor
      *
-     * @param \Neurologia\GenericosBundle\Entity\Departamento $derivadoPor
+     * @param \Neurologia\BDBundle\Entity\Departamento $derivadoPor
      * @return Paciente
      */
-    public function setDerivadoPor(\Neurologia\GenericosBundle\Entity\Departamento $derivadoPor = null)
+    public function setDerivadoPor(\Neurologia\BDBundle\Entity\Departamento $derivadoPor = null)
     {
         $this->derivadoPor = $derivadoPor;
 
@@ -534,7 +534,7 @@ class Paciente
     /**
      * Get derivadoPor
      *
-     * @return \Neurologia\GenericosBundle\Entity\Departamento 
+     * @return \Neurologia\BDBundle\Entity\Departamento 
      */
     public function getDerivadoPor()
     {
@@ -544,10 +544,10 @@ class Paciente
     /**
      * Set sexo
      *
-     * @param \Neurologia\GenericosBundle\Entity\Sexo $sexo
+     * @param \Neurologia\BDBundle\Entity\Sexo $sexo
      * @return Paciente
      */
-    public function setSexo(\Neurologia\GenericosBundle\Entity\Sexo $sexo = null)
+    public function setSexo(\Neurologia\BDBundle\Entity\Sexo $sexo = null)
     {
         $this->sexo = $sexo;
 
@@ -557,7 +557,7 @@ class Paciente
     /**
      * Get sexo
      *
-     * @return \Neurologia\GenericosBundle\Entity\Sexo 
+     * @return \Neurologia\BDBundle\Entity\Sexo 
      */
     public function getSexo()
     {

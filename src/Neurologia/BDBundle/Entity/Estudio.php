@@ -72,7 +72,7 @@ class Estudio
 //    /**
 //     * @var \Evolucion
 //     *
-//     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\Evolucion")
+//     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\Evolucion")
 //     * @ORM\JoinColumns({
 //     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
 //     * })
@@ -82,7 +82,7 @@ class Estudio
     /**
      * @var \TipoEstudio
      *
-     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\TipoEstudio")
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\TipoEstudio")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_estudio_id", referencedColumnName="id")
      * })
@@ -173,10 +173,10 @@ class Estudio
     /**
      * Set evolucion
      *
-     * @param \Neurologia\GenericosBundle\Entity\Evolucion $evolucion
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
      * @return Estudio
      */
-    public function setEvolucion(\Neurologia\GenericosBundle\Entity\Evolucion $evolucion = null)
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
     {
         $this->evolucion = $evolucion;
 
@@ -186,7 +186,7 @@ class Estudio
     /**
      * Get evolucion
      *
-     * @return \Neurologia\GenericosBundle\Entity\Evolucion 
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
      */
     public function getEvolucion()
     {
@@ -196,10 +196,10 @@ class Estudio
     /**
      * Set tipoEstudio
      *
-     * @param \Neurologia\GenericosBundle\Entity\TipoEstudio $tipoEstudio
+     * @param \Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio
      * @return Estudio
      */
-    public function setTipoEstudio(\Neurologia\GenericosBundle\Entity\TipoEstudio $tipoEstudio = null)
+    public function setTipoEstudio(\Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio = null)
     {
         $this->tipoEstudio = $tipoEstudio;
 
@@ -209,7 +209,7 @@ class Estudio
     /**
      * Get tipoEstudio
      *
-     * @return \Neurologia\GenericosBundle\Entity\TipoEstudio 
+     * @return \Neurologia\BDBundle\Entity\TipoEstudio 
      */
     public function getTipoEstudio()
     {

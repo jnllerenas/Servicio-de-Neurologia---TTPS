@@ -54,7 +54,7 @@ class User extends BaseUser
         /**
      * @var \TipoDocumento
      *
-     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\TipoDocumento")
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\TipoDocumento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_documento_id", referencedColumnName="id")
      * })
@@ -64,7 +64,7 @@ class User extends BaseUser
     /**
      * @var \EstadoCivil
      *
-     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\EstadoCivil")
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\EstadoCivil")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estado_civil_id", referencedColumnName="id")
      * })
@@ -74,7 +74,7 @@ class User extends BaseUser
     /**
      * @var \Sexo
      *
-     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\Sexo")
+     * @ORM\ManyToOne(targetEntity="Neurologia\BDBundle\Entity\Sexo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sexo_id", referencedColumnName="id")
      * })
@@ -240,10 +240,10 @@ class User extends BaseUser
     /**
      * Set tipoDocumento
      *
-     * @param \Neurologia\GenericosBundle\Entity\TipoDocumento $tipoDocumento
+     * @param \Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento
      * @return User
      */
-    public function setTipoDocumento(\Neurologia\GenericosBundle\Entity\TipoDocumento $tipoDocumento = null)
+    public function setTipoDocumento(\Neurologia\BDBundle\Entity\TipoDocumento $tipoDocumento = null)
     {
         $this->tipoDocumento = $tipoDocumento;
 
@@ -253,7 +253,7 @@ class User extends BaseUser
     /**
      * Get tipoDocumento
      *
-     * @return \Neurologia\GenericosBundle\Entity\TipoDocumento 
+     * @return \Neurologia\BDBundle\Entity\TipoDocumento 
      */
     public function getTipoDocumento()
     {
@@ -263,10 +263,10 @@ class User extends BaseUser
     /**
      * Set estadoCivil
      *
-     * @param \Neurologia\GenericosBundle\Entity\EstadoCivil $estadoCivil
+     * @param \Neurologia\BDBundle\Entity\EstadoCivil $estadoCivil
      * @return User
      */
-    public function setEstadoCivil(\Neurologia\GenericosBundle\Entity\EstadoCivil $estadoCivil = null)
+    public function setEstadoCivil(\Neurologia\BDBundle\Entity\EstadoCivil $estadoCivil = null)
     {
         $this->estadoCivil = $estadoCivil;
 
@@ -276,7 +276,7 @@ class User extends BaseUser
     /**
      * Get estadoCivil
      *
-     * @return \Neurologia\GenericosBundle\Entity\EstadoCivil 
+     * @return \Neurologia\BDBundle\Entity\EstadoCivil 
      */
     public function getEstadoCivil()
     {
@@ -286,10 +286,10 @@ class User extends BaseUser
     /**
      * Set sexo
      *
-     * @param \Neurologia\GenericosBundle\Entity\Sexo $sexo
+     * @param \Neurologia\BDBundle\Entity\Sexo $sexo
      * @return User
      */
-    public function setSexo(\Neurologia\GenericosBundle\Entity\Sexo $sexo = null)
+    public function setSexo(\Neurologia\BDBundle\Entity\Sexo $sexo = null)
     {
         $this->sexo = $sexo;
 
@@ -299,7 +299,7 @@ class User extends BaseUser
     /**
      * Get sexo
      *
-     * @return \Neurologia\GenericosBundle\Entity\Sexo 
+     * @return \Neurologia\BDBundle\Entity\Sexo 
      */
     public function getSexo()
     {
