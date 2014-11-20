@@ -19,11 +19,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Neurologia\GenericosBundle\NeurologiaGenericosBundle(),
             new Neurologia\UserBundle\NeurologiaUserBundle(),
-			new Neurologia\DiagnosticoBundle\NeurologiaDiagnosticoBundle(),
+	    new Neurologia\DiagnosticoBundle\NeurologiaDiagnosticoBundle(),
             new Neurologia\MainBundle\NeurologiaMainBundle(),
             new Neurologia\HistoriaClinicaBundle\NeurologiaHistoriaClinicaBundle(),
-			new Neurologia\BDBundle\NeurologiaBDBundle(),	
+	    new Neurologia\BDBundle\NeurologiaBDBundle(),	
             new Neurologia\AntecedenteBundle\NeurologiaAntecedenteBundle(),
+            new Neurologia\PacientesBundle\NeurologiaPacientesBundle(),
+            new Neurologia\EstudioBundle\NeurologiaEstudioBundle(),
         );
 
 

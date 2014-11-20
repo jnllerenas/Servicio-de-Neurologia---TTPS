@@ -46,4 +46,83 @@ class DiagnosticoPresuntivo
     private $evolucion;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return DiagnosticoPresuntivo
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set fecha
+     *
+     * @param \DateTime $fecha
+     * @return DiagnosticoPresuntivo
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Get fecha
+     *
+     * @return \DateTime 
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @return DiagnosticoPresuntivo
+     */
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
+    }
 }

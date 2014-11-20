@@ -1,13 +1,14 @@
 <?php
 
 namespace Neurologia\BDBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Estudio
  *
- * @ORM\Table(name="estudio", indexes={@ORM\Index(name="FK_estudio", columns={"tipo_estudio_id"}), @ORM\Index(name="FK_estudio2", columns={"evolucion_id"})})
+ * @ORM\Table(name="estudio")
  * @ORM\Entity
  */
 class Estudio
@@ -20,6 +21,32 @@ class Estudio
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="Imagen", cascade={"persist"}, mappedBy="estudio")
+    */
+    protected $imagenes;
+    
+        public function __construct()
+    {
+        $this->imagenes = new ArrayCollection();
+    }
+
+        public function getImagenes()
+    {
+        return $this->imagenes;
+    }
+    
+        public function addImagen(Imagen $imagen)
+    {
+        $imagen->addEstudio($this);
+        $this->imagenes->add($imagen);
+    }
+    
+    public function removeImagen(Imagen $imagen)
+    {
+        $this->imagenes->removeElement($imagen);
+    }
 
     /**
      * @var string
@@ -42,25 +69,25 @@ class Estudio
      */
     private $institucion;
 
+//    /**
+//     * @var \Evolucion
+//     *
+//     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\Evolucion")
+//     * @ORM\JoinColumns({
+//     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
+//     * })
+//     */
+//    private $evolucion;
+
     /**
      * @var \TipoEstudio
      *
-     * @ORM\ManyToOne(targetEntity="TipoEstudio")
+     * @ORM\ManyToOne(targetEntity="Neurologia\GenericosBundle\Entity\TipoEstudio")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tipo_estudio_id", referencedColumnName="id")
      * })
      */
     private $tipoEstudio;
-
-    /**
-     * @var \Evolucion
-     *
-     * @ORM\ManyToOne(targetEntity="Evolucion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="evolucion_id", referencedColumnName="id")
-     * })
-     */
-    private $evolucion;
 
 
 
@@ -144,35 +171,12 @@ class Estudio
     }
 
     /**
-     * Set tipoEstudio
-     *
-     * @param \Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio
-     * @return Estudio
-     */
-    public function setTipoEstudio(\Neurologia\BDBundle\Entity\TipoEstudio $tipoEstudio = null)
-    {
-        $this->tipoEstudio = $tipoEstudio;
-
-        return $this;
-    }
-
-    /**
-     * Get tipoEstudio
-     *
-     * @return \Neurologia\BDBundle\Entity\TipoEstudio 
-     */
-    public function getTipoEstudio()
-    {
-        return $this->tipoEstudio;
-    }
-
-    /**
      * Set evolucion
      *
-     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @param \Neurologia\GenericosBundle\Entity\Evolucion $evolucion
      * @return Estudio
      */
-    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    public function setEvolucion(\Neurologia\GenericosBundle\Entity\Evolucion $evolucion = null)
     {
         $this->evolucion = $evolucion;
 
@@ -182,10 +186,33 @@ class Estudio
     /**
      * Get evolucion
      *
-     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     * @return \Neurologia\GenericosBundle\Entity\Evolucion 
      */
     public function getEvolucion()
     {
         return $this->evolucion;
+    }
+
+    /**
+     * Set tipoEstudio
+     *
+     * @param \Neurologia\GenericosBundle\Entity\TipoEstudio $tipoEstudio
+     * @return Estudio
+     */
+    public function setTipoEstudio(\Neurologia\GenericosBundle\Entity\TipoEstudio $tipoEstudio = null)
+    {
+        $this->tipoEstudio = $tipoEstudio;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoEstudio
+     *
+     * @return \Neurologia\GenericosBundle\Entity\TipoEstudio 
+     */
+    public function getTipoEstudio()
+    {
+        return $this->tipoEstudio;
     }
 }

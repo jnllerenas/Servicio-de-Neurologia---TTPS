@@ -56,4 +56,106 @@ class Evolucion
     private $usuario;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param string $evolucion
+     * @return Evolucion
+     */
+    public function setEvolucion($evolucion)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return string 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
+    }
+
+    /**
+     * Set fechaHora
+     *
+     * @param \DateTime $fechaHora
+     * @return Evolucion
+     */
+    public function setFechaHora($fechaHora)
+    {
+        $this->fechaHora = $fechaHora;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHora
+     *
+     * @return \DateTime 
+     */
+    public function getFechaHora()
+    {
+        return $this->fechaHora;
+    }
+
+    /**
+     * Set historiaClinica
+     *
+     * @param \Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica
+     * @return Evolucion
+     */
+    public function setHistoriaClinica(\Neurologia\BDBundle\Entity\HistoriaClinica $historiaClinica = null)
+    {
+        $this->historiaClinica = $historiaClinica;
+
+        return $this;
+    }
+
+    /**
+     * Get historiaClinica
+     *
+     * @return \Neurologia\BDBundle\Entity\HistoriaClinica 
+     */
+    public function getHistoriaClinica()
+    {
+        return $this->historiaClinica;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Neurologia\BDBundle\Entity\User $usuario
+     * @return Evolucion
+     */
+    public function setUsuario(\Neurologia\BDBundle\Entity\User $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Neurologia\BDBundle\Entity\User 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
 }

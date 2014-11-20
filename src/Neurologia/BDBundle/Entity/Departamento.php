@@ -62,4 +62,9 @@ class Departamento
     {
         return $this->descripcion;
     }
+    
+            public function __toString()
+{
+    return $this->descripcion;
+}
 }

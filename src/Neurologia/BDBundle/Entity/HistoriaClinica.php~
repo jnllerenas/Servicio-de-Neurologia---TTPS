@@ -32,4 +32,37 @@ class HistoriaClinica
     private $paciente;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set paciente
+     *
+     * @param \Neurologia\BDBundle\Entity\Paciente $paciente
+     * @return HistoriaClinica
+     */
+    public function setPaciente(\Neurologia\BDBundle\Entity\Paciente $paciente = null)
+    {
+        $this->paciente = $paciente;
+
+        return $this;
+    }
+
+    /**
+     * Get paciente
+     *
+     * @return \Neurologia\BDBundle\Entity\Paciente 
+     */
+    public function getPaciente()
+    {
+        return $this->paciente;
+    }
 }

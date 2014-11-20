@@ -53,4 +53,106 @@ class TratamientoInterno
     private $evolucion;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcion
+     *
+     * @param string $descripcion
+     * @return TratamientoInterno
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcion
+     *
+     * @return string 
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * Set inicio
+     *
+     * @param \DateTime $inicio
+     * @return TratamientoInterno
+     */
+    public function setInicio($inicio)
+    {
+        $this->inicio = $inicio;
+
+        return $this;
+    }
+
+    /**
+     * Get inicio
+     *
+     * @return \DateTime 
+     */
+    public function getInicio()
+    {
+        return $this->inicio;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return TratamientoInterno
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
+     * Set evolucion
+     *
+     * @param \Neurologia\BDBundle\Entity\Evolucion $evolucion
+     * @return TratamientoInterno
+     */
+    public function setEvolucion(\Neurologia\BDBundle\Entity\Evolucion $evolucion = null)
+    {
+        $this->evolucion = $evolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get evolucion
+     *
+     * @return \Neurologia\BDBundle\Entity\Evolucion 
+     */
+    public function getEvolucion()
+    {
+        return $this->evolucion;
+    }
 }
