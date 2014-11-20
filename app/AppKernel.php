@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Neurologia\AntecedenteBundle\NeurologiaAntecedenteBundle(),
             new Neurologia\PacientesBundle\NeurologiaPacientesBundle(),
             new Neurologia\EstudioBundle\NeurologiaEstudioBundle(),
+            new Neurologia\TratamientoBundle\TratamientoBundle(),
         );
 
 
