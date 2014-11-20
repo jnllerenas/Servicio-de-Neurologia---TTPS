@@ -19,6 +19,9 @@ class EnfermedadController extends Controller
 		 ));
        $form = Formularios::createEnfermedadForm($this, $id);
        $params['nuevaEnfermedad'] = $form->createView();
+       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
+       $params['historia'] = $historia->getId();
+       $params['paciente'] = $historia->getPaciente();
        return $this->render('NeurologiaHistoriaClinicaBundle:Enfermedad:index.html.twig', $params);
     }
     
@@ -32,15 +35,18 @@ class EnfermedadController extends Controller
         if ($form->isValid()) {
            if( $form->get('enviar')->isClicked()){
               //guardo los datos
+               $time = new \DateTime();
               $enf = new EnfermedadActual();
               $enf->setDetalle($form->get('detalle')->getData());
               $enf->setHistoriaClinica($historia);
+              $enf->setFecha($time);
               $em->persist($enf);
               $em->flush();
            }
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_enfermedad', array('id' => $id)));
         }
         $params['enfermedad'] = $form->createView();
+        $params['historia'] = $id;
         return $this->render('NeurologiaHistoriaClinicaBundle:Enfermedad:add.html.twig', $params);
     }
     

@@ -18,7 +18,10 @@ MENU
             <h5>Motivo:</h5> {{ historia.motivo }} <br>
             <h5>Derivado por:</h5> {{ historia.departamento }} <br>
             <hr><br>
-            Necesito generar una evolucion para mostrar lo de aca
+            {% for i in listado %}
+                {{ i.fecha|date('Y-m-d') }} - {{ i.tipo }}{% if i.tipoDetalle %},{{ i.tipoDetalle }}{% endif %}:
+                {{i.descripcion}}{% if i.droga %}--Droga:{{ i.droga }} ({{i.dosis}}){% endif %}<br>
+            {% endfor %}
         {% else %}
             {{ form(iniciar) }}
             <hr>

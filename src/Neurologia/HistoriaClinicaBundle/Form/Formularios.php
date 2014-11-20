@@ -28,7 +28,7 @@ class Formularios {
     public static function createHistoriaForm($a,array $list,$idpaciente) {
         return $a->createFormBuilder()
         ->setAction($a->generateUrl('neurologia_historia_clinica_iniciar', array('idpaciente' => $idpaciente)))
-        ->add('atendido', 'hidden', array('data' => 'usuario@loguiado'))
+        
         ->add('derivado', 'choice', array(
                                  'choice_list' => new SimpleChoiceList($list),
                                   'label' => '*Derivado por: '  
@@ -36,7 +36,6 @@ class Formularios {
         ->add('motivo', 'text',array('required' => true,'label' => '*Motivo: '))
         ->add('enfermedad', 'textarea',array('required' => true,'label' => '*Enfermedad Actual: '))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
-        ->add('cancelar', 'submit', array('label' => 'Cancelar'))
         ->getForm();
     }
     
@@ -53,7 +52,6 @@ class Formularios {
         ->setAction($a->generateUrl('neurologia_historia_clinica_motivo_nuevo', array('id' => $id)))
         ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle del Motivo: '))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
-        ->add('cancelar', 'submit', array('label' => 'Cancelar'))
         ->getForm();
     }
     
@@ -70,7 +68,6 @@ class Formularios {
         ->setAction($a->generateUrl('neurologia_historia_clinica_enfermedad_nuevo', array('id' => $id)))
         ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle de la Enfermedad: '))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
-        ->add('cancelar', 'submit', array('label' => 'Cancelar'))
         ->getForm();
     }
 }

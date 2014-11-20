@@ -1,8 +1,10 @@
-{% for m in enfermedad %}
+     {% for m in enfermedad %}
             
-    Enfermedad Actual: - <br>
-              {{ m.detalle }} <br>
+   {{ m.fecha|date('Y-m-d') }} <br>
+            Enfermedad Actual:   {{ m.detalle }} <br>
            
         {% endfor %}    
             {{ form(nuevaEnfermedad) }}
             
+            
+<a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id }) }}">VOLVER</a>

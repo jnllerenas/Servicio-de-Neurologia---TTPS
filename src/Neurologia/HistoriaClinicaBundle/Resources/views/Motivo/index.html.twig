@@ -1,9 +1,11 @@
 
 {% for m in motivo %}
             
-   Motivo: - <br>
-              {{ m.detalle }} <br>
+    {{ m.fecha|date('Y-m-d') }} <br>
+            Motivo:   {{ m.detalle }} <br>
            
         {% endfor %}    
             {{ form(nuevoMotivo) }}
+            
+<a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id }) }}">VOLVER</a>
             
