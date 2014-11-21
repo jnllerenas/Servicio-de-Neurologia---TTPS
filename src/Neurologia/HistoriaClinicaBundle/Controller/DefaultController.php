@@ -38,11 +38,11 @@ class DefaultController extends Controller
         $params=array();
         $em = $this->getDoctrine()->getManager();
         $departamentos = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
-        $list = array();        
+        $list = array(0 => 'Ninguno');        
         foreach ($departamentos as $row) {
             $list[$row->getId()] = $row->getDescripcion();
         }
-        $list[0]= 'ninguno';
+     
         $form = Formularios::createHistoriaForm($this,$list,$idpaciente);
         $form->handleRequest($request);
         if ($form->isValid()) {
@@ -59,10 +59,11 @@ class DefaultController extends Controller
     
    public function guardarHistoria($form,$idpaciente) {
        
+       $em = $this->getDoctrine()->getManager();
        try {
     
        
-               $em = $this->getDoctrine()->getManager();
+               
                $em->getConnection()->beginTransaction();
        //paciente        
                $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
