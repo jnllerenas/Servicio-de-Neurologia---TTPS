@@ -20,7 +20,12 @@ MENU
             <hr><br>
             {% for i in listado %}
                 {{ i.fecha|date('Y-m-d') }} - {{ i.tipo }}{% if i.tipoDetalle %},{{ i.tipoDetalle }}{% endif %}:
-                {{i.descripcion}}{% if i.droga %}--Droga:{{ i.droga }} ({{i.dosis}}){% endif %}<br>
+                
+                {{i.descripcion}}{% if i.droga %}--Droga:<br>
+                                       {% for d in i.droga %}
+                                           * {{ d.droga }} ({{d.dosis}})<br>
+                                       {% endfor %}
+                                 {% endif %}<br>
             {% endfor %}
         {% else %}
             {{ form(iniciar) }}

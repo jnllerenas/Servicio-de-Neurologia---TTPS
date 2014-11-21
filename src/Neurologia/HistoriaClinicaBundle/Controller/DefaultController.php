@@ -125,8 +125,9 @@ class DefaultController extends Controller
        if (!$historia) {
            return false;
        }
-       $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m";
+       $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
        $query1 = $em->createQuery($dql1);
+       $query1->setParameter('id', $historia->getId());
        $idEnfermedad = $query1->getResult();
        $enfermedad = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
                 array(
@@ -145,8 +146,9 @@ class DefaultController extends Controller
       //  }
       // $aux['usuario'] = $usu->getNombre();
        $aux['usuario'] = 'admin'; 
-       $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m";
+       $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
        $query = $em->createQuery($dql);
+       $query->setParameter('id', $historia->getId());
        $idMotivo = $query->getResult();
        $motivo = $em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
                 array(
@@ -207,14 +209,12 @@ class DefaultController extends Controller
                 $m['droga'] = false;
             }
         }
-       //tratamientos (por ahora el tema de la droga no es opcional- preguntar)
+       //tratamientos 
         $builder = $em->createQueryBuilder();
-        $builder->select('e.fechaHora as fecha, te.descripcion, dt.dosis, d.descripcion as droga')
+        $builder->select('e.fechaHora as fecha, te.descripcion, te.id as idt')
             ->from('NeurologiaBDBundle:TratamientoInterno', 'te')
             ->innerJoin('te.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
-            ->setParameter('id', $id)
-            ->innerJoin('NeurologiaBDBundle:DrogaTratamiento', 'dt', 'WITH', 'dt.tratamiento=te.id')
-            ->innerJoin('NeurologiaBDBundle:Droga', 'd', 'WITH', 'd.id=dt.droga');
+            ->setParameter('id', $id);
 
         $tratemientoi = $builder->getQuery()->execute();
         if (!$tratemientoi){ $tratemientoi = array();}
@@ -224,6 +224,18 @@ class DefaultController extends Controller
                 $m['tipoDetalle'] = 'Interno';
             }
         }
+        foreach ($tratemientoi as &$t){
+                $builderx = $em->createQueryBuilder();
+                $builderx->select('dt.dosis, d.descripcion as droga')
+                    ->from('NeurologiaBDBundle:DrogaTratamiento', 'dt')
+                    ->innerJoin('dt.droga', 'd', 'WITH', 'dt.tratamiento = :idt')
+                    ->setParameter('idt', $t['idt']);
+                
+                $droga = $builderx->getQuery()->execute();
+                if (!$droga){ $droga = array();}
+                $t['droga']=$droga;
+        }
+        
         
         $dql4 = "select e.fechaHora as fecha, te.descripcion from NeurologiaBDBundle:TratamientoExterno te "
                 . "inner join NeurologiaBDBundle:Evolucion e "
@@ -269,7 +281,7 @@ class DefaultController extends Controller
             }
         }
        // enfermedades
-       $dql1 = "select m.fecha, m.detalle as descripcion from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
+        $dql1 = "select m.fecha, m.detalle as descripcion from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
         $query1 = $em->createQuery($dql1);
         $query1->setParameter('id', $id);
         $enfermedades = $query1->getResult();
@@ -307,4 +319,6 @@ class DefaultController extends Controller
     return strtotime($a['fecha']->format('Y-m-d')) - strtotime($b['fecha']->format('Y-m-d'));
    }
     
+   
+   
 }

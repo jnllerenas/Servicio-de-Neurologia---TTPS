@@ -43,8 +43,11 @@ class MotivoController extends Controller
               $motivo->setDetalle($form->get('detalle')->getData());
               $motivo->setHistoriaClinica($historia);
               $motivo->setFecha($time);
-              $em->persist($motivo);
-              $em->flush();
+             
+                  $em->persist($motivo);
+                  $em->flush();
+             
+              
            }
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_motivo', array('id' => $id)));
         }
@@ -52,7 +55,6 @@ class MotivoController extends Controller
         $params['historia'] = $id;
         return $this->render('NeurologiaHistoriaClinicaBundle:Motivo:add.html.twig', $params);
     }
-    
     
     
 }
