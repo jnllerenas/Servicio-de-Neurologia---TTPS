@@ -2,4 +2,7 @@ Neurologia\BDBundle\Entity\Imagen:
     properties:
         file:
             - File:
-                maxSize: 5000000
+                maxSize: 1M       
+                maxSizeMessage: La imagen no debe superar los 5Mb       
+                mimeTypes: [image/jpg, image/jpeg, image/gif, image/png]
+                mimeTypesMessage: La imagen debe tener formato JPEG, TIFF, JPG, GIF o PNG

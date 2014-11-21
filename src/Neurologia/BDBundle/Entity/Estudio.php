@@ -2,7 +2,7 @@
 
 namespace Neurologia\BDBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,8 +23,10 @@ class Estudio
     private $id;
     
     /**
+    * @Assert\Valid()
     * @ORM\OneToMany(targetEntity="Imagen", cascade={"persist"}, mappedBy="estudio")
     */
+    
     protected $imagenes;
     
         public function __construct()

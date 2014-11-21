@@ -4,7 +4,6 @@ namespace Neurologia\BDBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Imagen
@@ -32,15 +31,12 @@ class Imagen {
     $this -> setEstudio($estudio);
 }
 
-    /**
-     * @Assert\File(maxSize="5000000")
-     */
-    private $file;
+    protected $file;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
 
     /**
      * @var string

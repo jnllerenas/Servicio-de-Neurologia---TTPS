@@ -9,7 +9,7 @@ neurologia_user_homepage:
 neurologia_register:
     path:     /register
     defaults: { _controller: FOSUserBundle:Registration:register }
-    
+
 neurologia_login:
     path:     /
     defaults: { _controller: FOSUserBundle:Security:login }

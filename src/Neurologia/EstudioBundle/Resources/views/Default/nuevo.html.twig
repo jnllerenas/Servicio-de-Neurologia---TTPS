@@ -56,7 +56,7 @@
 }
 
 function addImagenFormDeleteLink($imagenFormLi) {
-    var $removeFormA = $('<a href="#">delete this imagen</a>');
+    var $removeFormA = $('<a href="#">Borrar imagen</a>');
     $imagenFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
@@ -67,6 +67,8 @@ function addImagenFormDeleteLink($imagenFormLi) {
         $imagenFormLi.remove();
     });
 }
+
+
     </script>
     
 
@@ -78,9 +80,10 @@ function addImagenFormDeleteLink($imagenFormLi) {
     {{ form_row(form.tipoEstudio) }}
 
     
+    
     <ul class="imagenes" data-prototype="{{ form_widget(form.imagenes.vars.prototype)|e }}">
 
-    </ul>
+    </ul> 
     {{ form_row(form.save) }}
     {{ form_end(form) }} 
 
