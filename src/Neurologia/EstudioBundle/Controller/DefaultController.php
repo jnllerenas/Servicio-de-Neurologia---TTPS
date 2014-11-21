@@ -29,8 +29,9 @@ class DefaultController extends Controller
         $em->flush();
         
             return $this->redirect($this->generateUrl('neurologia_estudio_nuevo'));
-        } 
-       // var_dump($form->getErrors());
+        }
+        
+// var_dump($form->getErrors());
         
         
        

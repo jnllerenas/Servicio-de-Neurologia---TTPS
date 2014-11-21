@@ -15,10 +15,12 @@ class EstudioType extends AbstractType {
         $builder->add('institucion');
         $builder->add('tipoEstudio');
         $builder->add('imagenes', 'collection', array(
+            'label' => false,
             'type' => new ImagenType(),
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' => true,
+            'prototype' => true,            
         ));
         $builder->add('save', 'submit', array('label' => 'Crear estudio'));
     }
