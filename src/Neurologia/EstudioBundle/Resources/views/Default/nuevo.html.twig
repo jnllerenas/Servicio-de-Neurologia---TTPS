@@ -70,24 +70,20 @@ function addImagenFormDeleteLink($imagenFormLi) {
 
 
     </script>
-    
-
-    {{ form_start(form) }}
+   
+   {{ form_start(form) }}
     {# render the estudio #}
     {{ form_row(form.descripcion) }}
     {{ form_row(form.fecha) }}
     {{ form_row(form.institucion) }}
     {{ form_row(form.tipoEstudio) }}
-
     
+    <ul class="imagenes" data-prototype="{{ form_row(form.imagenes.vars.prototype)|e }}"></ul> 
     
-    <ul class="imagenes" data-prototype="{{ form_widget(form.imagenes.vars.prototype)|e }}">
-
-    </ul> 
     {{ form_row(form.save) }}
     {{ form_end(form) }} 
 
 
-
+    
 
 {% endblock %}

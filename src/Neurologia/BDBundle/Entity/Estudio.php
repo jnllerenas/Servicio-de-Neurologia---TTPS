@@ -25,8 +25,7 @@ class Estudio
     /**
     * @Assert\Valid()
     * @ORM\OneToMany(targetEntity="Imagen", cascade={"persist"}, mappedBy="estudio")
-    */
-    
+    */    
     protected $imagenes;
     
         public function __construct()

@@ -4,6 +4,7 @@ namespace Neurologia\BDBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Imagen
@@ -30,7 +31,7 @@ class Imagen {
 {            
     $this -> setEstudio($estudio);
 }
-
+ 
     protected $file;
 
     /**

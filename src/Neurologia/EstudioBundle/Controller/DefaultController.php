@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+        
+
         public function nuevoAction(Request $request)
     {
         $estudio = new Estudio();
@@ -16,22 +18,28 @@ class DefaultController extends Controller
         $form = $this->createForm(new EstudioType(), $estudio);
 
         $form->handleRequest($request);
-
+        
+               
+   
         if ($form->isValid()) {
             // ... maybe do some form processing, like saving the Task and Tag objects
             
         $em = $this->getDoctrine()->getManager();        
         $em->persist($estudio);
         $em->flush();
-
+        
             return $this->redirect($this->generateUrl('neurologia_estudio_nuevo'));
-        }
-
+        } 
+       // var_dump($form->getErrors());
+        
+        
+       
         return $this->render('NeurologiaEstudioBundle:Default:nuevo.html.twig', array(
             'form' => $form->createView(),
         ));
     }
     
+
 }
 
     
