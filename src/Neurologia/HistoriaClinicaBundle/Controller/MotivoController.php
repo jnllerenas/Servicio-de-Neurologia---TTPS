@@ -11,6 +11,7 @@ class MotivoController extends Controller
 {
     public function indexAction($id)
     {
+        
        $em = $this->getDoctrine()->getManager();
        $params = array();
        $params['motivo'] = $em->getRepository('NeurologiaBDBundle:Motivo')->findby(
@@ -23,9 +24,13 @@ class MotivoController extends Controller
        $form = Formularios::createMotivoForm($this, $id);
        $params['nuevoMotivo'] = $form->createView();
        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
-       $params['historia'] = $historia->getId();
+       $params['historiaId'] = $historia->getId();
        $params['paciente'] = $historia->getPaciente();
        return $this->render('NeurologiaHistoriaClinicaBundle:Motivo:index.html.twig', $params);
+//       $templating = $this->get('templating');
+//       $content = $templating->render('NeurologiaHistoriaClinicaBundle:Motivo:index.html.twig', $params);
+//       return new Response($content);
+       
     }
     
     public function nuevoAction(Request $request, $id) {

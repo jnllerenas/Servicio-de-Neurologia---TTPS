@@ -1,13 +1,19 @@
 {% extends '::base.html.twig' %}
 
+
+{% block datosPaciente %}
+    {% if paciente %}
+        <div>    
+        <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
+        <h4>+ datos personales</h4>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block body %}
 
     {% if paciente %}
-    <div>    
-        <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
-        <h4>+ datos personales</h4>
-    </div>
-        <br>
+    
     <div>
         <hr>
         <h2>HISTORIA CLINICA</h2>
@@ -34,9 +40,13 @@
         <br>
         <div>
         {% if historia %}
-            seleccione una solapa
-            <a href="{{ url('neurologia_historia_clinica_motivo', {'id': historia.id }) }}">Motivo</a>
-            <a href="{{ url('neurologia_historia_clinica_enfermedad', {'id': historia.id}) }}">Enfermadad Actual</a>
+            <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="{{ url('neurologia_historia_clinica_motivo', {'id': historia.id }) }}">Motivo</a></li>
+            <li role="presentation"><a href="{{ url('neurologia_historia_clinica_enfermedad', {'id': historia.id}) }}">Enfermadad Actual</a></li>
+            </ul>
+            {% if solapa %}
+                {{ solapa|raw }}
+            {% endif %}
         {% else %}
             Inicie la historia para empezar
         {% endif %}
@@ -44,5 +54,4 @@
 {% else %}
     error
 {% endif %}
-
 {% endblock %}

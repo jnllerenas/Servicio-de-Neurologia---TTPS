@@ -8,7 +8,6 @@ use Neurologia\HistoriaClinicaBundle\Form\Formularios;
 use Neurologia\BDBundle\Entity\Motivo;
 use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\BDBundle\Entity\EnfermedadActual;
-use Neurologia\BDBundle\Entity\Paciente;
 class DefaultController extends Controller
 {
     public function indexAction($idpaciente)
@@ -24,12 +23,18 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Unable to find Paciente ');
         }
         //Cargo la Historia clinica si tiene, sino viene vacio
-        $params['historia']= $this->vistaHistoria($idpaciente);
+        $params['historia'] = $this->vistaHistoria($idpaciente);
         //formulario para crear historia
         $form = Formularios::createIniciarForm($this,$idpaciente);
         $params['iniciar'] = $form->createView();
         //historial
-        $params['listado'] = $this->vistaListado($params['historia']['id']);
+        $params['listado']= $this->vistaListado( $params['historia']['id']);
+         $solapa =  $this->forward(
+                'NeurologiaHistoriaClinicaBundle:Motivo:index', 
+                array('id'  => $params['historia']['id']
+        ));    
+        $params['solapa'] = $solapa->getContent();
+        
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     }
     
@@ -114,71 +119,12 @@ class DefaultController extends Controller
                
    }
    
-   public function vistaHistoria($idpaciente){
-       $aux = array();
-       $em = $this->getDoctrine()->getManager();
-       
-       $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
-       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
-                array(
-                        'paciente' => $paciente->getId(),
-                ));
-       if (!$historia) {
-           return false;
-       }
-       $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
-       $query1 = $em->createQuery($dql1);
-       $query1->setParameter('id', $historia->getId());
-       $idEnfermedad = $query1->getResult();
-       $enfermedad = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
-                array(
-                        'historiaClinica' => $historia->getId(),
-                        'id' => $idEnfermedad[0]['id'],
-                ));
-        if (!$enfermedad) {
-            throw $this->createNotFoundException('Unable to find Enfermedad ');
-        }
-       $aux['id']= $historia->getId();
-       $aux['enfermedad'] = $enfermedad->getDetalle();
-       
-      // $usu = $em->getRepository('NeurologiaBDBundle:User')->find($paciente->getAdmitidoPor());
-      // if (!$usu) {
-      //      throw $this->createNotFoundException('Unable to find Admitido por ');
-      //  }
-      // $aux['usuario'] = $usu->getNombre();
-       $aux['usuario'] = 'admin'; 
-       $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
-       $query = $em->createQuery($dql);
-       $query->setParameter('id', $historia->getId());
-       $idMotivo = $query->getResult();
-       $motivo = $em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
-                array(
-                        'historiaClinica' => $historia->getId(),
-                        'id' => $idMotivo[0]['id'],
-                ));
-       if (!$motivo) {
-            throw $this->createNotFoundException('Unable to find Motivo ');
-        }
-       $aux['motivo'] = $motivo->getDetalle();
-       
-       if($paciente->getDerivadoPor()){
-       $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
-       $aux['departamento'] = $departamento->getDescripcion();
-       }
-       else{
-           $aux['departamento'] = 'ninguno';
-       }
-       return $aux;
-       
-      
-   }
-   
-   public function vistaListado($id) {
+    public function vistaListado($id) {
        //devuelve una lista ordenada por fecha , de todo lo relacionado con el paciente
        // fecha  tipo tipoDetalle descipcion.
        $em = $this->getDoctrine()->getManager();
        // diagnosticos
-       $builder2 = $em->createQueryBuilder();
+        $builder2 = $em->createQueryBuilder();
         $builder2->select('e.fechaHora as fecha, cd.descripcion')
             ->from('NeurologiaBDBundle:DiagnosticoDefinitivo', 'dd')
             ->innerJoin('dd.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
@@ -314,11 +260,72 @@ class DefaultController extends Controller
        $listado = array_merge($tratemientoi, $tratamientoe, $diagnosticod, $diagnosticop,$estudios, $motivos, $enfermedades, $antecedentes);
        usort($listado, array($this, 'ordenar'));
        return $listado;
+       
    }
    
    function ordenar( $a, $b ) {
     return strtotime($a['fecha']->format('Y-m-d')) - strtotime($b['fecha']->format('Y-m-d'));
    }
+   
+   public function vistaHistoria($idpaciente){
+       $em = $this->getDoctrine()->getManager();
+       $aux = array();
+       $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
+                array(
+                        'paciente' => $paciente->getId(),
+                ));
+       if (!$historia) {
+           return false;
+       }
+       $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
+       $query1 = $em->createQuery($dql1);
+       $query1->setParameter('id', $historia->getId());
+       $idEnfermedad = $query1->getResult();
+       $enfermedad = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
+                array(
+                        'historiaClinica' => $historia->getId(),
+                        'id' => $idEnfermedad[0]['id'],
+                ));
+        if (!$enfermedad) {
+            throw $this->createNotFoundException('Unable to find Enfermedad ');
+        }
+       $aux['id']= $historia->getId();
+       $aux['enfermedad'] = $enfermedad->getDetalle();
+       
+      // $usu = $em->getRepository('NeurologiaBDBundle:User')->find($paciente->getAdmitidoPor());
+      // if (!$usu) {
+      //      throw $this->createNotFoundException('Unable to find Admitido por ');
+      //  }
+      // $aux['usuario'] = $usu->getNombre();
+       $aux['usuario'] = 'admin'; 
+       $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
+       $query = $em->createQuery($dql);
+       $query->setParameter('id', $historia->getId());
+       $idMotivo = $query->getResult();
+       $motivo = $em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
+                array(
+                        'historiaClinica' => $historia->getId(),
+                        'id' => $idMotivo[0]['id'],
+                ));
+       if (!$motivo) {
+            throw $this->createNotFoundException('Unable to find Motivo ');
+        }
+       $aux['motivo'] = $motivo->getDetalle();
+       
+       if($paciente->getDerivadoPor()){
+       $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
+       $aux['departamento'] = $departamento->getDescripcion();
+       }
+       else{
+           $aux['departamento'] = 'ninguno';
+       }
+       return $aux;
+       
+      
+   }
+   
+   
     
    
    
