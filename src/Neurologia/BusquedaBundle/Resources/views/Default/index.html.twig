@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<h1> Búsqueda </h1>
+{% block menubusqueda %}
+<nav>
+	<a href="{{ path('neurologia_busqueda_usuario') }}">Búsqueda de usuarios</a>
+	<a href="{{ path('neurologia_busqueda_paciente') }}">Búsqueda de pacientes</a>
+	<a href="{{ path('neurologia_busqueda_avanzada') }}">Búsqueda avanzada de pacientes </a>
+</nav>
+{% endblock %}
+{% if valoreselegidos %}
+{% block mensaje %}{% endblock %}
+{% endif %}
+{% if lista %}
+{% block lista %}{% endblock %}
+{% endif %}
+
+{% endblock %}
