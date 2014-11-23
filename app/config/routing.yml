@@ -1,3 +1,7 @@
+neurologia_tabs:
+    resource: "@NeurologiaTabsBundle/Resources/config/routing.yml"
+    prefix:   /tabs
+
 neurologia_pacientes:
     resource: "@NeurologiaPacientesBundle/Resources/config/routing.yml"
     prefix:   /
