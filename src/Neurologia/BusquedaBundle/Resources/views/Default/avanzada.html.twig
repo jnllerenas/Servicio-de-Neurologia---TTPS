@@ -1,5 +1,5 @@
 {% extends 'NeurologiaBusquedaBundle:Default:index.html.twig' %}
-
+{% block titulobusqueda %} {{ titulobusqueda }}{% endblock %}
 {% block menubusqueda %}
     {{ form_start(form, {'method': 'GET'}) }}
         <table>
@@ -34,9 +34,9 @@
 
 {% endblock %}
 {% block mensaje %}
-        <span>{{ cantidad }} 
-            paciente{% if cantidad != 1 %}s{% endif %} 
-            encontrado{% if cantidad != 1 %}s{% endif %}
+    <span>{{ lista|length }} 
+            paciente{% if lista|length != 1 %}s{% endif %} 
+            encontrado{% if lista|length != 1 %}s{% endif %}
         {% if valoreselegidos %}
             {{ valoreselegidos }}
         {% endif %}

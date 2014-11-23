@@ -45,6 +45,7 @@ class DefaultController extends Controller
     {
         $form = $this->createForm(new AvanzadaType());
         $request = $this->getRequest();
+        $vars["titulobusqueda"]="avanzada de pacientes";
         $vars["valoreselegidos"]=false;
         $vars["lista"]=false;
         $name=$request->get($form->getName());
@@ -65,12 +66,20 @@ class DefaultController extends Controller
           $elegidosstring='';
           $em = $this->getDoctrine()->getManager();
           if($categoriaDiagnostico!=''){
-              $where[]='dd.categoriaDiagnostico=:categoriaDiagnostico';
+              $where[]='EXISTS (SELECT dd1 '
+                      . 'FROM NeurologiaBDBundle:DiagnosticoDefinitivo dd1 '
+                      . 'INNER JOIN NeurologiaBDBundle:Evolucion e1 WITH dd1.evolucion = e1 '
+                      . 'WHERE dd1.categoriaDiagnostico = :categoriaDiagnostico '
+                      . 'AND e1.historiaClinica = h)';
               $parametros['categoriaDiagnostico'] = $categoriaDiagnostico;
               $elegido[]='categoría de diagnóstico: '.$em->getRepository("NeurologiaBDBundle:CategoriaDiagnostico")->find($categoriaDiagnostico)->getDescripcion();
           }
           if($droga!=''){
-            $where[]='dt.droga = :droga';
+            $where[]='EXISTS (SELECT dt1 FROM NeurologiaBDBundle:DrogaTratamiento dt1 '
+                    . 'INNER JOIN NeurologiaBDBundle:TratamientoInterno ti1 WITH dt1.tratamiento = ti1 '
+                    . 'INNER JOIN NeurologiaBDBundle:Evolucion e2 WITH ti1.evolucion = e2 '
+                    . 'WHERE dt1.droga = :droga '
+                    . 'AND e2.historiaClinica = h)';
             $parametros['droga'] = $droga;
             $elegido[]='droga en tratamiento: '.$em->getRepository("NeurologiaBDBundle:Droga")->find($droga)->getDescripcion();
           }
@@ -85,7 +94,12 @@ class DefaultController extends Controller
             $elegido[]=$edad.' años';
           }
           if($efectoAdverso!=''){
-            $where[]='dt.efectoAdverso = :efectoAdverso';
+            $where[]='EXISTS (SELECT dt2 '
+                    . 'FROM NeurologiaBDBundle:DrogaTratamiento dt2 '
+                    . 'INNER JOIN NeurologiaBDBundle:TratamientoInterno ti2 WITH dt2.tratamiento = ti2 '
+                    . 'INNER JOIN NeurologiaBDBundle:Evolucion e2 WITH ti2.evolucion = e2 '
+                    . 'WHERE dt2.efectoAdverso = :efectoAdverso '
+                    . 'AND e2.historiaClinica = h) ';
             $parametros['efectoAdverso'] = $efectoAdverso;
             $elegido[]='efecto adverso en tratamiento: '.$em->getRepository("NeurologiaBDBundle:EfectoAdverso")->find($efectoAdverso)->getDescripcion();
           }
@@ -94,28 +108,27 @@ class DefaultController extends Controller
               $elegidosstring='con '.implode(', ', $elegido);
           }
           
-          $querypacientes="SELECT DISTINCT p FROM NeurologiaBDBundle:Paciente p 
-              INNER JOIN NeurologiaBDBundle:HistoriaClinica h WITH h.paciente=p
-                  LEFT JOIN NeurologiaBDBundle:Evolucion e WITH e.historiaClinica = h
-                  LEFT JOIN NeurologiaBDBundle:TratamientoInterno ti WITH ti.evolucion = e
-                  LEFT JOIN NeurologiaBDBundle:DrogaTratamiento dt WITH dt.tratamiento = ti
-                  LEFT JOIN NeurologiaBDBundle:DiagnosticoDefinitivo dd WITH dd.evolucion = e $wherestring";
+          $querypacientes="SELECT DISTINCT p.id FROM NeurologiaBDBundle:HistoriaClinica h 
+                            INNER JOIN NeurologiaBDBundle:Paciente p WITH h.paciente = p
+                  $wherestring"
+                  . "GROUP BY p.id";
+          $queryenfermedad="SELECT MAX(eac.id) as id FROM NeurologiaBDBundle:EnfermedadActual eac"
+                  . " INNER JOIN NeurologiaBDBundle:HistoriaClinica hicl WITH eac.historiaClinica=hicl"
+                  . " GROUP BY hicl ";
           $queryString="SELECT pa.nombre, pa.apellido, pa.fechaNacimiento, s.descripcion as sexo, ea.detalle as enfermedad
                   FROM NeurologiaBDBundle:Paciente pa 
               INNER JOIN NeurologiaBDBundle:HistoriaClinica hc WITH hc.paciente = pa
               INNER JOIN NeurologiaBDBundle:Sexo s WITH pa.sexo = s
               INNER JOIN NeurologiaBDBundle:EnfermedadActual ea WITH ea.historiaClinica = hc
-                  WHERE pa IN ($querypacientes)";
+                  WHERE pa.id IN ($querypacientes)"
+                  . " AND ea.id IN($queryenfermedad)";
+          
           $query= $em->createQuery($queryString);
           if($parametros){
               $query->setParameters($parametros);
           }
-          
           $vars["lista"]=$query->getResult();
-          $vars["cantidad"]=count($vars["lista"]);
           $vars["valoreselegidos"]=$elegidosstring;
-          
-          
         }
         $vars['form']=$form->createView();
 
