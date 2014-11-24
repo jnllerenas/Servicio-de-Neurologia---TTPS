@@ -16,7 +16,10 @@ class AntecedenteType extends AbstractType
     {
         $builder
             ->add('descripcion')
-            ->add('tipoAntecedente')
+            ->add('tipoAntecedente', NULL,array(
+                'expanded' => 'true',
+                'empty_value'=>false,
+                'required'=>true))
         ;
     }
     
