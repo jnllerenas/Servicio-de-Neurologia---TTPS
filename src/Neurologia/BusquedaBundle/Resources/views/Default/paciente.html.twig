@@ -1,4 +1,70 @@
 {% extends 'NeurologiaBusquedaBundle:Default:index.html.twig' %}
+{% block titulobusqueda %} {{ titulobusqueda }}{% endblock %}
 {% block menubusqueda %}
-{{ form(form) }}
+    {{ form_start(form, {'method': 'GET'}) }}
+        <table>
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.nombre) }}</th>
+                    <th>{{ form_label(form.apellido) }}</th>
+                    <th>{{ form_label(form.documento) }}</th>
+                    <th>{{ form_label(form.telefono) }}</th>
+                    <th>{{ form_label(form.fechaNacimiento) }}</th>
+                    <th>{{ form_errors(form) }}</th>
+                </tr>
+                <tr>
+                    <td>{{ form_widget(form.nombre) }}</td>
+                    <td>{{ form_widget(form.apellido) }}</td>
+                    <td>{{ form_widget(form.documento) }}</td>
+                    <td>{{ form_widget(form.telefono) }}</td>
+                    <td>{{ form_widget(form.fechaNacimiento) }}</td>
+                    <td>{{ form_widget(form.search) }}<br>{{ form_widget(form.reset) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_errors(form.nombre) }}</td>
+                    <td>{{ form_errors(form.apellido) }}</td>
+                    <td>{{ form_errors(form.documento) }}</td>
+                    <td>{{ form_errors(form.telefono) }}</td>
+                    <td>{{ form_errors(form.fechaNacimiento) }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block mensaje %}
+    <span>{{ lista|length }} 
+            paciente{% if lista|length != 1 %}s{% endif %} 
+            encontrado{% if lista|length != 1 %}s{% endif %}
+        {% if valoreselegidos %}
+            {{ valoreselegidos }}
+        {% endif %}
+        </span>
+{% endblock %}
+{% block lista %}
+    
+<table>
+    <tbody>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Documento</th>
+                <th>Fecha de nacimiento</th>
+                <th>Telefono</th>
+                <th>Acciones</th>
+            </tr>
+            {% for tupla in lista %}
+               <tr>
+                   <td>{{ tupla.nombre }}</td>
+                   <td>{{ tupla.apellido }}</td>
+                   <td>{{ tupla.documento }}</td>
+                   <td>{{ tupla.fechaNacimiento|date('d-m-Y') }}</td>
+                   <td>{{ tupla.telefono }}</td>
+                   <td><a href="{{ path('neurologia_historia_clinica_homepage', {'idpaciente': tupla.id}) }}" title="Ver" class="sf-toolbar">Ver</a></td>
+                </tr>
+	{% endfor %}
+            </tbody>
+</table>
+    
 {% endblock %}

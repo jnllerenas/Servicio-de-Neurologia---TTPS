@@ -18,24 +18,74 @@ class DefaultController extends Controller
         return $this->render('NeurologiaBusquedaBundle:Default:index.html.twig', $vars);
     }
 
-    public function pacienteAction(Request $request)
+    public function pacienteAction()
     {
 
-        	$form = $this->createForm(new PacienteType());
-
-        	$form->handleRequest($request);
-            $vars["lista"]=false;
-            $vars["valoreselegidos"]=false;
-            $vars["form"]=$form->createView();
-
-        	if ($form->isValid()) {
-        		$em = $this->getDoctrine()->getManager();        
-        		
-
-       			return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
-    		}
-
-        	return $this->render('NeurologiaBusquedaBundle:Default:paciente.html.twig', $vars);
+        $form = $this->createForm(new PacienteType());
+        $request = $this->getRequest();
+        $vars["titulobusqueda"]="de pacientes";
+        $vars["lista"]=false;
+        $vars["valoreselegidos"]=false;
+        $name=$request->get($form->getName());
+        $method=$request->getMethod();
+        $elegidosstring='';
+        if($method=='GET' && $name){
+            $formDatos=$name;
+            $nombre=$formDatos['nombre'];
+            $apellido=$formDatos['apellido'];
+            $documento=$formDatos['documento'];
+            $telefono=$formDatos['telefono'];
+            $fechaNacimiento=$formDatos['fechaNacimiento'];
+            
+            $parametros=array();
+            $where=array();
+            $wherestring='';
+            $elegidosstring='';
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            if($nombre!=''){
+              $where[]='p.nombre = :nombre';
+              $parametros['nombre'] = $nombre;
+              $elegido[]='nombre: '.$nombre;
+            }
+            if($apellido!=''){
+              $where[]='p.apellido = :apellido';
+              $parametros['apellido'] = $apellido;
+              $elegido[]='apellido: '.$apellido;
+            }
+            if($documento!=''){
+              $where[]='p.documento = :documento';
+              $parametros['documento'] = $documento;
+              $elegido[]='documento: '.$documento;
+            }
+            if($telefono!=''){
+              $where[]='p.telefono = :telefono';
+              $parametros['telefono'] = $telefono;
+              $elegido[]='teléfono: '.$telefono;
+            }
+            if($fechaNacimiento!=''){
+              $where[]='p.fechaNacimiento = :fechaNacimiento';
+              $parametros['fechaNacimiento'] = $fechaNacimiento;
+              $elegido[]='fecha de nacimiento: '.$fechaNacimiento;
+            }
+            if($where){
+              $wherestring="WHERE ".implode(' AND ', $where). ' ';
+              $elegidosstring='con '.implode(', ', $elegido);
+            }
+            $queryString="SELECT p.id, p.nombre, p.apellido, p.documento, p.fechaNacimiento, p.telefono "
+                    . "FROM NeurologiaBDBundle:Paciente p "
+                    . "$wherestring";
+            $query= $em->createQuery($queryString);
+            $query= $em->createQuery($queryString);
+            if($parametros){
+                $query->setParameters($parametros);
+            }
+            $vars["lista"]=$query->getResult();
+            $vars["valoreselegidos"]=$elegidosstring;
+        }
+        $vars["form"]=$form->createView();
+        return $this->render('NeurologiaBusquedaBundle:Default:paciente.html.twig', $vars);
     }
     public function usuarioAction(Request $request)
     {
@@ -50,7 +100,7 @@ class DefaultController extends Controller
         $vars["lista"]=false;
         $name=$request->get($form->getName());
         $method=$request->getMethod();
-          $elegidosstring='';
+        $elegidosstring='';
         if($method=='GET' && $name){
           $formDatos=$name;
           $categoriaDiagnostico=$formDatos['categoriaDiagnostico'];
