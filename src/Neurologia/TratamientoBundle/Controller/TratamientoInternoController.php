@@ -7,7 +7,6 @@ use Neurologia\BDBundle\Entity\Droga;
 use Neurologia\BDBundle\Entity\EfectoAdverso;
 use Neurologia\BDBundle\Entity\DrogaTratamiento;
 use Neurologia\BDBundle\Entity\TratamientoInterno as TratamientoInterno;
-use Neurologia\BDBundle\Entity\Evolucion as Evolucion;
 use Neurologia\TratamientoBundle\Form\TratamientoInternoType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,11 +25,10 @@ class TratamientoInternoController extends Controller
         $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
         $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
         $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
-
+     
         $tratamientoInterno = new TratamientoInterno();
         $tratamientoInterno->setEvolucion($evolucion);
         $tratamientoInterno->setInicio(new \Datetime('tomorrow'));
-        $tratamientoInterno->setActivo(true);
         
         $form = $this->createForm(new TratamientoInternoType(),$tratamientoInterno);
 
@@ -38,9 +36,7 @@ class TratamientoInternoController extends Controller
 
         if ($form->isValid()) {
             
-            //$data = $form->getData();
-            //var_dump('falta terminar esto');
-            //var_dump($this->get('request')->request->get('neurologia_bdbundle_tratamientointerno[select_efectos_adversos_1]'));
+            var_dump($this->get('request')->request->get('neurologia_bdbundle_tratamientointerno'));
             $em->persist($tratamientoInterno);
             $em->flush();
             
