@@ -27,9 +27,6 @@ class MotivoController extends Controller
        $params['historiaId'] = $historia->getId();
        $params['paciente'] = $historia->getPaciente();
        return $this->render('NeurologiaHistoriaClinicaBundle:Motivo:index.html.twig', $params);
-//       $templating = $this->get('templating');
-//       $content = $templating->render('NeurologiaHistoriaClinicaBundle:Motivo:index.html.twig', $params);
-//       return new Response($content);
        
     }
     
@@ -54,7 +51,8 @@ class MotivoController extends Controller
              
               
            }
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_motivo', array('id' => $id)));
+           $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Motivo:index')));
         }
         $params['motivo'] = $form->createView();
         $params['historia'] = $id;

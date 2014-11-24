@@ -1,151 +1,35 @@
 <?php
+namespace Neurologia\HistoriaClinicaBundle\Helper;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-namespace Neurologia\HistoriaClinicaBundle\Controller;
+/**
+ * Description of VistaHistoria
+ *
+ * @author Wodan
+ */
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Neurologia\HistoriaClinicaBundle\Form\Formularios;
-use Neurologia\BDBundle\Entity\Motivo;
-use Neurologia\BDBundle\Entity\HistoriaClinica;
-use Neurologia\BDBundle\Entity\EnfermedadActual;
-class DefaultController extends Controller
-{
-    public function indexAction($idpaciente)
-    {
-        //si llegamos acá supuestamente tenemos seleccionado un paciente
-        $params = array(); 
-        //Cargo datos paciente
-        $paciente = $idpaciente;
-        $em = $this->getDoctrine()->getManager();
-        $params['paciente'] = $em->getRepository('NeurologiaBDBundle:Paciente')->find($paciente);
+use Symfony\Component\HttpFoundation\Response;
+
+class VistaHistoria extends Controller{
+    
+    private $em;
+    
+    public function __construct() {
+        $this->em = $this->getDoctrine()->getManager();
         
-        if (!$params['paciente']) {
-            throw $this->createNotFoundException('Unable to find Paciente ');
-        }
-        //Cargo la Historia clinica si tiene, sino viene vacio
-        $params['historia'] = $this->vistaHistoria($idpaciente);
-        //formulario para crear historia
-        $form = Formularios::createIniciarForm($this,$idpaciente);
-        $params['iniciar'] = $form->createView();
-        //historial
-        $params['listado']= $this->vistaListado( $params['historia']['id']);
-        // deberia dirigirme a NeurologiaHistoriaClinicaBundle:Default:tabs
-        // y que me devuelva el render de la vista que le pase como parámetro(por defecto va a ser null)
-        // usando el script de jona marco como actual y luego todas la peticiones van a caer aca.
-        // por lo que deberia redirigar eso hacia el nuevo routing y volverlo a imprimir
-        //espero que funcione
-        if(isset($_GET['solapa'])){
-        $solapa =  $this->forward(
-                'NeurologiaHistoriaClinicaBundle:Default:solapa', 
-                array('id'  => $params['historia']['id'], 'solapa' => $_GET['solapa']
-        ));    
-        $params['solapa'] = $solapa->getContent();
-        //por ahora lo dejo asi
-        if ($_GET['solapa'] == 'Motivo:index'){
-            $params['nro'] = 1;
-        }
-        else{$params['nro'] = 2;}
-        //Que bardo
-        }
-        return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     }
-    
-    public function iniciarAction(Request $request, $idpaciente)
-    {
-        $params=array();
-        $em = $this->getDoctrine()->getManager();
-        $departamentos = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
-        $list = array(0 => 'Ninguno');        
-        foreach ($departamentos as $row) {
-            $list[$row->getId()] = $row->getDescripcion();
-        }
-     
-        $form = Formularios::createHistoriaForm($this,$list,$idpaciente);
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-           if( $form->get('enviar')->isClicked()){
-              //guardo los datos
-              $this->guardarHistoria($form,$idpaciente);
-           }
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $idpaciente)));
-        }
-        $params['iniciar'] = $form->createView();
-        $params['historia'] = $idpaciente;
-        return $this->render('NeurologiaHistoriaClinicaBundle:Default:iniciar.html.twig', $params);
-    }
-    
-    public function solapaAction($id, $solapa){
-        $str = 'NeurologiaHistoriaClinicaBundle:'.$solapa;
-        $solapa =  $this->forward(
-                $str, 
-                array('id'  => $id
-        ));    
-        return $solapa;
-    }
-    
-   public function guardarHistoria($form,$idpaciente) {
-       
-       $em = $this->getDoctrine()->getManager();
-       try {
-    
-       
-               
-               $em->getConnection()->beginTransaction();
-       //paciente        
-               $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
-               //$usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
-               //$paciente->setAdmitidoPor($usuario);
-               if ($form->get('derivado')->getData()){
-               $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
-               $paciente->setDerivadoPor($derivado);
-               }
-               else{
-                   $paciente->setDerivadoPor(NULL);
-               }
-               $em->persist($paciente);
-               $em->flush();
-        //historia
-               $historia = new HistoriaClinica();
-               $historia->setPaciente($paciente);
-               $em->persist($historia);
-               $em->flush();
-               $historiaNueva = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
-                array(
-                        'paciente' => $idpaciente,
-                ));
-        //motivo
-               $time = new \DateTime();
-               $motivo = new Motivo();
-               $motivo->setDetalle($form->get('motivo')->getData());
-               $motivo->setHistoriaClinica($historiaNueva);
-               $motivo->setFecha($time);
-               $em->persist($motivo);
-               $em->flush();
-        //enfermedadActual
-               $enfermedad = new EnfermedadActual();
-               $enfermedad->setDetalle($form->get('enfermedad')->getData());
-               $enfermedad->setHistoriaClinica($historiaNueva);
-               $enfermedad->setFecha($time);
-               $em->persist($enfermedad);
-               $em->flush();
-               
-               
-               $em->getConnection()->commit();
-        } catch (Exception $e) {
-            // Rollback the failed transaction attempt
-            $em->getConnection()->rollback();
-            throw $e;
-        }
-               
-               
-   }
-   
-    public function vistaListado($id) {
+
+    public function vistaListado($idhistoria) {
        //devuelve una lista ordenada por fecha , de todo lo relacionado con el paciente
        // fecha  tipo tipoDetalle descipcion.
-       $em = $this->getDoctrine()->getManager();
+       
        // diagnosticos
-        $builder2 = $em->createQueryBuilder();
+        $builder2 = $this->em->createQueryBuilder();
         $builder2->select('e.fechaHora as fecha, cd.descripcion')
             ->from('NeurologiaBDBundle:DiagnosticoDefinitivo', 'dd')
             ->innerJoin('dd.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
@@ -162,7 +46,7 @@ class DefaultController extends Controller
             }
         }
         
-        $builder3 = $em->createQueryBuilder();
+        $builder3 = $this->em->createQueryBuilder();
         $builder3->select('e.fechaHora as fecha, dp.descripcion')
             ->from('NeurologiaBDBundle:DiagnosticoPresuntivo', 'dp')
             ->innerJoin('dp.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
@@ -178,7 +62,7 @@ class DefaultController extends Controller
             }
         }
        //tratamientos 
-        $builder = $em->createQueryBuilder();
+        $builder = $this->em->createQueryBuilder();
         $builder->select('e.fechaHora as fecha, te.descripcion, te.id as idt')
             ->from('NeurologiaBDBundle:TratamientoInterno', 'te')
             ->innerJoin('te.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
@@ -193,7 +77,7 @@ class DefaultController extends Controller
             }
         }
         foreach ($tratemientoi as &$t){
-                $builderx = $em->createQueryBuilder();
+                $builderx = $this->em->createQueryBuilder();
                 $builderx->select('dt.dosis, d.descripcion as droga')
                     ->from('NeurologiaBDBundle:DrogaTratamiento', 'dt')
                     ->innerJoin('dt.droga', 'd', 'WITH', 'dt.tratamiento = :idt')
@@ -208,7 +92,7 @@ class DefaultController extends Controller
         $dql4 = "select e.fechaHora as fecha, te.descripcion from NeurologiaBDBundle:TratamientoExterno te "
                 . "inner join NeurologiaBDBundle:Evolucion e "
                 . "where e.historiaClinica=:id and te.evolucion=e.id";
-        $query4 = $em->createQuery($dql4);
+        $query4 = $this->em->createQuery($dql4);
         $query4->setParameter('id', $id);
         $tratamientoe = $query4->getResult();
         if (!$tratamientoe){ $tratamientoe = array();}
@@ -220,7 +104,7 @@ class DefaultController extends Controller
             }
         }
        // estudios
-       $builder5 = $em->createQueryBuilder();
+       $builder5 = $this->em->createQueryBuilder();
         $builder5->select('e.fechaHora as fecha, es.descripcion, te.siglas as tipoDetalle')
             ->from('NeurologiaBDBundle:Estudio', 'es')
             ->innerJoin('es.evolucion', 'e', 'WITH', 'e.historiaClinica = :id')
@@ -237,7 +121,7 @@ class DefaultController extends Controller
         }
        // motivos
         $dql = "select m.fecha, m.detalle as descripcion from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
-        $query = $em->createQuery($dql);
+        $query = $this->em->createQuery($dql);
         $query->setParameter('id', $id);
         $motivos = $query->getResult();
         if (!$motivos){ $motivos = array();}
@@ -250,7 +134,7 @@ class DefaultController extends Controller
         }
        // enfermedades
         $dql1 = "select m.fecha, m.detalle as descripcion from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
-        $query1 = $em->createQuery($dql1);
+        $query1 = $this->em->createQuery($dql1);
         $query1->setParameter('id', $id);
         $enfermedades = $query1->getResult();
         if (!$enfermedades){ $enfermedades = array();}
@@ -266,7 +150,7 @@ class DefaultController extends Controller
                . "from NeurologiaBDBundle:Antecedente m "
                . "inner join NeurologiaBDBundle:TipoAntecedente ma "
                . "where m.historiaClinica=:id and ma.id=m.tipoAntecedente";
-        $query2 = $em->createQuery($dql2);
+        $query2 = $this->em->createQuery($dql2);
         $query2->setParameter('id', $id);
         $antecedentes = $query2->getResult();
         if (!$antecedentes){ $antecedentes = array();}
@@ -289,10 +173,9 @@ class DefaultController extends Controller
    }
    
    public function vistaHistoria($idpaciente){
-       $em = $this->getDoctrine()->getManager();
        $aux = array();
-       $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
-       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
+       $paciente = $this->em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+       $historia = $this->em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
                 array(
                         'paciente' => $paciente->getId(),
                 ));
@@ -300,10 +183,10 @@ class DefaultController extends Controller
            return false;
        }
        $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
-       $query1 = $em->createQuery($dql1);
+       $query1 = $this->em->createQuery($dql1);
        $query1->setParameter('id', $historia->getId());
        $idEnfermedad = $query1->getResult();
-       $enfermedad = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
+       $enfermedad = $this->em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findOneBy(
                 array(
                         'historiaClinica' => $historia->getId(),
                         'id' => $idEnfermedad[0]['id'],
@@ -321,10 +204,10 @@ class DefaultController extends Controller
       // $aux['usuario'] = $usu->getNombre();
        $aux['usuario'] = 'admin'; 
        $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
-       $query = $em->createQuery($dql);
+       $query = $this->em->createQuery($dql);
        $query->setParameter('id', $historia->getId());
        $idMotivo = $query->getResult();
-       $motivo = $em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
+       $motivo = $this->em->getRepository('NeurologiaBDBundle:Motivo')->findOneBy(
                 array(
                         'historiaClinica' => $historia->getId(),
                         'id' => $idMotivo[0]['id'],
@@ -335,7 +218,7 @@ class DefaultController extends Controller
        $aux['motivo'] = $motivo->getDetalle();
        
        if($paciente->getDerivadoPor()){
-       $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
+       $departamento = $this->em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
        $aux['departamento'] = $departamento->getDescripcion();
        }
        else{
@@ -345,9 +228,4 @@ class DefaultController extends Controller
        
       
    }
-   
-   
-    
-   
-   
 }

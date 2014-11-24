@@ -40,12 +40,21 @@
         <br>
         <div>
         {% if historia %}
-            <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="{{ url('neurologia_historia_clinica_motivo', {'id': historia.id }) }}">Motivo</a></li>
-            <li role="presentation"><a href="{{ url('neurologia_historia_clinica_enfermedad', {'id': historia.id}) }}">Enfermadad Actual</a></li>
+            <ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
+            <li role="presentation" onclick='activar(this);' id='liTab1'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Motivo:index'}) }}">Motivo</a></li>
+            <li role="presentation" onclick='activar(this);' id='liTab2'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Enfermedad:index'}) }}">Enfermadad Actual</a></li>
             </ul>
-            {% if solapa %}
+            {% if solapa is defined %}
                 {{ solapa|raw }}
+                <script>
+                        var tab = '{{ nro }}';
+                        li = document.getElementById ("ulTab").getElementsByTagName("LI");
+                        for(i = 0; i < li.length; ++i){
+                                li[i].setAttribute("class", "");
+                        }
+                        objeto = document.getElementById('liTab'+tab);
+                        objeto.setAttribute("class", "active");	
+                </script>
             {% endif %}
         {% else %}
             Inicie la historia para empezar

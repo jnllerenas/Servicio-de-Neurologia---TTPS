@@ -43,7 +43,8 @@ class EnfermedadController extends Controller
               $em->persist($enf);
               $em->flush();
            }
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_enfermedad', array('id' => $id)));
+           $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
+           return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Enfermedad:index'))); 
         }
         $params['enfermedad'] = $form->createView();
         $params['historia'] = $id;
