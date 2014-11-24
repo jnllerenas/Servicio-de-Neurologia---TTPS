@@ -3,9 +3,8 @@
 {% block body %}
 
     <script>
-        var $collectionHolder;
 
-// setup an "add a tag" link
+        var $collectionHolder;
         var $addImagenLink = $('<a href="#" class="add_imagen_link">Agregar imagen</a>');
         var $newLinkLi = $('<li class="list-group-item"></li>').append($addImagenLink);
 
@@ -33,7 +32,7 @@
                 addImagenForm($collectionHolder, $newLinkLi);
             });
         });
-        
+
         function addImagenForm($collectionHolder, $newLinkLi) {
 // Get the data-prototype explained earlier
             var prototype = $collectionHolder.data('prototype');
@@ -53,8 +52,8 @@
             $newLinkLi.before($newFormLi);
             addImagenFormDeleteLink($newFormLi);
         }
-        
-            function addImagenFormDeleteLink($imagenFormLi) {
+
+        function addImagenFormDeleteLink($imagenFormLi) {
             var $removeFormA = $('<a href="#">Borrar imagen</a>');
             $imagenFormLi.append($removeFormA);
 
@@ -73,7 +72,6 @@
 
 
 
-
     {{ form_start(form) }}
     {{ form_row(form.descripcion) }}
     {{ form_row(form.fecha) }}
@@ -81,13 +79,21 @@
     {{ form_row(form.tipoEstudio) }}
 
     <ul class="list-group" id="imagenes"
-         data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
-    ></ul>
-    
+        data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
+        ></ul>
+
     {{ form_row(form.save) }}
     {{ form_end(form) }} 
 
 
+    {% if error is not empty %}
+    <br>
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{ error }}
+    </div>
 
+{% endif %}
 
 {% endblock %}

@@ -1,3 +1,7 @@
 neurologia_estudio_nuevo:
     path:     /estudio/nuevo
     defaults: { _controller: NeurologiaEstudioBundle:Default:nuevo }
+    
+neurologia_estudio_success:
+    path:     /estudio/success
+    defaults: { _controller: NeurologiaEstudioBundle:Default:success }
