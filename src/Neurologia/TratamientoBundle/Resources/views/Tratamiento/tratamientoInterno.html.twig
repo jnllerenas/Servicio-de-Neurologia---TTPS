@@ -1,5 +1,10 @@
 {% extends '::base.html.twig' %}
 
+{# block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('public/js/tratamiento_interno.js') }}" type="text/javascript"></script>
+{% endblock #}
+
 {% block body %}
 
   <fieldset>
@@ -28,7 +33,7 @@
                 {{ form_widget(form.activo, { 'attr': {'class': 'form-control'} }) }}
             </div>
             
-            {% if medicamentos is not empty %}
+            {# if medicamentos is not empty %}
                 
                 <div>
                     <label class="required">Listado de medicamentos, efectos adversos y dosis</label>
@@ -76,7 +81,7 @@
                     <label>No existen medicamentos para agregar al tratamiento, debe agregarlos <a href="{{ path('droga') }}">aqu&iacute;</a>.</label>
                 </div>
                 
-            {% endif %}
+            {% endif #}
             <div>
                 
                 {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
