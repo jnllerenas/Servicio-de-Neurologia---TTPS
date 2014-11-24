@@ -29,6 +29,8 @@ class DefaultController extends Controller
         $name=$request->get($form->getName());
         $method=$request->getMethod();
         $elegidosstring='';
+        $parametros=array();
+        $wherestring='';
         if($method=='GET' && $name){
             $formDatos=$name;
             $nombre=$formDatos['nombre'];
@@ -37,12 +39,7 @@ class DefaultController extends Controller
             $telefono=$formDatos['telefono'];
             $fechaNacimiento=$formDatos['fechaNacimiento'];
             
-            $parametros=array();
             $where=array();
-            $wherestring='';
-            $elegidosstring='';
-            
-            $em = $this->getDoctrine()->getManager();
             
             if($nombre!=''){
               $where[]='p.nombre = :nombre';
@@ -73,16 +70,17 @@ class DefaultController extends Controller
               $wherestring="WHERE ".implode(' AND ', $where). ' ';
               $elegidosstring='con '.implode(', ', $elegido);
             }
-            $queryString="SELECT p.id, p.nombre, p.apellido, p.documento, p.fechaNacimiento, p.telefono "
-                    . "FROM NeurologiaBDBundle:Paciente p "
-                    . "$wherestring";
-            $query= $em->createQuery($queryString);
-            if($parametros){
-                $query->setParameters($parametros);
-            }
-            $vars["lista"]=$query->getResult();
-            $vars["valoreselegidos"]=$elegidosstring;
         }
+        $queryString="SELECT p.id, p.nombre, p.apellido, p.documento, p.fechaNacimiento, p.telefono "
+                . "FROM NeurologiaBDBundle:Paciente p "
+                . "$wherestring";
+        $em = $this->getDoctrine()->getManager();
+        $query= $em->createQuery($queryString);
+        if($parametros){
+            $query->setParameters($parametros);
+        }
+        $vars["lista"]=$query->getResult();
+        $vars["valoreselegidos"]=$elegidosstring;
         $vars["form"]=$form->createView();
         return $this->render('NeurologiaBusquedaBundle:Default:paciente.html.twig', $vars);
     }
