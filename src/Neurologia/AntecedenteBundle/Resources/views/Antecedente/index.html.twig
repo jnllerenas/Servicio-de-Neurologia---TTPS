@@ -1,39 +1,37 @@
 {% if personales %}
-<h2> personales </h2>
+<h2> Personales </h2>
  <table class="records_list">
         <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Descripcion</th>
-            </tr>
+           {# <tr>
+                <th>Descripcion</th> 
+                <th>Agregado el</th> 
+            </tr>#}
         </thead>
         <tbody>
 
         {% for antecedente in personales %}
             <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }}</td>
                 <td>{{ antecedente.descripcion }}</td>
-                
+            {#    <td>{{ antecedente.fecha|date('Y-m-d') }}</td> #}
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% endif %}
     {% if familiares %}
-    <h2> familiares </h2>
+    <h2> Familiares </h2>
     <table class="records_list">
         <thead>
-            <tr>
-                <th>Fecha</th>
+         {#   <tr>
                 <th>Descripcion</th>
-            </tr>
+                <th>Agregado el</th> 
+            </tr> #}
         </thead>
         <tbody>
         {% for antecedente in familiares %}
             <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }}</td>
                 <td>{{ antecedente.descripcion }}</td>
-                
+            {#    <td>{{ antecedente.fecha|date('Y-m-d') }}</td> #}
             </tr>
         {% endfor %}
         </tbody>
