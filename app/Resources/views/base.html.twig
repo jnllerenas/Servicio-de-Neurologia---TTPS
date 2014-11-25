@@ -7,7 +7,7 @@
         {%block javascripts %}            
             <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>            
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-            <script src="{{ asset('public/js/tratamiento_interno.js') }}" type="text/javascript"></script>    
+                
         {%endblock javascripts%}
 
         {% block stylesheets %}
@@ -29,17 +29,19 @@
         {% elseif is_granted('ROLE_USER') %}
 
             {% include 'NeurologiaUserBundle:Default:userMenu.html.twig' %}
+        
+        {% else %}
+
+            {% include 'NeurologiaUserBundle:Default:visitanteMenu.html.twig' %}
 
         {% endif %}
        
     {% endblock %}
 
     {% block datosPaciente %}
-        <h2>template base</h2>
     {% endblock %}
 
     {% block body %}
-        <h2>body desde template base</h2>
     {% endblock %}
 
 </body>
