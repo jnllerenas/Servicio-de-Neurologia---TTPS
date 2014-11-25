@@ -3,6 +3,8 @@ $(document).ready(function() {
     $('.table').dataTable({
             "sPaginationType":"full_numbers",
             "aaSorting":[[0, "asc"]],
+            iDisplayLength: 5,
+            bLengthChange: false,
             "bJQueryUI":true,
             "oLanguage" : {
                 "sEmptyTable" : "No se encontraron resultados",
@@ -28,4 +30,5 @@ $(document).ready(function() {
                 }
             }
     });
+    
 });
