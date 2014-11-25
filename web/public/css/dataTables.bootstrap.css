@@ -35,6 +35,10 @@ div.dataTables_paginate {
 	text-align: right;
 }
 
+.pagination{
+    width: 500px !important;
+}
+
 div.dataTables_paginate ul.pagination {
 	margin: 2px 0;
 	white-space: nowrap;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Neurologia\TratamientoBundle\Form;
+namespace Neurologia\EvolucionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TratamientoExternoType extends AbstractType
+class EvolucionType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,8 +15,11 @@ class TratamientoExternoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción'))
-            ->add('aceptar', 'submit', array('label' => 'Aceptar'))
+            ->add('evolucion', 'text', array('label' => 'Descripción'))
+            ->add('fechaHora', 'date', array('label' => 'Fecha de la evolución'))
+            //->add('historiaClinica')
+            //->add('usuario')
+            ->add('aceptar', 'submit', array('label'=>'Confirmar evolución'))
         ;
     }
     
@@ -26,7 +29,7 @@ class TratamientoExternoType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Neurologia\BDBundle\Entity\TratamientoExterno'
+            'data_class' => 'Neurologia\BDBundle\Entity\Evolucion'
         ));
     }
 
@@ -35,6 +38,6 @@ class TratamientoExternoType extends AbstractType
      */
     public function getName()
     {
-        return 'neurologia_tratamientobundle_tratamientoexterno';
+        return 'neurologia_evolucionbundle_evolucion';
     }
 }

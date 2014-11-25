@@ -5,8 +5,6 @@ namespace Neurologia\TratamientoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Neurologia\GenericosBundle\Form\DrogaType;
-//use Neurologia\GenericosBundle\Form\EfectoAdversoType;
 
 class TratamientoInternoType extends AbstractType
 {
@@ -23,11 +21,7 @@ class TratamientoInternoType extends AbstractType
             ->add('activo', 'choice', array('choices'   => array('1' => 'Si', '0' => 'No'),
                                             'required'  => true,
                                             'label' => 'Está activo?'))
-//            ->add('drogas', 'collection', array('label' => 'blebleblelebelebe',
-//                                                'type' => new DrogaType(),
-//                                                'allow_add' => true,
-//                                                'allow_delete' => true))
-            ->add('aceptar', 'submit', array('label' => 'Aceptar'))
+            ->add('aceptar', 'submit', array('label' => 'Guardar'))
         ;
     }
     
@@ -46,6 +40,6 @@ class TratamientoInternoType extends AbstractType
      */
     public function getName()
     {
-        return 'neurologia_bdbundle_tratamientointerno';
+        return 'neurologia_tratamientobundle_tratamientointerno';
     }
 }

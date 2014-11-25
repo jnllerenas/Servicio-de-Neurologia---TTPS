@@ -1,3 +1,7 @@
+neurologia_evolucion:
+    resource: "@EvolucionBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #Sacar luego la ruta a tabs
 neurologia_tabs:
     resource: "@NeurologiaTabsBundle/Resources/config/routing.yml"

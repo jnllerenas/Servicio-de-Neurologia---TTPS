@@ -1,39 +1,40 @@
 {% extends '::base.html.twig' %}
 
-{# block javascripts %}
+{% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('public/js/tratamiento_interno.js') }}" type="text/javascript"></script>
-{% endblock #}
+{% endblock %}
 
 {% block body %}
 
-  <fieldset>
+    <div>
+        <a href="{{ path('tratamiento_interno_new') }}" class="help-block"><input type="radio" name="opt_tratamiento" />Tratamiento interno</a>
+        <a href="{{ path('tratamiento_externo_new') }}" class="help-block"><input type="radio" name="opt_tratamiento" />Tratamiento externo</a>
+    </div>
+<fieldset>
     <legend>Tratamiento Interno:</legend>
 
         {{ form_start(form) }}
-        
+            
             {{ form_errors(form) }}
-
             <div>
                 {{ form_label(form.descripcion) }}
                 {{ form_errors(form.descripcion) }}
-                {{ form_widget(form.descripcion, { 'attr' : { 'class': 'form-control' }}) }}
-                <span class="help-block">Debe introducir una descripci&oacute;n para el tratamiento que desea agregar.</span>
+                {{ form_widget(form.descripcion) }}
             </div>
 
             <div>
                 {{ form_label(form.inicio) }}
                 {{ form_errors(form.inicio) }}
-                {{ form_widget(form.inicio, { 'attr': {'class': 'input-append date'} }) }}
+                {{ form_widget(form.inicio) }}
             </div>
-                
             <div>
                 {{ form_label(form.activo) }}
                 {{ form_errors(form.activo) }}
-                {{ form_widget(form.activo, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_widget(form.activo) }}
             </div>
             
-            {# if medicamentos is not empty %}
+            {% if medicamentos is not empty %}
                 
                 <div>
                     <label class="required">Listado de medicamentos, efectos adversos y dosis</label>
@@ -44,7 +45,7 @@
 
                             <div id="div_medicamento_1">
                                 <label>Medicamento: </label>
-                                <select id="neurologia_bdbundle_tratamientointerno[select_medicamentos_1]" name="neurologia_bdbundle_tratamientointerno[select_medicamentos_1]" class="form-control select_medicamentos">
+                                <select id="neurologia_bdbundle_tratamientointerno[select_medicamentos_1]" name="neurologia_bdbundle_tratamientointerno[select_medicamentos_1]" class="select_medicamentos">
 
                                     {% for medicamento in medicamentos %}
 
@@ -54,7 +55,7 @@
 
                                 </select>
                                 <label>Efecto adverso: </label>
-                                <select id="neurologia_bdbundle_tratamientointerno[select_efectos_adversos_1]" name="neurologia_bdbundle_tratamientointerno[select_efectos_adversos_1]" class="form-control otro">
+                                <select id="neurologia_bdbundle_tratamientointerno[select_efectos_adversos_1]" name="neurologia_bdbundle_tratamientointerno[select_efectos_adversos_1]" class="otro">
 
                                     {% for efectos_adverso in efectos_adversos %}
 
@@ -64,7 +65,7 @@
 
                                 </select>
                                 <label>Dosis: </label>
-                                <input type="textarea" id="neurologia_bdbundle_tratamientointerno[textarea_dosis_1]" name="neurologia_bdbundle_tratamientointerno[textarea_dosis_1]" class="form-control"/>
+                                <input type="textarea" id="neurologia_bdbundle_tratamientointerno[textarea_dosis_1]" name="neurologia_bdbundle_tratamientointerno[textarea_dosis_1]"/>
                                 <span class="help-block">Debe introducir una descripci&oacute;n para la dosis del medicamento que provey&oacute; al paciente.</span>
                             </div>
                         </div>  
@@ -81,10 +82,10 @@
                     <label>No existen medicamentos para agregar al tratamiento, debe agregarlos <a href="{{ path('droga') }}">aqu&iacute;</a>.</label>
                 </div>
                 
-            {% endif #}
+            {% endif %}
             <div>
                 
-                {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
+                {{ form_widget(form.aceptar) }}
                 
             </div>
             
