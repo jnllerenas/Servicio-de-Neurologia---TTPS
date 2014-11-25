@@ -215,9 +215,9 @@ class DefaultController extends Controller
             $where[]='EXISTS (SELECT dt2 '
                     . 'FROM NeurologiaBDBundle:DrogaTratamiento dt2 '
                     . 'INNER JOIN NeurologiaBDBundle:TratamientoInterno ti2 WITH dt2.tratamiento = ti2 '
-                    . 'INNER JOIN NeurologiaBDBundle:Evolucion e2 WITH ti2.evolucion = e2 '
+                    . 'INNER JOIN NeurologiaBDBundle:Evolucion e3 WITH ti2.evolucion = e3 '
                     . 'WHERE dt2.efectoAdverso = :efectoAdverso '
-                    . 'AND e2.historiaClinica = h) ';
+                    . 'AND e3.historiaClinica = h) ';
             $parametros['efectoAdverso'] = $efectoAdverso;
             $elegido[]='efecto adverso en tratamiento: '.$em->getRepository("NeurologiaBDBundle:EfectoAdverso")->find($efectoAdverso)->getDescripcion();
           }

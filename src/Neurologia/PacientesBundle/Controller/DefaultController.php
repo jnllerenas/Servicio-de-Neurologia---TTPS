@@ -17,12 +17,12 @@ class DefaultController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-        $em = $this->getDoctrine()->getManager();        
-        $em->persist($paciente);
-        $em->flush();
+			$em = $this->getDoctrine()->getManager();        
+			$em->persist($paciente);
+			$em->flush();
 
-        return $this->redirect($this->generateUrl('neurologia_paciente_agregar'));
-    }
+			return $this->redirect($this->generateUrl('neurologia_paciente_agregar'));
+		}
 
         return $this->render('NeurologiaPacientesBundle:Default:agregar.html.twig', array(
                     'form' => $form->createView(),
