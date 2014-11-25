@@ -27,7 +27,7 @@ class PacienteType extends AbstractType {
         $builder->add('admitidoPor');
         $builder->add('derivadoPor');
         $builder->add('sexo');
-        $builder->add('save', 'submit', array('label' => 'Alta paciente'));
+        //$builder->add('save', 'submit', array('label' => 'Alta paciente'));
     }
 
    public function getName() {

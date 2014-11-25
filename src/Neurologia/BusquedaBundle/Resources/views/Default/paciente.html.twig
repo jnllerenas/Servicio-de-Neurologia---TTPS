@@ -61,7 +61,7 @@
                    <td>{{ tupla.documento }}</td>
                    <td>{{ tupla.fechaNacimiento|date('d-m-Y') }}</td>
                    <td>{{ tupla.telefono }}</td>
-                   <td><a href="{{ path('neurologia_historia_clinica_homepage', {'idpaciente': tupla.id}) }}" title="Ver" class="sf-toolbar">Ver</a></td>
+                   <td><a href="{{ path('neurologia_historia_clinica_homepage', {'idpaciente': tupla.id}) }}" title="Ver" class="sf-toolbar">Ver</a><a href="{{ path('paciente_edit', { 'id': tupla.id }) }}" title="Editar" class="">Editar</a></td></td>
                 </tr>
 	{% endfor %}
             </tbody>
