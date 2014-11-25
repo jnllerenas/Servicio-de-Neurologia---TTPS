@@ -1,7 +1,0 @@
-parameters:
-#    neurologia_main.example.class: Neurologia\MainBundle\Example
-
-services:
-#    neurologia_main.example:
-#        class: %neurologia_main.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

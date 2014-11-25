@@ -1,7 +1,0 @@
-parameters:
-#    neurologia_historia_clinica.example.class: Neurologia\HistoriaClinicaBundle\Example
-
-services:
-#    neurologia_historia_clinica.example:
-#        class: %neurologia_historia_clinica.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

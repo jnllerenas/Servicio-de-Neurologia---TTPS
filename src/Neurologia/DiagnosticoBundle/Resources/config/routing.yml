@@ -1,7 +1,0 @@
-neurologia_diagnostico_homepage:
-    path:     /diagnostico
-    defaults: { _controller: NeurologiaDiagnosticoBundle:Default:index }
-
-neurologia_diagnostico_new:
-    path:     /diagnostico/new
-    defaults: { _controller: NeurologiaDiagnosticoBundle:Default:new }

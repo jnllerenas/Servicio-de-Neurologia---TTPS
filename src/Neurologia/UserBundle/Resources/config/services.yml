@@ -1,8 +1,0 @@
-parameters:
-#    acme_user.example.class: Acme\UserBundle\Example
-
-services:
-    neurologia_user.registration.form.type:
-        class: Neurologia\UserBundle\Form\Type\RegistrationFormType
-        tags:
-            - { name: form.type, alias: neurologia_user_registration }

@@ -1,7 +1,0 @@
-parameters:
-#    neurologia_genericos.example.class: Neurologia\GenericosBundle\Example
-
-services:
-#    neurologia_genericos.example:
-#        class: %neurologia_genericos.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

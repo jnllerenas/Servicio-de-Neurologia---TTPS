@@ -1,3 +1,0 @@
-neurologia_main_homepage:
-    path:     /home
-    defaults: { _controller: NeurologiaMainBundle:Default:index }
