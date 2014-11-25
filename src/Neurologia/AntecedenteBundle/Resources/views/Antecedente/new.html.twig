@@ -1,10 +1,28 @@
 
-    <h1>Antecedente creation</h1>
+    <h1>Agregar nuevo antecedente</h1>
 {% if mensaje %}
 <span class="">{{ mensaje }}</span>
 {% endif %}
-    {{ form(form) }}
-
+{{ form_start(form) }}
+<div>
+    {{ form_label(form.tipoAntecedente,'Tipo de antecedente:') }}
+    <div>
+    {% for child in form.tipoAntecedente %}
+        {{ form_widget(child) }}
+        {{ form_label(child) }}
+    {% endfor %}
+    </div>
+</div>  
+<div>
+    {{ form_label(form.descripcion,'Descripción:') }}
+    {{ form_widget(form.descripcion) }}
+    {{ form_errors(form.descripcion) }}
+</div>  
+<div>
+    {{ form_errors(form.tipoAntecedente) }}
+    {{ form_widget(form.submit) }}
+</div>
+{{ form_end(form) }}
     
         <button type="submit" onclick="history.back();" label="VOLVER">Volver</button>
 
