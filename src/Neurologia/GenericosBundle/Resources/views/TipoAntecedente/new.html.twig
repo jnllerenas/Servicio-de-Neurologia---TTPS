@@ -1,0 +1,13 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+	<div align="center" style="text-align:center">
+		<h1>Nuevo Tipo de Antecedente</h1>
+
+		{{ form(form) }}
+
+		<a class="btn btn-primary" href="{{ path('tipoantecedente') }}">
+			Volver
+		</a>
+	</div>
+{% endblock %}

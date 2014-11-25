@@ -1,0 +1,68 @@
+{% extends 'NeurologiaBusquedaBundle:Default:index.html.twig' %}
+{% block titulobusqueda %} {{ titulobusqueda }}{% endblock %}
+{% block menubusqueda %}
+    {{ form_start(form, {'method': 'GET'}) }}
+        <table>
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.categoriaDiagnostico) }}</th>
+                    <th>{{ form_label(form.droga) }}</th>
+                    <th>{{ form_label(form.sexo) }}</th>
+                    <th>{{ form_label(form.edad) }}</th>
+                    <th>{{ form_label(form.efectoAdverso) }}</th>
+                    <th>{{ form_errors(form) }}</th>
+                </tr>
+                <tr>
+                    <td>{{ form_widget(form.categoriaDiagnostico) }}</td>
+                    <td>{{ form_widget(form.droga) }}</td>
+                    <td>{{ form_widget(form.sexo) }}</td>
+                    <td>{{ form_widget(form.edad) }}</td>
+                    <td>{{ form_widget(form.efectoAdverso) }}</td>
+                    <td>{{ form_widget(form.search) }}<br>{{ form_widget(form.reset) }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form_errors(form.categoriaDiagnostico) }}</td>
+                    <td>{{ form_errors(form.droga) }}</td>
+                    <td>{{ form_errors(form.sexo) }}</td>
+                    <td>{{ form_errors(form.edad) }}</td>
+                    <td>{{ form_errors(form.efectoAdverso) }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block mensaje %}
+    <span>{{ lista|length }} 
+            paciente{% if lista|length != 1 %}s{% endif %} 
+            encontrado{% if lista|length != 1 %}s{% endif %}
+        {% if valoreselegidos %}
+            {{ valoreselegidos }}
+        {% endif %}
+        </span>
+{% endblock %}
+{% block lista %}
+    
+<table>
+    <tbody>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Sexo</th>
+                <th>Enfermedad Actual</th>
+            </tr>
+            {% for tupla in lista %}
+               <tr>
+                   <td>{{ tupla.nombre }}</td>
+                   <td>{{ tupla.apellido }}</td>
+                   <td>{{ tupla.fechaNacimiento|date('d-m-Y') }}</td>
+                   <td>{{ tupla.sexo }}</td>
+                   <td>{{ tupla.enfermedad }}</td>
+                </tr>
+	{% endfor %}
+            </tbody>
+</table>
+    
+{% endblock %}

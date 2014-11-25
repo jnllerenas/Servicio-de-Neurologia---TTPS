@@ -1,0 +1,30 @@
+tipoantecedente:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:index" }
+
+tipoantecedente_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:show" }
+
+tipoantecedente_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:new" }
+
+tipoantecedente_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:create" }
+    requirements: { _method: post }
+
+tipoantecedente_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:edit" }
+
+tipoantecedente_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:update" }
+    requirements: { _method: post|put }
+
+tipoantecedente_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoAntecedente:delete" }
+    requirements: { _method: post|delete }

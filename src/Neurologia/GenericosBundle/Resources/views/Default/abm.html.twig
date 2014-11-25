@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+    {% block body %}  
+   
+        <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Menu
+    <span class="caret"></span>
+  </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('tipoestudio') }}">Tipo estudio</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('droga') }}">Droga</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('tipodocumento') }}">Tipo documento</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('tipoantecedente') }}">Tipo antecedente</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('niveleducacional') }}">Nivel educacional</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1"  href="{{ path('estadocivil') }}">Estado civil</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('obrasocial') }}">Obra social</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('sexo') }}">Sexo</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('departamento') }}">Departamento</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('efectoadverso') }}">Efecto adverso</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('categoriadiagnostico') }}">Categoria diagnostico</a></li>
+        
+  </ul>
+              
+     </div>       
+
+            
+             {% block container %}     
+ {% endblock %}
+ {% endblock %}

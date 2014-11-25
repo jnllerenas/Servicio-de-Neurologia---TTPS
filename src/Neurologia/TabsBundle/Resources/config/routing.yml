@@ -1,0 +1,8 @@
+neurologia_tabs_homepage:
+    path: /
+    defaults: { _controller: NeurologiaTabsBundle:Default:index }
+
+neurologia_tabs_accion:
+    path: /tabsAccion/{nroTab} 
+    defaults: { _controller: NeurologiaTabsBundle:Default:tab }
+

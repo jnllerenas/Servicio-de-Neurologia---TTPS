@@ -1,0 +1,30 @@
+tipoestudio:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:index" }
+
+tipoestudio_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:show" }
+
+tipoestudio_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:new" }
+
+tipoestudio_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:create" }
+    requirements: { _method: post }
+
+tipoestudio_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:edit" }
+
+tipoestudio_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:update" }
+    requirements: { _method: post|put }
+
+tipoestudio_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:TipoEstudio:delete" }
+    requirements: { _method: post|delete }

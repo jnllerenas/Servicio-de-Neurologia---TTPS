@@ -1,0 +1,9 @@
+     {% for m in enfermedad %}
+            
+   {{ m.fecha|date('Y-m-d') }} <br>
+            Enfermedad Actual:   {{ m.detalle }} <br>
+           
+        {% endfor %}    
+            {{ form(nuevaEnfermedad) }}
+            
+            

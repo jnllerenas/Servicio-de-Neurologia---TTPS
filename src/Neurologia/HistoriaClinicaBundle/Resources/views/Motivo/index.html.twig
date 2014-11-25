@@ -1,0 +1,12 @@
+
+            
+{% for m in motivo %}
+            
+    {{ m.fecha|date('Y-m-d') }} <br>
+            Motivo:   {{ m.detalle }} <br>
+           
+        {% endfor %}    
+            {{ form(nuevoMotivo) }}
+            
+
+           

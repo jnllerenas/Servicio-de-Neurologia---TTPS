@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('tratamiento_interno_new') }}" class="help-block"><input type="radio" name="opt_tratamiento" />Tratamiento interno</a>
+        <a href="{{ path('tratamiento_externo_new') }}" class="help-block"><input type="radio" name="opt_tratamiento" />Tratamiento externo</a>
+    </div>
+  <fieldset>
+    <legend>Tratamiento Externo:</legend>
+
+        {{ form_start(form) }}
+        
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_label(form.descripcion) }}
+                {{ form_errors(form.descripcion) }}
+                {{ form_widget(form.descripcion) }}
+                <span class="help-block">Debe introducir una descripci&oacute;n para el tratamiento que desea agregar.</span>
+            </div>
+
+            <div>
+                
+                {{ form_widget(form.aceptar) }}
+                
+            </div>
+
+        {{ form_end(form) }}    
+    
+  </fieldset>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+obrasocial:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:index" }
+
+obrasocial_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:show" }
+
+obrasocial_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:new" }
+
+obrasocial_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:create" }
+    requirements: { _method: post }
+
+obrasocial_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:edit" }
+
+obrasocial_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:update" }
+    requirements: { _method: post|put }
+
+obrasocial_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:ObraSocial:delete" }
+    requirements: { _method: post|delete }

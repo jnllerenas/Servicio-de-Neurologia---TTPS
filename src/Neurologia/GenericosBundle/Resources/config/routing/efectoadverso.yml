@@ -1,0 +1,30 @@
+efectoadverso:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:index" }
+
+efectoadverso_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:show" }
+
+efectoadverso_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:new" }
+
+efectoadverso_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:create" }
+    requirements: { _method: post }
+
+efectoadverso_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:edit" }
+
+efectoadverso_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:update" }
+    requirements: { _method: post|put }
+
+efectoadverso_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:EfectoAdverso:delete" }
+    requirements: { _method: post|delete }

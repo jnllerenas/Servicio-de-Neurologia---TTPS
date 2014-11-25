@@ -1,0 +1,20 @@
+NivelEducacional:
+    type: entity
+    table: nivel_educacional
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

@@ -1,0 +1,18 @@
+<div>
+    {{ form_label(form.descripcion) }}
+    {{ form_errors(form.descripcion) }}
+    {{ form_widget(form.descripcion, { 'attr' : { 'class': 'form-control' }}) }}
+    <span class="help-block">Debe introducir una descripci&oacute;n para el tratamiento que desea agregar.</span>
+</div>
+
+<div>
+    {{ form_label(form.inicio) }}
+    {{ form_errors(form.inicio) }}
+    {{ form_widget(form.inicio, { 'attr': {'class': 'input-append date'} }) }}
+</div>
+
+<div>
+    {{ form_label(form.activo) }}
+    {{ form_errors(form.activo) }}
+    {{ form_widget(form.activo, { 'attr': {'class': 'form-control'} }) }}
+</div>

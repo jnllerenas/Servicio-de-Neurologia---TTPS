@@ -1,0 +1,47 @@
+neurologia_genericos_homepage:
+    path:     /abm/
+    defaults: { _controller: NeurologiaGenericosBundle:Default:abm }
+
+NeurologiaGenericosBundle_categoriadiagnostico:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/categoriadiagnostico.yml"
+    prefix: /abm/categoriadiagnostico
+
+NeurologiaGenericosBundle_departamento:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/departamento.yml"
+    prefix: /abm/departamento
+
+NeurologiaGenericosBundle_droga:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/droga.yml"
+    prefix: /abm/droga
+
+NeurologiaGenericosBundle_efectoadverso:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/efectoadverso.yml"
+    prefix: /abm/efectoadverso
+
+NeurologiaGenericosBundle_estadocivil:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/estadocivil.yml"
+    prefix: /abm/estadocivil
+
+NeurologiaGenericosBundle_niveleducacional:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/niveleducacional.yml"
+    prefix: /abm/niveleducacional
+
+NeurologiaGenericosBundle_obrasocial:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/obrasocial.yml"
+    prefix: /abm/obrasocial
+
+NeurologiaGenericosBundle_sexo:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/sexo.yml"
+    prefix: /abm/sexo
+
+NeurologiaGenericosBundle_tipoantecedente:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipoantecedente.yml"
+    prefix: /abm/tipoantecedente
+
+NeurologiaGenericosBundle_tipodocumento:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipodocumento.yml"
+    prefix: /abm/tipodocumento
+
+NeurologiaGenericosBundle_tipoestudio:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipoestudio.yml"
+    prefix: /abm/tipoestudio

@@ -1,0 +1,30 @@
+sexo:
+    path:     /
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:index" }
+
+sexo_show:
+    path:     /{id}/show
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:show" }
+
+sexo_new:
+    path:     /new
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:new" }
+
+sexo_create:
+    path:     /create
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:create" }
+    requirements: { _method: post }
+
+sexo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:edit" }
+
+sexo_update:
+    path:     /{id}/update
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:update" }
+    requirements: { _method: post|put }
+
+sexo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "NeurologiaGenericosBundle:Sexo:delete" }
+    requirements: { _method: post|delete }

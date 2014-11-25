@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}  
+
+	{% block container %}  
+		{{ include('NeurologiaDiagnosticoBundle:Default:listado.html.twig', {'datos': datos}) }}
+		
+		<div class="dropdown" align="right">
+			<a class="btn btn-primary"  href="{{ path('neurologia_diagnostico_new') }}">Nuevo Diagnostico</a>
+		</div>
+	{% endblock %}
+	       
+	
+	
+{% endblock %}
+

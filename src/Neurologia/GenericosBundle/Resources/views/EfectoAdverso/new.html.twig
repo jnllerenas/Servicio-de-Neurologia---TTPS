@@ -1,0 +1,13 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+	<div align="center" style="text-align:center">
+		<h1>Nuevo Efecto Adverso</h1>
+
+		{{ form(form) }}
+
+		<a class="btn btn-primary" href="{{ path('efectoadverso') }}">
+			Volver
+		</a>
+	</div>
+{% endblock %}

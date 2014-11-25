@@ -1,0 +1,14 @@
+
+
+antecedente:
+    path:     /{idhistoria}/antecedente/
+    defaults: { _controller: "NeurologiaAntecedenteBundle:Antecedente:index" }
+
+antecedente_new:
+    path:     /{idhistoria}/antecedente/new
+    defaults: { _controller: "NeurologiaAntecedenteBundle:Antecedente:new" }
+
+antecedente_create:
+    path:     /{idhistoria}/antecedente/create
+    defaults: { _controller: "NeurologiaAntecedenteBundle:Antecedente:create" }
+    requirements: { _method: post }

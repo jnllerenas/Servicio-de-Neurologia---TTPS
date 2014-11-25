@@ -1,0 +1,3 @@
+neurologia_bd_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: NeurologiaBDBundle:Default:index }

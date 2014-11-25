@@ -1,0 +1,46 @@
+{% if personales %}
+<h2> Personales </h2>
+ <table class="records_list">
+        <thead>
+           {# <tr>
+                <th>Descripcion</th> 
+                <th>Agregado el</th> 
+            </tr>#}
+        </thead>
+        <tbody>
+
+        {% for antecedente in personales %}
+            <tr>
+                <td>{{ antecedente.descripcion }}</td>
+            {#    <td>{{ antecedente.fecha|date('Y-m-d') }}</td> #}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% if familiares %}
+    <h2> Familiares </h2>
+    <table class="records_list">
+        <thead>
+         {#   <tr>
+                <th>Descripcion</th>
+                <th>Agregado el</th> 
+            </tr> #}
+        </thead>
+        <tbody>
+        {% for antecedente in familiares %}
+            <tr>
+                <td>{{ antecedente.descripcion }}</td>
+            {#    <td>{{ antecedente.fecha|date('Y-m-d') }}</td> #}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+        <ul>
+        <li>
+            <a href="{{ path('antecedente_new',{'idhistoria':historia.id}) }}">
+                Nuevo Antecedente
+            </a>
+        </li>
+        </ul>
