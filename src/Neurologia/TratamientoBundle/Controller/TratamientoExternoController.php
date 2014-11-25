@@ -33,6 +33,11 @@ class TratamientoExternoController extends Controller
             $em->persist($tratamientoExterno);
             $em->flush();
             
+            $this->get('session')->getFlashBag()->add(
+                        'mensaje',
+                        'Se ha agregado exitósamente un diagnóstico externo.'
+                    );
+            
             return $this->redirect($this->generateUrl('tratamiento_index'));
         }
         
