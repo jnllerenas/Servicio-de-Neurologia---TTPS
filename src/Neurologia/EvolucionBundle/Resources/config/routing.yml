@@ -1,0 +1,15 @@
+evolucion_index:
+    path:     /evolucion
+    defaults: { _controller: EvolucionBundle:Evolucion:index }
+    
+evolucion_homepage_index2:
+    path:     /evolucion/
+    defaults: { _controller: EvolucionBundle:Evolucion:index } 
+
+evolucion_homepage_agregar:
+    path:     /evolucion/agregar-evolucion
+    defaults: { _controller: EvolucionBundle:Evolucion:new }
+    
+evolucion_homepage_editar:
+    path:     /evolucion/editar-evolucion
+    defaults: { _controller: EvolucionBundle:Evolucion:edit }
