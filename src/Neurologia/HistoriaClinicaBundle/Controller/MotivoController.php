@@ -52,7 +52,7 @@ class MotivoController extends Controller
               
            }
            $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Motivo:index')));
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Motivo')));
         }
         $params['motivo'] = $form->createView();
         $params['historia'] = $id;

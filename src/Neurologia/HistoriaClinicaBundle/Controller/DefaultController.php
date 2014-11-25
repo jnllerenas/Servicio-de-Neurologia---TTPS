@@ -41,15 +41,12 @@ class DefaultController extends Controller
         ));    
         $params['solapa'] = $solapa->getContent();
         //por ahora lo dejo asi
-        if ($_GET['solapa'] == 'Motivo:index'){
-            $params['nro'] = 1;
-        }
-        else{$params['nro'] = 2;}
-        //Que bardo
+        
+        $params['tab'] = $_GET['solapa'];
         }
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
-    }
     
+    }
     public function iniciarAction(Request $request, $idpaciente)
     {
         $params=array();
@@ -75,11 +72,18 @@ class DefaultController extends Controller
     }
     
     public function solapaAction($id, $solapa){
-        $str = 'NeurologiaHistoriaClinicaBundle:'.$solapa;
-        $solapa =  $this->forward(
-                $str, 
-                array('id'  => $id
-        ));    
+        switch ($solapa){
+        case 'Antecedente':
+                $str = 'NeurologiaAntecedenteBundle:'.$solapa.':index';
+                $params =  array('idhistoria'  => $id);
+            break;
+        default :
+               $str = 'NeurologiaHistoriaClinicaBundle:'.$solapa.':index';
+               $params =  array('id'  => $id);
+               break;
+        }
+        
+        $solapa =  $this->forward($str, $params);    
         return $solapa;
     }
     

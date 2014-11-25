@@ -64,7 +64,9 @@ class AntecedenteController extends Controller
                 $antecedente->setUsuario($usuario);
                 $em->persist($antecedente);
                 $em->flush();
-                return $this->redirect($this->generateUrl('antecedente', array('idhistoria' => $historia->getId())));
+                
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Antecedente')));
+    
             }else{
                 $mensaje="Ya existe un antecedente ".$tipoAntecedente->getDescripcion()." con la descripción: ".$antecedente->getDescripcion()." para este paciente.";
             }
