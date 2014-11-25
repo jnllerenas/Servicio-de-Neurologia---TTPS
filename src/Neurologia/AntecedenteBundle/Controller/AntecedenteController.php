@@ -28,12 +28,12 @@ class AntecedenteController extends Controller
         $vars['familiares'] = $em->getRepository('NeurologiaBDBundle:Antecedente')->findBy(
             array(
                 'historiaClinica' => $vars['historia']->getId(),
-                'tipoAntecedente' => $tipoAntecedente->findOneBy(['descripcion'=>'familiar'])->getId()
+                'tipoAntecedente' => $tipoAntecedente->findOneBy(array('descripcion'=>'familiar'))->getId()
                 ));
         $vars['personales'] = $em->getRepository('NeurologiaBDBundle:Antecedente')->findBy(
             array(
                 'historiaClinica' => $vars['historia']->getId(),
-                'tipoAntecedente' => $tipoAntecedente->findOneBy(['descripcion'=>'personal'])->getId()
+                'tipoAntecedente' => $tipoAntecedente->findOneBy(array('descripcion'=>'personal'))->getId()
                 ));
 
         return $this->render('NeurologiaAntecedenteBundle:Antecedente:index.html.twig', $vars);
@@ -55,9 +55,9 @@ class AntecedenteController extends Controller
             $tipoAntecedente=$antecedente->getTipoAntecedente();
             $usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
             $existe = $em->getRepository('NeurologiaBDBundle:Antecedente')
-                        ->findOneBy(['historiaClinica' => $historia->getId(),
+                        ->findOneBy(array('historiaClinica' => $historia->getId(),
                                     'tipoAntecedente' => $tipoAntecedente->getId(),
-                                    'descripcion' => $antecedente->getDescripcion()]);
+                                    'descripcion' => $antecedente->getDescripcion()));
             if(!$existe){
                 $antecedente->setFecha($fecha);
                 $antecedente->setHistoriaClinica($historia);
@@ -73,10 +73,10 @@ class AntecedenteController extends Controller
 
             
         }
-        $vars=["antecedente" => $antecedente,
+        $vars=array("antecedente" => $antecedente,
                 "form" => $form->createView(),
                 "historia" => $historia,
-                "mensaje" => $mensaje];
+                "mensaje" => $mensaje);
 
         return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', $vars);
     }
@@ -91,7 +91,7 @@ class AntecedenteController extends Controller
     private function createCreateForm(Antecedente $antecedente, $idhistoria)
     {
         $form = $this->createForm(new AntecedenteType(), $antecedente, array(
-            'action' => $this->generateUrl('antecedente_create',['idhistoria'=>$idhistoria]),
+            'action' => $this->generateUrl('antecedente_create',array('idhistoria'=>$idhistoria)),
             'method' => 'POST',
         ));
 
