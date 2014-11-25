@@ -30,9 +30,9 @@
 
             {% include 'NeurologiaUserBundle:Default:userMenu.html.twig' %}
         
-        {% else %}
+        {% elseif is_granted('ROLE_SECRETARIO') %}
 
-            {% include 'NeurologiaUserBundle:Default:visitanteMenu.html.twig' %}
+            {% include 'NeurologiaUserBundle:Default:secretarioMenu.html.twig' %}
 
         {% endif %}
        
