@@ -24,7 +24,6 @@ class DrogaTratamiento
     /**
      * @var \EfectoAdverso
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="EfectoAdverso")
      * @ORM\JoinColumns({
@@ -36,7 +35,6 @@ class DrogaTratamiento
     /**
      * @var \Droga
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="Droga")
      * @ORM\JoinColumns({
@@ -48,7 +46,6 @@ class DrogaTratamiento
     /**
      * @var \TratamientoInterno
      *
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\OneToOne(targetEntity="TratamientoInterno")
      * @ORM\JoinColumns({
