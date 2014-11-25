@@ -68,5 +68,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user, role: ROLE_USER }
         - { path: ^/abm, role: ROLE_USER }
+        - { path: ^/tratamiento, role: ROLE_USER }
+        - { path: ^/evolucion, role: ROLE_USER }
         - { path: ^/home, role: ROLE_USER }
         - { path: ^/admin, role: ROLE_ADMIN }
