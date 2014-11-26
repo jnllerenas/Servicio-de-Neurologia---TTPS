@@ -6,6 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib'),
+    'Zend\\ServiceManager\\' => array($vendorDir . '/zendframework/zend-servicemanager'),
+    'Zend\\Memory\\' => array($vendorDir . '/zendframework/zend-memory'),
+    'Zend\\EventManager\\' => array($vendorDir . '/zendframework/zend-eventmanager'),
+    'Zend\\Cache\\' => array($vendorDir . '/zendframework/zend-cache'),
+    'ZendPdf\\' => array($vendorDir . '/zendframework/zendpdf/library'),
     'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Symfony\\Bundle\\SwiftmailerBundle' => array($vendorDir . '/symfony/swiftmailer-bundle'),
@@ -16,7 +22,11 @@ return array(
     'Sensio\\Bundle\\FrameworkExtraBundle' => array($vendorDir . '/sensio/framework-extra-bundle'),
     'Sensio\\Bundle\\DistributionBundle' => array($vendorDir . '/sensio/distribution-bundle'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Ps\\PdfBundle' => array($vendorDir . '/psliwa/pdf-bundle'),
+    'PHPPdf' => array($vendorDir . '/psliwa/php-pdf/lib'),
     'Incenteev\\ParameterHandler' => array($vendorDir . '/incenteev/composer-parameter-handler'),
+    'Imagine' => array($vendorDir . '/psliwa/php-pdf/lib'),
+    'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
@@ -26,6 +36,7 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Doctrine\\Bundle\\DoctrineBundle' => array($vendorDir . '/doctrine/doctrine-bundle'),
+    'CanGelis\\PDF' => array($vendorDir . '/cangelis/pdf/src'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
     '' => array($baseDir . '/src'),
 );

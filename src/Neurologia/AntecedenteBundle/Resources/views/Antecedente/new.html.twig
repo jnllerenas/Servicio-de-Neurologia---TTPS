@@ -1,5 +1,6 @@
-
-    <h1>Agregar nuevo antecedente</h1>
+{% extends '::base.html.twig' %}
+{% block body %}
+<h1>Agregar nuevo antecedente</h1>
 {% if mensaje %}
 <span class="">{{ mensaje }}</span>
 {% endif %}
@@ -26,4 +27,4 @@
     
         <button type="submit" onclick="history.back();" label="VOLVER">Volver</button>
 
-
+{% endblock %}

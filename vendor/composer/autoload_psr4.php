@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'FOS\\UserBundle\\' => array($vendorDir . '/friendsofsymfony/user-bundle'),
 );

@@ -8,6 +8,8 @@ use Neurologia\HistoriaClinicaBundle\Form\Formularios;
 use Neurologia\BDBundle\Entity\Motivo;
 use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\BDBundle\Entity\EnfermedadActual;
+//use Ps\PdfBundle\Annotation\Pdf;
+
 class DefaultController extends Controller
 {
     public function indexAction($idpaciente)
@@ -77,6 +79,10 @@ class DefaultController extends Controller
                 $str = 'NeurologiaAntecedenteBundle:'.$solapa.':index';
                 $params =  array('idhistoria'  => $id);
             break;
+        case 'Evolucion':
+                $str = 'EvolucionBundle:'.$solapa.':list';
+                $params =  array();
+            break;
         default :
                $str = 'NeurologiaHistoriaClinicaBundle:'.$solapa.':index';
                $params =  array('id'  => $id);
@@ -85,6 +91,25 @@ class DefaultController extends Controller
         
         $solapa =  $this->forward($str, $params);    
         return $solapa;
+    }
+    
+    public function epicrisisAction($idpaciente)
+    {
+        
+//        $em = $this->getDoctrine()->getManager();
+//        $params['paciente'] = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+//        
+//        if (!$params['paciente']) {
+//            throw $this->createNotFoundException('Unable to find Paciente ');
+//        }
+//        //Cargo la Historia clinica si tiene, sino viene vacio
+//        $params['historia'] = $this->vistaHistoria($idpaciente);
+//       $format = $this->get('request')->get('_format');
+//
+//        return $this->render(
+//            sprintf('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig',
+//                   $format),
+//            array('nombre' => $idpaciente,));
     }
     
    public function guardarHistoria($form,$idpaciente) {

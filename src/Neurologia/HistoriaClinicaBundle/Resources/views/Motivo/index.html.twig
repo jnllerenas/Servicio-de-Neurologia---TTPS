@@ -1,12 +1,10 @@
-
-            
-{% for m in motivo %}
-            
-    {{ m.fecha|date('Y-m-d') }} <br>
-            Motivo:   {{ m.detalle }} <br>
-           
-        {% endfor %}    
-            {{ form(nuevoMotivo) }}
-            
-
-           
+<div class="table-responsive">
+	<table class="table">
+        {% for m in motivo %}
+            <tr>
+                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+        {{ form(nuevoMotivo) }}

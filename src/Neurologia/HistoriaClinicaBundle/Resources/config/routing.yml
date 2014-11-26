@@ -21,3 +21,7 @@ neurologia_historia_clinica_enfermedad:
 neurologia_historia_clinica_enfermedad_nuevo:
     path:   /historia/{id}/enfermedad/nuevo
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Enfermedad:nuevo }
+    
+neurologia_historia_clinica_epicrisis:
+    path:     /{idpaciente}/epicrisis
+    defaults: { _controller: NeurologiaHistoriaClinicaBundle:Default:epicrisis }

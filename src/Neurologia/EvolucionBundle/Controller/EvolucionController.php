@@ -12,7 +12,7 @@ class EvolucionController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(1);
+        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
         //supuestamente, viene de session.
         
         $dql_1 = " SELECT e.fechaHora as fecha_evolucion, e.evolucion "
@@ -33,7 +33,7 @@ class EvolucionController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(1);
+        $historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
         $evolucion = new Evolucion();
         $evolucion->setFechaHora(new \Datetime('tomorrow'));
         $evolucion->setHistoriaClinica($historia_clinica);
@@ -60,6 +60,27 @@ class EvolucionController extends Controller
                                     'form' => $form->createView()
                                 )
         );
+    }
+    
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
+        //supuestamente, viene de session.
+        
+        $dql_1 = " SELECT e.fechaHora as fecha_evolucion, e.evolucion "
+                ." FROM NeurologiaBDBundle:Evolucion e "
+                ." WHERE e.historiaClinica = :id "
+                ." ORDER BY e.fechaHora ASC ";
+        
+        $query_1 = $em->createQuery($dql_1)->setParameter('id', $id_historia_clinica);
+        
+        $evoluciones = $query_1->getResult();
+        
+        return $this->render('EvolucionBundle:Evolucion:evolucionList.html.twig',
+                             array(
+                                 'evoluciones' => $evoluciones
+                             ));
     }
     
 }

@@ -1,24 +1,31 @@
 {% extends '::base.html.twig' %}
-
+ {% block stylesheets %}
+     {{ parent() }}
+            <link href="{{asset('public/css/estilo.css')}}" rel="stylesheet">
+{%endblock stylesheets%}
 
 {% block datosPaciente %}
     {% if paciente %}
-        <div>    
+        <div class="pacienteHistoria">    
         <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
         
-            <img  href="{{ asset('/NeurologiaHistoriaClinicaBundle/image/mas.png') }}" alt="Mostrar" class="boton" />
+            <img  href="{{ asset('public/images/mas.png') }}" alt="Mostrar" class="boton" />
        
-        Datos Personales<br>
+            Datos Personales<br><br>
         <div class="oculto">
-            {% if paciente.tipoDocumento %}-{{paciente.tipoDocumento.descripcion}}:     {{ paciente.documento }}<br>{% endif %}
-            {% if paciente.sexo %}-Sexo:    {{paciente.sexo.descripcion}}<br>{% endif %}
-            -Obra Social:{% if paciente.obraSocial %}   {{paciente.obraSocial.descripcion}} N°({{ paciente.numeroCarnet }}){% else %} No tiene.{%endif%}<br>
-            {% if paciente.email %}-Mail:    {{paciente.email}}<br>{% endif %}
-            {% if paciente.nivelEducacional %}-Nivel de educación:    {{paciente.nivelEducacional.descripcion}}<br>{% endif %}
-            {% if paciente.direccion %}-Dirección:    {{paciente.direccion}}<br>{% endif %}
-            {% if paciente.fechaNacimiento %}-Fecha Nacimiento:    {{paciente.fechaNacimiento|date('Y-m-d')}}<br>{% endif %}
-            {% if paciente.telefono %}-Teléfono:    {{paciente.telefono}}<br>{% endif %}
-            {% if paciente.ocupacion %}-Ocupacion:    {{paciente.ocupacion}}<br>{% endif %}
+            <table class="table">
+            {% if paciente.tipoDocumento %}<tr><td> <b>{{paciente.tipoDocumento.descripcion}}:</b> {{ paciente.documento }} </td></tr>{% endif %}
+            {% if paciente.sexo %}<tr><td> <b>Sexo:</b>   {{paciente.sexo.descripcion}}</td></tr>{% endif %}
+            {% if paciente.obraSocial %}<tr><td> <b>Obra Social:</b>   {{paciente.obraSocial.descripcion}} N°({{ paciente.numeroCarnet }})</td></tr>{% else %} <tr><td> <b>Obra Social:</b> No tiene.</td></tr>{%endif%}<br>
+            {% if paciente.email %}<tr><td> <b>>Mail:</b>    {{paciente.email}}</td></tr>{% endif %}
+            {% if paciente.nivelEducacional %}<tr><td> <b>Nivel de educación:</b>    {{paciente.nivelEducacional.descripcion}}</td></tr>{% endif %}
+            {% if paciente.direccion %}<tr><td> <b>Dirección:</b>    {{paciente.direccion}}</td></tr>{% endif %}
+            {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('Y-m-d')}}</td></tr>{% endif %}
+            {% if paciente.telefono %}<tr><td> <b>Teléfono:</b>    {{paciente.telefono}}</td></tr>{% endif %}
+            {% if paciente.ocupacion %}<tr><td> <b>Ocupacion:</b>    {{paciente.ocupacion}}</td></tr>{% endif %}
+            </table>
+                  
+            
         </div>
         </div>
                 <script>
@@ -35,40 +42,55 @@
 {% block body %}
 
     {% if paciente %}
-    
-    <div>
+   <div class="contenidoHistoria">
+    <div class="encabezadoHistoria">
         <hr>
         <h2>HISTORIA CLINICA</h2>
         {% if historia %}
-            <h5>Enfermedad Actual:</h5> {{ historia.enfermedad }}<br>
-            <h5>Atendido Por:</h5> {{ historia.usuario }} <br>
-            <h5>Motivo:</h5> {{ historia.motivo }} <br>
-            <h5>Derivado por:</h5> {{ historia.departamento }} <br>
-            <hr><br>
+            <table class="table">
+            <tr><td> <b>Enfermedad Actual:</b> {{ historia.enfermedad }} </td></tr>
+            <tr><td> <b>Atendido Por:</b> {{ historia.usuario }} </td></tr>
+            <tr><td> <b>Motivo:</b> {{ historia.motivo }} </td></tr>
+            <tr><td> <b>Derivado por:</b> {{ historia.departamento }} </td></tr>
+            </table>
+            <br>
+          <!--  <button type="submit" label="Epicrisis"><a href="{{ url('neurologia_historia_clinica_epicrisis', {'idpaciente': paciente.id}) }}" target="a_blank" >Generar Epicrisis</a></button>
+           --> <hr><br>
+     </div>
+     <div class="listadoHistoria">
+            <table class="table">            
             {% for i in listado %}
-                {{ i.fecha|date('Y-m-d') }} - {{ i.tipo }}{% if i.tipoDetalle %},{{ i.tipoDetalle }}{% endif %}:
+               
+                <tr><td><b>{{ i.fecha|date('Y-m-d') }} - {{ i.tipo }}{% if i.tipoDetalle %},{{ i.tipoDetalle }}{% endif %}</b>:<br>
                 
-                {{i.descripcion}}{% if i.droga %}--Droga:<br>
+                {{i.descripcion}}{% if i.droga %}<br>--Drogas:<br>
                                        {% for d in i.droga %}
-                                           * {{ d.droga }} ({{d.dosis}})<br>
+                                           <br>
+                                           * {{ d.droga }} ({{d.dosis}})
                                        {% endfor %}
-                                 {% endif %}<br>
+                                 {% endif %}
+               </td></tr>
             {% endfor %}
+            </table>
         {% else %}
             {{ form(iniciar) }}
             <hr>
         {% endif %}
     </div>  
-        <br>
-        <div>
+   </div>
+    <br>
+    <div class="solapaHistoria">
         {% if historia %}
             <ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
             <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Motivo'}) }}">Motivo</a></li>
             <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Enfermedad'}) }}">Enfermadad Actual</a></li>
             <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Antecedente'}) }}">Antecedente</a></li>
+            <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Evolucion'}) }}">Evolucion</a></li>
             </ul>
             {% if solapa is defined %}
+                
                 {{ solapa|raw }}
+                
                 <script>
                         var tab = '{{ tab }}';
                         li = document.getElementById ("ulTab").getElementsByTagName("LI");
@@ -76,13 +98,14 @@
                                 li[i].setAttribute("class", "");
                         }
                         objeto = document.getElementById('liTab'+tab);
-                        objeto.setAttribute("class", "active");	
+                        objeto.setAttribute("class", "active");	    
+                        
                 </script>
             {% endif %}
         {% else %}
             Inicie la historia para empezar
         {% endif %}
-        </div>
+    </div>
 {% else %}
     error
 {% endif %}

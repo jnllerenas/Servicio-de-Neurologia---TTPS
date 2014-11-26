@@ -1,2 +1,12 @@
-{{ form(enfermedad) }}
-<button type="submit" onclick="history.back();" label="VOLVER">Volver</button>
+{% extends '::base.html.twig' %}
+{% block body %}
+{{ form_start(enfermedad) }}
+    
+    {{ form_row(enfermedad.detalle, { 'attr': {'class': 'form-control'} }) }}
+    
+    {{ form_row(enfermedad.enviar, { 'attr': {'class': 'btn btn-primary'} }) }}   
+    
+    
+{{ form_end(enfermedad) }}
+<button type="submit" class="btn btn-primary" onclick="history.back();" label="VOLVER">Volver</button>
+{% endblock %}
