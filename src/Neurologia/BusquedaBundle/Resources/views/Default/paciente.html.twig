@@ -2,7 +2,7 @@
 {% block titulobusqueda %} {{ titulobusqueda }}{% endblock %}
 {% block menubusqueda %}
     {{ form_start(form, {'method': 'GET'}) }}
-        <table>
+        <table >
             <tbody>
                 <tr>
                     <th>{{ form_label(form.nombre) }}</th>
@@ -43,8 +43,8 @@
         </span>
 {% endblock %}
 {% block lista %}
-    <div class="table-responsive">
-	<table class="table">
+    
+<table class="table table-hover datatable_style">
     <tbody>
             <tr>
                 <th>Nombre</th>
@@ -66,5 +66,5 @@
 	{% endfor %}
             </tbody>
 </table>
-    </div>
+    
 {% endblock %}

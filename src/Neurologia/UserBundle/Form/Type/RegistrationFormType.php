@@ -17,7 +17,8 @@ class RegistrationFormType extends AbstractType
         $builder->add('numero_documento');
         $builder->add('estadoCivil');
         $builder->add('telefono');
-        $builder->add('fecha_de_nacimiento', 'birthday');
+        $builder->add('fecha_de_nacimiento', 'date',array(
+            'widget' => 'single_text'));
         $builder->add('direccion');
     }
 

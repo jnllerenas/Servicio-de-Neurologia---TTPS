@@ -9,12 +9,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class PacienteType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-       
+
         $builder->add('nombre', 'text');
         $builder->add('apellido', 'text');
         $builder->add('direccion', 'text');
         $builder->add('documento', 'text');
-        $builder->add('fechaNacimiento', 'birthday');
+        $builder->add('fechaNacimiento', 'date', array(
+            'widget' => 'single_text'));
         $builder->add('telefono', 'text');
         $builder->add('ocupacion', 'text');
         $builder->add('otros', 'textarea');
@@ -30,11 +31,11 @@ class PacienteType extends AbstractType {
         //$builder->add('save', 'submit', array('label' => 'Alta paciente'));
     }
 
-   public function getName() {
+    public function getName() {
         return 'paciente';
     }
-    
-        public function setDefaultOptions(OptionsResolverInterface $resolver) {
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'Neurologia\BDBundle\Entity\Paciente',
         ));
