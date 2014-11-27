@@ -45,7 +45,7 @@
    <div class="contenidoHistoria">
     <div class="encabezadoHistoria">
         <hr>
-        <h2>HISTORIA CLINICA</h2>
+        <h2>HISTORIA CLINICA</h2>      
         {% if historia %}
             <table class="table">
             <tr><td> <b>Enfermedad Actual:</b> {{ historia.enfermedad }} </td></tr>
@@ -86,6 +86,9 @@
             <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Enfermedad'}) }}">Enfermadad Actual</a></li>
             <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Antecedente'}) }}">Antecedente</a></li>
             <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Evolucion'}) }}">Evolucion</a></li>
+            <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Estudio'}) }}">Estudios</a></li>
+            <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Diagnostico'}) }}">Diagnosticos</a></li>
+            <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': paciente.id,'solapa':'Tratamiento'}) }}">Tratamientos</a></li>
             </ul>
             {% if solapa is defined %}
                 

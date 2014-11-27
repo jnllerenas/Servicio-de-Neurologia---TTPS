@@ -26,10 +26,14 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
+        
               
     {% else %}
         
         <label> No existen evoluciones para el paciente seleccionado. </label>
         
     {% endif %}
+   
+     <a href="{{ path('evolucion_homepage_agregar',{}) }}">
+               Generar Nueva Evolución
+     </a>

@@ -13,7 +13,7 @@ class TratamientoController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         //supuestamente, viene de session.
-        $id_historia_clinica = 1;
+        $id_historia_clinica = $_SESSION['historia']->getId();
         
         $dql_1 = " SELECT e.fechaHora as fecha_tratamiento, te.descripcion as descripcion "
                 //. "       SIZE(collection) as con_medicamentos, count(ti.id) as con_efectos_adversos "

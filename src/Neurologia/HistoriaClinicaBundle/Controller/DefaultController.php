@@ -24,6 +24,7 @@ class DefaultController extends Controller
         if (!$params['paciente']) {
             throw $this->createNotFoundException('Unable to find Paciente ');
         }
+        $_SESSION['paciente'] = $params['paciente'];
         //Cargo la Historia clinica si tiene, sino viene vacio
         $params['historia'] = $this->vistaHistoria($idpaciente);
         //formulario para crear historia
@@ -43,9 +44,10 @@ class DefaultController extends Controller
         ));    
         $params['solapa'] = $solapa->getContent();
         //por ahora lo dejo asi
-        
         $params['tab'] = $_GET['solapa'];
         }
+        
+        
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     
     }
@@ -81,6 +83,18 @@ class DefaultController extends Controller
             break;
         case 'Evolucion':
                 $str = 'EvolucionBundle:'.$solapa.':list';
+                $params =  array('idhistoria'  => $id);
+            break;
+        case 'Estudio':
+                $str = 'NeurologiaEstudioBundle:Default:list';
+                $params =  array();
+            break;
+        case 'Tratamiento':
+                $str = 'TratamientoBundle:'.$solapa.':index';
+                $params =  array();
+            break;
+        case 'Diagnostico':
+                $str = 'NeurologiaDiagnosticoBundle:Default:index';
                 $params =  array();
             break;
         default :
@@ -122,8 +136,7 @@ class DefaultController extends Controller
                $em->getConnection()->beginTransaction();
        //paciente        
                $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
-               //$usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
-               //$paciente->setAdmitidoPor($usuario);
+               $paciente->setAdmitidoPor($_SESSION['user']);
                if ($form->get('derivado')->getData()){
                $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
                $paciente->setDerivadoPor($derivado);
@@ -328,6 +341,7 @@ class DefaultController extends Controller
        if (!$historia) {
            return false;
        }
+       $_SESSION['historia'] = $historia;
        $dql1 = "select MAX(m.id) as id from NeurologiaBDBundle:EnfermedadActual m where m.historiaClinica=:id";
        $query1 = $em->createQuery($dql1);
        $query1->setParameter('id', $historia->getId());
@@ -343,12 +357,8 @@ class DefaultController extends Controller
        $aux['id']= $historia->getId();
        $aux['enfermedad'] = $enfermedad->getDetalle();
        
-      // $usu = $em->getRepository('NeurologiaBDBundle:User')->find($paciente->getAdmitidoPor());
-      // if (!$usu) {
-      //      throw $this->createNotFoundException('Unable to find Admitido por ');
-      //  }
-      // $aux['usuario'] = $usu->getNombre();
-       $aux['usuario'] = 'admin'; 
+       
+       $aux['usuario'] = $_SESSION['user']->getUsername();
        $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";
        $query = $em->createQuery($dql);
        $query->setParameter('id', $historia->getId());

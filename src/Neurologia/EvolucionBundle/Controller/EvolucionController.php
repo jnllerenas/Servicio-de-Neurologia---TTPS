@@ -12,7 +12,7 @@ class EvolucionController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
+        $id_historia_clinica = $_SESSION['historia']->getId();
         //supuestamente, viene de session.
         
         $dql_1 = " SELECT e.fechaHora as fecha_evolucion, e.evolucion "
@@ -33,7 +33,7 @@ class EvolucionController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
+        $historia_clinica = $_SESSION['historia'];
         $evolucion = new Evolucion();
         $evolucion->setFechaHora(new \Datetime('tomorrow'));
         $evolucion->setHistoriaClinica($historia_clinica);
@@ -62,10 +62,10 @@ class EvolucionController extends Controller
         );
     }
     
-    public function listAction()
+    public function listAction($idhistoria)
     {
         $em = $this->getDoctrine()->getManager();
-        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find(18);
+        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find($idhistoria);
         //supuestamente, viene de session.
         
         $dql_1 = " SELECT e.fechaHora as fecha_evolucion, e.evolucion "

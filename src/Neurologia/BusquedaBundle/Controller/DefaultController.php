@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $vars["lista"]=false;
-            $vars["valoreselegidos"]=false;
+        $vars["valoreselegidos"]=false;
         return $this->render('NeurologiaBusquedaBundle:Default:index.html.twig', $vars);
     }
 
