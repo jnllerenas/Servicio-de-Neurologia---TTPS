@@ -6,7 +6,9 @@
 
 
 {% block body %}
-
+ <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Tratamientos internos</div>
     {% if tratamientos is not empty %}
         
         {% for flashMessage in app.session.flashbag.get('mensaje') %}
@@ -16,44 +18,65 @@
             
         {% endfor %}
         
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Tratamientos</div>
+       
 
             <!-- Table -->
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <!--<th>Tipo</th>-->
                         <th>Descripci&oacute;n</th>
-                        <!--<th>Activo</th>
-                        <th>Medicamentos</th>
-                        <th>Efectos adversos</th>
-                        <th>Detalle</th>-->
+                        <th>Fecha de inicio</th>
+                        <th>Activo</th>
+                        <th>Drogas</th>
                     </tr>
                 </thead>
                 <tbody>
                     
                     {% for t in tratamientos %}
                         <tr>
-                            <td>{{ t.fecha_tratamiento|date('d-m-Y H:i:s') }}</td>
-                            <!--<tr>t.tipo_tratamiento</tr>-->
                             <td>{{ t.descripcion }}</td>
-                            <!--<tr>t.activo</tr>
-                            <tr>t.con_medicamentos</tr>
-                            <tr>t.con_efectos_adversos</tr>
-                            <tr>detalle</tr>-->
+                            <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d-m-Y') }}{% endif %}</td>
+                            <td>{% if t.activo %}Sí{% else %}No{% endif %}</td>
+                            <td>{{ t.drogas }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+                
+                {% else %}
+        
+        <label> No existen tratamientos internos para este paciente. </label>
+        
+    {% endif %}
         </div>
+    <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Tratamientos externos</div>
+    {% if tratamientosex is not empty %}
+                
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Descripci&oacute;n</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for tex in tratamientosex %}
+                        <tr>
+                            <td>{{ tex.descripcion }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
               
     {% else %}
         
-        <label> No existen tratamientos para el paciente seleccionado. </label>
+        <label> No existen tratamientos externos para este paciente. </label>
         
     {% endif %}
-    
+    </div>
 {% endblock %}

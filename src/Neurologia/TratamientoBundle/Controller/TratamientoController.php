@@ -15,22 +15,28 @@ class TratamientoController extends Controller
         //supuestamente, viene de session.
         $id_historia_clinica = $_SESSION['historia']->getId();
         
-        $dql_1 = " SELECT e.fechaHora as fecha_tratamiento, te.descripcion as descripcion "
-                //. "       SIZE(collection) as con_medicamentos, count(ti.id) as con_efectos_adversos "
+        $dql_1 = " SELECT ti.descripcion as descripcion, ti.activo, ti.inicio, COUNT(dt.droga) AS drogas "
                 ." FROM NeurologiaBDBundle:Evolucion e "
-                ."    LEFT JOIN NeurologiaBDBundle:TratamientoExterno te WITH te.evolucion = e.id "
-                ."    LEFT JOIN NeurologiaBDBundle:TratamientoInterno ti WITH ti.evolucion = e.id "
-                ." WHERE (ti.evolucion IS NOT NULL OR te.evolucion IS NOT NULL) "
-                ."   AND e.historiaClinica = :id "
+                ." INNER JOIN NeurologiaBDBundle:TratamientoInterno ti WITH ti.evolucion = e "
+                . "LEFT JOIN NeurologiaBDBundle:DrogaTratamiento dt WITH dt.tratamiento = ti"
+                ." WHERE e.historiaClinica = :id "
+                . "GROUP BY ti.id"
                 ." ORDER BY e.fechaHora ASC ";
         
+        $dql_2 = "SELECT te.descripcion as descripcion  "
+                . "FROM NeurologiaBDBundle:Evolucion e "
+                ." INNER JOIN NeurologiaBDBundle:TratamientoExterno te WITH te.evolucion = e "
+                ." WHERE e.historiaClinica = :id "
+                . " ORDER BY e.fechaHora ASC ";
+        
         $query_1 = $em->createQuery($dql_1)->setParameter('id', $id_historia_clinica);
-        
+        $query_2 = $em->createQuery($dql_2)->setParameter('id', $id_historia_clinica);
         $tratamientos = $query_1->getResult();
-        
+        $tratamientosex = $query_2->getResult();
         return $this->render('TratamientoBundle:Tratamiento:tratamiento.html.twig',
                              array(
-                                 'tratamientos' => $tratamientos
+                                 'tratamientos' => $tratamientos,
+                                 'tratamientosex' => $tratamientosex
                              ));
     }
     
