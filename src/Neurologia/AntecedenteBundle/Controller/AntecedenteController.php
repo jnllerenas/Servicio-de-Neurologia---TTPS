@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Neurologia\BDBundle\Entity\Antecedente;
+use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\AntecedenteBundle\Form\AntecedenteType;
 
 /**
@@ -19,10 +20,10 @@ class AntecedenteController extends Controller
      * Lists all Antecedente entities.
      *
      */
-    public function indexAction($idhistoria)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $vars['historia'] = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
+        $vars['historia'] = $_SESSION["historia"];
         $tipoAntecedente= $em->getRepository('NeurologiaBDBundle:TipoAntecedente');
 
         $vars['familiares'] = $em->getRepository('NeurologiaBDBundle:Antecedente')->findBy(
@@ -42,18 +43,18 @@ class AntecedenteController extends Controller
      * Creates a new Antecedente entity.
      *
      */
-    public function createAction(Request $request,$idhistoria)
+    public function createAction(Request $request)
     {
         $mensaje="";
         $fecha=new \DateTime("now"); 
         $antecedente = new Antecedente();
-        $form = $this->createCreateForm($antecedente,$idhistoria);
+        $form = $this->createCreateForm($antecedente);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
-        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
+        $historia = $em->merge($_SESSION['historia']);
+        $usuario = $em->merge($_SESSION['user']);
         if ($form->isValid()) {
             $tipoAntecedente=$antecedente->getTipoAntecedente();
-            $usuario = $em->getRepository('NeurologiaBDBundle:User')->find(1);
             $existe = $em->getRepository('NeurologiaBDBundle:Antecedente')
                         ->findOneBy(array('historiaClinica' => $historia->getId(),
                                     'tipoAntecedente' => $tipoAntecedente->getId(),
@@ -84,14 +85,14 @@ class AntecedenteController extends Controller
     /**
      * Creates a form to create a Antecedente entity.
      *
-     * @param Antecedente $entity The entity
+     * @param Antecedente $antecedente The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Antecedente $antecedente, $idhistoria)
+    private function createCreateForm(Antecedente $antecedente)
     {
         $form = $this->createForm(new AntecedenteType(), $antecedente, array(
-            'action' => $this->generateUrl('antecedente_create',array('idhistoria'=>$idhistoria)),
+            'action' => $this->generateUrl('antecedente_create'),
             'method' => 'POST',
         ));
 
@@ -104,13 +105,13 @@ class AntecedenteController extends Controller
      * Displays a form to create a new Antecedente entity.
      *
      */
-    public function newAction($idhistoria)
+    public function newAction()
     {
         $mensaje="";
         $vars['antecedente'] = new Antecedente();
         $em = $this->getDoctrine()->getManager();
-        $vars['historia'] = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($idhistoria);
-        $vars['form'] = $this->createCreateForm($vars['antecedente'],$idhistoria)->createView();
+        $vars['historia'] = $_SESSION['historia'];
+        $vars['form'] = $this->createCreateForm($vars['antecedente'])->createView();
         $vars['mensaje'] = $mensaje;
         return $this->render('NeurologiaAntecedenteBundle:Antecedente:new.html.twig', $vars);
     }

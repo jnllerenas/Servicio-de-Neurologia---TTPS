@@ -136,7 +136,8 @@ class DefaultController extends Controller
                $em->getConnection()->beginTransaction();
        //paciente        
                $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
-               $paciente->setAdmitidoPor($_SESSION['user']);
+               $usuario=$em->merge($_SESSION['user']);//agrego nahuel motivo: para que se pueda usar con el entity manager se debe mergear la variable
+               $paciente->setAdmitidoPor($usuario); // modifico para usar $usuario
                if ($form->get('derivado')->getData()){
                $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
                $paciente->setDerivadoPor($derivado);
@@ -161,6 +162,7 @@ class DefaultController extends Controller
                $motivo->setDetalle($form->get('motivo')->getData());
                $motivo->setHistoriaClinica($historiaNueva);
                $motivo->setFecha($time);
+               $motivo->setUsuario($usuario); //agrego nahuel motivo: no se puede agregar sin id de usuario
                $em->persist($motivo);
                $em->flush();
         //enfermedadActual
@@ -168,6 +170,7 @@ class DefaultController extends Controller
                $enfermedad->setDetalle($form->get('enfermedad')->getData());
                $enfermedad->setHistoriaClinica($historiaNueva);
                $enfermedad->setFecha($time);
+               $enfermedad->setUsuario($usuario);//agrego nahuel motivo: no se puede agregar sin id de usuario
                $em->persist($enfermedad);
                $em->flush();
                
