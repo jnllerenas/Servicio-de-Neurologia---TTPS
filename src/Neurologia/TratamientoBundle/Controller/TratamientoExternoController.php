@@ -19,10 +19,10 @@ class TratamientoExternoController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
+//        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
         
         $tratamientoExterno = new TratamientoExterno();
-        $tratamientoExterno->setEvolucion($evolucion);
+//        $tratamientoExterno->setEvolucion($evolucion);
         
         $form = $this->createForm(new TratamientoExternoType(),$tratamientoExterno);
 
@@ -30,15 +30,14 @@ class TratamientoExternoController extends Controller
 
         if ($form->isValid()) {
             
-            $em->persist($tratamientoExterno);
-            $em->flush();
+            $_SESSION['tratamientos']['t'][] = $tratamientoExterno;
             
             $this->get('session')->getFlashBag()->add(
                         'mensaje',
                         'Se ha agregado exitósamente un diagnóstico externo.'
                     );
             
-            return $this->redirect($this->generateUrl('tratamiento_index'));
+            return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
         }
         
         return $this->render('TratamientoBundle:Tratamiento:tratamientoExterno.html.twig',

@@ -41,8 +41,7 @@ class DefaultController extends Controller
         //por ahora lo dejo asi
         $params['tab'] = $_GET['solapa'];
         }
-        
-        
+        $this->resetEvolucion();
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     
     }
@@ -386,7 +385,14 @@ class DefaultController extends Controller
       
    }
    
-   
+   function resetEvolucion() {
+      $_SESSION['evolucion'] = true;
+      $_SESSION['tratamientos']['t'] = array();
+      $_SESSION['tratamientos']['d'] = array();
+      $_SESSION['estudios'] = array();
+      $_SESSION['diagnosticos'] = array();
+      return true;
+   }
     
    
    

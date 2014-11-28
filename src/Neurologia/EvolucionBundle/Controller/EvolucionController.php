@@ -32,27 +32,30 @@ class EvolucionController extends Controller
     
     public function newAction(Request $request)
     {
+        if (!isset($_SESSION['evolucion'])){
+            throw $this->createNotFoundException('Asegurese de ingresar a esta sección por la busqueda de pacientes ');
+        }
+        else{
         $em = $this->getDoctrine()->getManager();
-        $historia_clinica = $_SESSION['historia'];
         $evolucion = new Evolucion();
-        $evolucion->setFechaHora(new \Datetime('tomorrow'));
+        $evolucion->setFechaHora(new \Datetime()); 
+        $historia_clinica=$em->merge($_SESSION['historia']);
         $evolucion->setHistoriaClinica($historia_clinica);
-        
+        $usuario=$em->merge($_SESSION['user']);
+        $evolucion->setUsuario($usuario);
         $form = $this->createForm(new EvolucionType(),$evolucion);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            
-            $em->persist($evolucion);
-            $em->flush();
-            
+            $_SESSION['evolucion'] = $evolucion;
+            $this->guardarEvolucion();            
             $this->get('session')->getFlashBag()->add(
                         'mensaje',
                         'Se ha agregado exitósamente una evolución.'
                     );
             
-            return $this->redirect($this->generateUrl('evolucion_index'));
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
         }
         
         return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',
@@ -60,6 +63,7 @@ class EvolucionController extends Controller
                                     'form' => $form->createView()
                                 )
         );
+        }
     }
     
     public function listAction()
@@ -83,4 +87,44 @@ class EvolucionController extends Controller
                              ));
     }
     
+    
+    function guardarEvolucion(){
+        $em = $this->getDoctrine()->getManager();
+        try {
+    
+       
+               
+               $em->getConnection()->beginTransaction();
+       //evolucion       
+               $evolucion = $em->merge($_SESSION['evolucion']);
+               $em->persist($evolucion);
+               $em->flush();
+        //tratamientos
+               if (!empty($_SESSION['tratamientos']['t'])){
+                   foreach ($_SESSION['tratamientos']['t'] as $key=>$row) {
+                       $tratamiento = $em->merge($row);
+                       $tratamiento->setEvolucion($evolucion);
+                       $em->persist($tratamiento);
+                       $em->flush();
+//                       if (array_key_exists($key, $_SESSION['tratamientos']['d'])) {
+//                            $droga = $em->merge($_SESSION['tratamientos']['d'][$key]);
+//                            $droga->setTratamiento($tratamiento);
+//                            $em->persist($tratamiento);
+//                            $em->flush();
+//                       }
+                   }
+                   
+               }
+               
+        //estudios
+        //diagnosticos
+               
+               
+               $em->getConnection()->commit();
+        } catch (Exception $e) {
+            // Rollback the failed transaction attempt
+            $em->getConnection()->rollback();
+            throw $e;
+        }
+    }
 }

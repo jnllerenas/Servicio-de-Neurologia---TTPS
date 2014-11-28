@@ -25,11 +25,11 @@ class TratamientoInternoController extends Controller
 
         $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
         $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
-        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
+//        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
      
         $tratamientoInterno = new TratamientoInterno();
-        $tratamientoInterno->setEvolucion($evolucion);
-        $tratamientoInterno->setInicio(new \Datetime('tomorrow'));
+//        $tratamientoInterno->setEvolucion($evolucion);
+        $tratamientoInterno->setInicio(new \Datetime());
 //        
 //        $droga_tratamiento = new DrogaTratamiento();
 //        $droga_tratamiento->setTratamiento($tratamientoInterno);
@@ -41,10 +41,12 @@ class TratamientoInternoController extends Controller
 
         if ($form->isValid()) {
             
-            $em->persist($tratamientoInterno);
-            $em->flush();
+//            $em->persist($tratamientoInterno);
+//            $em->flush();
+            $_SESSION['tratamientos']['t'][]= $tratamientoInterno;
+//            $_SESSION['tratamientos']['d'][count($_SESSION['tratamientos']['t'])] = 
             
-            return $this->redirect($this->generateUrl('tratamiento_index'));
+            return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
             
         }
         
