@@ -17,37 +17,23 @@ class DrogaTratamientoType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $droga = new Droga();
-        $efectoAdverso = new EfectoAdverso();
         
-        $builder
-            ->add('tratamiento', 'collection', array(
-                        'label' => 'tratamientoo o o o o ',
-                        'type' => new TratamientoInternoType(),
-                        'allow_add' => true,
-                        'by_reference' => false,
-                        'allow_delete' => true,
-                        'prototype' => true
-            ))               
-            ->add('droga', 'collection', array(
-                        'label' => 'droga o o o o ',
-                        'type' => new \Neurologia\GenericosBundle\Form\DrogaType(),
-                        'allow_add' => true,
-                        'by_reference' => false,
-                        'allow_delete' => true,
-                        'prototype' => true
-            ))               
-            ->add('efectoAdverso', 'collection', array(
-                        'label' => 'efectoo o o o o ',
-                        'type' => new \Neurologia\GenericosBundle\Form\EfectoAdversoType(),
-                        'allow_add' => true,
-                        'by_reference' => false,
-                        'allow_delete' => true,
-                        'prototype' => true
-            ))               
-            ->add('dosis', 'text')
-            
-            ->add('aceptar', 'submit', array('label' => 'Aceptar'))
+        
+        
+        $builder->add('droga', 'entity', array(
+            'empty_value' => 'Elija una droga',
+            'required' => true,
+            'class' => 'NeurologiaBDBundle:Droga',
+            'property' => 'descripcion',
+           
+        ))
+          ->add('efectoAdverso', 'entity', array(
+            'empty_value' => 'Elija una efecto adverso',
+            'required' => true,
+            'class' => 'NeurologiaBDBundle:EfectoAdverso',
+            'property' => 'descripcion',
+              ))
+          ->add('dosis', 'text')  
         ;
     }
     

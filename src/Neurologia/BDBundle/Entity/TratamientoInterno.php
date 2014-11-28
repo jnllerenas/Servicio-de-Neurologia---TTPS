@@ -1,6 +1,9 @@
 <?php
 
 namespace Neurologia\BDBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Neurologia\BDBundle\Entity\DrogaTratamiento;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -52,7 +55,32 @@ class TratamientoInterno
      */
     private $evolucion;
 
+     /**
+    * @Assert\Valid()
+    * @ORM\OneToMany(targetEntity="DrogaTratamiento", cascade={"persist"}, mappedBy="TratamientoInterno")
+    */    
+    protected $drogaTratamiento;
+    
+        public function __construct()
+    {
+        $this->drogaTratamiento = new ArrayCollection();
+    }
 
+        public function getDrogaTratamiento()
+    {
+        return $this->drogaTratamiento;
+    }
+    
+        public function addDrogaTratamiento(DrogaTratamiento $droga)
+    {
+        $droga->addTratamiento($this);
+        $this->drogaTratamiento->add($droga);
+    }
+    
+    public function removeDrogaTratamiento(DrogaTratamiento $droga)
+    {
+        $this->drogaTratamiento->removeElement($droga);
+    }
 
     /**
      * Get id

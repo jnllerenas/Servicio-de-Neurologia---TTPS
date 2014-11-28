@@ -17,10 +17,19 @@ class TratamientoInternoType extends AbstractType
         $builder
             ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción'))
             ->add('inicio', 'date', array('required'  => true, 
-                                          'label' => 'Fecha de inicio'))
+                                          'label' => 'Fecha de inicio',
+                                            'widget' => 'single_text'))
             ->add('activo', 'choice', array('choices'   => array('1' => 'Si', '0' => 'No'),
                                             'required'  => true,
                                             'label' => 'Está activo?'))
+            ->add('drogaTratamiento', 'collection', array(
+            'label' => false,
+            'type' => new DrogaTratamientoType(),
+            'allow_add' => true,
+            'by_reference' => false,
+            'allow_delete' => true,
+            'prototype' => true,            
+        ))
             ->add('aceptar', 'submit', array('label' => 'Guardar'))
         ;
     }

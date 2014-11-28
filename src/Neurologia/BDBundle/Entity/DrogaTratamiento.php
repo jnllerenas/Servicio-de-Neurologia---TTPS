@@ -54,7 +54,10 @@ class DrogaTratamiento
      */
     private $tratamiento;
 
-
+public function addTratamiento(TratamientoInterno $trat)
+{            
+    $this ->setTratamiento($trat);
+}
 
     /**
      * Set dosis

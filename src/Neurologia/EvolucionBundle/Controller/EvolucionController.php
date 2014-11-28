@@ -106,12 +106,12 @@ class EvolucionController extends Controller
                        $tratamiento->setEvolucion($evolucion);
                        $em->persist($tratamiento);
                        $em->flush();
-//                       if (array_key_exists($key, $_SESSION['tratamientos']['d'])) {
-//                            $droga = $em->merge($_SESSION['tratamientos']['d'][$key]);
-//                            $droga->setTratamiento($tratamiento);
-//                            $em->persist($tratamiento);
-//                            $em->flush();
-//                       }
+                       if (array_key_exists($key, $_SESSION['tratamientos']['d'])) {
+                            $droga = $em->merge($_SESSION['tratamientos']['d'][$key]);
+                            $droga->setTratamiento($tratamiento);
+                            $em->persist($tratamiento);
+                            $em->flush();
+                       }
                    }
                    
                }

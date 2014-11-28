@@ -389,8 +389,8 @@ class DefaultController extends Controller
       $_SESSION['evolucion'] = true;
       $_SESSION['tratamientos']['t'] = array();
       $_SESSION['tratamientos']['d'] = array();
-      $_SESSION['estudios'] = array();
-      $_SESSION['diagnosticos'] = array();
+//      $_SESSION['estudios'] = array();
+//      $_SESSION['diagnosticos'] = array();
       return true;
    }
     

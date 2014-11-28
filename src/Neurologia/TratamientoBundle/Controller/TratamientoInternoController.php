@@ -29,22 +29,22 @@ class TratamientoInternoController extends Controller
      
         $tratamientoInterno = new TratamientoInterno();
 //        $tratamientoInterno->setEvolucion($evolucion);
-        $tratamientoInterno->setInicio(new \Datetime());
+//        $tratamientoInterno->setInicio(new \Datetime());
 //        
 //        $droga_tratamiento = new DrogaTratamiento();
 //        $droga_tratamiento->setTratamiento($tratamientoInterno);
         
         
         $form = $this->createForm(new TratamientoInternoType(), $tratamientoInterno);
-
+        
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             
 //            $em->persist($tratamientoInterno);
 //            $em->flush();
             $_SESSION['tratamientos']['t'][]= $tratamientoInterno;
-//            $_SESSION['tratamientos']['d'][count($_SESSION['tratamientos']['t'])] = 
+            $_SESSION['tratamientos']['d'][count($_SESSION['tratamientos']['t'])] = $form->get('drogaTratamiento')->getData();
             
             return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
             
@@ -53,8 +53,6 @@ class TratamientoInternoController extends Controller
         return $this->render('TratamientoBundle:Tratamiento:tratamientoInterno.html.twig',
                                 array(
                                     'form' => $form->createView(),
-                                    'medicamentos' => $medicamentos,
-                                    'efectos_adversos' => $efectos_adversos
                                 )
         );
     }
