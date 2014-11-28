@@ -12,23 +12,18 @@ use Neurologia\BDBundle\Entity\EnfermedadActual;
 
 class DefaultController extends Controller
 {
-    public function indexAction($idpaciente)
+    public function indexAction()
     {
         //si llegamos acá supuestamente tenemos seleccionado un paciente
         $params = array(); 
         //Cargo datos paciente
-        $paciente = $idpaciente;
+        $paciente = $_SESSION['paciente'];
         $em = $this->getDoctrine()->getManager();
-        $params['paciente'] = $em->getRepository('NeurologiaBDBundle:Paciente')->find($paciente);
-        
-        if (!$params['paciente']) {
-            throw $this->createNotFoundException('Unable to find Paciente ');
-        }
-        $_SESSION['paciente'] = $params['paciente'];
+        $params['paciente'] = $em->merge($paciente);
         //Cargo la Historia clinica si tiene, sino viene vacio
-        $params['historia'] = $this->vistaHistoria($idpaciente);
+        $params['historia'] = $this->vistaHistoria();
         //formulario para crear historia
-        $form = Formularios::createIniciarForm($this,$idpaciente);
+        $form = Formularios::createIniciarForm($this);
         $params['iniciar'] = $form->createView();
         //historial
         $params['listado']= $this->vistaListado( $params['historia']['id']);
@@ -40,7 +35,7 @@ class DefaultController extends Controller
         if(isset($_GET['solapa'])){
         $solapa =  $this->forward(
                 'NeurologiaHistoriaClinicaBundle:Default:solapa', 
-                array('id'  => $params['historia']['id'], 'solapa' => $_GET['solapa']
+                array('solapa' => $_GET['solapa']
         ));    
         $params['solapa'] = $solapa->getContent();
         //por ahora lo dejo asi
@@ -51,39 +46,41 @@ class DefaultController extends Controller
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     
     }
-    public function iniciarAction(Request $request, $idpaciente)
+    public function iniciarAction(Request $request)
     {
         $params=array();
         $em = $this->getDoctrine()->getManager();
+        $idpaciente = $_SESSION['paciente']->getId();
         $departamentos = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
         $list = array(0 => 'Ninguno');        
         foreach ($departamentos as $row) {
             $list[$row->getId()] = $row->getDescripcion();
         }
      
-        $form = Formularios::createHistoriaForm($this,$list,$idpaciente);
+        $form = Formularios::createHistoriaForm($this,$list);
         $form->handleRequest($request);
         if ($form->isValid()) {
            if( $form->get('enviar')->isClicked()){
               //guardo los datos
-              $this->guardarHistoria($form,$idpaciente);
+              $this->guardarHistoria($form);
            }
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $idpaciente)));
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
         }
         $params['iniciar'] = $form->createView();
         $params['historia'] = $idpaciente;
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:iniciar.html.twig', $params);
     }
     
-    public function solapaAction($id, $solapa){
+    public function solapaAction($solapa){
+        $id=$_SESSION['historia']->getId();
         switch ($solapa){
         case 'Antecedente':
                 $str = 'NeurologiaAntecedenteBundle:'.$solapa.':index';
-                $params =  array('idhistoria'  => $id);
+                $params =  array();
             break;
         case 'Evolucion':
                 $str = 'EvolucionBundle:'.$solapa.':list';
-                $params =  array('idhistoria'  => $id);
+                $params =  array();
             break;
         case 'Estudio':
                 $str = 'NeurologiaEstudioBundle:Default:list';
@@ -99,7 +96,7 @@ class DefaultController extends Controller
             break;
         default :
                $str = 'NeurologiaHistoriaClinicaBundle:'.$solapa.':index';
-               $params =  array('id'  => $id);
+               $params =  array();
                break;
         }
         
@@ -107,11 +104,11 @@ class DefaultController extends Controller
         return $solapa;
     }
     
-    public function epicrisisAction($idpaciente)
+    public function epicrisisAction()
     {
         
 //        $em = $this->getDoctrine()->getManager();
-//        $params['paciente'] = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+//        $params['paciente'] = $em->merge($_id_SESSION['paciente']);
 //        
 //        if (!$params['paciente']) {
 //            throw $this->createNotFoundException('Unable to find Paciente ');
@@ -126,7 +123,7 @@ class DefaultController extends Controller
 //            array('nombre' => $idpaciente,));
     }
     
-   public function guardarHistoria($form,$idpaciente) {
+   public function guardarHistoria($form) {
        
        $em = $this->getDoctrine()->getManager();
        try {
@@ -135,7 +132,7 @@ class DefaultController extends Controller
                
                $em->getConnection()->beginTransaction();
        //paciente        
-               $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
+               $paciente = $em->merge($_SESSION['paciente']);
                $usuario=$em->merge($_SESSION['user']);//agrego nahuel motivo: para que se pueda usar con el entity manager se debe mergear la variable
                $paciente->setAdmitidoPor($usuario); // modifico para usar $usuario
                if ($form->get('derivado')->getData()){
@@ -333,8 +330,9 @@ class DefaultController extends Controller
     return strtotime($a['fecha']->format('Y-m-d')) - strtotime($b['fecha']->format('Y-m-d'));
    }
    
-   public function vistaHistoria($idpaciente){
+   public function vistaHistoria(){
        $em = $this->getDoctrine()->getManager();
+       $idpaciente=$_SESSION['paciente']->getId();
        $aux = array();
        $paciente = $em->getRepository('NeurologiaBDBundle:Paciente')->find($idpaciente);
        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(

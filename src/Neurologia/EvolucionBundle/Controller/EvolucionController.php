@@ -62,10 +62,10 @@ class EvolucionController extends Controller
         );
     }
     
-    public function listAction($idhistoria)
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $id_historia_clinica = $em->getRepository('Neurologia\BDBundle\Entity\HistoriaClinica')->find($idhistoria);
+        $id_historia_clinica = $em->merge($_SESSION['historia']);
         //supuestamente, viene de session.
         
         $dql_1 = " SELECT e.fechaHora as fecha_evolucion, e.evolucion "

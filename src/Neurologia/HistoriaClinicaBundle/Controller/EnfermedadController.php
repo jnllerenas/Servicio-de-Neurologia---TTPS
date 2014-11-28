@@ -9,28 +9,29 @@ use Neurologia\BDBundle\Entity\EnfermedadActual;
 
 class EnfermedadController extends Controller
 {
-     public function indexAction($id)
+     public function indexAction()
     {
        $em = $this->getDoctrine()->getManager();
        $params = array();
        $params['enfermedad'] = $em->getRepository('NeurologiaBDBundle:EnfermedadActual')->findby(
                array(
-		'historiaClinica' => $id,
+		'historiaClinica' => $_SESSION['historia']->getId(),
 		 ));
-       $form = Formularios::createEnfermedadForm($this, $id);
+       $form = Formularios::createEnfermedadForm($this);
        $params['nuevaEnfermedad'] = $form->createView();
-       $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
+       $historia = $em->merge($_SESSION['historia']);
        $params['historia'] = $historia->getId();
        $params['paciente'] = $historia->getPaciente();
        return $this->render('NeurologiaHistoriaClinicaBundle:Enfermedad:index.html.twig', $params);
     }
     
-    public function nuevoAction(Request $request, $id) {
+    public function nuevoAction(Request $request) {
         
         $em = $this->getDoctrine()->getManager();
         $params = array();
-        $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
-        $form = Formularios::nuevaEnfermedadForm($this,$id);
+        $historia = $em->merge($_SESSION['historia']);
+        $usuario = $em->merge($_SESSION['user']);
+        $form = Formularios::nuevaEnfermedadForm($this);
         $form->handleRequest($request);
         if ($form->isValid()) {
            if( $form->get('enviar')->isClicked()){
@@ -39,15 +40,16 @@ class EnfermedadController extends Controller
               $enf = new EnfermedadActual();
               $enf->setDetalle($form->get('detalle')->getData());
               $enf->setHistoriaClinica($historia);
+              $enf->setUsuario($usuario);
               $enf->setFecha($time);
               $em->persist($enf);
               $em->flush();
            }
-           $historia = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->find($id);
-           return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('idpaciente' => $historia->getPaciente()->getId(),'solapa' =>'Enfermedad'))); 
+           $historia = $em->merge($_SESSION['historia']);
+           return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('solapa' =>'Enfermedad'))); 
         }
         $params['enfermedad'] = $form->createView();
-        $params['historia'] = $id;
+        $params['historia'] = $_SESSION['historia']->getId();
         return $this->render('NeurologiaHistoriaClinicaBundle:Enfermedad:add.html.twig', $params);
     }
     

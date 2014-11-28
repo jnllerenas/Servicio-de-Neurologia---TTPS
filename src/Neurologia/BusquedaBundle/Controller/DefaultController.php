@@ -252,4 +252,20 @@ class DefaultController extends Controller
 
         return $this->render('NeurologiaBusquedaBundle:Default:avanzada.html.twig', $vars);
     }
+    public function accederAction()
+    {
+        $request = $this->getRequest();
+        $pacienteid=$request->get('paciente_id');
+        $method=$request->getMethod();
+        if($method=='POST' && $pacienteid){
+            $em=$this->getDoctrine()->getManager();
+            $paciente=$em->getRepository('NeurologiaBDBundle:Paciente')->find($pacienteid);
+            if (!$paciente) {
+                throw $this->createNotFoundException('Unable to find Paciente ');
+            }
+            $_SESSION["paciente"]=$paciente;
+            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
+        }
+        return $this->pacienteAction();
+    }
 }

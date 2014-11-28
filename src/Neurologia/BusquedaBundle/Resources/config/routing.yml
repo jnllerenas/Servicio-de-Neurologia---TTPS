@@ -10,3 +10,6 @@ neurologia_busqueda_usuario:
 neurologia_busqueda_avanzada:
     path:     /busqueda/avanzada
     defaults: { _controller: NeurologiaBusquedaBundle:Default:avanzada }
+neurolgia_acceder_paciente:
+    path:     /busqueda/paciente/acceder
+    defaults: { _controller: NeurologiaBusquedaBundle:Default:acceder }

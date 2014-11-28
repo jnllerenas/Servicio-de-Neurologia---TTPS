@@ -16,12 +16,12 @@ class DefaultController extends Controller
 		//$datosB=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoDefinitivo')->findAll();
         
 		/*REVISAR*/
-		
 		$em = $this->getDoctrine()->getManager();
+		$historia=$em->merge($_SESSION['historia']);
 		$query = $em->createQuery(
 			'SELECT p, c FROM NeurologiaBDBundle:DiagnosticoDefinitivo p
-            JOIN p.categoriaDiagnostico c'
-		);
+            INNER JOIN p.categoriaDiagnostico c WITH p.categoriaDiagnostico=c INNER JOIN NeurologiaBDBundle:Evolucion e WITH p.evolucion = e WHERE e.historiaClinica = :historia'
+		)->setParameter('historia',$historia);
 
 		$datosB = $query->getResult();
 		//var_dump($datosB);
