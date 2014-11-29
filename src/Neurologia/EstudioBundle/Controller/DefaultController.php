@@ -25,9 +25,14 @@ class DefaultController extends Controller {
         if ($form->isValid()) {
             // ... maybe do some form processing, like saving the Task and Tag objects
 
-//            $em = $this->getDoctrine()->getManager();
-            
-//            $estudio->setEvolucion($em->merge($_SESSION['evolucion']));
+            $em = $this->getDoctrine()->getManager();
+            $imagenes=$estudio->getImagenes();
+            foreach($imagenes as $value){
+                $value->preupload();
+                $value->upload();
+            }
+//            $evolucion=$em->merge($_SESSION['evolucion']);
+//            $estudio->setEvolucion($evolucion);
             $_SESSION['estudios'][]=$estudio;
 //            $em->persist($estudio);
 //            $em->flush();

@@ -18,10 +18,11 @@
             <div>
                 {% if tratinterno %}
                 <table>
-                    <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Acciones</th>
+                    <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Drogas</th><th>Acciones</th>
             {% for key,ti in tratinterno %}
                 <tr><td>{{ ti.descripcion }}</td>
                     <td>{{ ti.inicio|date('d-m-Y') }}</td>
+                    <td>{{ ti.drogaTratamiento | length }}</td>
                     <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
                     <td><a href="{{ path('tratamiento_interno_edit',{'id':key}) }}" >Editar</a>
                 <a href="" >Eliminar</a></tr>
