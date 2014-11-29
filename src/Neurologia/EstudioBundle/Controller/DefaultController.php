@@ -62,7 +62,7 @@ class DefaultController extends Controller {
     public function listarAction(){        //HistoriaClinica $historiaClinica){
         
          
-        $id = 1;//$_SESSION['historia']->getId();    
+        $_SESSION['historia']->getId();    
 
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
