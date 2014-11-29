@@ -387,8 +387,9 @@ class DefaultController extends Controller
    
    function resetEvolucion() {
       $_SESSION['evolucion'] = true;
-      $_SESSION['tratamientos']['t'] = array();
+      $_SESSION['tratamientos']['ti'] = array();
       $_SESSION['tratamientos']['d'] = array();
+      $_SESSION['tratamientos']['te'] = array();
 //      $_SESSION['estudios'] = array();
 //      $_SESSION['diagnosticos'] = array();
       return true;

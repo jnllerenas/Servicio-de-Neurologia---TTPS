@@ -2,9 +2,6 @@
 
 {% block body %}
 
-    <a href="{{ path('tratamiento_interno_new') }}" class="help-block"> Agregar tratamiento</a>
-    <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
-    <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
   <fieldset>
     <legend>Evolucion:</legend>
 
@@ -19,19 +16,42 @@
                 <span class="help-block">Debe introducir una descripci&oacute;n para la evoluci&oacute;n que desea agregar.</span>
             </div>
             <div>
-                {{ form_label(form.fechaHora) }}
-                {{ form_errors(form.fechaHora) }}
-                {{ form_widget(form.fechaHora) }}
+                {% if tratinterno %}
+                <table>
+                    <tr><th>Descripcion</th><th>Inicio</th><th>Activo</th><th>Acciones</th>
+            {% for key,ti in tratinterno %}
+                <tr><td>{{ ti.descripcion }}</td>
+                    <td>{{ ti.inicio|date('d-m-Y') }}</td>
+                    <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
+                    <td><a href="{{ path('tratamiento_interno_edit',{'id':key}) }}" >Editar</a>
+                <a href="" >Eliminar</a></tr>
+            {% endfor %}
+                </table>
+                {% endif %}
+                {% if tratexterno %}
+                     <table>
+                         <tr><th>Descripcion</th><th>Acciones</th></tr>
+            {% for key,te in tratexterno %}
+                <tr><td>{{ te.descripcion }}</td>
+                <td><a href="{{ path('tratamiento_externo_edit',{'id':key}) }}" >Editar</a>
+                <a href="" >Eliminar</a></tr>
+            {% endfor %}
+        </table>
+                {% endif %}
+    <a href="{{ path('tratamiento_interno_new') }}" class="help-block"> Agregar tratamiento</a>
+    <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
+    <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
             </div>
-
+            
             <div>
                 
                 {{ form_widget(form.aceptar) }}
                 <a href="/Servicio-de-Neurologia---TTPS/web/evolucion">Cancelar</a>
             </div>
 
-        {{ form_end(form) }}    
-    
+        {{ form_end(form) }}  
+        
+        
   </fieldset>
 
 {% endblock %}

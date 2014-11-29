@@ -38,9 +38,9 @@ class EvolucionController extends Controller
         else{
         $em = $this->getDoctrine()->getManager();
         $evolucion = new Evolucion();
-        $evolucion->setFechaHora(new \Datetime()); 
         $historia_clinica=$em->merge($_SESSION['historia']);
         $evolucion->setHistoriaClinica($historia_clinica);
+        $evolucion->setFechaHora(new \Datetime());
         $usuario=$em->merge($_SESSION['user']);
         $evolucion->setUsuario($usuario);
         $form = $this->createForm(new EvolucionType(),$evolucion);
@@ -52,17 +52,18 @@ class EvolucionController extends Controller
             $this->guardarEvolucion();            
             $this->get('session')->getFlashBag()->add(
                         'mensaje',
-                        'Se ha agregado exitósamente una evolución.'
+                        'Se ha agregado exitosamente una evolución.'
                     );
             
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
         }
-        
-        return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',
-                                array(
-                                    'form' => $form->createView()
-                                )
-        );
+        $vars['form']=$form->createView();
+        $vars['tratinterno']=$_SESSION['tratamientos']['ti'];
+        $vars['drogastratamiento']=$_SESSION['tratamientos']['d'];
+        $vars['tratexterno']=$_SESSION['tratamientos']['te'];
+        //$vars['diagnosticos']=array();
+        //$vars['estudios']=array();
+        return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',$vars);
         }
     }
     

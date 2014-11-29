@@ -30,7 +30,7 @@ class TratamientoExternoController extends Controller
 
         if ($form->isValid()) {
             
-            $_SESSION['tratamientos']['t'][] = $tratamientoExterno;
+            $_SESSION['tratamientos']['te'][] = $tratamientoExterno;
             
             $this->get('session')->getFlashBag()->add(
                         'mensaje',
