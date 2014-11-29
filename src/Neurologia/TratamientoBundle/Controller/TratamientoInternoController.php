@@ -44,7 +44,6 @@ class TratamientoInternoController extends Controller
 //            $em->persist($tratamientoInterno);
 //            $em->flush();
             $_SESSION['tratamientos']['ti'][]= $tratamientoInterno;
-            $_SESSION['tratamientos']['d'][count($_SESSION['tratamientos']['t'])] = $form->get('drogaTratamiento')->getData();
             
             return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
             

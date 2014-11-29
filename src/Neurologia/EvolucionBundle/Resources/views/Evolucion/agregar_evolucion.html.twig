@@ -22,8 +22,8 @@
             {% for key,ti in tratinterno %}
                 <tr><td>{{ ti.descripcion }}</td>
                     <td>{{ ti.inicio|date('d-m-Y') }}</td>
-                    <td>{{ ti.drogaTratamiento | length }}</td>
                     <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
+                    <td>{{ ti.drogaTratamiento | length }}</td>
                     <td><a href="{{ path('tratamiento_interno_edit',{'id':key}) }}" >Editar</a>
                 <a href="" >Eliminar</a></tr>
             {% endfor %}
