@@ -151,7 +151,7 @@ class DefaultController extends Controller
                $em->flush();
                $historiaNueva = $em->getRepository('NeurologiaBDBundle:HistoriaClinica')->findOneBy(
                 array(
-                        'paciente' => $idpaciente,
+                        'paciente' => $paciente->getId(),
                 ));
         //motivo
                $time = new \DateTime();
