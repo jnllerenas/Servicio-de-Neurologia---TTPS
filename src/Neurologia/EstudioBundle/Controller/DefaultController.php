@@ -25,10 +25,13 @@ class DefaultController extends Controller {
         if ($form->isValid()) {
             // ... maybe do some form processing, like saving the Task and Tag objects
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($estudio);
-            $em->flush();
-            return $this->redirect($this->generateUrl('neurologia_estudio_success'));
+//            $em = $this->getDoctrine()->getManager();
+            
+//            $estudio->setEvolucion($em->merge($_SESSION['evolucion']));
+            $_SESSION['estudios'][]=$estudio;
+//            $em->persist($estudio);
+//            $em->flush();
+            return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
         }
 
         
