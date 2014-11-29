@@ -8,6 +8,7 @@ use Neurologia\HistoriaClinicaBundle\Form\Formularios;
 use Neurologia\BDBundle\Entity\Motivo;
 use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\BDBundle\Entity\EnfermedadActual;
+use Neurologia\BDBundle\Entity\Evolucion;
 //use Ps\PdfBundle\Annotation\Pdf;
 
 class DefaultController extends Controller
@@ -386,12 +387,12 @@ class DefaultController extends Controller
    }
    
    function resetEvolucion() {
-      $_SESSION['evolucion'] = true;
+      $_SESSION['evolucion'] = new Evolucion();
       $_SESSION['tratamientos']['ti'] = array();
       $_SESSION['tratamientos']['d'] = array();
       $_SESSION['tratamientos']['te'] = array();
-//      $_SESSION['estudios'] = array();
-//      $_SESSION['diagnosticos'] = array();
+      $_SESSION['estudios'] = array();
+      $_SESSION['diagnosticos'] = array();
       return true;
    }
     

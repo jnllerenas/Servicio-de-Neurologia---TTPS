@@ -46,9 +46,10 @@ class DefaultController extends Controller
 		
 			$descripcion = $request->request->get('descripcion');	//ACCEDE AL POST TOMANDO EN CUENTA EL NAME DEL ELEMENTO HTML
 			
-			$evolucion_id = 1;	//REEMPLAZAR EL '1' POR VALOR DE LA SESSION O VER COMO
-			$evolucion = $this->getDoctrine()->getRepository('NeurologiaBDBundle:Evolucion')->find($evolucion_id);
-			
+//			$evolucion_id = 1;	//REEMPLAZAR EL '1' POR VALOR DE LA SESSION O VER COMO
+//			$evolucion = $this->getDoctrine()->getRepository('NeurologiaBDBundle:Evolucion')->find($evolucion_id);
+                        $em = $this->getDoctrine()->getManager();
+			$evolucion=$em->merge($_SESSION['evolucion']);
 			if (!$evolucion) {
 				throw $this->createNotFoundException('No Existe la evolucion con identificador: '.$evolucion_id);
 			}
@@ -71,10 +72,11 @@ class DefaultController extends Controller
 					$entity->setDescripcion($descripcion);
 					$entity->setEvolucion($evolucion);
 					$entity->setFecha($fecha);
-										
-					$em = $this->getDoctrine()->getManager();
-					$em->persist($entity);
-					$em->flush();
+                                        
+                                        $_SESSION['diagnosticos'][]=$entity;
+//					$em = $this->getDoctrine()->getManager();
+//					$em->persist($entity);
+//					$em->flush();
 
 					break;
 				case 'Definitivo':
@@ -85,14 +87,15 @@ class DefaultController extends Controller
 					$entity->setCategoriaDiagnostico($categoria_diagnostico);
 					$entity->setFecha($fecha);
 					
-					$em = $this->getDoctrine()->getManager();
-					$em->persist($entity);
-					$em->flush();
+                                        $_SESSION['diagnosticos'][]=$entity;
+//					$em = $this->getDoctrine()->getManager();
+//					$em->persist($entity);
+//					$em->flush();
 					
 					break;
 			}
 
-			return $this->forward('NeurologiaDiagnosticoBundle:Default:index', array('msj'=>'Diagnostico agregado'));
+			return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
 		}
 		
 		$categorias = $this->getDoctrine()->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->findAll();

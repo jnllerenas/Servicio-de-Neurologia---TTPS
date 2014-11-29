@@ -18,7 +18,7 @@
             <div>
                 {% if tratinterno %}
                 <table>
-                    <tr><th>Descripcion</th><th>Inicio</th><th>Activo</th><th>Acciones</th>
+                    <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Acciones</th>
             {% for key,ti in tratinterno %}
                 <tr><td>{{ ti.descripcion }}</td>
                     <td>{{ ti.inicio|date('d-m-Y') }}</td>
@@ -30,7 +30,7 @@
                 {% endif %}
                 {% if tratexterno %}
                      <table>
-                         <tr><th>Descripcion</th><th>Acciones</th></tr>
+                         <tr><th>Descripci&oacute;n</th><th>Acciones</th></tr>
             {% for key,te in tratexterno %}
                 <tr><td>{{ te.descripcion }}</td>
                 <td><a href="{{ path('tratamiento_externo_edit',{'id':key}) }}" >Editar</a>
@@ -39,7 +39,32 @@
         </table>
                 {% endif %}
     <a href="{{ path('tratamiento_interno_new') }}" class="help-block"> Agregar tratamiento</a>
+    {% if diagnosticos %}
+    <table>
+        <tr><th>Descripci&oacute;n</th><th>Categoría</th><th>Acciones</th>
+        {% for key,d in diagnosticos %}
+            <tr><td>{{ d.descripcion }}</td>
+                <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
+                <td><a href="" >Editar</a>
+                <a href="" >Eliminar</a>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
+    {% if estudios %}
+    <table>
+        <tr><th>Descripci&oacute;n</th><th>Tipo</th><th>Im&aacute;genes</th><th>Acciones</th>
+        {% for key,e in estudios %}
+            <tr><td>{{ e.descripcion }}</td>
+                <td>{{ e.tipo }}</td>
+                <td></td>
+                <td><a href="" >Editar</a>
+                <a href="" >Eliminar</a>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
             </div>
             

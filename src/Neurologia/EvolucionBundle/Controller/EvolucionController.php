@@ -37,7 +37,7 @@ class EvolucionController extends Controller
         }
         else{
         $em = $this->getDoctrine()->getManager();
-        $evolucion = new Evolucion();
+        $evolucion = $em->merge($_SESSION['evolucion']);
         $historia_clinica=$em->merge($_SESSION['historia']);
         $evolucion->setHistoriaClinica($historia_clinica);
         $evolucion->setFechaHora(new \Datetime());
@@ -61,8 +61,8 @@ class EvolucionController extends Controller
         $vars['tratinterno']=$_SESSION['tratamientos']['ti'];
         $vars['drogastratamiento']=$_SESSION['tratamientos']['d'];
         $vars['tratexterno']=$_SESSION['tratamientos']['te'];
-        //$vars['diagnosticos']=array();
-        //$vars['estudios']=array();
+        $vars['diagnosticos']=$_SESSION['diagnosticos'];
+        $vars['estudios']=$_SESSION['estudios'];
         return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',$vars);
         }
     }
