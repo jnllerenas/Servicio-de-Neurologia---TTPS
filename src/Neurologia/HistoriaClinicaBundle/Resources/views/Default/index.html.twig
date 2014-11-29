@@ -1,18 +1,22 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
+
      {{ parent() }}
             <link href="{{ asset('public/css/estilo.css') }}" rel="stylesheet">
             
             <link class="ui" href="{{ asset('public/css/semantic.min.css') }}" rel="stylesheet">
             <link href="{{ asset('public/css/docs.css') }}" rel="stylesheet">
+			
 {% endblock stylesheets %}
 
  {% block javascripts %}
+ 
      {{ parent() }}
             <script src="{{ asset('public/js/lib/highlight.min.js') }}"></script>
             <script src="{{ asset('public/js/lib/semantic.min.js') }}"></script>
             <script src="{{ asset('public/js/lib/docs.js') }}"></script>
+			
 {% endblock javascripts %}
 
 {% block datosPaciente %}
