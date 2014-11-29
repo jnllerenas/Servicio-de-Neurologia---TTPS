@@ -58,5 +58,45 @@ class DefaultController extends Controller {
 
         return $this->render('NeurologiaEstudioBundle:Default:success.html.twig');
     }
+    
+    public function listarAction(){        //HistoriaClinica $historiaClinica){
+        
+         
+        $id = 1;//$_SESSION['historia']->getId();    
+
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('e')
+              ->from('NeurologiaBDBundle:Estudio', 'e')
+              ->innerJoin('NeurologiaBDBundle:Evolucion', 'ev', 'WITH', 'e.evolucion = ev')               
+              ->where('ev.historiaClinica = :id')
+              ->setParameter('id', $id);
+        $estudios = $qb->getQuery()->execute();
+        if (!$estudios){ $estudios = array();}
+//        else {
+//            foreach ($estudios as $e) {
+//                echo ($e->getFecha()->format('Y-m-d'));
+//                
+//            }
+//        }
+        
+         return $this->render('NeurologiaEstudioBundle:Default:listar.html.twig', array(
+                    'estudios' => $estudios));
+    }
+   
+
+    
+        public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('NeurologiaBDBundle:Estudio')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find estudio entity.');
+        }          
+
+        
+        return $this->render('NeurologiaEstudioBundle:Default:show.html.twig', array('estudio' => $entity));
+    }
+   
 
 }

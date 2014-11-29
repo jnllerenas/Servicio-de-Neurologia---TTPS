@@ -28,27 +28,27 @@ class Estudio
     */    
     protected $imagenes;
     
-    public function __construct()
+        public function __construct()
     {
         $this->imagenes = new ArrayCollection();
     }
 
-    public function getImagenes()
+        public function getImagenes()
     {
         return $this->imagenes;
     }
     
-    public function addImagen(Imagen $imagen)
+        public function addImagen(Imagen $imagen)
     {
         //$imagen->addEstudio($this);
         $this->imagenes->add($imagen);
-    }
-    public function agregarEstudioAImagenes()
+    }    
+        public function agregarEstudioAImagenes()
     {
         foreach ($this->getImagenes() as $value) {
             $value->add($this);
         }
-    }
+    }    
     public function removeImagen(Imagen $imagen)
     {
         $this->imagenes->removeElement($imagen);
@@ -106,7 +106,7 @@ class Estudio
     {
         return $this->id;
     }
-
+    
     /**
      * Set descripcion
      *
@@ -220,5 +220,10 @@ class Estudio
     public function getTipoEstudio()
     {
         return $this->tipoEstudio;
+    }
+    
+    public function getTipoEstudioSiglas()
+    {
+        return $this->tipoEstudio->getSiglas();
     }
 }

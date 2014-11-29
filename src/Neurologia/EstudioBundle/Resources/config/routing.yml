@@ -5,3 +5,11 @@ neurologia_estudio_nuevo:
 neurologia_estudio_success:
     path:     /estudio/success
     defaults: { _controller: NeurologiaEstudioBundle:Default:success }
+
+neurologia_estudio_listar:
+    path:     /estudio/listar
+    defaults: { _controller: NeurologiaEstudioBundle:Default:listar }
+    
+neurologia_estudio_show:
+    path:     /estudio/{id}/show
+    defaults: { _controller: "NeurologiaEstudioBundle:Default:show" }

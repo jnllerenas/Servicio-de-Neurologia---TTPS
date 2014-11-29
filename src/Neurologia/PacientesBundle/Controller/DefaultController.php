@@ -80,7 +80,7 @@ class DefaultController extends Controller {
         }
         $deleteForm = $this->createDeleteForm($id);
         return $this->render('NeurologiaPacientesBundle:Default:show.html.twig', array(
-            'entity'      => $entity,
+            'estudio'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
