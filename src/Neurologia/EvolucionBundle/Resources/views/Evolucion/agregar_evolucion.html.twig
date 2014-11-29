@@ -51,21 +51,21 @@
         {% endfor %}
     </table>
     {% endif %}
-    <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
+    <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
     {% if estudios %}
     <table>
         <tr><th>Descripci&oacute;n</th><th>Tipo</th><th>Im&aacute;genes</th><th>Acciones</th>
         {% for key,e in estudios %}
             <tr><td>{{ e.descripcion }}</td>
-                <td>{{ e.tipoEstudio }}</td>
-                <td>{{ e.imagenes | length }}</td>
+                <td>{{ e.tipo }}</td>
+                <td></td>
                 <td><a href="" >Editar</a>
                 <a href="" >Eliminar</a>
             </tr>
         {% endfor %}
     </table>
     {% endif %}
-    <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
+    <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
             </div>
             
             <div>
