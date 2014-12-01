@@ -103,5 +103,87 @@ class DefaultController extends Controller
 	    return $this->render('NeurologiaDiagnosticoBundle:Default:new.html.twig', array('categorias'=>$categorias)); 
 			
     }
+        public function deleteAction($key)
+    {
+        if(array_key_exists($key, $_SESSION['diagnosticos'])){
+            unset($_SESSION['diagnosticos'][$key]);
+        }
+        return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+    }
+    
+    
+        public function editAction($key)
+    {	
+                if(array_key_exists($key,$_SESSION['diagnosticos'])){
+                    $diagnostico=$_SESSION['diagnosticos'][$key];
+                
+		$request = $this->getRequest();
+		
+		if($request->getMethod() == 'POST'){
+			/*print_r($request->request->all());
+			die();*/
+		
+			$descripcion = $request->request->get('descripcion');	//ACCEDE AL POST TOMANDO EN CUENTA EL NAME DEL ELEMENTO HTML
+			
+//			$evolucion_id = 1;	//REEMPLAZAR EL '1' POR VALOR DE LA SESSION O VER COMO
+//			$evolucion = $this->getDoctrine()->getRepository('NeurologiaBDBundle:Evolucion')->find($evolucion_id);
+                        $em = $this->getDoctrine()->getManager();
+			$evolucion=$em->merge($_SESSION['evolucion']);
+			if (!$evolucion) {
+				throw $this->createNotFoundException('No Existe la evolucion con identificador: '.$evolucion_id);
+			}
+
+			/*var_dump($evolucion);die;*/
+			
+			$tipo = $request->request->get('tipo');
+			$categoria_diagnostico_id = $request->request->get('select_diagnostico_categoria');
+			$categoria_diagnostico = $this->getDoctrine()->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->find($categoria_diagnostico_id);
+			$fecha = new \DateTime("now");
+			
+			if (!$evolucion) {
+				throw $this->createNotFoundException('No Existe la evolucion con identificador: '.$evolucion_id);
+			}
+			
+			switch ($tipo) {
+				case 'Presuntivo':
+					$entity = new DiagnosticoPresuntivo();
+					
+					$entity->setDescripcion($descripcion);
+					$entity->setEvolucion($evolucion);
+					$entity->setFecha($fecha);
+                                        
+                                        $_SESSION['diagnosticos'][$key]=$entity;
+//					$em = $this->getDoctrine()->getManager();
+//					$em->persist($entity);
+//					$em->flush();
+
+					break;
+				case 'Definitivo':
+					$entity = new DiagnosticoDefinitivo();
+					
+					$entity->setDescripcion($descripcion);
+					$entity->setEvolucion($evolucion);
+					$entity->setCategoriaDiagnostico($categoria_diagnostico);
+					$entity->setFecha($fecha);
+					
+                                        $_SESSION['diagnosticos'][$key]=$entity;
+//					$em = $this->getDoctrine()->getManager();
+//					$em->persist($entity);
+//					$em->flush();
+					
+					break;
+			}
+
+			return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+		}
+		
+		$categorias = $this->getDoctrine()->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->findAll();
+					
+	    return $this->render('NeurologiaDiagnosticoBundle:Default:edit.html.twig', array('categorias'=>$categorias, 'diagnostico' =>$diagnostico, 'key' => $key)); 
+            }else{
+                return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+            }
+			
+    }
 
 }

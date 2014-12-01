@@ -1,0 +1,81 @@
+{% extends 'NeurologiaDiagnosticoBundle:Default:index.html.twig' %}
+
+{% block container %}     
+
+		<form id="fDiagnostico" action="{{ path('neurologia_diagnostico_edit',{ 'key' : key }) }}" method="POST" role="form">
+			<fieldset>
+				<legend>Nuevo Diagnostico</legend>
+				
+				<div class="radio" onchange="mostrar_ocultar(1)">
+					<label>
+                                            <input type="radio" name="tipo" id="tipo1" value="Presuntivo" {% if diagnostico.categoriaDiagnostico is not defined %}checked{% endif %}>
+						Presuntivo
+					</label>
+				</div>
+				<div class="radio" onchange="mostrar_ocultar(2)">
+					<label>
+						<input type="radio" name="tipo" id="tipo2" value="Definitivo" {% if diagnostico.categoriaDiagnostico is defined %}checked{% endif %}>
+						Definitivo
+					</label>
+					<div id="div_diagnostico_categoria" style="display:{% if diagnostico.categoriaDiagnostico is not defined %}none{% else %}block{% endif %}">
+						<label for="select_diagnostico_categoria">Descripcion</label>
+						<select class="form-control" id="select_diagnostico_categoria" name="select_diagnostico_categoria">
+							<option value="0">Seleccione..</option>
+							{% for categoria in categorias %}
+								<option value="{{ categoria.id }}" {% if diagnostico.categoriaDiagnostico is defined %}{% if diagnostico.categoriaDiagnostico.id == categoria.id %}selected{% endif %}{% endif %}>{{ categoria.descripcion }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+
+				<br>
+				
+				<div class="form-group">
+					<label for="descripcion">Descripcion</label>
+					<textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui..">{{ diagnostico.descripcion }}</textarea>
+				</div>
+				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico()" />
+				<a class="btn btn-primary" href="{{ path('neurologia_diagnostico_homepage') }}">Cancelar</a>
+			</fieldset>
+		</form>
+
+	
+		<script>
+			function mostrar_ocultar(param){
+
+				switch(param){
+					case 1:
+						document.getElementById('div_diagnostico_categoria').style.display = 'none';
+						break;
+					case 2:
+						document.getElementById('div_diagnostico_categoria').style.display = 'block';
+						break;
+				}
+				
+			}
+			
+			function validarFormDiagnostico(){
+			
+				desc = document.getElementById('descripcion').value;
+				
+				if (document.getElementById('tipo1').checked)
+					tipo = document.getElementById('tipo1').value;
+				
+				if (document.getElementById('tipo2').checked)
+					tipo = document.getElementById('tipo2').value;
+				
+				cat = document.getElementById('select_diagnostico_categoria').value;
+				
+				if ((desc=='')||((tipo=='Definitivo')&&(cat==0))){
+					alert('Complete correctamente todos los campos');
+					return false;
+				}
+				else{
+					document.getElementById('fDiagnostico').submit();
+				}
+			}
+		</script>
+{% endblock %}
+
+
+

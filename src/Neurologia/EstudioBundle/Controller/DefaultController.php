@@ -99,6 +99,60 @@ class DefaultController extends Controller {
         
         return $this->render('NeurologiaEstudioBundle:Default:show.html.twig', array('estudio' => $entity));
     }
+    
+        public function deleteAction($key)
+    {
+        if(array_key_exists($key, $_SESSION['estudios'])){
+            $imagenes=$_SESSION['estudios'][$key]->getImagenes();
+            foreach($imagenes as $value){
+                $value->removeUpload();
+            }
+            unset($_SESSION['estudios'][$key]);
+        }
+        return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+    }
+        public function editAction(Request $request,$key)
+    {
+        if(array_key_exists($key, $_SESSION['estudios'])){
+            $estudio = $_SESSION['estudios'][$key];
+            $imagenesold=$_SESSION['estudios'][$key]->getImagenes();
+                foreach($imagenesold as $value){
+                    $value->removeUpload();
+                    $_SESSION['estudios'][$key]->removeImagen($value);
+            }
+            $error = "";
+
+            $form = $this->createForm(new EstudioType(), $estudio);
+
+            $cloned = clone $form;
+            $form->handleRequest($request);
+            
+            if ($form->isValid()) {
+                
+                $imagenes=$estudio->getImagenes();
+                foreach($imagenes as $value){
+                    $value->preupload();
+                    $value->upload();
+                }
+                $_SESSION['estudios'][$key]=$estudio;
+    
+                return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+            }
+
+
+//            if (!($form->get('imagenes')->isEmpty())) {
+//                $error = $form->get('imagenes')->getErrorsAsString();
+//                $form = $cloned;            
+//                
+//            }
+        
+        }
+
+
+        return $this->render('NeurologiaEstudioBundle:Default:edit.html.twig', array(
+                    'form' => $form->createView(), 'error' => $error
+        ));
+    }
    
 
 }

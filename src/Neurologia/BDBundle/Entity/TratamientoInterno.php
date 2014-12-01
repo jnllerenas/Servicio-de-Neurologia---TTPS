@@ -73,10 +73,15 @@ class TratamientoInterno
     
         public function addDrogaTratamiento(DrogaTratamiento $droga)
     {
-        $droga->addTratamiento($this);
+        //$droga->addTratamiento($this);
         $this->drogaTratamiento->add($droga);
     }
-    
+        public function agregarTratamientoADrogas()
+    {
+        foreach ($this->getDrogaTratamiento() as $value) {
+            $value->add($this);
+        }
+    } 
     public function removeDrogaTratamiento(DrogaTratamiento $droga)
     {
         $this->drogaTratamiento->removeElement($droga);

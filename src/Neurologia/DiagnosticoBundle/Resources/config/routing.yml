@@ -5,3 +5,11 @@ neurologia_diagnostico_homepage:
 neurologia_diagnostico_new:
     path:     /diagnostico/new
     defaults: { _controller: NeurologiaDiagnosticoBundle:Default:new }
+
+neurologia_diagnostico_delete:
+    path:     /diagnostico/{key}/delete
+    defaults: { _controller: NeurologiaDiagnosticoBundle:Default:delete }
+    
+neurologia_diagnostico_edit:
+    path:     /diagnostico/{key}/edit
+    defaults: { _controller: NeurologiaDiagnosticoBundle:Default:edit }
