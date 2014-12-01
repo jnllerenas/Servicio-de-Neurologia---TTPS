@@ -55,15 +55,15 @@ class EvolucionController extends Controller
                         'Se ha agregado exitosamente una evolución.'
                     );
             
-            return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
+           return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage'));
         }
         $vars['form']=$form->createView();
         $vars['tratinterno']=$_SESSION['tratamientos']['ti'];
         $vars['tratexterno']=$_SESSION['tratamientos']['te'];
         $vars['diagnosticos']=$_SESSION['diagnosticos'];
         $vars['estudios']=$_SESSION['estudios'];
-        var_dump($_SESSION['estudios']);
-        return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',$vars);
+        
+       return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',$vars);
         }
     }
     
@@ -104,17 +104,17 @@ class EvolucionController extends Controller
                if (!empty($_SESSION['tratamientos']['ti'])){
                    foreach ($_SESSION['tratamientos']['ti'] as $row) {
                        $tratamiento = $em->merge($row);
+                       $tratamiento->agregarTratamientoADrogas();
                        $tratamiento->setEvolucion($evolucion);
                        $em->persist($tratamiento);
                        $em->flush();
-//                       if (!empty($_SESSION['tratamientos']['ti']['drogaTratamiento'])) {
-//                           foreach ($_SESSION['tratamientos']['ti']['drogaTratamiento']->getValues( ) as $value) {
-//                            $droga = $em->merge($value);
-//                            $droga->setTratamiento($tratamiento);
-//                            $em->persist($droga);
-//                            $em->flush();
-//                           }
-//                       }
+                       $drogas=$row->getDrogaTratamiento();
+                           foreach ($drogas as $value) {
+                            $droga = $em->merge($value);
+                            $droga->addTratamiento($tratamiento);
+                            $em->persist($droga);
+                            $em->flush();
+                           }
                    }
                    
                }
@@ -132,21 +132,21 @@ class EvolucionController extends Controller
                if (!empty($_SESSION['estudios'])){
                    foreach ($_SESSION['estudios'] as $row) {
                        $estudio = $em->merge($row);
+//                       $estudio->agregarEstudioAImagenes();
                        $estudio->setEvolucion($evolucion);
                        $em->persist($estudio);
                        $em->flush();
-//                       $imagenes = $_SESSION['estudios']['imagenes']->getValues( );
-//                       if (!empty($imagenes)) {
-//                           foreach ($imagenes as $value) {
-//                            $imagen = $em->merge($value);
-//                            $imagen->setEstudio($estudio);
-//                            $em->persist($imagen);
-//                            $em->flush();
-//                           }
-//                       }
+                       $imagenes=$row->getImagenes();
+                       foreach($imagenes as $value){
+                            $imagen = $em->merge($value);
+                            $imagen->addEstudio($estudio);
+                            $em->persist($imagen);
+                            $em->flush();
+                           }
+                       }
                    }
                    
-               }
+               
         //diagnosticos
                 if (!empty($_SESSION['diagnosticos'])){
                    foreach ($_SESSION['diagnosticos'] as $row) {

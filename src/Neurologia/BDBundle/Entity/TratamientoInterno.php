@@ -57,7 +57,7 @@ class TratamientoInterno
 
      /**
     * @Assert\Valid()
-    * @ORM\OneToMany(targetEntity="DrogaTratamiento", cascade={"persist"}, mappedBy="TratamientoInterno")
+    * @ORM\OneToMany(targetEntity="DrogaTratamiento", cascade={"persist"}, mappedBy="tratamiento")
     */    
     protected $drogaTratamiento;
     

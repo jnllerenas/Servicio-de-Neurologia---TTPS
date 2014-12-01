@@ -327,7 +327,7 @@ class DefaultController extends Controller
    }
    
    function ordenar( $a, $b ) {
-    return strtotime($a['fecha']->format('Y-m-d')) - strtotime($b['fecha']->format('Y-m-d'));
+    return  strtotime($b['fecha']->format('Y-m-d H:i:d')) - strtotime($a['fecha']->format('Y-m-d H:i:d'));
    }
    
    public function vistaHistoria(){
