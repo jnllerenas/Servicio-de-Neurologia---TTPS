@@ -47,9 +47,36 @@ class TratamientoExternoController extends Controller
         );
     }
     
-    public function editAction()
+    public function editAction(Request $request,$key)
     {
-        return $this->render('TratamientoBundle:Tratamiento:tratamientoInterno.html.twig');
+        if(array_key_exists($key, $_SESSION['tratamientos']['te'])){
+            $em = $this->getDoctrine()->getManager();
+            $tratamientoExterno = $em->merge($_SESSION['tratamientos']['te'][$key]);
+            
+            $form = $this->createForm(new TratamientoExternoType(), $tratamientoExterno);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $_SESSION['tratamientos']['te'][$key]= $tratamientoExterno;
+                return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+            }
+            return $this->render('TratamientoBundle:Tratamiento:TEedit.html.twig',
+                    array(
+                                    'form' => $form->createView(),
+                                    'key' => $key
+                                ));
+        }else{
+            return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+        }
+    }
+    
+    public function deleteAction($key)
+    {
+         if(array_key_exists($key, $_SESSION['tratamientos']['te'])){
+            unset($_SESSION['tratamientos']['te'][$key]);
+        }
+        return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
     }
     
 }

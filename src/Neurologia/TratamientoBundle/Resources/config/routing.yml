@@ -11,13 +11,22 @@ tratamiento_interno_new:
     defaults: { _controller: TratamientoBundle:TratamientoInterno:new }
     
 tratamiento_interno_edit:
-    path:     /tratamiento/editar-tratamiento-interno/{id}
+    path:     /tratamiento/editar-tratamiento-interno/{key}
     defaults: { _controller: TratamientoBundle:TratamientoInterno:edit }
+    
+tratamiento_interno_delete:
+    path:     /tratamiento/eliminar-tratamiento-interno/{key}
+    defaults: { _controller: TratamientoBundle:TratamientoInterno:delete }
 
 tratamiento_externo_new:
     path:     /tratamiento/agregar-tratamiento-externo
     defaults: { _controller: TratamientoBundle:TratamientoExterno:new }
     
 tratamiento_externo_edit:
-    path:     /tratamiento/editar-tratamiento-externo/{id}
+    path:     /tratamiento/editar-tratamiento-externo/{key}
     defaults: { _controller: TratamientoBundle:TratamientoExterno:edit }
+
+    
+tratamiento_externo_delete:
+    path:     /tratamiento/eliminar-tratamiento-externo/{key}
+    defaults: { _controller: TratamientoBundle:TratamientoExterno:delete }    

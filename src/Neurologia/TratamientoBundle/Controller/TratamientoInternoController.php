@@ -23,8 +23,8 @@ class TratamientoInternoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
-        $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
+//        $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
+//        $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
 //        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
      
         $tratamientoInterno = new TratamientoInterno();
@@ -56,9 +56,40 @@ class TratamientoInternoController extends Controller
         );
     }
     
-    public function editAction()
+    public function editAction(Request $request,$key)
     {
-        return $this->render('TratamientoBundle:Tratamiento:tratamientoInterno.html.twig');
+        if(array_key_exists($key, $_SESSION['tratamientos']['ti'])){
+            $em = $this->getDoctrine()->getManager();
+            $tratamientoInterno = $em->merge($_SESSION['tratamientos']['ti'][$key]);
+            foreach ($tratamientoInterno->getDrogaTratamiento() as $value){
+                $tratamientoInterno->removeDrogaTratamiento($value);
+                $tratamientoInterno->addDrogaTratamiento($em->merge($value));
+            }
+            $form = $this->createForm(new TratamientoInternoType(), $tratamientoInterno);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $_SESSION['tratamientos']['ti'][$key]= $tratamientoInterno;
+                return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+            }
+            return $this->render('TratamientoBundle:Tratamiento:TIedit.html.twig',
+                    array(
+                                    'form' => $form->createView(),
+                                    'key' => $key
+                                ));
+        }else{
+            return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+        }
+        
     }
     
+    
+    public function deleteAction($key)
+    {
+        if(array_key_exists($key, $_SESSION['tratamientos']['ti'])){
+            unset($_SESSION['tratamientos']['ti'][$key]);
+        }
+        return $this->redirect($this->generateUrl('evolucion_homepage_agregar'));
+    }
 }

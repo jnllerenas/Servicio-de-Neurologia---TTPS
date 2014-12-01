@@ -24,8 +24,8 @@
                     <td>{{ ti.inicio|date('d-m-Y') }}</td>
                     <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
                     <td>{{ ti.drogaTratamiento | length }}</td>
-                    <td><a href="{{ path('tratamiento_interno_edit',{'id':key}) }}" >Editar</a>
-                <a href="" >Eliminar</a></tr>
+                    <td><a href="{{ path('tratamiento_interno_edit',{'key':key}) }}" onclick="return confirm('¿Desea editar la información del tratamiento?\nLas drogas deberán ser cargadas nuevamente.');">Editar</a>
+                <a href="{{ path('tratamiento_interno_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');" >Eliminar</a></tr>
             {% endfor %}
                 </table>
                 {% endif %}
@@ -34,8 +34,8 @@
                          <tr><th>Descripci&oacute;n</th><th>Acciones</th></tr>
             {% for key,te in tratexterno %}
                 <tr><td>{{ te.descripcion }}</td>
-                <td><a href="{{ path('tratamiento_externo_edit',{'id':key}) }}" >Editar</a>
-                <a href="" >Eliminar</a></tr>
+                <td><a href="{{ path('tratamiento_externo_edit',{'key':key}) }}" >Editar</a>
+                <a href="{{ path('tratamiento_externo_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');"  >Eliminar</a></tr>
             {% endfor %}
         </table>
                 {% endif %}
@@ -46,8 +46,8 @@
         {% for key,d in diagnosticos %}
             <tr><td>{{ d.descripcion }}</td>
                 <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
-                <td><a href="" >Editar</a>
-                <a href="" >Eliminar</a>
+                <td><a href="{{ path('neurologia_diagnostico_edit', { 'key' : key }) }}" >Editar</a>
+                <a href="{{ path('neurologia_diagnostico_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el diagnóstico?');" >Eliminar</a>
             </tr>
         {% endfor %}
     </table>
@@ -60,8 +60,8 @@
             <tr><td>{{ e.descripcion }}</td>
                 <td>{{ e.tipoEstudio }}</td>
                 <td>{{ e.imagenes | length }}</td>
-                <td><a href="" >Editar</a>
-                <a href="" >Eliminar</a>
+                <td><a href="{{ path('neurologia_estudio_edit', { 'key' : key }) }}" onclick="return confirm('¿Desea editar la información del estudio?\nLas imágenes deberán ser cargadas nuevamente.');">Editar</a>
+                <a href="{{ path('neurologia_estudio_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el estudio?');" >Eliminar</a>
             </tr>
         {% endfor %}
     </table>
@@ -72,12 +72,16 @@
             <div>
                 
                 {{ form_widget(form.aceptar) }}
-                <a href="{{ path('neurologia_historia_clinica_homepage') }}">Cancelar</a>
+                <a href="{{ path('neurologia_historia_clinica_homepage') }}" onclick="return confirm('¿Desea abandonar la evolución?\nLa información cargada se perderá.');">Cancelar</a>
             </div>
 
         {{ form_end(form) }}  
         
         
   </fieldset>
-
+        <script>
+            $('form').submit(function(){
+                return confirm('¿Desea guardar la evolución?\nNo se podrá modificar o eliminar la información guardada.');
+            })
+        </script>
 {% endblock %}

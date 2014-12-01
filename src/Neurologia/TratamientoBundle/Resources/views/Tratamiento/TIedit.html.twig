@@ -1,0 +1,110 @@
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('public/js/tratamiento_interno.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+    <script>
+
+        var $collectionHolder;
+        var $addDroga = $('<a href="#" class="drogaTratamiento">Agregar droga</a>');
+        var $newLinkLi = $('<li class="list-group-item"></li>').append($addDroga);
+
+        jQuery(document).ready(function () {
+            // Get the ul that holds the collection of tags
+            $collectionHolder = $('#drogaTratamiento');
+
+            // add a delete link to all of the existing tag form li elements
+            $collectionHolder.find('li').each(function () {
+                addDrogaFormDeleteLink($(this));
+            });
+
+            // add the "add a tag" anchor and li to the tags ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $addDroga.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addDrogaTratamientoForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addDrogaTratamientoForm($collectionHolder, $newLinkLi) {
+// Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+// get the new index
+            var index = $collectionHolder.data('index');
+
+// Replace '__name__' in the prototype's HTML to
+// instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+// increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+// Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li class="list-group-item"></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+            addDrogaFormDeleteLink($newFormLi);
+        }
+
+        function addDrogaFormDeleteLink($DrogaFormLi) {
+            var $removeFormA = $('<a href="#">Quitar droga</a>');
+            $DrogaFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the li for the tag form
+                $DrogaFormLi.remove();
+            });
+        }
+
+    </script>
+ 
+<fieldset>
+    <legend>Tratamiento Interno:</legend>
+
+        {{ form_start(form) }}
+            
+            {{ form_errors(form) }}
+            <div>
+                {{ form_label(form.descripcion) }}
+                {{ form_errors(form.descripcion) }}
+                {{ form_widget(form.descripcion) }}
+            </div>
+
+            <div>
+                {{ form_label(form.inicio) }}
+                {{ form_errors(form.inicio) }}
+                {{ form_widget(form.inicio) }}
+            </div>
+            <div>
+                {{ form_label(form.activo) }}
+                {{ form_errors(form.activo) }}
+                {{ form_widget(form.activo) }}
+            </div>
+            <div>
+               <ul class="list-group" id="drogaTratamiento"
+                data-prototype="{{ include('TratamientoBundle:Tratamiento:prototype.html.twig', { 'form': form.drogaTratamiento.vars.prototype })}}"         
+                ></ul>
+            </div>
+            
+          {{ form_row(form.aceptar) }}
+            
+        {{ form_end(form) }}    
+    
+  </fieldset>
+        
+
+
+{% endblock %}

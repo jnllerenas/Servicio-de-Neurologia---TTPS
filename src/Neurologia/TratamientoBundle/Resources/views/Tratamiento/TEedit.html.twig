@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    
+  <fieldset>
+    <legend>Tratamiento Externo:</legend>
+
+        {{ form_start(form) }}
+        
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_label(form.descripcion) }}
+                {{ form_errors(form.descripcion) }}
+                {{ form_widget(form.descripcion) }}
+                <span class="help-block">Debe introducir una descripci&oacute;n para el tratamiento que desea agregar.</span>
+            </div>
+
+            <div>
+                
+                {{ form_widget(form.aceptar) }}
+                
+            </div>
+
+        {{ form_end(form) }}    
+    
+  </fieldset>
+
+{% endblock %}

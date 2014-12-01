@@ -13,3 +13,12 @@ neurologia_estudio_listar:
 neurologia_estudio_show:
     path:     /estudio/{id}/show
     defaults: { _controller: "NeurologiaEstudioBundle:Default:show" }
+    
+neurologia_estudio_delete:
+    path:     /estudio/{key}/delete
+    defaults: { _controller: "NeurologiaEstudioBundle:Default:delete" }
+    
+neurologia_estudio_edit:
+    path:     /estudio/{key}/edit
+    defaults: { _controller: "NeurologiaEstudioBundle:Default:edit" }
+        
