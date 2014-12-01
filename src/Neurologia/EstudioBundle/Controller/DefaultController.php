@@ -62,15 +62,17 @@ class DefaultController extends Controller {
     public function listarAction(){        //HistoriaClinica $historiaClinica){
         
          
-        $_SESSION['historia']->getId();    
+          
 
         $em = $this->getDoctrine()->getManager();
+        $historia = $em->merge($_SESSION['historia']);
+        $id_historia = $historia->getId();
         $qb = $em->createQueryBuilder();
         $qb->select('e')
               ->from('NeurologiaBDBundle:Estudio', 'e')
               ->innerJoin('NeurologiaBDBundle:Evolucion', 'ev', 'WITH', 'e.evolucion = ev')               
               ->where('ev.historiaClinica = :id')
-              ->setParameter('id', $id);
+              ->setParameter('id', $id_historia);
         $estudios = $qb->getQuery()->execute();
         if (!$estudios){ $estudios = array();}
 //        else {

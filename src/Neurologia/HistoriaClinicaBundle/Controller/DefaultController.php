@@ -83,7 +83,7 @@ class DefaultController extends Controller
                 $params =  array();
             break;
         case 'Estudio':
-                $str = 'NeurologiaEstudioBundle:Default:list';
+                $str = 'NeurologiaEstudioBundle:Default:listar';
                 $params =  array();
             break;
         case 'Tratamiento':
