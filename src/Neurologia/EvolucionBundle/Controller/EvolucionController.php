@@ -59,10 +59,10 @@ class EvolucionController extends Controller
         }
         $vars['form']=$form->createView();
         $vars['tratinterno']=$_SESSION['tratamientos']['ti'];
-        $vars['drogastratamiento']=$_SESSION['tratamientos']['d'];
         $vars['tratexterno']=$_SESSION['tratamientos']['te'];
         $vars['diagnosticos']=$_SESSION['diagnosticos'];
         $vars['estudios']=$_SESSION['estudios'];
+        var_dump($_SESSION['estudios']);
         return $this->render('EvolucionBundle:Evolucion:agregar_evolucion.html.twig',$vars);
         }
     }
@@ -101,25 +101,62 @@ class EvolucionController extends Controller
                $em->persist($evolucion);
                $em->flush();
         //tratamientos
-               if (!empty($_SESSION['tratamientos']['t'])){
-                   foreach ($_SESSION['tratamientos']['t'] as $key=>$row) {
+               if (!empty($_SESSION['tratamientos']['ti'])){
+                   foreach ($_SESSION['tratamientos']['ti'] as $row) {
                        $tratamiento = $em->merge($row);
                        $tratamiento->setEvolucion($evolucion);
                        $em->persist($tratamiento);
                        $em->flush();
-                       if (array_key_exists($key, $_SESSION['tratamientos']['d'])) {
-                            $droga = $em->merge($_SESSION['tratamientos']['d'][$key]);
-                            $droga->setTratamiento($tratamiento);
-                            $em->persist($tratamiento);
-                            $em->flush();
-                       }
+//                       if (!empty($_SESSION['tratamientos']['ti']['drogaTratamiento'])) {
+//                           foreach ($_SESSION['tratamientos']['ti']['drogaTratamiento']->getValues( ) as $value) {
+//                            $droga = $em->merge($value);
+//                            $droga->setTratamiento($tratamiento);
+//                            $em->persist($droga);
+//                            $em->flush();
+//                           }
+//                       }
+                   }
+                   
+               }
+               if (!empty($_SESSION['tratamientos']['te'])){
+                   foreach ($_SESSION['tratamientos']['te'] as $row) {
+                       $tratamiento = $em->merge($row);
+                       $tratamiento->setEvolucion($evolucion);
+                       $em->persist($tratamiento);
+                       $em->flush();
                    }
                    
                }
                
         //estudios
+               if (!empty($_SESSION['estudios'])){
+                   foreach ($_SESSION['estudios'] as $row) {
+                       $estudio = $em->merge($row);
+                       $estudio->setEvolucion($evolucion);
+                       $em->persist($estudio);
+                       $em->flush();
+//                       $imagenes = $_SESSION['estudios']['imagenes']->getValues( );
+//                       if (!empty($imagenes)) {
+//                           foreach ($imagenes as $value) {
+//                            $imagen = $em->merge($value);
+//                            $imagen->setEstudio($estudio);
+//                            $em->persist($imagen);
+//                            $em->flush();
+//                           }
+//                       }
+                   }
+                   
+               }
         //diagnosticos
-               
+                if (!empty($_SESSION['diagnosticos'])){
+                   foreach ($_SESSION['diagnosticos'] as $row) {
+                       $diagnostico = $em->merge($row);
+                       $diagnostico->setEvolucion($evolucion);
+                       $em->persist($diagnostico);
+                       $em->flush();
+                   }
+                   
+               }
                
                $em->getConnection()->commit();
         } catch (Exception $e) {

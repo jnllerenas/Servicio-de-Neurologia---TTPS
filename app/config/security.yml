@@ -71,4 +71,5 @@ security:
         - { path: ^/tratamiento, role: ROLE_USER }
         - { path: ^/evolucion, role: ROLE_USER }
         - { path: ^/home, role: ROLE_USER }
+        - { path: ^/historia, role: ROLE_USER }
         - { path: ^/admin, role: ROLE_ADMIN }

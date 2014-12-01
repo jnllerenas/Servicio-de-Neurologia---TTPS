@@ -6,18 +6,38 @@
     <legend>Evolucion:</legend>
 
         {{ form_start(form) }}
-        
+        <div>
             {{ form_errors(form) }}
-
-            <div>
-                {{ form_label(form.evolucion) }}
-                {{ form_errors(form.evolucion) }}
-                {{ form_widget(form.evolucion) }}
-                <span class="help-block">Debe introducir una descripci&oacute;n para la evoluci&oacute;n que desea agregar.</span>
+            {{ form_label(form.evolucion) }}
+            {{ form_errors(form.evolucion) }}
+            {{ form_widget(form.evolucion) }}
+            <span class="help-block">Debe introducir una descripci&oacute;n para la evoluci&oacute;n que desea agregar.</span>
             </div>
+                        
             <div>
+                
+                {{ form_widget(form.aceptar) }}
+                <a href="{{ path('neurologia_historia_clinica_homepage') }}">Cancelar</a>
+            </div>
+
+        {{ form_end(form) }}  
+        
+        <br>
+  </fieldset>
+        <div  class="alert alert-success" role="alert" >
+            <a href="{{ path('neurologia_estudio_nuevo') }}" > Agregar estudio</a><br>
+            <a href="{{ path('tratamiento_interno_new') }}" > Agregar tratamiento</a><br>
+            <a href="{{ path('neurologia_diagnostico_new') }}" > Agregar diagn&oacute;stico</a><br>
+        </div>
+
+               
+            <div class="panel panel-default">
+               <div class="panel-heading">Datos Agregados a la Evolucion</div>
+               
+                
                 {% if tratinterno %}
-                <table>
+                    <h4>Tratamientoa Internos</h4>
+                <table class="table">
                     <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Drogas</th><th>Acciones</th>
             {% for key,ti in tratinterno %}
                 <tr><td>{{ ti.descripcion }}</td>
@@ -28,9 +48,11 @@
                 <a href="" >Eliminar</a></tr>
             {% endfor %}
                 </table>
+                <br>
                 {% endif %}
                 {% if tratexterno %}
-                     <table>
+                    <h4>Tratamientoa Externos</h4>
+                     <table class="table">
                          <tr><th>Descripci&oacute;n</th><th>Acciones</th></tr>
             {% for key,te in tratexterno %}
                 <tr><td>{{ te.descripcion }}</td>
@@ -38,10 +60,12 @@
                 <a href="" >Eliminar</a></tr>
             {% endfor %}
         </table>
+        <br>
                 {% endif %}
-    <a href="{{ path('tratamiento_interno_new') }}" class="help-block"> Agregar tratamiento</a>
+    
     {% if diagnosticos %}
-    <table>
+        <h4>Diagnosticos</h4>
+    <table class="table">
         <tr><th>Descripci&oacute;n</th><th>Categoría</th><th>Acciones</th>
         {% for key,d in diagnosticos %}
             <tr><td>{{ d.descripcion }}</td>
@@ -51,10 +75,11 @@
             </tr>
         {% endfor %}
     </table>
+    <br>
     {% endif %}
-    <a href="{{ path('neurologia_diagnostico_new') }}" class="help-block"> Agregar diagn&oacute;stico</a>
     {% if estudios %}
-    <table>
+        <h4>Estudios</h4>
+    <table class="table">
         <tr><th>Descripci&oacute;n</th><th>Tipo</th><th>Im&aacute;genes</th><th>Acciones</th>
         {% for key,e in estudios %}
             <tr><td>{{ e.descripcion }}</td>
@@ -65,19 +90,7 @@
             </tr>
         {% endfor %}
     </table>
+    <br>
     {% endif %}
-    <a href="{{ path('neurologia_estudio_nuevo') }}" class="help-block"> Agregar estudio</a>
             </div>
-            
-            <div>
-                
-                {{ form_widget(form.aceptar) }}
-                <a href="{{ path('neurologia_historia_clinica_homepage') }}">Cancelar</a>
-            </div>
-
-        {{ form_end(form) }}  
-        
-        
-  </fieldset>
-
 {% endblock %}
