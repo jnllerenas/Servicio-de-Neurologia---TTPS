@@ -34,9 +34,9 @@ NeurologiaGenericosBundle_sexo:
     resource: "@NeurologiaGenericosBundle/Resources/config/routing/sexo.yml"
     prefix: /abm/sexo
 
-#NeurologiaGenericosBundle_tipoantecedente:
-#    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipoantecedente.yml"
-#    prefix: /abm/tipoantecedente
+NeurologiaGenericosBundle_tipoantecedente:
+    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipoantecedente.yml"
+    prefix: /abm/tipoantecedente
 
 NeurologiaGenericosBundle_tipodocumento:
     resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipodocumento.yml"

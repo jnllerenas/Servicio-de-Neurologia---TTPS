@@ -1,5 +1,5 @@
 {% include 'NeurologiaGenericosBundle:Default:mensajes.html.twig' %}
-
+{% if (datosB or datos) %}
 <div class="table-responsive">
 	<table class="table">
 		<tr>
@@ -47,4 +47,7 @@
 			</tr>
 		{% endfor %}
 	</table>
+{% else %}
+    no se encontraron diagnosticos
+{% endif %}
 </div>

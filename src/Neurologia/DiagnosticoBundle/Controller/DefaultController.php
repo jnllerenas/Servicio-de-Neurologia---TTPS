@@ -12,18 +12,28 @@ class DefaultController extends Controller
 {
     public function indexAction($error=null, $msj=null)
     {
-		$datos=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoPresuntivo')->findAll();
+        
+                $em = $this->getDoctrine()->getManager();
+                $historia=$em->merge($_SESSION['historia']);
+                
+                
+                
+                $query = $em->createQuery(
+			'SELECT p FROM NeurologiaBDBundle:DiagnosticoPresuntivo p
+            INNER JOIN NeurologiaBDBundle:Evolucion e WITH p.evolucion = e WHERE e.historiaClinica = :historia'
+		)->setParameter('historia',$historia);
+		$datos=$query->getResult();
 		//$datosB=$this->getDoctrine()->getRepository('NeurologiaBDBundle:DiagnosticoDefinitivo')->findAll();
         
 		/*REVISAR*/
-		$em = $this->getDoctrine()->getManager();
-		$historia=$em->merge($_SESSION['historia']);
-		$query = $em->createQuery(
+		
+		
+		$query2 = $em->createQuery(
 			'SELECT p, c FROM NeurologiaBDBundle:DiagnosticoDefinitivo p
             INNER JOIN p.categoriaDiagnostico c WITH p.categoriaDiagnostico=c INNER JOIN NeurologiaBDBundle:Evolucion e WITH p.evolucion = e WHERE e.historiaClinica = :historia'
 		)->setParameter('historia',$historia);
 
-		$datosB = $query->getResult();
+		$datosB = $query2->getResult();
 		//var_dump($datosB);
 		
 		return $this->render('NeurologiaDiagnosticoBundle:Default:index.html.twig',

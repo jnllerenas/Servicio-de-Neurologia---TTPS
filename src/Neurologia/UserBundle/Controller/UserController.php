@@ -172,7 +172,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('neurologia_busqueda_usuario'));
         }
 
         return $this->render('NeurologiaUserBundle:User:edit.html.twig', array(

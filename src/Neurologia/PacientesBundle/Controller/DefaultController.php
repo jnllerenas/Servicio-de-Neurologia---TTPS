@@ -31,7 +31,7 @@ class DefaultController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            return $this->redirect($this->generateUrl('paciente_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
         }
         return $this->render('NeurologiaPacientesBundle:Default:new.html.twig', array(
             'entity' => $entity,

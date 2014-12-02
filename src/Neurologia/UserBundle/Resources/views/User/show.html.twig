@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>User</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -38,15 +38,15 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('user') }}">
-            Back to the list
+        <a href="{{ path('neurologia_busqueda_usuario') }}">
+           Volver
         </a>
     </li>
     <li>
         <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+    
+    
 </ul>
 {% endblock %}
