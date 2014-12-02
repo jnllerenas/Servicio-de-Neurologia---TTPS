@@ -24,9 +24,9 @@
         <div class="pacienteHistoria">    
         <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
         
-            <img  href="{{ asset('public/images/mas.png') }}" alt="Mostrar" class="boton" />
+            <img src="{{ asset('public/images/mas.png') }}" alt="Mostrar" class="boton" />
        
-            Datos Personales<br><br>
+            <span class="boton" >Datos Filiatorios</span><br><br>
         <div class="oculto">
             <table class="table">
             {% if paciente.tipoDocumento %}<tr><td> <b>{{paciente.tipoDocumento.descripcion}}:</b> {{ paciente.documento }} </td></tr>{% endif %}
