@@ -47,7 +47,7 @@ class DrogaTratamiento
      * @var \TratamientoInterno
      *
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="TratamientoInterno")
+     * @ORM\ManyToOne(targetEntity="TratamientoInterno",inversedBy="drogaTratamiento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
      * })
