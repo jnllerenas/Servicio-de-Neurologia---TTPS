@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Paciente list</h1>
+    <h1>Listado de Pacientes</h1>
 
     <table class="records_list">
         <thead>
@@ -11,13 +11,13 @@
                 <th>Apellido</th>
                 <th>Direccion</th>
                 <th>Documento</th>
-                <th>Fechanacimiento</th>
+                <th>Fecha de Nacimiento</th>
                 <th>Telefono</th>
                 <th>Ocupacion</th>
                 <th>Otros</th>
-                <th>Numerocarnet</th>
+                <th>Numero de Carnet</th>
                 <th>Email</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
         <ul>
         <li>
             <a href="{{ path('paciente_new') }}">
-                Create a new entry
+                Nuevo
             </a>
         </li>
     </ul>

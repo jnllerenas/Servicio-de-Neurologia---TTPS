@@ -51,7 +51,7 @@ class DefaultController extends Controller {
             'action' => $this->generateUrl('paciente_create'),
             'method' => 'POST',
         ));
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear'));
         return $form;
     }
     /**
@@ -116,7 +116,7 @@ class DefaultController extends Controller {
             'action' => $this->generateUrl('paciente_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
         return $form;
     }
     /**
@@ -174,7 +174,7 @@ class DefaultController extends Controller {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('paciente_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Borrar'))
             ->getForm()
         ;
     }

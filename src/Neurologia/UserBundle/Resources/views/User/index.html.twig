@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User list</h1>
+    <h1>Listado de Usuarios</h1>
 
     <table class="records_list">
         <thead>
@@ -13,7 +13,7 @@
                 <th>Telefono</th>
                 <th>Fecha_de_nacimiento</th>
                 <th>Direccion</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -29,10 +29,10 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('user_show', { 'id': entity.id }) }}">Ver</a>
                     </li>
                     <li>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -44,7 +44,7 @@
         <ul>
         <li>
             <a href="{{ path('user_new') }}">
-                Create a new entry
+                Nuevo
             </a>
         </li>
     </ul>
