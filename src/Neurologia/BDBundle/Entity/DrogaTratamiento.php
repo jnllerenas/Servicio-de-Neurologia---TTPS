@@ -12,11 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DrogaTratamiento
 {
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id; 
+    
     /**
      * @var string
      *
      * @ORM\Column(name="dosis", type="string", length=255, nullable=false)
-     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $dosis;
@@ -54,10 +63,20 @@ class DrogaTratamiento
      */
     private $tratamiento;
 
-public function addTratamiento(TratamientoInterno $trat)
-{            
-    $this ->setTratamiento($trat);
-}
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    public function addTratamiento(TratamientoInterno $trat)
+    {            
+        $this ->setTratamiento($trat);
+    }
 
     /**
      * Set dosis
