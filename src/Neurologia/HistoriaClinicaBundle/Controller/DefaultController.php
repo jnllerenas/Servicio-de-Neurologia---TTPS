@@ -199,7 +199,7 @@ class DefaultController extends Controller
         else {
             foreach ($diagnosticod as &$m) {
                 $m['tipo'] = 'Diagnóstico';
-                $m['tipoDetalle'] = 'Definitivo';
+                $m['tipoDetalle'] = 'definitivo';
                 $m['droga'] = false;
             }
         }
@@ -215,7 +215,7 @@ class DefaultController extends Controller
         else {
             foreach ($diagnosticop as &$m) {
                 $m['tipo'] = 'Diagnóstico';
-                $m['tipoDetalle'] = 'Presuntivo';
+                $m['tipoDetalle'] = 'presuntivo';
                 $m['droga'] = false;
             }
         }
@@ -231,7 +231,7 @@ class DefaultController extends Controller
         else {
             foreach ($tratemientoi as &$m) {
                 $m['tipo'] = 'Tratamiento';
-                $m['tipoDetalle'] = 'Interno';
+                $m['tipoDetalle'] = 'interno';
             }
         }
         foreach ($tratemientoi as &$t){
@@ -256,8 +256,8 @@ class DefaultController extends Controller
         if (!$tratamientoe){ $tratamientoe = array();}
         else {
             foreach ($tratamientoe as &$m) {
-                $m['tipo'] = 'Tratemiento';
-                $m['tipoDetalle'] = 'Externo';
+                $m['tipo'] = 'Tratamiento';
+                $m['tipoDetalle'] = 'externo';
                 $m['droga'] = false;
             }
         }
@@ -298,7 +298,7 @@ class DefaultController extends Controller
         if (!$enfermedades){ $enfermedades = array();}
         else {
             foreach ($enfermedades as &$m) {
-                $m['tipo'] = 'Enfermedad Acutal';
+                $m['tipo'] = 'Enfermedad actual';
                 $m['tipoDetalle'] = false;
                 $m['droga'] = false;
             }
@@ -353,7 +353,7 @@ class DefaultController extends Controller
                         'id' => $idEnfermedad[0]['id'],
                 ));
         if (!$enfermedad) {
-            throw $this->createNotFoundException('Unable to find Enfermedad ');
+            throw $this->createNotFoundException('No se encontró Enfermedad ');
         }
        $aux['id']= $historia->getId();
        $aux['enfermedad'] = $enfermedad->getDetalle();
@@ -370,7 +370,7 @@ class DefaultController extends Controller
                         'id' => $idMotivo[0]['id'],
                 ));
        if (!$motivo) {
-            throw $this->createNotFoundException('Unable to find Motivo ');
+            throw $this->createNotFoundException('No se encontró Motivo ');
         }
        $aux['motivo'] = $motivo->getDetalle();
        
