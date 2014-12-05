@@ -14,7 +14,7 @@
     
 {% for estudio in estudios %}
     <tr>
-    <td>{{estudio.fecha|date('Y-m-d')}}</td>
+    <td>{{estudio.fecha|date('d-m-Y')}}</td>
     <td>{{estudio.getTipoEstudioSiglas}}</td>
     
     {% if estudio.imagenes %}

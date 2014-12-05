@@ -1,3 +1,13 @@
+<script>
+    $(document).ready(function () {        
+        $('.oculto').hide();
+        $( "#down" ).show();
+        $(".boton").click(function () {
+            $('.oculto').toggle();
+        });
+    });
+</script>
+
 <div class="pacienteHistoria">
 
     <div class="panel panel-default">
@@ -26,13 +36,5 @@
     </div>
 </div>     
 
-<script>
-    $(document).ready(function () {        
-        $('.oculto').hide();
-        $( "#down" ).show();
-        $(".boton").click(function () {
-            $('.oculto').toggle();
-        });
-    });
-</script>
+
 
