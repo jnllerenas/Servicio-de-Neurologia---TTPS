@@ -1,0 +1,38 @@
+<div class="pacienteHistoria">
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <img id="down" src="{{ asset('public/images/down.png') }}" alt="Mostrar" class="boton oculto" />
+            <img id="up" src="{{ asset('public/images/up.png') }}" alt="Mostrar" class="boton oculto" />            
+            <b>{{paciente.apellido}}, {{paciente.nombre}}</b>          
+        </div>
+
+        <div class="oculto">
+            <div class="panel-body">                
+                <table class="table-condensed">
+                    {% if paciente.tipoDocumento %}<tr><td> <b>{{paciente.tipoDocumento.descripcion}}:</b> {{ paciente.documento }} </td>{% endif %}
+                        {% if paciente.sexo %}<td> <b>Sexo:</b>   {{paciente.sexo.descripcion}}</td>{% endif %}
+                    {% if paciente.obraSocial %}<td> <b>Obra Social:</b>   {{paciente.obraSocial.descripcion}} N°({{ paciente.numeroCarnet }})</td>{% else %} <tr><td> <b>Obra Social:</b> No tiene.</td>{%endif%}<br>
+                    {% if paciente.email %}<tr><td> <b>Mail:</b>    {{paciente.email}}</td>{% endif %}
+                    {% if paciente.nivelEducacional %}<td> <b>Nivel de educación:</b>    {{paciente.nivelEducacional.descripcion}}</td>{% endif %}
+                        {% if paciente.direccion %}<td> <b>Dirección:</b>    {{paciente.direccion}}</td></tr>{% endif %}
+                    {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('Y-m-d')}}</td>{% endif %}
+                        {% if paciente.telefono %}<td> <b>Teléfono:</b>    {{paciente.telefono}}</td>{% endif %}
+                    {% if paciente.ocupacion %}<td> <b>Ocupacion:</b>    {{paciente.ocupacion}}</td></tr>{% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>     
+
+<script>
+    $(document).ready(function () {        
+        $('.oculto').hide();
+        $( "#down" ).show();
+        $(".boton").click(function () {
+            $('.oculto').toggle();
+        });
+    });
+</script>
+

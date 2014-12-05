@@ -2,98 +2,70 @@
 
 {% block stylesheets %}
 
-     {{ parent() }}
-            <link href="{{ asset('public/css/estilo.css') }}" rel="stylesheet">
-            
-            <link class="ui" href="{{ asset('public/css/semantic.min.css') }}" rel="stylesheet">
-            <link href="{{ asset('public/css/docs.css') }}" rel="stylesheet">
-			
+    {{ parent() }}
+
+    <link href="{{ asset('public/css/estilo.css') }}" rel="stylesheet">            
+    <link class="ui" href="{{ asset('public/css/semantic.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/docs.css') }}" rel="stylesheet">
+
 {% endblock stylesheets %}
 
- {% block javascripts %}
- 
-     {{ parent() }}
-            <script src="{{ asset('public/js/lib/highlight.min.js') }}"></script>
-            <script src="{{ asset('public/js/lib/semantic.min.js') }}"></script>
-            <script src="{{ asset('public/js/lib/docs.js') }}"></script>
-			
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script src="{{ asset('public/js/lib/highlight.min.js') }}"></script>
+    <script src="{{ asset('public/js/lib/semantic.min.js') }}"></script>
+    <script src="{{ asset('public/js/lib/docs.js') }}"></script>
+
 {% endblock javascripts %}
 
-{% block datosPaciente %}
-    {% if paciente %}
-        <div class="pacienteHistoria">    
-        <h3>{{paciente.apellido}}, {{paciente.nombre}}</h3>
-        
-            <img src="{{ asset('public/images/mas.png') }}" alt="Mostrar" class="boton" />
-       
-            <span class="boton" >Datos Filiatorios</span><br><br>
-        <div class="oculto">
-            <table class="table">
-            {% if paciente.tipoDocumento %}<tr><td> <b>{{paciente.tipoDocumento.descripcion}}:</b> {{ paciente.documento }} </td></tr>{% endif %}
-            {% if paciente.sexo %}<tr><td> <b>Sexo:</b>   {{paciente.sexo.descripcion}}</td></tr>{% endif %}
-            {% if paciente.obraSocial %}<tr><td> <b>Obra Social:</b>   {{paciente.obraSocial.descripcion}} N°({{ paciente.numeroCarnet }})</td></tr>{% else %} <tr><td> <b>Obra Social:</b> No tiene.</td></tr>{%endif%}<br>
-            {% if paciente.email %}<tr><td> <b>>Mail:</b>    {{paciente.email}}</td></tr>{% endif %}
-            {% if paciente.nivelEducacional %}<tr><td> <b>Nivel de educación:</b>    {{paciente.nivelEducacional.descripcion}}</td></tr>{% endif %}
-            {% if paciente.direccion %}<tr><td> <b>Dirección:</b>    {{paciente.direccion}}</td></tr>{% endif %}
-            {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('Y-m-d')}}</td></tr>{% endif %}
-            {% if paciente.telefono %}<tr><td> <b>Teléfono:</b>    {{paciente.telefono}}</td></tr>{% endif %}
-            {% if paciente.ocupacion %}<tr><td> <b>Ocupacion:</b>    {{paciente.ocupacion}}</td></tr>{% endif %}
-            </table>
-                  
-            
-        </div>
-        </div>
-                <script>
-                        $(document).ready(function(){
-                            $('.oculto').hide();
-                            $(".boton").click(function(){
-                                 $('.oculto').toggle();
-                              });
-                          });
-                </script>
-    {% endif %}
-{% endblock %}
+{% if paciente is not empty %}
+    {% block datosPaciente %}
+        {{ include('NeurologiaHistoriaClinicaBundle:Default:datosPaciente.html.twig', { 'paciente': paciente }) }} 
+    {% endblock %}
+{% endif %}
 
 {% block body %}
 
     {% if paciente %}
-        
+
         {% if historia %}
             <div id="example">
                 <div class="ui vertical inverted sidebar menu left" id="menu">
-                  <div class="item">
-                    <a class="ui logo icon image" href="#">
-                      <img src="{{ asset('public/images/Logo.png') }}">
-                    </a>
-                   <!-- <a href="#"><b>Neurolog&iacute;a</b></a> -->
-                  </div>
+                    <div class="item">
+                        <a class="ui logo icon image" href="#">
+                            <img src="{{ asset('public/images/Logo.png') }}">
+                        </a>
+                        <!-- <a href="#"><b>Neurolog&iacute;a</b></a> -->
+                    </div>
 
-                  <div class="item">
-                    <div class="ui small  inverted header">Enfermedad Actual</div>
-                    <div class="menu">
-                        <a class="item" href="#">{{ historia.enfermedad }}</a>
+                    <div class="item">
+                        <div class="ui small  inverted header">Enfermedad Actual</div>
+                        <div class="menu">
+                            <a class="item" href="#">{{ historia.enfermedad }}</a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="item">
-                    <div class="ui small  inverted header">Atendido Por</div>
-                    <div class="menu">
-                        <a class="item" href="#">{{ historia.usuario }}</a>
+                    <div class="item">
+                        <div class="ui small  inverted header">Atendido Por</div>
+                        <div class="menu">
+                            <a class="item" href="#">{{ historia.usuario }}</a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="item">
-                    <div class="ui small  inverted header">Motivo</div>
-                    <div class="menu">
-                        <a class="item" href="#">{{ historia.motivo }}</a>
+                    <div class="item">
+                        <div class="ui small  inverted header">Motivo</div>
+                        <div class="menu">
+                            <a class="item" href="#">{{ historia.motivo }}</a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="item">
-                    <div class="ui small  inverted header">Derivado por</div>
-                    <div class="menu">
-                        <a class="item" href="#">{{ historia.departamento }}</a>
+                    <div class="item">
+                        <div class="ui small  inverted header">Derivado por</div>
+                        <div class="menu">
+                            <a class="item" href="#">{{ historia.departamento }}</a>
+                        </div>
                     </div>
-                  </div>
-                  <div class="item">
-                    <div class="ui small  inverted header">Historial</div>
+                    <div class="item">
+                        <div class="ui small  inverted header">Historial</div>
                         {% for i in listado %}
                             <div class="menu">
                                 <i class="calendar icon"></i>
@@ -114,49 +86,52 @@
                                 {% endif %}
                             </div>
                         {% endfor %}
-                  </div>
+                    </div>
                 </div>
 
                 <div class="ui black big launch right attached fixed button">
-                  <i class="content icon"></i>
-                  <span class="text">Historia Cl&iacute;nica</span>
+                    <i class="content icon"></i>
+                    <span class="text">Historia Cl&iacute;nica</span>
                 </div>
 
             </div>
         {% else %}
             {{ form(iniciar) }}
         {% endif %}
-         <br>
-         <div class="solapaHistoria">
-             {% if historia %}
-                 <ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
-                 <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Motivo'}) }}">Motivo</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Enfermedad'}) }}">Enfermedad Actual</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Antecedente'}) }}">Antecedente</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Evolucion'}) }}">Evolucion</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Estudio'}) }}">Estudios</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Diagnostico'}) }}">Diagnosticos</a></li>
-                 <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Tratamiento'}) }}">Tratamientos</a></li>
-                 </ul>
-                 {% if solapa is defined %}
+        <br>
+        <div class="solapaHistoria">
 
-                     {{ solapa|raw }}
+            {% if historia %}
 
-                     <script>
-                             var tab = '{{ tab }}';
-                             li = document.getElementById ("ulTab").getElementsByTagName("LI");
-                             for(i = 0; i < li.length; ++i){
-                                     li[i].setAttribute("class", "");
-                             }
-                             objeto = document.getElementById('liTab'+tab);
-                             objeto.setAttribute("class", "active");	    
+                <ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
+                    <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Motivo'}) }}">Motivo</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Enfermedad'}) }}">Enfermedad Actual</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Antecedente'}) }}">Antecedente</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Evolucion'}) }}">Evolucion</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Estudio'}) }}">Estudios</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Diagnostico'}) }}">Diagnosticos</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Tratamiento'}) }}">Tratamientos</a></li>
+                </ul>
 
-                     </script>
-                 {% endif %}
-             {% else %}
-                 Inicie la historia para empezar
-             {% endif %}
-         </div>
+                {% if solapa is defined %}
+
+                    {{ solapa|raw }}
+
+                    <script>
+                        var tab = '{{ tab }}';
+                        li = document.getElementById("ulTab").getElementsByTagName("LI");
+                        for (i = 0; i < li.length; ++i) {
+                            li[i].setAttribute("class", "");
+                        }
+                        objeto = document.getElementById('liTab' + tab);
+                        objeto.setAttribute("class", "active");
+
+                    </script>
+                {% endif %}
+            {% else %}
+                Inicie la historia para empezar
+            {% endif %}
+        </div>
     {% else %}
         error
     {% endif %}
