@@ -12,14 +12,15 @@
         <thead>
             <tr>
                 <th>Descripcion</th>
-                <!--<th>Ver</th>-->
-				<th>Editar</th>
+                <th>Siglas</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.descripcion }}</td>
+                <td>{{ entity.siglas }}</td>
                 <!--<td>
 					<a href="{{ path('tipoestudio_show', { 'id': entity.id }) }}">
 						<img src="{{ asset('bundles/firstbundle/images/ver.png') }}" alt="Ver" />
