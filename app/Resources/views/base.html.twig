@@ -7,6 +7,9 @@
         {%block javascripts %}            
             <script src="{{ asset('public/js/jquery-2.1.1.min.js') }}"></script>            
             <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('public/js/lib/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('public/js/lib/dataTables.bootstrap.js') }}"></script>
+            <script src="{{ asset('public/js/datatable_bootstrap.js') }}"></script>
                 
         {%endblock javascripts%}
 
@@ -15,10 +18,11 @@
             <link rel="stylesheet" href="{{ asset('public/css/bootstrap-theme.min.css') }}">
             <link href="{{asset('public/css/jquery-ui-1.11.2.custom/jquery-ui.css')}}" rel="stylesheet">
             <link href="{{asset('public/css/dataTables.bootstrap.css')}}" rel="stylesheet">
+            <link href="{{asset('public/css/estaticos.css')}}" rel="stylesheet">
         {%endblock stylesheets%}
 
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         
-		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
     {% block menu %}
@@ -40,9 +44,16 @@
     {% endblock %}
 
     {% block datosPaciente %}
+        
     {% endblock %}
 
     {% block body %}
+  
+        <div class="bienvenida">
+            <img class="img_bienvenida" src="{{ asset('public/images/OLDLogo.png') }}" alt="Logo SIRCH" title="SIRCH" />
+            <h5>Bienvenido al Sistema de Registro de Historias Cl&iacute;nicas</h5>
+        </div>
+            
     {% endblock %}
 
 </body>
