@@ -1,0 +1,25 @@
+.bienvenida{
+    margin: auto;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.img_bienvenida{
+    margin-left: 85px;
+}
+
+.abm_container{
+    width: 900px;
+    margin: auto;
+    height: auto;
+    text-align: center;
+    display: block;
+}
+
+.datatable_bootstrap{
+    overflow: hidden;
+}
+
+.panel-title{
+    text-align: left;
+}
