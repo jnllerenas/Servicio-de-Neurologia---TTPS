@@ -1597,6 +1597,56 @@
         ]
     },
     {
+        "name": "illuminate/support",
+        "version": "v4.2.9",
+        "version_normalized": "4.2.9.0",
+        "target-dir": "Illuminate/Support",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/illuminate/support.git",
+            "reference": "b6716d34afce6e69523725f2534a5c3a54dba964"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/illuminate/support/zipball/b6716d34afce6e69523725f2534a5c3a54dba964",
+            "reference": "b6716d34afce6e69523725f2534a5c3a54dba964",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "jeremeamia/superclosure": "~1.0",
+            "patchwork/utf8": "1.1.*"
+        },
+        "time": "2014-09-12 21:42:43",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Illuminate\\Support": ""
+            },
+            "files": [
+                "Illuminate/Support/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ]
+    },
+    {
         "name": "zendframework/zend-memory",
         "version": "2.3.3",
         "version_normalized": "2.3.3.0",
@@ -1952,18 +2002,18 @@
     },
     {
         "name": "psliwa/pdf-bundle",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
         "target-dir": "Ps/PdfBundle",
         "source": {
             "type": "git",
             "url": "https://github.com/psliwa/PdfBundle.git",
-            "reference": "67277828bc465111c0e2ce784895afa1949fe558"
+            "reference": "1dec2d7fa4cf61488893dcaafa720cb2b53affe7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/psliwa/PdfBundle/zipball/67277828bc465111c0e2ce784895afa1949fe558",
-            "reference": "67277828bc465111c0e2ce784895afa1949fe558",
+            "url": "https://api.github.com/repos/psliwa/PdfBundle/zipball/1dec2d7fa4cf61488893dcaafa720cb2b53affe7",
+            "reference": "1dec2d7fa4cf61488893dcaafa720cb2b53affe7",
             "shasum": ""
         },
         "require": {
@@ -1972,7 +2022,7 @@
             "sensio/framework-extra-bundle": ">=2.0",
             "symfony/symfony": ">=2.0"
         },
-        "time": "2014-10-04 12:27:19",
+        "time": "2013-12-17 18:59:11",
         "type": "symfony-bundle",
         "installation-source": "dist",
         "autoload": {
@@ -2059,56 +2109,6 @@
             "remote",
             "s3",
             "sftp"
-        ]
-    },
-    {
-        "name": "illuminate/support",
-        "version": "v4.2.9",
-        "version_normalized": "4.2.9.0",
-        "target-dir": "Illuminate/Support",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/illuminate/support.git",
-            "reference": "b6716d34afce6e69523725f2534a5c3a54dba964"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/illuminate/support/zipball/b6716d34afce6e69523725f2534a5c3a54dba964",
-            "reference": "b6716d34afce6e69523725f2534a5c3a54dba964",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "jeremeamia/superclosure": "~1.0",
-            "patchwork/utf8": "1.1.*"
-        },
-        "time": "2014-09-12 21:42:43",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Illuminate\\Support": ""
-            },
-            "files": [
-                "Illuminate/Support/helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylorotwell@gmail.com"
-            }
         ]
     },
     {

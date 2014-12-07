@@ -9,7 +9,9 @@ use Neurologia\BDBundle\Entity\Motivo;
 use Neurologia\BDBundle\Entity\HistoriaClinica;
 use Neurologia\BDBundle\Entity\EnfermedadActual;
 use Neurologia\BDBundle\Entity\Evolucion;
-//use Ps\PdfBundle\Annotation\Pdf;
+use Ps\PdfBundle\Annotation\Pdf;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -103,25 +105,32 @@ class DefaultController extends Controller
         $solapa =  $this->forward($str, $params);    
         return $solapa;
     }
-    
+
     public function epicrisisAction()
     {
-        
-//        $em = $this->getDoctrine()->getManager();
-//        $params['paciente'] = $em->merge($_id_SESSION['paciente']);
-//        
-//        if (!$params['paciente']) {
-//            throw $this->createNotFoundException('Unable to find Paciente ');
-//        }
-//        //Cargo la Historia clinica si tiene, sino viene vacio
-//        $params['historia'] = $this->vistaHistoria($idpaciente);
-//       $format = $this->get('request')->get('_format');
-//
-//        return $this->render(
-//            sprintf('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig',
-//                   $format),
-//            array('nombre' => $idpaciente,));
-    }
+		
+		//$em = $this->getDoctrine()->getManager();
+	//$idpaciente = $_SESSION['paciente']->getId();
+     //  $aux = $this->vistaListado($idpaciente);
+		
+
+        $params = array(); 
+        $paciente = $_SESSION['paciente'];
+        $em = $this->getDoctrine()->getManager();
+        $params['paciente'] = $em->merge($paciente);
+        $params['historia'] = $this->vistaHistoria();
+        $params['listado']= $this->vistaListado( $params['historia']['id']);
+      		
+	    return $this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', $params);
+	  
+		$facade = $this->get('ps_pdf.facade');
+		$response = new Response();
+		$this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', array() ,$response);
+		$xml = $response->getContent();
+		$content = $facade->render($xml);
+		return new Response($content, 200, array('content-type' => 'application/pdf'));
+ 
+	}
     
    public function guardarHistoria($form) {
        

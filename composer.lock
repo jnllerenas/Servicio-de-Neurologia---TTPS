@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2218307bd96c96e8e81ad8cfd6fc119a",
+    "hash": "09afee764786a8eec4225c9536880bc9",
     "packages": [
         {
             "name": "cangelis/pdf",
@@ -1084,17 +1084,17 @@
         },
         {
             "name": "psliwa/pdf-bundle",
-            "version": "dev-master",
+            "version": "1.0.0",
             "target-dir": "Ps/PdfBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psliwa/PdfBundle.git",
-                "reference": "67277828bc465111c0e2ce784895afa1949fe558"
+                "reference": "1dec2d7fa4cf61488893dcaafa720cb2b53affe7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psliwa/PdfBundle/zipball/67277828bc465111c0e2ce784895afa1949fe558",
-                "reference": "67277828bc465111c0e2ce784895afa1949fe558",
+                "url": "https://api.github.com/repos/psliwa/PdfBundle/zipball/1dec2d7fa4cf61488893dcaafa720cb2b53affe7",
+                "reference": "1dec2d7fa4cf61488893dcaafa720cb2b53affe7",
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1125,7 @@
                 "PHPPdf",
                 "pdf"
             ],
-            "time": "2014-10-04 12:27:19"
+            "time": "2013-12-17 18:59:11"
         },
         {
             "name": "psliwa/php-pdf",
@@ -2101,7 +2101,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "psliwa/pdf-bundle": 20,
         "cangelis/pdf": 20
     },
     "prefer-stable": false,
