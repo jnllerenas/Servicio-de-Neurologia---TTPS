@@ -31,4 +31,6 @@ $(document).ready(function() {
             }
     });
     
+    $('.datatable_bootstrap').css('text-align','center');
+    
 });
