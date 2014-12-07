@@ -1,15 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1> B&uacute;squeda {% block titulobusqueda %}{% endblock %}</h1>
-{% block menubusqueda %}
+    
+    {% block menubusqueda %}
 
-{% endblock %}
-{% if valoreselegidos %}
-{% block mensaje %}{% endblock %}
-{% endif %}
-{% if lista %}
-{% block lista %}{% endblock %}
-{% endif %}
+        {% if valoreselegidos %}
+            {% block mensaje %}{% endblock %}
+        {% endif %}
 
+        {% if lista %}
+            {% block lista %}{% endblock %}
+        {% endif %}
+        
+    {% endblock %}
+    
 {% endblock %}
