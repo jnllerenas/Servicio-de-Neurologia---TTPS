@@ -51,7 +51,7 @@ class DefaultController extends Controller {
             'action' => $this->generateUrl('paciente_create'),
             'method' => 'POST',
         ));
-        $form->add('submit', 'submit', array('label' => 'Crear'));
+        $form->add('submit', 'submit', array('label' => 'Registrar'));
         return $form;
     }
     /**

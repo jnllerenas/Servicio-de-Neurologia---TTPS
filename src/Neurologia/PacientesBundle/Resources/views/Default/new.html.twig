@@ -1,47 +1,148 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Creacion de Paciente</h1>
 
-	{{ form_start(form, {'action': path('paciente_create'), 'method': 'POST'}) }}
-	
-	<table class="table">
-		<tr>
-			<td>{{ form_row(form.nombre) }}</td>
-			<td>{{ form_row(form.apellido) }}</td>
-			<td>{{ form_row(form.sexo) }}</td>
-		</tr>	
-		<tr>
-			<td>{{ form_row(form.tipoDocumento) }}</td>
-			<td>{{ form_row(form.documento) }}</td>
-			<td>{{ form_row(form.fechaNacimiento) }}</td>
-		</tr>
-		<tr>
-			<td>{{ form_row(form.telefono) }}</td>
-			<td>{{ form_row(form.direccion) }}</td>
-			<td>{{ form_row(form.email) }}</td>
-		<tr>
-			<td>{{ form_row(form.estadoCivil) }}</td>
-			<td>{{ form_row(form.nivelEducacional) }}</td>
-			<td>{{ form_row(form.ocupacion) }}</td>
-		</tr>
-		<tr>
-			<td>{{ form_row(form.obraSocial) }}</td>
-			<td>{{ form_row(form.numeroCarnet) }}</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>{{ form_row(form.admitidoPor) }}</td>
-			<td>{{ form_row(form.derivadoPor) }}</td>
-			<td>{{ form_row(form.otros) }}</td>
-		</tr>
-	</table>
-	
-	<div>
-		{{ form_row(form.submit) }}
-		 <input type="button" onclick="javascript:history.back()" value="Volver" />
-	</div>
-	{{ form_end(form) }}
+<div class="panel panel-primary" style="margin: auto; width: 1150px;">
 
-       
+    <div class="panel-heading">
+        <h3 class="panel-title">Registro de usuarios</h3>
+    </div>
+    <div class="panel-body">
+        {{ form_start(form, {'action': path('paciente_create'), 'method': 'POST'}) }}
+
+            {{ form_errors(form) }}
+            <div>
+                <div style="width: 250px; float: left; margin: 25px;">
+                    <div>
+                        {{ form_label(form.nombre) }}
+                        <br>
+                        {{ form_widget(form.nombre, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.apellido) }}
+                        <br>
+                        {{ form_widget(form.apellido, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.sexo) }}
+                        <br>
+                        {{ form_widget(form.sexo, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.tipoDocumento) }}
+                        <br>
+                        {{ form_widget(form.tipoDocumento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+
+                </div>
+                    
+                <div style="width: 250px; float: left; margin: 25px;">
+                    <div>
+                        {{ form_label(form.documento) }}
+                        <br>
+                        {{ form_widget(form.documento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.fechaNacimiento) }}
+                        <br>
+                        {{ form_widget(form.fechaNacimiento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.telefono) }}
+                        <br>
+                        {{ form_widget(form.telefono, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.direccion) }}
+                        <br>
+                        {{ form_widget(form.direccion, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    
+                </div>
+                    
+                <div style="width: 250px; float: left; margin: 25px;">
+
+
+                    <div>
+                        {{ form_label(form.email) }}
+                        <br>
+                        {{ form_widget(form.email, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.estadoCivil) }}
+                        <br>
+                        {{ form_widget(form.estadoCivil, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.nivelEducacional) }}
+                        <br>
+                        {{ form_widget(form.nivelEducacional, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.ocupacion) }}
+                        <br>
+                        {{ form_widget(form.ocupacion, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    
+                </div>
+
+                <div style="width: 150px; float: left; margin: 25px;">
+
+                    <div>
+                        {{ form_label(form.obraSocial) }}
+                        <br>
+                        {{ form_widget(form.obraSocial, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.numeroCarnet) }}
+                        <br>
+                        {{ form_widget(form.numeroCarnet, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.admitidoPor) }}
+                        <br>
+                        {{ form_widget(form.admitidoPor, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(form.derivadoPor) }}
+                        <br>
+                        {{ form_widget(form.derivadoPor, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    
+                </div>
+                    
+                <div style="width: 850px; float: left; margin: 25px; margin-top: 0px;">                    
+                    
+                    <div>
+                        {{ form_label(form.otros) }}
+                        <br>
+                        {{ form_widget(form.otros, { 'attr': { 'style': 'float: left;width: 800px;' } }) }}
+                    </div>
+                    
+                </div>
+                <div style="width: 100px;float: left;margin-left: 45px;margin-top: 50px;">
+                    
+                    <div>
+                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
+                    </div>
+                    
+                </div>
+                    
+            {{ form_end(form) }}
+            
+        </form>
+    </div>
+</div>
 {% endblock %}
