@@ -1,15 +1,25 @@
 {% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
 
 {% block container %}
-	<div align="center" style="text-align:center">
-		<h1>Edicion Obra Social</h1>
+    
+    <div class="panel panel-primary">
 
-		{{ form(edit_form) }}
+        <div class="panel-heading">
+            <h3 class="panel-title">Edici&oacute;n de una obra social</h3>
+        </div>
+        <div class="panel-body">
+            <div align="center" style="text-align:center">
+                
+                {{ form(edit_form) }}
 
-		<a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('obrasocial') }}">
-			Volver
-		</a>
-		
-		{{ form(delete_form) }}
-	</div>
+                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('obrasocial') }}">Volver</a>
+
+                {{ form(delete_form) }}
+                
+                <a style="float:right" class="btn btn-primary" href="{{- path('obrasocial_new') -}}">Nuevo</a>
+                
+            </div>
+        </div>
+    </div>
+           
 {% endblock %}
