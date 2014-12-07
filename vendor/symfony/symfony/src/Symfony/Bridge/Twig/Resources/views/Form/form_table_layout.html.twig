@@ -30,7 +30,7 @@
 {%- endblock hidden_row %}
 
 {% block form_widget_compound -%}
-    <table class="table" {{ block('widget_container_attributes') }}>
+    <table {{ block('widget_container_attributes') }}>
         {% if form.parent is empty and errors|length > 0 -%}
         <tr>
             <td colspan="2">

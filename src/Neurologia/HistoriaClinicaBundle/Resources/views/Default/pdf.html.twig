@@ -1,0 +1,31 @@
+<div>
+
+	<h3>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}}</h3>		
+
+	<div>Enfermedad Actual: {{ historia.enfermedad }}</div>
+	<div>Atendido Por: {{ historia.usuario }}</div>
+	<div>Motivo: {{ historia.motivo }}</div>
+	<div>Derivado por: {{ historia.departamento }}</div>
+	
+	<h3>Historial:</h3>
+	<table>
+	{% for i in listado %}
+		<tr>
+			<td width='80px'>{{ i.fecha|date('Y-m-d') }}</td>
+				
+			{% if i.droga %}
+				<td>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}:  {{i.descripcion|capitalize}}</td>
+				<td>Droga(dosis):
+				
+				{% for d in i.droga %}
+						{{ d.droga }} ({{d.dosis}})
+				{% endfor %}
+				</td>
+			{% else %}
+				<td colspan='2'>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}:  {{i.descripcion|capitalize}}</td>
+			{% endif %}
+		</tr>
+	{% endfor %}
+	</table>
+	
+</div>

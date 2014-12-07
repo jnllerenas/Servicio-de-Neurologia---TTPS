@@ -105,14 +105,8 @@ class DefaultController extends Controller
         $solapa =  $this->forward($str, $params);    
         return $solapa;
     }
-
     public function epicrisisAction()
     {
-		
-		//$em = $this->getDoctrine()->getManager();
-	//$idpaciente = $_SESSION['paciente']->getId();
-     //  $aux = $this->vistaListado($idpaciente);
-		
 
         $params = array(); 
         $paciente = $_SESSION['paciente'];
@@ -121,11 +115,11 @@ class DefaultController extends Controller
         $params['historia'] = $this->vistaHistoria();
         $params['listado']= $this->vistaListado( $params['historia']['id']);
       		
-	    return $this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', $params);
+
 	  
 		$facade = $this->get('ps_pdf.facade');
 		$response = new Response();
-		$this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', array() ,$response);
+		$this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', $params ,$response);
 		$xml = $response->getContent();
 		$content = $facade->render($xml);
 		return new Response($content, 200, array('content-type' => 'application/pdf'));
