@@ -3,7 +3,42 @@
 {% block body -%}
     <h1>Creacion de Paciente</h1>
 
-    {{ form(form) }}
+	{{ form_start(form, {'action': path('paciente_create'), 'method': 'POST'}) }}
+	
+	<table class="table">
+		<tr>
+			<td>{{ form_row(form.nombre) }}</td>
+			<td>{{ form_row(form.apellido) }}</td>
+			<td>{{ form_row(form.sexo) }}</td>
+		</tr>	
+		<tr>
+			<td>{{ form_row(form.tipoDocumento) }}</td>
+			<td>{{ form_row(form.documento) }}</td>
+			<td>{{ form_row(form.fechaNacimiento) }}</td>
+		</tr>
+		<tr>
+			<td>{{ form_row(form.telefono) }}</td>
+			<td>{{ form_row(form.direccion) }}</td>
+			<td>{{ form_row(form.email) }}</td>
+		<tr>
+			<td>{{ form_row(form.estadoCivil) }}</td>
+			<td>{{ form_row(form.nivelEducacional) }}</td>
+			<td>{{ form_row(form.ocupacion) }}</td>
+		</tr>
+		<tr>
+			<td>{{ form_row(form.obraSocial) }}</td>
+			<td>{{ form_row(form.numeroCarnet) }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>{{ form_row(form.admitidoPor) }}</td>
+			<td>{{ form_row(form.derivadoPor) }}</td>
+			<td>{{ form_row(form.otros) }}</td>
+		</tr>
+	</table>
+	
+
+	{{ form_end(form) }}
 
        
 {% endblock %}
