@@ -102,11 +102,13 @@
                 data-prototype="{{ include('TratamientoBundle:Tratamiento:prototype.html.twig', { 'form': form.drogaTratamiento.vars.prototype })}}"         
                 ></ul>
             </div>
-            
-          
+           
+    
+          {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
+                    <a class="btn btn-primary" href="{{ path('evolucion_homepage_agregar') }}">Cancelar</a>
             
         {{ form_end(form) }}    
-    
+
   </fieldset>
         
 

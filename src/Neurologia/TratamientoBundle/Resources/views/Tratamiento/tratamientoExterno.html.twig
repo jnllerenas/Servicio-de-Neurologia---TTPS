@@ -21,7 +21,8 @@
 
             <div>
                 
-                {{ form_widget(form.aceptar) }}
+                {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
+                    <a class="btn btn-primary" href="{{ path('evolucion_homepage_agregar') }}">Cancelar</a>
                 
             </div>
 

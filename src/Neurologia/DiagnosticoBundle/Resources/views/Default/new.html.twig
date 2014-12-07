@@ -1,18 +1,17 @@
-{% extends 'NeurologiaDiagnosticoBundle:Default:index.html.twig' %}
-
-{% block container %}     
-
+{% extends '::base.html.twig' %}
+{% block body %}    
+<h1>Nuevo Diagnostico</h1>
 		<form id="fDiagnostico" action="{{ path('neurologia_diagnostico_new') }}" method="POST" role="form">
-			<fieldset>
-				<legend>Nuevo Diagnostico</legend>
+			
+                    
 				
-				<div class="radio" onchange="mostrar_ocultar(1)">
+				<div class="radio" onchange="mostrar_ocultar(1);">
 					<label>
 						<input type="radio" name="tipo" id="tipo1" value="Presuntivo" checked>
 						Presuntivo
 					</label>
 				</div>
-				<div class="radio" onchange="mostrar_ocultar(2)">
+				<div class="radio" onchange="mostrar_ocultar(2);">
 					<label>
 						<input type="radio" name="tipo" id="tipo2" value="Definitivo">
 						Definitivo
@@ -34,11 +33,11 @@
 					<label for="descripcion">Descripcion</label>
 					<textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui.."></textarea>
 				</div>
-				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico()" />
-				<a class="btn btn-primary" href="{{ path('neurologia_diagnostico_homepage') }}">Cancelar</a>
-			</fieldset>
-		</form>
-
+				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico();" />
+				<a class="btn btn-primary" href="{{ path('evolucion_homepage_agregar') }}">Cancelar</a>
+                               
+                        
+                </form>
 	
 		<script>
 			function mostrar_ocultar(param){
