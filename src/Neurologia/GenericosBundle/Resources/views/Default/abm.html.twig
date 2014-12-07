@@ -1,10 +1,15 @@
 {% extends '::base.html.twig' %}
 
-    {% block body %}  
+{% block body %}  
    
+    <div class="abm_container">
         
+        {% block container %} 
+        
+            {% include 'NeurologiaGenericosBundle:Default:mensajes.html.twig' %}
 
-            
-             {% block container %}     
- {% endblock %}
- {% endblock %}
+        {% endblock container %}
+        
+    </div>
+        
+{% endblock %}
