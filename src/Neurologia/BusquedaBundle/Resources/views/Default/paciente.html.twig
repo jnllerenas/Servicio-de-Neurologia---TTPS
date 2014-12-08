@@ -79,10 +79,11 @@
                                         <img src="{{- asset('public/images/glyphicons/glyphicons-300-hospital-h.png') -}}" alt="Ver Historia Clínica" title="Ver Historia Clínica"/>
                                         Ver Historia Clínica
                                     </button>
-                                </form>
-                                <a href="{{- path('paciente_edit', { 'id': tupla.id }) -}}">
+                                <button type="button" onclick="self.location='{{- path('paciente_edit', { 'id': tupla.id }) -}}'">
                                     <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar" title="Editar"/>
-                                </a>
+                                    Editar Datos Filiatorios
+                                </button>
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}

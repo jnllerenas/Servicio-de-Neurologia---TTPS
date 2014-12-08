@@ -8,7 +8,7 @@
         </div>
 
         <div class="item">
-            <div class="ui small  inverted header">Enfermedad Actual</div>
+            <div class="ui small  inverted header">Enfermedad Actual:</div>
             <div class="menu">
                 <a class="item" href="#">{{ historia.enfermedad }}</a>
             </div>
@@ -34,9 +34,19 @@
         <div class="item">
             <div class="ui small  inverted header">Historial</div>
             {% for i in listado %}
+                {% if loop.first %}
+                {% set date = i.fecha|date('d/m/Y') %}
                 <div class="menu">
                     <i class="calendar icon"></i>
                     {{ i.fecha|date('d/m/Y') }}
+                {% endif %}
+                {% if i.fecha|date('d/m/Y') != date %}
+                </div>
+                {% set date = i.fecha|date('d/m/Y') %} 
+                <div class="menu">   
+                    <i class="calendar icon"></i>
+                    {{ i.fecha|date('d/m/Y') }}
+                {% endif %}
                     <a class="item" href="#">
                         <u>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</u>: <i> {{i.descripcion|capitalize}}</i>
                     </a>
@@ -51,7 +61,9 @@
                         {% endfor %}
 
                     {% endif %}
-                </div>
+                    {% if loop.last %}
+                    </div>
+                    {% endif %}
             {% endfor %}
         </div>
     </div>
