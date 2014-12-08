@@ -12,7 +12,7 @@
 
         {% for antecedente in personales %}
             <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
+                <td>{{ antecedente.fecha|date('d/m/Y') }} - {{ antecedente.descripcion }}</td>
             
             </tr>
         {% endfor %}
@@ -33,7 +33,7 @@
         <tbody>
         {% for antecedente in familiares %}
             <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
+                <td>{{ antecedente.fecha|date('d/m/Y') }} - {{ antecedente.descripcion }}</td>
             
             </tr>
         {% endfor %}

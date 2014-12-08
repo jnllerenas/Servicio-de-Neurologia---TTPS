@@ -2,7 +2,7 @@
 	<table class="table">
         {% for m in motivo %}
             <tr>
-                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
+                <td>{{ m.fecha|date('d/m/Y') }} - {{ m.detalle }}</td>
             </tr>
         {% endfor %}
     </table>

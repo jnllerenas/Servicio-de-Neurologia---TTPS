@@ -1,6 +1,6 @@
 <div>
 
-	<h3>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}} ({{ "now"|date("m/d/Y") }})</h3>		
+	<h3>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}} ({{ "now"|date("d/m/Y") }})</h3>		
 
 	<div>Enfermedad Actual: {{ historia.enfermedad }}</div>
 	<div>Admitido Por: {{ historia.usuario }}</div>
@@ -11,7 +11,7 @@
 	<table>
 	{% for i in listado %}
 		<tr>
-			<td width='80px'>{{ i.fecha|date('Y-m-d') }}</td>
+			<td width='80px'>{{ i.fecha|date('d/m/Y') }}</td>
 				
 			{% if i.droga %}
 				<td>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}:  {{i.descripcion|capitalize}}</td>

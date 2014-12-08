@@ -36,7 +36,7 @@
             {% for i in listado %}
                 <div class="menu">
                     <i class="calendar icon"></i>
-                    {{ i.fecha|date('Y-m-d') }}
+                    {{ i.fecha|date('d/m/Y') }}
                     <a class="item" href="#">
                         <u>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</u>: <i> {{i.descripcion|capitalize}}</i>
                     </a>

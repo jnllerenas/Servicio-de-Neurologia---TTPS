@@ -32,7 +32,7 @@
                     {% for t in tratamientos %}
                         <tr>
                             <td>{{ t.descripcion }}</td>
-                            <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d-m-Y') }}{% endif %}</td>
+                            <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d/m/Y') }}{% endif %}</td>
                             <td>{% if t.activo %}Sí{% else %}No{% endif %}</td>
                             <td>{{ t.drogas }}</td>
                         </tr>

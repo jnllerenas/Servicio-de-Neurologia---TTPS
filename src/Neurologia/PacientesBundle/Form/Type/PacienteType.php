@@ -29,8 +29,8 @@ class PacienteType extends AbstractType {
 		$builder->add('nivelEducacional');
         $builder->add('obraSocial');
         
-        /*$builder->add('admitidoPor');*/
-        $builder->add('derivadoPor');
+        /*$builder->add('admitidoPor');
+        $builder->add('derivadoPor');*/
         
         //$builder->add('save', 'submit', array('label' => 'Alta paciente'));
     }
