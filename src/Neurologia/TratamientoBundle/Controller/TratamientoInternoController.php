@@ -23,7 +23,7 @@ class TratamientoInternoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-//        $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
+//        $drogas = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
 //        $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
 //        $evolucion = $em->getRepository('Neurologia\BDBundle\Entity\Evolucion')->find(1);
      

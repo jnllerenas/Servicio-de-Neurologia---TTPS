@@ -42,10 +42,6 @@
                     <tr>
                         <th>Fecha</th>
                         <th>Descripci&oacute;n</th>
-                        <!--<th>Activo</th>
-                        <th>Medicamentos</th>
-                        <th>Efectos adversos</th>
-                        <th>Detalle</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -54,10 +50,6 @@
                         <tr>
                             <td>{{ e.fecha_evolucion|date('d-m-Y H:i:s') }}</td>
                             <td>{{ e.evolucion }}</td>
-                            <!--<tr>t.activo</tr>
-                            <tr>t.con_medicamentos</tr>
-                            <tr>t.con_efectos_adversos</tr>
-                            <tr>detalle</tr>-->
                         </tr>
                     {% endfor %}
                 </tbody>
