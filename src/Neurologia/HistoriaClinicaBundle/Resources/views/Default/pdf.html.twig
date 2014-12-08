@@ -1,13 +1,31 @@
 <div>
 
-	<h3>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}} ({{ "now"|date("d/m/Y") }})</h3>		
-
-	<div>Enfermedad Actual: {{ historia.enfermedad }}</div>
+	<h2>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}} ({{ "now"|date("d/m/Y") }})</h2>		
+        
+        <h3>Datos del Paciente</h3>
+        
+        <div>
+                    {% if paciente.tipoDocumento %} <b>{{paciente.tipoDocumento.descripcion}}:</b> {{ paciente.documento }}<br></br> {% endif %}
+                    {% if paciente.sexo %}<b>Sexo:</b>   {{paciente.sexo.descripcion}}<br></br>{% endif %}
+                    {% if paciente.obraSocial %} <b>Obra Social:</b>   {{paciente.obraSocial.descripcion}} N°({{ paciente.numeroCarnet }}){% else %} <b>Obra Social:</b> No tiene.{%endif%}<br></br>
+                    {% if paciente.email %}<b>Mail:</b>    {{paciente.email}}<br></br>{% endif %}
+                    {% if paciente.nivelEducacional %} <b>Nivel de educación:</b>    {{paciente.nivelEducacional.descripcion}}<br></br>{% endif %}
+                    {% if paciente.direccion %} <b>Dirección:</b>    {{paciente.direccion}}<br></br>{% endif %}
+                    {% if paciente.fechaNacimiento %} <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('d/m/Y')}}<br></br>{% endif %}
+                    {% if paciente.telefono %} <b>Teléfono:</b>    {{paciente.telefono}}<br></br>{% endif %}
+                    {% if paciente.ocupacion %} <b>Ocupacion:</b>    {{paciente.ocupacion}}<br></br>{% endif %}
+        </div>
+	
+	
+	<h3>Historial:</h3>
+        
+        <div>Enfermedad Actual: {{ historia.enfermedad }}</div>
 	<div>Admitido Por: {{ historia.usuario }}</div>
 	<div>Motivo: {{ historia.motivo }}</div>
 	<div>Derivado por: {{ historia.departamento }}</div>
-	
-	<h3>Historial:</h3>
+        <br></br>
+        <br></br>
+        
 	<table>
 	{% for i in listado %}
 		<tr>
