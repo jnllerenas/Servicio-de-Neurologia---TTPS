@@ -1,16 +1,145 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Editar Paciente</h1>
 
-    {{ form(edit_form) }}
+<div class="panel panel-primary" style="margin: auto; width: 1150px;">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{% if actual %}{{ path('neurologia_historia_clinica_homepage') }}{% else %}{{ path('neurologia_busqueda_paciente') }}{% endif %}">
-            Volver
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="panel-heading">
+        <h3 class="panel-title">Edicion de usuario</h3>
+    </div>
+    <div class="panel-body">
+        {{ form_start(edit_form, {'action': path('paciente_update', {  'id': entity.id  } ), 'method': 'PUT'}) }}
+		
+            {{ form_errors(edit_form) }}
+            <div>
+                <div style="width: 250px; float: left; margin: 25px;">
+                    <div>
+                        {{ form_label(edit_form.nombre) }}
+                        <br>
+                        {{ form_widget(edit_form.nombre, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.apellido) }}
+                        <br>
+                        {{ form_widget(edit_form.apellido, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.sexo) }}
+                        <br>
+                        {{ form_widget(edit_form.sexo, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.tipoDocumento) }}
+                        <br>
+                        {{ form_widget(edit_form.tipoDocumento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+
+                </div>
+                    
+                <div style="width: 250px; float: left; margin: 25px;">
+                    <div>
+                        {{ form_label(edit_form.documento) }}
+                        <br>
+                        {{ form_widget(edit_form.documento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.fechaNacimiento) }}
+                        <br>
+                        {{ form_widget(edit_form.fechaNacimiento, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.telefono) }}
+                        <br>
+                        {{ form_widget(edit_form.telefono, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.direccion) }}
+                        <br>
+                        {{ form_widget(edit_form.direccion, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    
+                </div>
+                    
+                <div style="width: 250px; float: left; margin: 25px;">
+
+
+                    <div>
+                        {{ form_label(edit_form.email) }}
+                        <br>
+                        {{ form_widget(edit_form.email, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.estadoCivil) }}
+                        <br>
+                        {{ form_widget(edit_form.estadoCivil, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.nivelEducacional) }}
+                        <br>
+                        {{ form_widget(edit_form.nivelEducacional, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.ocupacion) }}
+                        <br>
+                        {{ form_widget(edit_form.ocupacion, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    
+                </div>
+
+                <div style="width: 150px; float: left; margin: 25px;">
+
+                    <div>
+                        {{ form_label(edit_form.obraSocial) }}
+                        <br>
+                        {{ form_widget(edit_form.obraSocial, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                    <div>
+                        {{ form_label(edit_form.numeroCarnet) }}
+                        <br>
+                        {{ form_widget(edit_form.numeroCarnet, { 'attr': { 'style': 'float: left;' } }) }}
+                    </div>
+                    <br><br><br>
+                                     
+                </div>
+                    
+                <div style="width: 850px; float: left; margin: 25px; margin-top: 0px;">                    
+                    
+                    <div>
+                        {{ form_label(edit_form.otros) }}
+                        <br>
+                        {{ form_widget(edit_form.otros, { 'attr': { 'style': 'float: left;width: 800px;' } }) }}
+                    </div>
+                    
+                </div>
+                <div style="width: 100px;float: left;margin-left: 45px;margin-top: 50px;">
+                    
+                    <div>
+                        {{ form_row(edit_form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'margin-top: -75px;' } }) }}
+                    </div>
+					
+					<div>
+						<input class="btn btn-primary" style="margin-top:-15px" type="button" onclick=" window.history.back()" value='Volver' />
+                    </div>
+                    
+                </div>
+                    
+            {{ form_end(edit_form) }}
+            
+			</edit_form>
+		</div>
+	</div>
+</div>
+
+
+
 {% endblock %}

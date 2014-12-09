@@ -135,9 +135,13 @@
                 <div style="width: 100px;float: left;margin-left: 45px;margin-top: 50px;">
                     
                     <div>
-                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary' } }) }}
+                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'margin-top: -75px;' } }) }}
                     </div>
                     
+					<div>
+						<input class="btn btn-primary" style="margin-top:-15px" type="button" onclick=" window.history.back()" value='Volver' />
+                    </div>
+					
                 </div>
                     
             {{ form_end(form) }}
