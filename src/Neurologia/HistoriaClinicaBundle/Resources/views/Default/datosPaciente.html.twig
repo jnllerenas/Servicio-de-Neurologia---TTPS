@@ -30,6 +30,10 @@
                     {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('d/m/Y')}}</td>{% endif %}
                         {% if paciente.telefono %}<td> <b>Teléfono:</b>    {{paciente.telefono}}</td>{% endif %}
                     {% if paciente.ocupacion %}<td> <b>Ocupacion:</b>    {{paciente.ocupacion}}</td></tr>{% endif %}
+                    {% if paciente.id %}<tr><td><button type="button" onclick="self.location='{{- path('paciente_edit', { 'id': paciente.id }) -}}'">
+                                    <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar" title="Editar"/>
+                                    Editar Datos Filiatorios
+                        </button></td></tr>{% endif %}
                 </table>
             </div>
         </div>
