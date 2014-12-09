@@ -74,11 +74,13 @@
                             <td>{{ tupla.telefono }}</td>
                             <td>
                                 <form method="post" action="{{ path('neurolgia_acceder_paciente') }}">
+                                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_DOCTOR') %}
                                     <input type="hidden" name="paciente_id" value="{{ tupla.id }}">
                                     <button type="submit"  >
                                         <img src="{{- asset('public/images/glyphicons/glyphicons-300-hospital-h.png') -}}" alt="Ver Historia Clínica" title="Ver Historia Clínica"/>
                                         Ver Historia Clínica
                                     </button>
+                                        {% endif %}
                                 <button type="button" onclick="self.location='{{- path('paciente_edit', { 'id': tupla.id }) -}}'">
                                     <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar" title="Editar"/>
                                     Editar Datos Filiatorios
