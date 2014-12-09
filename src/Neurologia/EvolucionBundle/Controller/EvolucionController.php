@@ -24,6 +24,9 @@ class EvolucionController extends Controller {
     }
 
     public function newAction(Request $request) {
+		$_SESSION['evolucion']= array();
+		$_SESSION['evolucion'][0]= new Evolucion;
+			
         if (!isset($_SESSION['evolucion'])) {
             throw $this->createNotFoundException('Asegurese de ingresar a esta sección por la busqueda de pacientes ');
         } else {
