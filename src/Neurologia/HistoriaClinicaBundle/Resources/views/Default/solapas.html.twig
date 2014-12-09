@@ -7,6 +7,7 @@
                     <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_listar', 'tab':'Estudio'}) }}">Estudios</a></li>
                     <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'diagnostico_listar', 'tab':'Diagnostico'}) }}">Diagnosticos</a></li>
                     <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_listar', 'tab':'Tratamiento'}) }}">Tratamientos</a></li>
+                    <li role="presentation" id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank">Epicrisis</a></li>
                 </ul>
 
                 {% if contenido is defined %}
