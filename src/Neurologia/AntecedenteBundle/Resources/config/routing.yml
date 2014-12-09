@@ -1,10 +1,10 @@
 
 
-antecedente:
+antecedente_listar:
     path:     /antecedente/
     defaults: { _controller: "NeurologiaAntecedenteBundle:Antecedente:index" }
 
-antecedente_new:
+antecedente_nuevo:
     path:     /antecedente/new
     defaults: { _controller: "NeurologiaAntecedenteBundle:Antecedente:new" }
 

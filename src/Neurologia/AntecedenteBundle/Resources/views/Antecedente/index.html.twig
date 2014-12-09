@@ -1,47 +1,46 @@
-{% block body %}
-    {% for flashMessage in app.session.flashbag.get('mensaje') %}
-        <div class="alert alert-success" role="alert" style="display:block">
-            {{ flashMessage }}
-        </div>
-            
-        {% endfor %}
- <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Antecedentes personales</div>
-    {% if personales is not empty %}
-    <table class="table">
+{% block contenido %}
+{% if personales %}
+<h2> Personales </h2>
+ <div class="table-responsive">
+	<table class="table">
+        <thead>
+           {# <tr>
+                <th>Descripcion</th> 
+                <th>Agregado el</th> 
+            </tr>#}
+        </thead>
         <tbody>
+
         {% for antecedente in personales %}
             <tr>
-                <td>{{ antecedente.fecha|date('d/m/Y') }} - {{ antecedente.descripcion }}</td>
+                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
+            
             </tr>
         {% endfor %}
         </tbody>
     </table>
-{% else %}
-        <label> Este paciente no registra antecedentes personales. </label>
+	</div>
     {% endif %}
-</div>
- <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Antecedentes familiares</div>
-        </div>
-    {% if familiares is not empty %}
-        <div class="panel-body">
+    {% if familiares %}
+    <h2> Familiares </h2>
+    <div class="table-responsive">
 	<table class="table">
+        <thead>
+         {#   <tr>
+                <th>Descripcion</th>
+                <th>Agregado el</th> 
+            </tr> #}
+        </thead>
         <tbody>
         {% for antecedente in familiares %}
             <tr>
-                <td>{{ antecedente.fecha|date('d/m/Y') }} - {{ antecedente.descripcion }}</td>
+                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
             
             </tr>
         {% endfor %}
         </tbody>
     </table>
-{% else %}
-        <label> Este paciente no registra antecedentes familiares. </label>
+	</div>
 {% endif %}
-</div>
-
-        <a style="margin:auto" class="btn btn-primary" href="{{- path('antecedente_new') -}}">Nuevo</a>
-{% endblock %}
+<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'antecedente_nuevo', 'tab':'Antecedente'}) }}">Nuevo antecedente</a>   
+{% endblock contenido %}

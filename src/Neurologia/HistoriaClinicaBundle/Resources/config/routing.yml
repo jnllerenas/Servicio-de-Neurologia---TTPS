@@ -6,19 +6,19 @@ neurologia_historia_clinica_iniciar:
     path:     /historia/iniciar
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Default:iniciar }
     
-neurologia_historia_clinica_motivo:
+motivo_listar:
     path:     /historia/motivo
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Motivo:index }
 
-neurologia_historia_clinica_motivo_nuevo:
+motivo_nuevo:
     path:   /historia/motivo/nuevo
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Motivo:nuevo }
     
-neurologia_historia_clinica_enfermedad:
+enfermedad_listar:
     path:     /historia/enfermedad
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Enfermedad:index }
     
-neurologia_historia_clinica_enfermedad_nuevo:
+enfermedad_nuevo:
     path:   /historia/enfermedad/nuevo
     defaults: { _controller: NeurologiaHistoriaClinicaBundle:Enfermedad:nuevo }
     
