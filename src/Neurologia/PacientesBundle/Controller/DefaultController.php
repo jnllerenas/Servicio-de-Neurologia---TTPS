@@ -92,6 +92,7 @@ class DefaultController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('NeurologiaBDBundle:Paciente')->find($id);
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paciente entity.');
         }
@@ -132,10 +133,10 @@ class DefaultController extends Controller {
         }
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        $editForm->handleRequest($request); 
         if ($editForm->isValid()) {
             $em->flush();
-            return $this->redirect($this->generateUrl('paciente_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
         }
         return $this->render('NeurologiaPacientesBundle:Default:edit.html.twig', array(
             'entity'      => $entity,
