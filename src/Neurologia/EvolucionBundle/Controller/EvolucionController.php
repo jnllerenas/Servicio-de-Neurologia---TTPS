@@ -36,8 +36,10 @@ class EvolucionController extends Controller {
             $evolucion->setHistoriaClinica($historia_clinica);
             $evolucion->setFechaHora(new \Datetime());
             $evolucion->setEvolucion('Sin descripción.');
-            $usuario = $em->merge($_SESSION['user']);
-            $evolucion->setUsuario($usuario);
+			
+			$usuario = $this->getDoctrine()->getRepository('NeurologiaBDBundle:User')->find($_SESSION['user']->getId());
+           
+     	    $evolucion->setUsuario($usuario);
             $em->persist($evolucion);
             $em->flush();
             // $form = $this->createForm(new EvolucionType(), $evolucion);
