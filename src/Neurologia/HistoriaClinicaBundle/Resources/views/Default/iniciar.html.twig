@@ -2,22 +2,21 @@
 
 {% block body %}
 {{ form_start(iniciar) }}
-    {{ form_errors(iniciar) }}
-
-    
+	<h3>Inicio de Historia Clinica </h3>
     <br>
     {{ form_row(iniciar.derivado, { 'attr': {'class': 'form-control'} }) }}
     <br>
     {{ form_row(iniciar.motivo, { 'attr': {'class': 'form-control'} }) }}
     <br>
     {{ form_row(iniciar.enfermedad, { 'attr': {'class': 'form-control'} }) }}
-    <br>
-    * Los campos son obligatorios
-    <br>
+
     {{ form_row(iniciar.enviar, { 'attr': {'class': 'btn btn-primary'} }) }}   
+	<div>
+		<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+	</div>
     
     
 {{ form_end(iniciar) }}
 
-<a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': historia }) }}">VOLVER</a>
+<!--<a href="{{ url('neurologia_historia_clinica_homepage', {'idpaciente': historia }) }}">VOLVER</a>-->
 {% endblock %}

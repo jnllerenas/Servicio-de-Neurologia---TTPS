@@ -20,7 +20,7 @@ class Formularios {
     public static function createIniciarForm($a) {
          return $a->createFormBuilder()
         ->setAction($a->generateUrl('neurologia_historia_clinica_iniciar'))
-        ->add('Iniciar Historia Clinica', 'submit', array('label' => 'Iniciar Historia Clinica'))
+        ->add('Iniciar Historia Clinica', 'submit', array('label' => 'Iniciar Historia Clinica', 'attr'=>array('class'=>"btn btn-primary")))
         ->getForm();
         
     }
@@ -31,11 +31,11 @@ class Formularios {
         
         ->add('derivado', 'choice', array(
                                  'choice_list' => new SimpleChoiceList($list),
-                                  'label' => '*Derivado por: '  
+                                  'label' => 'Derivado por: '  
             ))
-        ->add('motivo', 'text',array('required' => true,'label' => '*Motivo: '))
-        ->add('enfermedad', 'textarea',array('required' => true,'label' => '*Enfermedad Actual: '))
-        ->add('enviar', 'submit', array('label' => 'Enviar'))
+        ->add('motivo', 'text',array('required' => true,'label' => 'Motivo: '))
+        ->add('enfermedad', 'textarea',array('required' => true,'label' => 'Enfermedad Actual: '))
+        ->add('enviar', 'submit', array('label' => 'Crear'))
         ->getForm();
     }
     
