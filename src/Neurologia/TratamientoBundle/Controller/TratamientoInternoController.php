@@ -74,7 +74,14 @@ class TratamientoInternoController extends Controller {
                         $droga->addTratamiento($tratamientoInterno);
                         $em->persist($droga);
                         $em->flush();
-            }  
+            }
+
+ 
+
+            
+            
+            
+            
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('accion' => 'evolucion_modificar', 'id' => $evolucion->getId(), 'tab' => 'Evolucion')));
         }
         return $this->render('TratamientoBundle:Tratamiento:tratamientoInterno.html.twig', array('form' => $form->createView(),)
