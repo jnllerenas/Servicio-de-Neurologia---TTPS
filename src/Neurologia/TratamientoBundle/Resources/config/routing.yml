@@ -24,4 +24,8 @@ tratamiento_externo_editar:
     
 tratamiento_externo_borrar:
     path:     /tratamiento/externo/borrar/{key}
-    defaults: { _controller: TratamientoBundle:TratamientoExterno:delete }    
+    defaults: { _controller: TratamientoBundle:TratamientoExterno:delete }  
+
+tratamiento_show:
+    path:     /tratamiento/{id}/show
+    defaults: { _controller: "TratamientoBundle:TratamientoInterno:show" }	

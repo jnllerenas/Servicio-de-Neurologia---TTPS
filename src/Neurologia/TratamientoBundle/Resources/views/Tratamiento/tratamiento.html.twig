@@ -25,6 +25,7 @@
                         <th>Fecha de inicio</th>
                         <th>Activo</th>
                         <th>Drogas</th>
+						<th>Ver</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                             <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d-m-Y') }}{% endif %}</td>
                             <td>{% if t.activo %}Sí{% else %}No{% endif %}</td>
                             <td>{{ t.drogas }}</td>
+							<td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_show','id': t.id, 'tab':'Tratamiento'}) }}">Ver</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

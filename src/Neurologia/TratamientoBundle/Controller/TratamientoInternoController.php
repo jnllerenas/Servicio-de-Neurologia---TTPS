@@ -17,6 +17,29 @@ class TratamientoInternoController extends Controller {
     public function indexAction() {
         return $this->render('TratamientoBundle:Tratamiento:errorDeAcceso.html.twig');
     }
+	
+	public function showAction() {
+        $id = $_GET['id'];
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('NeurologiaBDBundle:TratamientoInterno')->find($id);
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find tratamiento Interno entity.');
+        }
+		$drogas = $em->getRepository('NeurologiaBDBundle:DrogaTratamiento')->findBy(
+																				array('tratamiento' => $id)
+		
+																	);
+																	
+		$dql_1 = " SELECT d.descripcion as drogadescripcion, dt.dosis, ea.descripcion as efectodescripcion"
+                ." FROM NeurologiaBDBundle:DrogaTratamiento dt "
+                ." INNER JOIN NeurologiaBDBundle:Droga d WITH dt.droga = d "
+                . "LEFT JOIN NeurologiaBDBundle:EfectoAdverso ea WITH dt.efectoAdverso = ea"
+                ." WHERE dt.tratamiento = :id ";
+		$query_1 = $em->createQuery($dql_1)->setParameter('id', $id);
+        $drogas = $query_1->getResult();
+		
+        return $this->render('TratamientoBundle:Tratamiento:show.html.twig', array('tratamiento' => $entity, 'drogas' => $drogas));
+    }
 
     public function newAction(Request $request) {
         $em = $this->getDoctrine()->getManager();

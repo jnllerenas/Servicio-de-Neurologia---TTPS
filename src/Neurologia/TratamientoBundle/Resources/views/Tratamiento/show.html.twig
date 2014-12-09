@@ -1,0 +1,53 @@
+{% block contenido %}
+    <h3>Tratamiento Interno > Detalle</h3>
+    <table class="table table-hover">  
+
+        <tr>
+            <td>Inicio</td> <td>{{tratamiento.inicio|date('Y-m-d')}}</td>
+        </tr>    
+        <tr>
+            <td>Descripcion</td><td>{{tratamiento.descripcion}}</td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+			<td>
+				{% if tratamiento.activo==1 %}
+					Si
+				{% else %}
+					No
+				{% endif %}
+			</td>
+        </tr>
+ 
+    </table>
+    <table class = "table table-hover">
+
+        {% if drogas is not empty %}
+
+            <tr>
+                <td>Droga</td>
+				<td>Efecto Adverso</td>
+				<td>Dosis</td>
+            </tr>
+
+            {% for droga in drogas %}
+                <tr>
+                    <td>{{droga.drogadescripcion}}</td> 
+					<td>{{droga.efectodescripcion}}</td> 
+					<td>{{droga.dosis}}</td> 
+                </tr>   
+            {% endfor %}
+
+        {% endif %}
+
+    </table>
+
+
+
+
+
+{% endblock %}
+   <div>
+		<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+	</div>
+

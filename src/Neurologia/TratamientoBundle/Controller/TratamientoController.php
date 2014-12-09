@@ -15,7 +15,7 @@ class TratamientoController extends Controller
         //supuestamente, viene de session.
         $id_historia_clinica = $_SESSION['historia']->getId();
         
-        $dql_1 = " SELECT ti.descripcion as descripcion, ti.activo, ti.inicio, COUNT(dt.droga) AS drogas "
+        $dql_1 = " SELECT ti.id as id, ti.descripcion as descripcion, ti.activo, ti.inicio, COUNT(dt.droga) AS drogas "
                 ." FROM NeurologiaBDBundle:Evolucion e "
                 ." INNER JOIN NeurologiaBDBundle:TratamientoInterno ti WITH ti.evolucion = e "
                 . "LEFT JOIN NeurologiaBDBundle:DrogaTratamiento dt WITH dt.tratamiento = ti"
