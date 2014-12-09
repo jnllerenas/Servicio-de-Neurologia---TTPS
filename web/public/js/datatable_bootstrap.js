@@ -16,7 +16,7 @@ $(document).ready(function() {
                 "sLengthMenu" : "Mostrar _MENU_ registros",
                 "sLoadingRecords" : "Cargando...",
                 "sProcessing" : "Procesando...",
-                "sSearch" : "Buscar:",
+                "sSearch" : "Aquí puede filtrar su búsqueda por cualquier campo:",
                 "sZeroRecords" : "No se encontraron resultados",
                 "oPaginate" : {
                         "sFirst" : "Primero",
