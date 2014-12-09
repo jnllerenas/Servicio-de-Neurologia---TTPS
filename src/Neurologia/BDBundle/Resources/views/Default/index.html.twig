@@ -1,1 +1,10 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div>Para realizar una copia de seguridad de la base de datos</div>
+    <div>Haga click en el siguiente botón</div>
+    <form action="{{ path('neurologia_bd_create_backup') }}" method="post" >
+        <input type="hidden" name="backup" value="1">
+    <button type="submit" >Realizar copia de seguridad</button>
+    </form>
+    <div>{% if mensaje is defined %}{{ mensaje }}{% endif %}</div>
+    {% endblock %}

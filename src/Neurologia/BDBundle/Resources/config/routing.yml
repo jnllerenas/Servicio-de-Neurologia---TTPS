@@ -1,3 +1,6 @@
 neurologia_bd_homepage:
-    path:     /hello/{name}
+    path:     /backup
     defaults: { _controller: NeurologiaBDBundle:Default:index }
+neurologia_bd_create_backup:
+    path:     /backup/create
+    defaults: { _controller: NeurologiaBDBundle:Default:backup }

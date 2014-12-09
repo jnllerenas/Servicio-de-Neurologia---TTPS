@@ -14,17 +14,17 @@
                         <tr>
                             <th>{{ form_label(form.categoriaDiagnostico) }}</th>
                             <th>{{ form_label(form.droga) }}</th>
+                            <th>{{ form_label(form.efectoAdverso) }}</th>
                             <th>{{ form_label(form.sexo) }}</th>
                             <th>{{ form_label(form.edad) }}</th>
-                            <th>{{ form_label(form.efectoAdverso) }}</th>
                             <th>{{ form_errors(form) }}</th>
                         </tr>
                         <tr>
                             <td>{{ form_widget(form.categoriaDiagnostico) }}</td>
                             <td>{{ form_widget(form.droga) }}</td>
+                            <td>{{ form_widget(form.efectoAdverso) }}</td>
                             <td>{{ form_widget(form.sexo) }}</td>
                             <td>{{ form_widget(form.edad) }}</td>
-                            <td>{{ form_widget(form.efectoAdverso) }}</td>
                             <td>
                                 {{ form_widget(form.search,{ 'attr': {'class': 'btn btn-primary'} }) }}
                                 {{ form_widget(form.reset,{ 'attr': {'class': 'btn btn-primary'} }) }}
@@ -33,9 +33,9 @@
                         <tr>
                             <td>{{ form_errors(form.categoriaDiagnostico) }}</td>
                             <td>{{ form_errors(form.droga) }}</td>
+                            <td>{{ form_errors(form.efectoAdverso) }}</td>
                             <td>{{ form_errors(form.sexo) }}</td>
                             <td>{{ form_errors(form.edad) }}</td>
-                            <td>{{ form_errors(form.efectoAdverso) }}</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -51,7 +51,7 @@
         {% endblock %}
         
         {% block lista %}
-
+{% if lista %}
         <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
             <thead>
                 <tr>
@@ -74,7 +74,7 @@
                 {% endfor %}
             </tbody>
         </table>
-
+{% endif %}
         {% endblock %}
         </div>
     </div>
