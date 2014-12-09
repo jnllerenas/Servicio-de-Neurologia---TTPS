@@ -41,7 +41,7 @@
             {{ include('NeurologiaHistoriaClinicaBundle:Default:solapas.html.twig') }} 
             {% block contenido %}
             {% endblock %}
-
+			<a href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank"> Epicrisis </a>
         {% else %}
 
             {{ form(iniciar) }}
