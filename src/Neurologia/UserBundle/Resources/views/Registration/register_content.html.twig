@@ -10,6 +10,7 @@
             {{ form_start(form) }}
 
                 {{ form_errors(form) }}
+                
                 <div>
                     <div style="width: 250px; float: left; margin: 25px;">
                         <div>
@@ -49,7 +50,7 @@
                         <div>
                             {{ form_label(form.fecha_de_nacimiento) }}
                             <br>
-                            {{ form_widget(form.fecha_de_nacimiento, { 'attr': { 'style': 'float: left;' } }) }}
+                            {{ form_widget(form.fecha_de_nacimiento, { 'attr': { 'style': 'float: left; line-height: 20px;' } }) }}
                         </div>
                         <br><br><br>
                         <div>
@@ -68,6 +69,12 @@
                             {{ form_label(form.direccion) }}
                             <br>
                             {{ form_widget(form.direccion, { 'attr': { 'style': 'float: left;' } }) }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            {{ form_label(form.roles) }}
+                            <br>
+                            {{ form_widget(form.roles, { 'attr': { 'style': 'float: left;' } }) }}
                         </div>
                         <br><br><br>
 
@@ -90,15 +97,15 @@
                         <div>
                             {{ form_label(form.plainPassword.first) }}
                             <br>
-                            {{ form_widget(form.plainPassword.first, { 'attr': { 'style': 'float: left;' } }) }}
+                            {{ form_widget(form.plainPassword.first, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
                         </div>
                         <br><br><br>
                         <div>
                             {{ form_label(form.plainPassword.second) }}
                             <br>
-                            {{ form_widget(form.plainPassword.second, { 'attr': { 'style': 'float: left;' } }) }}
+                            {{ form_widget(form.plainPassword.second, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
                         </div>
-                        <br><br><br><br><br><br>
+                        <br><br><br><br><br>
                         <div style="clear:both;">
                             <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}" style="float: right;"/>
                         </div>
