@@ -26,23 +26,23 @@
 </head>
 <body>
     {% block menu %}
-        
+
         {% if is_granted('ROLE_ADMIN')%}
 
             {% include 'NeurologiaUserBundle:Default:adminMenu.html.twig' %}
 
-        {% elseif is_granted('ROLE_USER') %}
+        {% elseif is_granted('ROLE_DOCTOR') %}
 
             {% include 'NeurologiaUserBundle:Default:userMenu.html.twig' %}
-        
-        {% elseif is_granted('ROLE_SECRETARIO') %}
+
+        {% elseif is_granted('ROLE_SECRETARY') %}
 
             {% include 'NeurologiaUserBundle:Default:secretarioMenu.html.twig' %}
 
         {% endif %}
-       
+        
     {% endblock %}
-
+    
     {% block datosPaciente %}
         
     {% endblock %}
