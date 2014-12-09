@@ -1,4 +1,5 @@
 {% block menu %}
+
 <div class="navbar navbar-default">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -42,7 +43,12 @@
                 </ul>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
+		
+        <ul style="display: inline;float: right;">
+               <a href="{{ path('user_edit', {'id' : app.user.id } ) }}">{{ app.user.apellido }}, {{ app.user.nombre }}</a>
+        </ul>
+		
+		<ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
                 <a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_logout') }}">Salir</a>
         </ul>
     </div>
