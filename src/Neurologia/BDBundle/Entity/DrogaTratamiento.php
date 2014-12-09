@@ -13,19 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 class DrogaTratamiento
 {
     
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id; 
+   
     
     /**
      * @var string
      *
      * @ORM\Column(name="dosis", type="string", length=255, nullable=false)
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $dosis;
@@ -34,6 +28,7 @@ class DrogaTratamiento
      * @var \EfectoAdverso
      *
      * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="EfectoAdverso")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="efecto_adverso_id", referencedColumnName="id")
@@ -45,6 +40,7 @@ class DrogaTratamiento
      * @var \Droga
      *
      * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity="Droga")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="droga_id", referencedColumnName="id")
@@ -56,6 +52,7 @@ class DrogaTratamiento
      * @var \TratamientoInterno
      *
      * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="TratamientoInterno",inversedBy="drogaTratamiento")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
@@ -63,15 +60,7 @@ class DrogaTratamiento
      */
     private $tratamiento;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    
     
     public function addTratamiento(TratamientoInterno $trat)
     {            
