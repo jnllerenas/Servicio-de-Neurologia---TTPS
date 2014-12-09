@@ -24,7 +24,7 @@
                 <td>{{ entity.apellido }}</td>
                 <td>{{ entity.numerodocumento }}</td>
                 <td>{{ entity.telefono }}</td>
-                <td>{% if entity.fechadenacimiento %}{{ entity.fechadenacimiento|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if entity.fechadenacimiento %}{{ entity.fechadenacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.direccion }}</td>
                 <td>
                 <ul>

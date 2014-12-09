@@ -1,6 +1,6 @@
 
     
-<h1>Estudios </h1>
+<h3>Estudios < Listado </h3>
 {% if estudios %}
 <table class="table table-condensed table-hover">  
     <thead>
@@ -22,9 +22,12 @@
     <td>{{ estudio.imagenes|length }}</td>
     
     {% endif %}
-    <td><a href="{{ path('neurologia_estudio_show', { 'id': estudio.id }) }}" class="">Ver</a></td>
+
+    <td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_show','id': estudio.id, 'tab':'Estudio'}) }}">Ver</a></td>
     </tr>
 {% endfor %}
 {% else %}
     No se encontraron estudios para esta paciente.
 {% endif %}
+</table>
+  <a id="" class="button" href='javascript:history.back()'>Volver</a>

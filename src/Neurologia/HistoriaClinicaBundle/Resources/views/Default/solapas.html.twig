@@ -1,17 +1,17 @@
 <div class="solapaHistoria"> 
 <ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
-                    <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Motivo'}) }}">Motivo</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Enfermedad'}) }}">Enfermedad Actual</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Antecedente'}) }}">Antecedente</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Evolucion'}) }}">Evolucion</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Estudio'}) }}">Estudios</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Diagnostico'}) }}">Diagnosticos</a></li>
-                    <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'solapa':'Tratamiento'}) }}">Tratamientos</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'motivo_listar', 'tab':'Motivo'}) }}">Motivo</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'enfermedad_listar', 'tab':'Enfermedad'}) }}">Enfermedad Actual</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'antecedente_listar', 'tab':'Antecedente'}) }}">Antecedente</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEvolucion'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_listar', 'tab':'Evolucion'}) }}">Evolucion</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabEstudio'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_listar', 'tab':'Estudio'}) }}">Estudios</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabDiagnostico'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'diagnostico_listar', 'tab':'Diagnostico'}) }}">Diagnosticos</a></li>
+                    <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_listar', 'tab':'Tratamiento'}) }}">Tratamientos</a></li>
                 </ul>
 
-                {% if solapa is defined %}
+                {% if contenido is defined %}
 
-                    {{ solapa|raw }}
+                    {{ contenido|raw }}
 
                     <script>
                         var tab = '{{ tab }}';

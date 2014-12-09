@@ -1,7 +1,6 @@
-{% extends '::base.html.twig' %}
-{% block body %}    
+{% block contenido %}    
 <h1>Nuevo Diagnostico</h1>
-		<form id="fDiagnostico" action="{{ path('neurologia_diagnostico_new') }}" method="POST" role="form">
+		<form id="fDiagnostico" action="{{ path('diagnostico_nuevo') }}" method="POST" role="form">
 			
                     
 				
@@ -34,7 +33,7 @@
 					<textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui.."></textarea>
 				</div>
 				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico();" />
-				<a class="btn btn-primary" href="{{ path('evolucion_homepage_agregar') }}">Cancelar</a>
+				<a class="btn btn-primary" href="{{ path('evolucion_nuevo') }}">Cancelar</a>
                                
                         
                 </form>

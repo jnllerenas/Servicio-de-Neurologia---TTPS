@@ -1,15 +1,15 @@
-neurologia_diagnostico_homepage:
+diagnostico_listar:
     path:     /diagnostico
     defaults: { _controller: NeurologiaDiagnosticoBundle:Default:index }
 
-neurologia_diagnostico_new:
-    path:     /diagnostico/new
+diagnostico_nuevo:
+    path:     /diagnostico/nuevo
     defaults: { _controller: NeurologiaDiagnosticoBundle:Default:new }
 
-neurologia_diagnostico_delete:
-    path:     /diagnostico/{key}/delete
+diagnostico_borrar:
+    path:     /diagnostico/borrar/{key}
     defaults: { _controller: NeurologiaDiagnosticoBundle:Default:delete }
     
-neurologia_diagnostico_edit:
-    path:     /diagnostico/{key}/edit
+diagnostico_editar:
+    path:     /diagnostico/editar/{key}
     defaults: { _controller: NeurologiaDiagnosticoBundle:Default:edit }

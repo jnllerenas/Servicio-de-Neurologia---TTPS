@@ -1,11 +1,8 @@
-{% extends '::base.html.twig' %}
-
-{% block javascripts %}
-    {{ parent() }}
+{% block javascripts %}   
     <script src="{{ asset('public/js/tratamiento_interno.js') }}" type="text/javascript"></script>
 {% endblock %}
 
-{% block body %}
+{% block contenido %}
     <script>
 
         var $collectionHolder;
@@ -72,45 +69,42 @@
 
     </script>
     <div>
-        <a href="{{ path('tratamiento_interno_new') }}" class="help-block">Tratamiento interno</a>
-        <a href="{{ path('tratamiento_externo_new') }}" class="help-block">Tratamiento externo</a>
+         <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Tratamiento interno</a><br>
+          <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
     </div>
-<fieldset>
+
     <legend>Tratamiento Interno:</legend>
 
-        {{ form_start(form) }}
-            
-            {{ form_errors(form) }}
-            <div>
-                {{ form_label(form.descripcion) }}
-                {{ form_errors(form.descripcion) }}
-                {{ form_widget(form.descripcion) }}
-            </div>
+    {{ form_start(form) }}
 
-            <div>
-                {{ form_label(form.inicio) }}
-                {{ form_errors(form.inicio) }}
-                {{ form_widget(form.inicio) }}
-            </div>
-            <div>
-                {{ form_label(form.activo) }}
-                {{ form_errors(form.activo) }}
-                {{ form_widget(form.activo) }}
-            </div>
-            <div>
-               <ul class="list-group" id="drogaTratamiento"
-                data-prototype="{{ include('TratamientoBundle:Tratamiento:prototype.html.twig', { 'form': form.drogaTratamiento.vars.prototype })}}"         
-                ></ul>
-            </div>
-           
-    
-          {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
-                    <a class="btn btn-primary" href="{{ path('evolucion_homepage_agregar') }}">Cancelar</a>
-            
-        {{ form_end(form) }}    
+    {{ form_errors(form) }}
+    <div>
+        {{ form_label(form.descripcion) }}
+        {{ form_errors(form.descripcion) }}
+        {{ form_widget(form.descripcion) }}
+    </div>
 
-  </fieldset>
-        
+    <div>
+        {{ form_label(form.inicio) }}
+        {{ form_errors(form.inicio) }}
+        {{ form_widget(form.inicio) }}
+    </div>
+    <div>
+        {{ form_label(form.activo) }}
+        {{ form_errors(form.activo) }}
+        {{ form_widget(form.activo) }}
+    </div>
+    <div>
+        <ul class="list-group" id="drogaTratamiento"
+            data-prototype="{{ include('TratamientoBundle:Tratamiento:prototype.html.twig', { 'form': form.drogaTratamiento.vars.prototype })}}"         
+            ></ul>
+    </div>
+
+
+    {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
+    <a class="btn btn-primary" href="{{ path('evolucion_nuevo') }}">Cancelar</a>
+
+    {{ form_end(form) }}    
 
 
 {% endblock %}

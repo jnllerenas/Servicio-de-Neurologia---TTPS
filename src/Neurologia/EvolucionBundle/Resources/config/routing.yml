@@ -1,15 +1,21 @@
-evolucion_index:
+evolucion_listar:
     path:     /evolucion
     defaults: { _controller: EvolucionBundle:Evolucion:index }
-    
-evolucion_homepage_index2:
-    path:     /evolucion/
-    defaults: { _controller: EvolucionBundle:Evolucion:index } 
 
-evolucion_homepage_agregar:
-    path:     /evolucion/agregar-evolucion
+evolucion_nuevo:
+    path:     /evolucion/nuevo
     defaults: { _controller: EvolucionBundle:Evolucion:new }
     
-evolucion_homepage_editar:
-    path:     /evolucion/editar-evolucion
-    defaults: { _controller: EvolucionBundle:Evolucion:edit }
+evolucion_modificar:
+    path:     /evolucion/modificar/{id}
+    defaults: { _controller: EvolucionBundle:Evolucion:modificar }
+
+evolucion_descripcion_edit:
+    path:     /evolucion/descripcion/{id}/edit
+    defaults: { _controller: "EvolucionBundle:Evolucion:descripcionEdit" }
+
+evolucion_descripcion_update:
+    path:     /evolucion/descripcion/{id}/update
+    defaults: { _controller: "EvolucionBundle:Evolucion:descripcionUpdate" }
+    requirements: { _method: post|put }
+    

@@ -1,7 +1,5 @@
-{% extends '::base.html.twig' %}
-
-{% block body %}
-    <h1>Estudios > Listado > Detalle</h1>
+{% block contenido %}
+    <h3>Estudios < Listado < Detalle</h3>
     <table class="table table-hover">  
 
         <tr>
@@ -18,9 +16,9 @@
         </tr>
     </table>
     <table class = "table table-hover">
-        
+
         {% if estudio.imagenes is not empty %}
-            
+
             <tr>
                 <td>Imagen/es</td><td></td>
             </tr>
@@ -32,16 +30,13 @@
             {% endfor %}
 
         {% endif %}
-        
+
     </table>
-        
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('neurologia_historia_clinica_homepage') }}">
-            Volver
-        </a>
-    
-</ul>
+
+
+
+
 
 {% endblock %}
+    <a id="" class="button" href='javascript:history.back()'>Volver</a>
 

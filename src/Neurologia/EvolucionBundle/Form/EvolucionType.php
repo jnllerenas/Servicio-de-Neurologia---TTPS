@@ -15,8 +15,8 @@ class EvolucionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('evolucion', 'textarea', array('label' => 'Descripción'))
-            ->add('aceptar', 'submit', array('label'=>'Confirmar evolución'))
+            ->add('evolucion','textarea', array('label' => 'Descripción: '))
+            
         ;
     }
     
@@ -35,6 +35,6 @@ class EvolucionType extends AbstractType
      */
     public function getName()
     {
-        return 'neurologia_evolucionbundle_evolucion';
+        return 'neurologia_bdbundle_evolucion';
     }
 }

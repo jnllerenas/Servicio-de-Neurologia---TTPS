@@ -17,7 +17,7 @@
     <script src="{{ asset('public/js/lib/highlight.min.js') }}"></script>
     <script src="{{ asset('public/js/lib/semantic.min.js') }}"></script>
     <script src="{{ asset('public/js/lib/docs.js') }}"></script>
-    
+
 
 {% endblock javascripts %}
 
@@ -39,6 +39,8 @@
 
             {{ include('NeurologiaHistoriaClinicaBundle:Default:historiaClinicaLateral.html.twig') }} 
             {{ include('NeurologiaHistoriaClinicaBundle:Default:solapas.html.twig') }} 
+            {% block contenido %}
+            {% endblock %}
 
         {% else %}
 
@@ -46,16 +48,12 @@
             Inicie la historia para empezar.
 
         {% endif %}
-		
-		<a href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank"> Epicrisis </a>
 
     {% else %}
 
         Error.
 
     {% endif %}
-	
-	
 
 {% endblock %}
 

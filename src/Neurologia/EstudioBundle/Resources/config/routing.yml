@@ -1,24 +1,24 @@
-neurologia_estudio_nuevo:
+estudio_nuevo:
     path:     /estudio/nuevo
     defaults: { _controller: NeurologiaEstudioBundle:Default:nuevo }
     
-neurologia_estudio_success:
+estudio_success:
     path:     /estudio/success
     defaults: { _controller: NeurologiaEstudioBundle:Default:success }
 
-neurologia_estudio_listar:
+estudio_listar:
     path:     /estudio/listar
     defaults: { _controller: NeurologiaEstudioBundle:Default:listar }
     
-neurologia_estudio_show:
+estudio_show:
     path:     /estudio/{id}/show
     defaults: { _controller: "NeurologiaEstudioBundle:Default:show" }
     
-neurologia_estudio_delete:
-    path:     /estudio/{key}/delete
+estudio_borrar:
+    path:     /estudio/{key}/borrar
     defaults: { _controller: "NeurologiaEstudioBundle:Default:delete" }
     
-neurologia_estudio_edit:
-    path:     /estudio/{key}/edit
+estudio_editar:
+    path:     /estudio/{key}/editar
     defaults: { _controller: "NeurologiaEstudioBundle:Default:edit" }
         

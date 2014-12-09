@@ -41,7 +41,7 @@ class Formularios {
     
      public static function createMotivoForm($a) {
          return $a->createFormBuilder()
-        ->setAction($a->generateUrl('neurologia_historia_clinica_motivo_nuevo'))
+        ->setAction($a->generateUrl('motivo_nuevo'))
         ->add('nuevo', 'submit', array('label' => 'Nuevo'))
         ->getForm();
         
@@ -49,7 +49,7 @@ class Formularios {
     
      public static function nuevoMotivoForm($a) {
         return $a->createFormBuilder()
-        ->setAction($a->generateUrl('neurologia_historia_clinica_motivo_nuevo'))
+        ->setAction($a->generateUrl('motivo_nuevo'))
         ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle del Motivo: '))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
         ->getForm();
@@ -57,7 +57,7 @@ class Formularios {
     
       public static function createEnfermedadForm($a) {
          return $a->createFormBuilder()
-        ->setAction($a->generateUrl('neurologia_historia_clinica_enfermedad_nuevo'))
+        ->setAction($a->generateUrl('enfermedad_nuevo'))
         ->add('nuevo', 'submit', array('label' => 'Nuevo'))
         ->getForm();
         
@@ -65,7 +65,7 @@ class Formularios {
     
      public static function nuevaEnfermedadForm($a) {
         return $a->createFormBuilder()
-        ->setAction($a->generateUrl('neurologia_historia_clinica_enfermedad_nuevo'))
+        ->setAction($a->generateUrl('enfermedad_nuevo'))
         ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle de la Enfermedad: '))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
         ->getForm();

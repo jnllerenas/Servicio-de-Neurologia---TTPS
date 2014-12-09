@@ -1,32 +1,27 @@
-tratamiento_index:
+tratamiento_listar:
     path:     /tratamiento
     defaults: { _controller: TratamientoBundle:Tratamiento:index }
-
-tratamiento_index2:
-    path:     /tratamiento/
-    defaults: { _controller: TratamientoBundle:Tratamiento:index }
     
-tratamiento_interno_new:
-    path:     /tratamiento/agregar-tratamiento-interno
+tratamiento_interno_nuevo:
+    path:     /tratamiento/interno/nuevo
     defaults: { _controller: TratamientoBundle:TratamientoInterno:new }
     
-tratamiento_interno_edit:
-    path:     /tratamiento/editar-tratamiento-interno/{key}
+tratamiento_interno_editar:
+    path:     /tratamiento/interno/editar/{key}
     defaults: { _controller: TratamientoBundle:TratamientoInterno:edit }
     
-tratamiento_interno_delete:
-    path:     /tratamiento/eliminar-tratamiento-interno/{key}
+tratamiento_interno_borrar:
+    path:     /tratamiento/interno/borrar/{key}
     defaults: { _controller: TratamientoBundle:TratamientoInterno:delete }
 
-tratamiento_externo_new:
-    path:     /tratamiento/agregar-tratamiento-externo
+tratamiento_externo_nuevo:
+    path:     /tratamiento/externo/nuevo
     defaults: { _controller: TratamientoBundle:TratamientoExterno:new }
     
-tratamiento_externo_edit:
-    path:     /tratamiento/editar-tratamiento-externo/{key}
+tratamiento_externo_editar:
+    path:     /tratamiento/externo/editar/{key}
     defaults: { _controller: TratamientoBundle:TratamientoExterno:edit }
-
     
-tratamiento_externo_delete:
-    path:     /tratamiento/eliminar-tratamiento-externo/{key}
+tratamiento_externo_borrar:
+    path:     /tratamiento/externo/borrar/{key}
     defaults: { _controller: TratamientoBundle:TratamientoExterno:delete }    

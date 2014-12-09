@@ -1,11 +1,14 @@
+{% block contenido %}
 <div class="table-responsive">
 	<table class="table">
         {% for m in enfermedad %}
             <tr>
-                <td>{{ m.fecha|date('d/m/Y') }} - {{ m.detalle }}</td>
+                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
             
             </tr>
         {% endfor %}
         </table>
 </div>
-{{ form(nuevaEnfermedad) }} 
+
+<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'enfermedad_nuevo', 'tab':'Enfermedad'}) }}">Nueva enfermedad</a>   
+{% endblock %}

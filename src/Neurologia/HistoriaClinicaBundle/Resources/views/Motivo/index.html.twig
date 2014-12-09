@@ -1,10 +1,13 @@
+{% block contenido %}
 <div class="table-responsive">
 	<table class="table">
         {% for m in motivo %}
             <tr>
-                <td>{{ m.fecha|date('d/m/Y') }} - {{ m.detalle }}</td>
+                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
             </tr>
         {% endfor %}
     </table>
-</div>
-        {{ form(nuevoMotivo) }}
+</div>       
+
+<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'motivo_nuevo', 'tab':'Motivo'}) }}">Nuevo motivo</a>  
+{% endblock %}

@@ -27,7 +27,7 @@
                     {% if paciente.email %}<tr><td> <b>Mail:</b>    {{paciente.email}}</td>{% endif %}
                     {% if paciente.nivelEducacional %}<td> <b>Nivel de educación:</b>    {{paciente.nivelEducacional.descripcion}}</td>{% endif %}
                         {% if paciente.direccion %}<td> <b>Dirección:</b>    {{paciente.direccion}}</td></tr>{% endif %}
-                    {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('d/m/Y')}}</td>{% endif %}
+                    {% if paciente.fechaNacimiento %}<tr><td> <b>Fecha Nacimiento:</b>    {{paciente.fechaNacimiento|date('Y-m-d')}}</td>{% endif %}
                         {% if paciente.telefono %}<td> <b>Teléfono:</b>    {{paciente.telefono}}</td>{% endif %}
                     {% if paciente.ocupacion %}<td> <b>Ocupacion:</b>    {{paciente.ocupacion}}</td></tr>{% endif %}
                 </table>
