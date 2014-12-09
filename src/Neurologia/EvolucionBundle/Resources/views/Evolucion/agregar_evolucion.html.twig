@@ -40,7 +40,7 @@
                
                 
                 {% if tratinterno %}
-                    <h4>Tratamientoa Internos</h4>
+                    <h4>Tratamientos Internos</h4>
                 <table class="table">
                     <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Drogas</th><th>Acciones</th>
             {% for key,ti in tratinterno %}
@@ -48,20 +48,20 @@
                     <td>{{ ti.inicio|date('d-m-Y') }}</td>
                     <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
                     <td>{{ ti.drogaTratamiento | length }}</td>
-                    <td><a href="{{ path('tratamiento_interno_edit',{'key':key}) }}" onclick="return confirm('¿Desea editar la información del tratamiento?\nLas drogas deberán ser cargadas nuevamente.');">Editar</a>
-                <a href="{{ path('tratamiento_interno_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');" >Eliminar</a></tr>
+                    <!--<td><a href="{{ path('tratamiento_interno_edit',{'key':key}) }}" onclick="return confirm('¿Desea editar la información del tratamiento?\nLas drogas deberán ser cargadas nuevamente.');">Editar</a>
+                <a href="{{ path('tratamiento_interno_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');" >Eliminar</a></tr>-->
             {% endfor %}
                 </table>
                 <br>
                 {% endif %}
                 {% if tratexterno %}
-                    <h4>Tratamientoa Externos</h4>
+                    <h4>Tratamientos Externos</h4>
                      <table class="table">
                          <tr><th>Descripci&oacute;n</th><th>Acciones</th></tr>
             {% for key,te in tratexterno %}
                 <tr><td>{{ te.descripcion }}</td>
-                <td><a href="{{ path('tratamiento_externo_edit',{'key':key}) }}" >Editar</a>
-                <a href="{{ path('tratamiento_externo_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');"  >Eliminar</a></tr>
+               <!-- <td><a href="{{ path('tratamiento_externo_edit',{'key':key}) }}" >Editar</a>
+                <a href="{{ path('tratamiento_externo_delete', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');"  >Eliminar</a></tr>-->
             {% endfor %}
         </table>
         <br>

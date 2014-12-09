@@ -1,8 +1,8 @@
 {% block contenido %}
-    <div>
+    <!--<div>
          <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Tratamiento interno</a><br>
           <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
-    </div>
+    </div>-->
 
     <legend>Tratamiento Externo:</legend>
 
@@ -20,7 +20,9 @@
     <div>
 
         {{ form_widget(form.aceptar, { 'attr': {'class': 'btn btn-primary'} }) }}
-        <a class="btn btn-primary" href="{{ path('evolucion_nuevo') }}">Cancelar</a>
+          <div>
+			<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+		</div>
 
     </div>
 

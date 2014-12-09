@@ -66,22 +66,22 @@
 
     </script>
 
-<h3>Evolucion < Estudio < Nuevo </h3>
+<h3>Evolucion > Estudio > Nuevo </h3>
 
 
 
     {{ form_start(form) }}
-    {{ form_row(form.descripcion) }}
-    {{ form_row(form.fecha) }}
-    {{ form_row(form.institucion) }}
-    {{ form_row(form.tipoEstudio) }}
+		{{ form_row(form.descripcion) }}
+		{{ form_row(form.fecha) }}
+		{{ form_row(form.institucion) }}
+		{{ form_row(form.tipoEstudio) }}
 
     <ul class="list-group" id="imagenes"
         data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
         ></ul>
 
     {{ form_row(form.save, { 'attr': {'class': 'btn btn-primary'} }) }}
-    <a class="btn btn-primary" href="{{ path('evolucion_nuevo') }}">Cancelar</a>
+    
     {{ form_end(form) }} 
 
 
@@ -96,4 +96,7 @@
 {% endif %}
 
 {% endblock %}
-  <a id="" class="button" href='javascript:history.back()'>Volver</a>
+  <div>
+	<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+</div>
+                    

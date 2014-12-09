@@ -193,7 +193,7 @@ class EvolucionController extends Controller {
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Modificar'));
+        $form->add('submit', 'submit', array('label' => 'Modificar', 'attr'=>array('class'=>"btn btn-primary")));
 
         return $form;
     }
