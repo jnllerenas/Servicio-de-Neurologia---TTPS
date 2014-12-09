@@ -128,7 +128,7 @@ class UserController extends Controller
 
         return $this->render('NeurologiaUserBundle:User:edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
