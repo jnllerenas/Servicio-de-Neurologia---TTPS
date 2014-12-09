@@ -21,6 +21,12 @@ class SecurityController extends Controller
     public function loginAction(Request $request)
     {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        
+                 if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY'))
+    {
+        // redirect authenticated users to homepage
+         return $this->render('::base.html.twig');
+    }
         $session = $request->getSession();
 
         // get the error if any (works with forward and redirect -- see below)
