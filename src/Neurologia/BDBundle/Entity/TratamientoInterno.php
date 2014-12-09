@@ -79,7 +79,11 @@ class TratamientoInterno
         public function agregarTratamientoADrogas()
     {
         foreach ($this->getDrogaTratamiento() as $value) {
-            $value->add($this);
+		//var_dump($value);var_dump($this);die;
+			
+			$t = $this->getDoctrine()->getRepository('NeurologiaBDBundle:TratamientoInterno')->find($this->getId());
+			
+            $value->setTratamiento($t);
         }
     } 
     public function removeDrogaTratamiento(DrogaTratamiento $droga)

@@ -23,7 +23,12 @@ class DefaultController extends Controller
         if(!is_dir($folder)){
             mkdir($folder);
         }
-        $comando='"d:\xampp\mysql\bin\mysqldump" -u '.$database_user;
+		$path = getenv("PATHMYSL");
+		if ($path==false){
+			$mensaje="Cree la variable de entorno PATHMYSQL como variable de entorno escribiendo en la consola -> set PATHMYSQ='elpath'";
+			return $this->render('NeurologiaBDBundle:Default:backup.html.twig',array('mensaje'=>$mensaje));
+		}
+        $comando=$path.'"\mysqldump" -u '.$database_user;
         if($database_password !== null){
             $comando.=" -p$database_password";
         }
