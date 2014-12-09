@@ -5,7 +5,7 @@
 <div class="panel panel-primary" style="margin: auto; width: 1150px;">
 
     <div class="panel-heading">
-        <h3 class="panel-title">Registro de usuarios</h3>
+        <h3 class="panel-title">Edicion de usuario</h3>
     </div>
     <div class="panel-body">
         {{ form_start(edit_form, {'action': path('paciente_update', {  'id': entity.id  } ), 'method': 'PUT'}) }}
@@ -109,18 +109,7 @@
                         {{ form_widget(edit_form.numeroCarnet, { 'attr': { 'style': 'float: left;' } }) }}
                     </div>
                     <br><br><br>
-                    <div>
-                        {{ form_label(edit_form.admitidoPor) }}
-                        <br>
-                        {{ form_widget(edit_form.admitidoPor, { 'attr': { 'style': 'float: left;' } }) }}
-                    </div>
-                    <br><br><br>
-                    <div>
-                        {{ form_label(edit_form.derivadoPor) }}
-                        <br>
-                        {{ form_widget(edit_form.derivadoPor, { 'attr': { 'style': 'float: left;' } }) }}
-                    </div>
-                    
+                                     
                 </div>
                     
                 <div style="width: 850px; float: left; margin: 25px; margin-top: 0px;">                    
@@ -146,7 +135,11 @@
                     
             {{ form_end(edit_form) }}
             
-        </edit_form>
-    </div>
+			</edit_form>
+		</div>
+	</div>
 </div>
+
+
+
 {% endblock %}

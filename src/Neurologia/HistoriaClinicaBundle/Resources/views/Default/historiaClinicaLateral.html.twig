@@ -1,57 +1,70 @@
 <div id="example">
-    <div class="ui vertical inverted sidebar menu left" id="menu">
-        <div class="item">
-            <a class="ui logo icon image" href="#">
+    <div class="ui vertical wide inverted sidebar menu left" id="menu">
+        <div class="item segment ui black inverted" style="margin-bottom: 0px">
+            <a class="ui logo icon image" href="#" style="margin-left: 15%">
+
                 <img src="{{ asset('public/images/Logo.png') }}">
             </a>
             <!-- <a href="#"><b>Neurolog&iacute;a</b></a> -->
         </div>
 
         <div class="item">
-            <div class="ui small  inverted header">Enfermedad Actual</div>
-            <div class="menu">
-                <a class="item" href="#">{{ historia.enfermedad }}</a>
-            </div>
+            <span class="ui small  inverted header">Enfermedad actual: </span>
+            <span class="menu">
+            <a class="item" style="display: inline" href="#">{{ historia.enfermedad|capitalize }}</a>
+            </span>
         </div>
         <div class="item">
-            <div class="ui small  inverted header">Atendido Por</div>
-            <div class="menu">
-                <a class="item" href="#">{{ historia.usuario }}</a>
-            </div>
+            <span class="ui small  inverted header">Admitido por: </span>
+            <span class="menu">
+                <a class="item" style="display: inline" href="#">{{ historia.usuario|capitalize }}</a>
+            </span>
         </div>
         <div class="item">
-            <div class="ui small  inverted header">Motivo</div>
-            <div class="menu">
-                <a class="item" href="#">{{ historia.motivo }}</a>
-            </div>
+            <span class="ui small  inverted header">Motivo: </span>
+            <span class="menu">
+                <a class="item" style="display: inline" href="#">{{ historia.motivo|capitalize }}</a>
+            </span>
         </div>
         <div class="item">
-            <div class="ui small  inverted header">Derivado por</div>
-            <div class="menu">
-                <a class="item" href="#">{{ historia.departamento }}</a>
-            </div>
+            <span class="ui small  inverted header">Derivado por: </span>
+            <span class="menu">
+                <a class="item" style="display: inline" href="#">{{ historia.departamento|capitalize }}</a>
+            </span>
         </div>
         <div class="item">
             <div class="ui small  inverted header">Historial</div>
             {% for i in listado %}
-                <div class="menu">
-                    <i class="calendar icon"></i>
-                    {{ i.fecha|date('Y-m-d') }}
-                    <a class="item" href="#">
-                        <u>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</u>: <i> {{i.descripcion|capitalize}}</i>
-                    </a>
-                    {% if i.droga %}
-                        <a class="item" href="#">
-                            Droga(dosis):
-                        </a>
-                        {% for d in i.droga %}
-                            <a class="item" href="#">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ d.droga }} ({{d.dosis}})
-                            </a>
-                        {% endfor %}
-
-                    {% endif %}
-                </div>
+                {% if loop.first %}
+                 {% set date = i.fecha|date('d/m/Y') %}
+                 <div class="menu">
+                     <i class="calendar icon"></i>
+                     {{ i.fecha|date('d/m/Y') }}
+                 {% endif %}
+                 {% if i.fecha|date('d/m/Y') != date %}
+                 </div>
+                 {% set date = i.fecha|date('d/m/Y') %} 
+                 <div class="menu">   
+                     <i class="calendar icon"></i>
+                     {{ i.fecha|date('d/m/Y') }}
+                 {% endif %}
+                     <a class="item" href="#">
+                         <u>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</u>: <i> {{i.descripcion|capitalize}}</i>
+                     </a>
+                     {% if i.droga %}
+                         <a class="item" href="#">
+                             Droga(dosis):
+                         </a>
+                         {% for d in i.droga %}
+                             <a class="item" href="#">
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ d.droga }} ({{d.dosis}})
+                             </a>
+                         {% endfor %}
+ 
+                     {% endif %}
+                     {% if loop.last %}
+                     </div>
+                     {% endif %}
             {% endfor %}
         </div>
     </div>

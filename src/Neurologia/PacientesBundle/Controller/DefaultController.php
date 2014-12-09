@@ -96,12 +96,17 @@ class DefaultController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paciente entity.');
         }
+        $actual=false;
+        if(isset($_SESSION['paciente']) && $_SESSION['paciente']->getId() == $id){
+            $actual=true;
+        }
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
         return $this->render('NeurologiaPacientesBundle:Default:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'actual'      => $actual
         ));
     }
     /**
