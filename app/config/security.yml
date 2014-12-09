@@ -1,75 +1,34 @@
 security:
-    encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
-    providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
-    firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: _security_check
-                login_path: _demo_login
-            logout:
-                path:   _demo_logout
-                target: _demo
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
-
-    access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-
-security:
+    access_denied_url: /login
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
-
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
-
+        ROLE_SECRETARY:        ROLE_USER
+        ROLE_DOCTOR:           ROLE_SECRETARY
+        ROLE_ADMIN:            ROLE_DOCTOR
+        ROLE_SUPER_ADMIN:      [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
-
     firewalls:
         main:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-                default_target_path:            /home
+                default_target_path: /home
             logout:       true
             anonymous:    true
-           
-
     access_control:
         
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: ROLE_ADMIN }
+        - { path: ^/register, role: ROLE_ADMIN  }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, role: ROLE_USER }
-        - { path: ^/abm, role: ROLE_USER }
-        - { path: ^/tratamiento, role: ROLE_USER }
-        - { path: ^/evolucion, role: ROLE_USER }
-        - { path: ^/home, role: ROLE_USER }
-        - { path: ^/historia, role: ROLE_USER }
+        - { path: ^/user, role: ROLE_ADMIN }
+        - { path: ^/abm, role: ROLE_ADMIN }
+        - { path: ^/tratamiento, role: [ROLE_ADMIN, ROLE_DOCTOR] }
+        - { path: ^/evolucion, role: [ROLE_ADMIN, ROLE_DOCTOR] }
+        - { path: ^/home, role: [ROLE_ADMIN, ROLE_DOCTOR, ROLE_SECRETARY] }
+        - { path: ^/busqueda, role: [ROLE_ADMIN, ROLE_DOCTOR, ROLE_SECRETARY] }
+        - { path: ^/historia, role: [ROLE_ADMIN, ROLE_DOCTOR] }
         - { path: ^/admin, role: ROLE_ADMIN }
