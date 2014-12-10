@@ -12,7 +12,17 @@
             {{ form_start(form) }}
 
                 {{ form_errors(form) }}
-                
+                {{ form_errors(form.nombre) }}
+                {{ form_errors(form.apellido) }}
+                {{ form_errors(form.sexo) }}
+                {{ form_errors(form.tipoDocumento) }}
+                {{ form_errors(form.numero_documento) }}
+                {{ form_errors(form.fecha_de_nacimiento) }}
+                {{ form_errors(form.estadoCivil) }}
+                {{ form_errors(form.telefono) }}
+                {{ form_errors(form.direccion) }}
+                {{ form_errors(form.roles) }}
+                {{ form_errors(form.email) }}                
                 <div>
                     <div style="width: 250px; float: left; margin: 25px;">
                         <div>
@@ -78,8 +88,7 @@
                             <br>
                             {{ form_widget(form.roles, { 'attr': { 'style': 'float: left;' } }) }}
                         </div>
-                        <br><br><br>
-
+                        
                     </div>
 
                     <div style="width: 250px; float: left; margin: 25px;">
@@ -96,22 +105,28 @@
                             {{ form_widget(form.username, { 'attr': { 'style': 'float: left;' } }) }}
                         </div>
                         <br><br><br>
-                        <!--<div>
-                            {{ form_label(form.plainPassword.first) }}
+                        <div>
+                            {{ form_label(form.plainPassword.first, { 'attr': { 'style': 'display:none;' } }) }}
                             <br>
-                            {{ form_widget(form.plainPassword.first, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
+                            {{ form_widget(form.plainPassword.first, { 'attr': { 'style': 'display:none;' } }) }}
                         </div>
                         <br><br><br>
                         <div>
-                            {{ form_label(form.plainPassword.second) }}
+                            {{ form_label(form.plainPassword.second, { 'attr': { 'style': 'display:none;' } }) }}
                             <br>
-                            {{ form_widget(form.plainPassword.second, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
-                        </div>-->
-                        <br><br><br><br><br>
+                            {{ form_widget(form.plainPassword.second, { 'attr': { 'style': 'display:none;' } }) }}
+                        </div>
+                        <br><br><br>
                         <div>
-                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary'} }) }}
-                    </div>
-						<div style="clear:both;">
+                            {{ form_label(form.enabled) }}
+                            <br>
+                            {{ form_widget(form.enabled, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
+                        </div> 
+                        <br><br><br>
+                        <div>
+                            {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary'} }) }}
+                        </div>
+			<div style="clear:both;">
                             <input class="btn btn-primary" type="button" value="Volver" style="float: right; margin-top: -34px;" onclick="window.history.back()"/>
                         </div>
                     </div>
