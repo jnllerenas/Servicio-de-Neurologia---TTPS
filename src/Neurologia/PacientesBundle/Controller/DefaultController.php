@@ -31,6 +31,11 @@ class DefaultController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', 'Se ha agregado exitósamente un paciente.'
+                );
             return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
         }
         return $this->render('NeurologiaPacientesBundle:Default:new.html.twig', array(
@@ -141,6 +146,11 @@ class DefaultController extends Controller {
         $editForm->handleRequest($request); 
         if ($editForm->isValid()) {
             $em->flush();
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', 'Se ha modificado exitósamente un paciente.'
+                );
             return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
         }
         return $this->render('NeurologiaPacientesBundle:Default:edit.html.twig', array(
