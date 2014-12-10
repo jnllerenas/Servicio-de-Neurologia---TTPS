@@ -169,7 +169,7 @@ class DefaultController extends Controller
         $name=$request->get($form->getName());
         $method=$request->getMethod();
         $elegidosstring='';
-        if($method=='GET' && $name){
+        //if($method=='GET' && $name){
           $formDatos=$name;
           $categoriaDiagnostico=$formDatos['categoriaDiagnostico'];
           $droga=$formDatos['droga'];
@@ -247,7 +247,7 @@ class DefaultController extends Controller
           }
           $vars["lista"]=$query->getResult();
           $vars["valoreselegidos"]=$elegidosstring;
-        }
+        //}
         $vars['form']=$form->createView();
 
         return $this->render('NeurologiaBusquedaBundle:Default:avanzada.html.twig', $vars);
