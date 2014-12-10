@@ -1,11 +1,3 @@
-neurologia_admin_homepage:
-    path:     /admin
-    defaults: { _controller: NeurologiaUserBundle:Default:admin }
-    
-neurologia_user_homepage:
-    path:     /user
-    defaults: { _controller: NeurologiaUserBundle:Default:user }
-
 neurologia_register:
     path:     /register
     defaults: { _controller: FOSUserBundle:Registration:register }
