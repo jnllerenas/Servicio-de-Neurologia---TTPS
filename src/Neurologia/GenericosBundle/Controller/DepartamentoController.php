@@ -24,12 +24,32 @@ class DepartamentoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
-
+        
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('departamento', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('departamento', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:Departamento:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
+            'entities' => $entities
         ));
+        
     }
     /**
      * Creates a new Departamento entity.
@@ -45,24 +65,23 @@ class DepartamentoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
-			
-			return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('msj'=>'Registro creado satisfactoriamente'));
-            //return $this->redirect($this->generateUrl('departamento_show', array('id' => $entity->getId())));
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'No puede haber dos departamentos con la misma descripción'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }else{
+                    throw $e;
+                }
+            }
+
+            return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('msj'=>'Registro creado satisfactoriamente'));
+
         }
 
         return $this->render('NeurologiaGenericosBundle:Departamento:new.html.twig', array(
@@ -106,28 +125,6 @@ class DepartamentoController extends Controller
     }
 
     /**
-     * Finds and displays a Departamento entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:Departamento')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Departamento entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:Departamento:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing Departamento entity.
      *
      */
@@ -138,7 +135,7 @@ class DepartamentoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:Departamento')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Departamento entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el departamento seleccionado.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -180,7 +177,7 @@ class DepartamentoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:Departamento')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Departamento entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el departamento seleccionado.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,7 +191,7 @@ class DepartamentoController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'No puede haber dos departamentos con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -229,7 +226,7 @@ class DepartamentoController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:Departamento')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Departamento entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar el departamento seleccionado.');
             }
 
             $em->remove($entity);
@@ -240,7 +237,7 @@ class DepartamentoController extends Controller
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'Imposible eliminar por integridad referencial'));
+						return $this->forward('NeurologiaGenericosBundle:Departamento:index', array('error'=>'No se puede eliminar un departamento utilizado en una Historia Clínica'));
 					}
 					else{
 						throw $e;
@@ -266,8 +263,8 @@ class DepartamentoController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('departamento_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }

@@ -25,11 +25,31 @@ class EfectoAdversoController extends Controller
 
         $entities = $em->getRepository('NeurologiaBDBundle:EfectoAdverso')->findAll();
 
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('efectoadverso', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('efectoadverso', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:EfectoAdverso:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
-        ));
+            'entities' => $entities
+        ));              
+
     }
     /**
      * Creates a new EfectoAdverso entity.
@@ -45,24 +65,23 @@ class EfectoAdversoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'No puede haber dos efectos adversos con la misma descripción.'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }else{
+                    throw $e;
+                }
+            }
 
-			return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('msj'=>'Registro creado satisfactoriamente'));
-            //return $this->redirect($this->generateUrl('efectoadverso_show', array('id' => $entity->getId())));
+            return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('msj'=>'Registro creado satisfactoriamente'));
+
         }
 
         return $this->render('NeurologiaGenericosBundle:EfectoAdverso:new.html.twig', array(
@@ -106,28 +125,6 @@ class EfectoAdversoController extends Controller
     }
 
     /**
-     * Finds and displays a EfectoAdverso entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:EfectoAdverso')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EfectoAdverso entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:EfectoAdverso:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing EfectoAdverso entity.
      *
      */
@@ -138,7 +135,7 @@ class EfectoAdversoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:EfectoAdverso')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EfectoAdverso entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el efecto adverso seleccionado.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -180,7 +177,7 @@ class EfectoAdversoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:EfectoAdverso')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EfectoAdverso entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el efecto adverso seleccionado.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -195,7 +192,7 @@ class EfectoAdversoController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'No puede haber dos efectos adversos con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -230,7 +227,7 @@ class EfectoAdversoController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:EfectoAdverso')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find EfectoAdverso entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar el efecto adverso seleccionado.');
             }
 
             $em->remove($entity);
@@ -241,7 +238,7 @@ class EfectoAdversoController extends Controller
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'Imposible eliminar por integridad referencial'));
+						return $this->forward('NeurologiaGenericosBundle:EfectoAdverso:index', array('error'=>'No se puede eliminar un efecto adverso utilizado en una Historia Clínica'));
 					}
 					else{
 						throw $e;
@@ -267,7 +264,7 @@ class EfectoAdversoController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('efectoadverso_delete', array('id' => $id)))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;

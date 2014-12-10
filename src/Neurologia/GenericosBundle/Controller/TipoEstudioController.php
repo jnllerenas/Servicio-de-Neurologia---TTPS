@@ -25,11 +25,31 @@ class TipoEstudioController extends Controller
 
         $entities = $em->getRepository('NeurologiaBDBundle:TipoEstudio')->findAll();
 
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('tipoestudio', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('tipoestudio', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:TipoEstudio:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
+            'entities' => $entities
         ));
+        
     }
     /**
      * Creates a new TipoEstudio entity.
@@ -45,23 +65,23 @@ class TipoEstudioController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'No puede haber dos tipos de estudio con la misma descripción.'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }
+                else{
+                    throw $e;
+                }
+            }
 
-			return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('msj'=>'Registro creado satisfactoriamente'));
+            return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('tipoestudio_show', array('id' => $entity->getId())));
         }
 
@@ -106,28 +126,6 @@ class TipoEstudioController extends Controller
     }
 
     /**
-     * Finds and displays a TipoEstudio entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:TipoEstudio')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TipoEstudio entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:TipoEstudio:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing TipoEstudio entity.
      *
      */
@@ -138,7 +136,7 @@ class TipoEstudioController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:TipoEstudio')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TipoEstudio entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el tipo de estudio seleccionado.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -194,7 +192,7 @@ class TipoEstudioController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'No puede haber dos tipos de estudio con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -229,7 +227,7 @@ class TipoEstudioController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:TipoEstudio')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find TipoEstudio entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar el tipo de estudio seleccionado.');
             }
 
             $em->remove($entity);
@@ -240,7 +238,7 @@ class TipoEstudioController extends Controller
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'Imposible eliminar por integridad referencial'));
+						return $this->forward('NeurologiaGenericosBundle:TipoEstudio:index', array('error'=>'No se puede eliminar un tipo de estudio utilizado en una Historia Clínica'));
 					}
 					else{
 						throw $e;
@@ -266,7 +264,7 @@ class TipoEstudioController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('tipoestudio_delete', array('id' => $id)))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;

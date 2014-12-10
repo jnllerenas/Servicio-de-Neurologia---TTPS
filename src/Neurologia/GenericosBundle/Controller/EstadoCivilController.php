@@ -25,11 +25,31 @@ class EstadoCivilController extends Controller
 
         $entities = $em->getRepository('NeurologiaBDBundle:EstadoCivil')->findAll();
 
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('estadocivil', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('estadocivil', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:EstadoCivil:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
-        ));
+            'entities' => $entities
+        ));      
+       
     }
     /**
      * Creates a new EstadoCivil entity.
@@ -45,23 +65,22 @@ class EstadoCivilController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
-	
-			return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('msj'=>'Registro creado satisfactoriamente'));
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'No puede haber dos estados civiles con la misma descripción.'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }else{
+                    throw $e;
+                }
+            }
+
+            return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('estadocivil_show', array('id' => $entity->getId())));
         }
 
@@ -106,28 +125,6 @@ class EstadoCivilController extends Controller
     }
 
     /**
-     * Finds and displays a EstadoCivil entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:EstadoCivil')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstadoCivil entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:EstadoCivil:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing EstadoCivil entity.
      *
      */
@@ -138,7 +135,7 @@ class EstadoCivilController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:EstadoCivil')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstadoCivil entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el estado civil seleccionado.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -180,7 +177,7 @@ class EstadoCivilController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:EstadoCivil')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find EstadoCivil entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el estado civil seleccionado.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,7 +191,7 @@ class EstadoCivilController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'No puede haber dos estados civiles con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -229,7 +226,7 @@ class EstadoCivilController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:EstadoCivil')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find EstadoCivil entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar el estado civil seleccionado.');
             }
 
             $em->remove($entity);
@@ -240,7 +237,7 @@ class EstadoCivilController extends Controller
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'Imposible eliminar por integridad referencial'));
+						return $this->forward('NeurologiaGenericosBundle:EstadoCivil:index', array('error'=>'No se puede eliminar un estado civil utilizado en una Historia Clínica'));
 					}
 					else{
 						throw $e;
@@ -266,7 +263,7 @@ class EstadoCivilController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('estadocivil_delete', array('id' => $id)))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;

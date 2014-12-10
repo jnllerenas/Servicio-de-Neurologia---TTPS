@@ -25,11 +25,31 @@ class NivelEducacionalController extends Controller
 
         $entities = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->findAll();
 
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('niveleducacional', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('niveleducacional', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:NivelEducacional:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
-        ));
+            'entities' => $entities
+        ));        
+
     }
     /**
      * Creates a new NivelEducacional entity.
@@ -45,23 +65,23 @@ class NivelEducacionalController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'No puede haber dos niveles educacionales con la misma descripción.'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }
+                else{
+                    throw $e;
+                }
+            }
 
-			return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('msj'=>'Registro creado satisfactoriamente'));
+            return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('msj'=>'Registro creado satisfactoriamente'));
             //return $this->redirect($this->generateUrl('niveleducacional_show', array('id' => $entity->getId())));
         }
 
@@ -106,28 +126,6 @@ class NivelEducacionalController extends Controller
     }
 
     /**
-     * Finds and displays a NivelEducacional entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:NivelEducacional:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing NivelEducacional entity.
      *
      */
@@ -138,7 +136,7 @@ class NivelEducacionalController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el nivel educacional seleccionado.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -180,7 +178,7 @@ class NivelEducacionalController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar el nivel educacional seleccionado.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,7 +192,7 @@ class NivelEducacionalController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'No puede haber dos niveles educacionales con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -229,7 +227,7 @@ class NivelEducacionalController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:NivelEducacional')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find NivelEducacional entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar el nivel educacional seleccionado.');
             }
 
             $em->remove($entity);
@@ -240,7 +238,7 @@ class NivelEducacionalController extends Controller
 			} catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'Imposible eliminar por integridad referencial'));
+						return $this->forward('NeurologiaGenericosBundle:NivelEducacional:index', array('error'=>'No se puede eliminar un nivel educacional utilizado en una Historia Clínica'));
 					}
 					else{
 						throw $e;
@@ -266,7 +264,7 @@ class NivelEducacionalController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('niveleducacional_delete', array('id' => $id)))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
             ->getForm()
         ;

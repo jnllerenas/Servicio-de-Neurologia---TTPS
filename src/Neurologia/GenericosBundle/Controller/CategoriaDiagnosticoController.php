@@ -24,11 +24,30 @@ class CategoriaDiagnosticoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->findAll();
-
+        
+        if(!empty($msj)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'mensaje', $msj
+                );
+            return $this->redirect($this->generateUrl('categoriadiagnostico', array(
+                'entities' => $entities
+            )));
+        }
+        if(!empty($error)){
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'error', $error
+                );
+            return $this->redirect($this->generateUrl('categoriadiagnostico', array(
+                'entities' => $entities
+            )));
+        }
+        
         return $this->render('NeurologiaGenericosBundle:CategoriaDiagnostico:index.html.twig', array(
-            'entities' => $entities,
-			'error'=>$error,
-			'msj'=>$msj,
+            'entities' => $entities
         ));
     }
     /**
@@ -45,23 +64,23 @@ class CategoriaDiagnosticoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             try {
-				$em->flush();
-			}
-			catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Error de clave duplicada'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}
-			return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('msj'=>'Registro creado satisfactoriamente'));
-            //return $this->redirect($this->generateUrl('categoriadiagnostico_show', array('id' => $entity->getId())));
+                $em->flush();
+            }
+            catch (\Doctrine\DBAL\DBALException $e) {
+                if ($e->getCode() == 0){
+                    if ($e->getPrevious()->getCode() == 23000){
+                        return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'No puede haber dos categorías con la misma descripción'));
+                    }
+                    else{
+                        throw $e;
+                    }
+                }else{
+                    throw $e;
+                }
+            }
+            
+            return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('msj'=>'Registro creado satisfactoriamente'));
+        
         }
 
         return $this->render('NeurologiaGenericosBundle:CategoriaDiagnostico:new.html.twig', array(
@@ -105,28 +124,6 @@ class CategoriaDiagnosticoController extends Controller
     }
 
     /**
-     * Finds and displays a CategoriaDiagnostico entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find CategoriaDiagnostico entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('NeurologiaGenericosBundle:CategoriaDiagnostico:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing CategoriaDiagnostico entity.
      *
      */
@@ -137,7 +134,7 @@ class CategoriaDiagnosticoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find CategoriaDiagnostico entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar la categoría de diagnóstico seleccionada.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -179,7 +176,7 @@ class CategoriaDiagnosticoController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find CategoriaDiagnostico entity.');
+            throw $this->createNotFoundException('No se ha podido encontrar la categoría de diagnóstico seleccionada.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +190,7 @@ class CategoriaDiagnosticoController extends Controller
 			catch (\Doctrine\DBAL\DBALException $e) {
 				if ($e->getCode() == 0){
 					if ($e->getPrevious()->getCode() == 23000){
-						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Error de clave duplicada'));
+						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'No puede haber dos categorías con la misma descripción.'));
 					}
 					else{
 						throw $e;
@@ -227,27 +224,28 @@ class CategoriaDiagnosticoController extends Controller
             $entity = $em->getRepository('NeurologiaBDBundle:CategoriaDiagnostico')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find CategoriaDiagnostico entity.');
+                throw $this->createNotFoundException('No se ha podido encontrar la categoría de diagnóstico seleccionada.');
             }
-			$em->remove($entity);
-			
-			try {	
-				$em->flush();
-				
-			} catch (\Doctrine\DBAL\DBALException $e) {
-				if ($e->getCode() == 0){
-					if ($e->getPrevious()->getCode() == 23000){ 	//Error de integridad referencial
-						return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'Imposible eliminar por integridad referencial'));
-					}
-					else{
-						throw $e;
-					}
-				}
-				else{
-					throw $e;
-				}
-			}				
-		}
+            
+            $em->remove($entity);
+
+            try {	
+                    $em->flush();
+
+            } catch (\Doctrine\DBAL\DBALException $e) {
+                    if ($e->getCode() == 0){
+                            if ($e->getPrevious()->getCode() == 23000){ 	//Error de integridad referencial
+                                    return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('error'=>'No se puede eliminar una categoría utilizada en una Historia Clínica'));
+                            }
+                            else{
+                                    throw $e;
+                            }
+                    }
+                    else{
+                            throw $e;
+                    }
+            }				
+        }
 
         return $this->forward('NeurologiaGenericosBundle:CategoriaDiagnostico:index', array('msj'=>'Registro eliminado satisfactoriamente'));
     }
@@ -263,8 +261,8 @@ class CategoriaDiagnosticoController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('categoriadiagnostico_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger',)))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Borrar', 'attr' => array('class' => 'btn btn-danger')))
             ->getForm()
         ;
     }
