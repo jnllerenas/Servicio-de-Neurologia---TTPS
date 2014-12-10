@@ -1,6 +1,9 @@
 neurologia_genericos_homepage:
     path:     /abm/
-    defaults: { _controller: NeurologiaGenericosBundle:Default:abm }
+    defaults:  
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /home
+        permanent: true
 
 NeurologiaGenericosBundle_categoriadiagnostico:
     resource: "@NeurologiaGenericosBundle/Resources/config/routing/categoriadiagnostico.yml"
@@ -33,10 +36,6 @@ NeurologiaGenericosBundle_obrasocial:
 NeurologiaGenericosBundle_sexo:
     resource: "@NeurologiaGenericosBundle/Resources/config/routing/sexo.yml"
     prefix: /abm/sexo
-
-NeurologiaGenericosBundle_tipoantecedente:
-    resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipoantecedente.yml"
-    prefix: /abm/tipoantecedente
 
 NeurologiaGenericosBundle_tipodocumento:
     resource: "@NeurologiaGenericosBundle/Resources/config/routing/tipodocumento.yml"

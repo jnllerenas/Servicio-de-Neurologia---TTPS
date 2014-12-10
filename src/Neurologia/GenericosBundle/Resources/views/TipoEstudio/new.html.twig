@@ -1,21 +1,32 @@
-{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+{% extends 'NeurologiaGenericosBundle:Default:new.html.twig' %}
 
-{% block container %}
-    
-    <div class="panel panel-primary">
+{% block titulo_modulo %}
+    Nuevo tipo de estudio
+{% endblock titulo_modulo %}
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Nuevo tipo de estudio</h3>
+{% block form_abm %}
+                    
+    {{ form_start(form, {'method': 'POST'}) }}
+
+        <div style="width:auto; text-align: center;">
+            {{ form_label(form.descripcion) }}<br>
+            {{ form_widget(form.descripcion,{ 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.descripcion) }}
         </div>
-        <div class="panel-body">
-            <div align="center" style="text-align:center">
-                
-                {{ form(form) }}
-
-                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('tipoestudio') }}">Volver</a>
-
-            </div>
+        <br>
+        <div style="width:auto; text-align: center;">
+            {{ form_label(form.siglas) }}<br>
+            {{ form_widget(form.siglas,{ 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.siglas) }}
         </div>
-    </div>    
-            
-{% endblock %}
+        <br><br>
+        <div style="clear: both; text-align: center;">
+            <a class="btn btn-primary" href="{{- path('tipoestudio') -}}">
+                Volver
+            </a>
+            {{ form_widget(form.submit,{ 'attr': {'class': 'btn btn-success'} }) }}
+        </div>
+
+    {{ form_end(form) }}
+
+{% endblock form_abm %}

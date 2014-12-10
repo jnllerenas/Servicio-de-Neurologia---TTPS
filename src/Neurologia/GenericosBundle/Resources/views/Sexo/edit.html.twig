@@ -1,25 +1,13 @@
-{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+{% extends 'NeurologiaGenericosBundle:Default:edit.html.twig' %}
 
-{% block container %}
-    
-    <div class="panel panel-primary">
+{% block titulo_modulo %}
+    Edici&oacute;n de un sexo
+{% endblock titulo_modulo %}
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Edici&oacute;n de un sexo</h3>
-        </div>
-        <div class="panel-body">
-            <div align="center" style="text-align:center">
-                
-                {{ form(edit_form) }}
+{% block path_abm_volver %}
+    {{- path('sexo') -}}
+{% endblock path_abm_volver %}
 
-                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('sexo') }}">Volver</a>
-
-                {{ form(delete_form) }}
-                
-                <a style="float:right" class="btn btn-primary" href="{{- path('sexo_new') -}}">Nuevo</a>
-                
-            </div>
-        </div>
-    </div>
-           
-{% endblock %}
+{% block path_abm_nuevo %}
+   {{- path('sexo_new') -}}
+{% endblock path_abm_nuevo %}

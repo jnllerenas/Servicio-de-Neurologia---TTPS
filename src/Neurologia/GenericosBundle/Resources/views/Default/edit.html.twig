@@ -1,0 +1,43 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+    
+    <div class="panel panel-primary" style="margin: auto; width: 400px;">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {% block titulo_modulo %}{% endblock titulo_modulo %}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div align="center" style="text-align:left;">
+                
+                {% block form_abm %}
+                    
+                    {{ form_start(edit_form) }}
+
+                        <div style="width:auto; text-align: center;">
+                            {{ form_label(edit_form.descripcion) }}<br>
+                            {{ form_widget(edit_form.descripcion,{ 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(edit_form.descripcion) }}
+                        </div>
+                        <br><br>
+                        <div style="clear: both; text-align: center;">
+                            {{ form_widget(edit_form.submit,{ 'attr': { 'style': 'margin-bottom: 20px;' } }) }}
+                            
+                    {{ form_end(edit_form) }}
+                    {{ form_start(delete_form) }}
+                        <a class="btn btn-primary" href="{% block path_abm_volver %}{% endblock path_abm_volver %}">
+                            Volver
+                        </a>
+                        {{ form_widget(delete_form.submit,{ 'attr': {'class': 'btn btn-danger'} }) }}
+                        <a class="btn btn-primary" href="{% block path_abm_nuevo %}{% endblock path_abm_nuevo %}">Nuevo</a>
+                    {{ form_end(delete_form) }}
+                        </div>
+                {% endblock form_abm %}
+                
+            </div>
+        </div>
+    </div>    
+            
+{% endblock %}

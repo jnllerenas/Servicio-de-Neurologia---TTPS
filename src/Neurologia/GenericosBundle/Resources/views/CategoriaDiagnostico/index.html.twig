@@ -10,6 +10,20 @@
             <h3 class="panel-title">Categor&iacute;as de diagn&oacute;stico</h3>
         </div>
         <div class="panel-body">
+            {% for flashMessage in app.session.flashbag.get('mensaje') %}
+
+                <div class="alert alert-success" role="alert" style="display:block">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+
+                <div class="alert alert-danger" role="alert" style="display:block">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
             <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
                 <thead>
                     <tr>
@@ -23,7 +37,7 @@
                             <td>{{ entity.descripcion }}</td>
                             <td>
                                 <a href="{{- path('categoriadiagnostico_edit', { 'id': entity.id }) -}}">
-                                    <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar" title="Editar"/>
+                                    <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar Categoría de Diagnóstico" title="Editar Categoría de Diagnóstico"/>
                                 </a>
                             </td>
                         </tr>
@@ -33,6 +47,6 @@
         </div>
     </div>
 
-    <a style="float:right" class="btn btn-primary" href="{{- path('categoriadiagnostico_new') -}}">Nuevo</a>
+    <a style="float:right" class="btn btn-primary" href="{{- path('categoriadiagnostico_new') -}}">Nueva Categoría de Diagnóstico</a>
             
 {% endblock %}

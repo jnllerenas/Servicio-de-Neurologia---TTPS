@@ -1,26 +1,13 @@
-{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+{% extends 'NeurologiaGenericosBundle:Default:edit.html.twig' %}
 
-{% block container %}
-    
-    <div class="panel panel-primary">
+{% block titulo_modulo %}
+    Edici&oacute;n de una categor&iacute;a de diagn&oacute;stico
+{% endblock titulo_modulo %}
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Edici&oacute;n de una categor&iacute;a de diagn&oacute;stico</h3>
-        </div>
-        <div class="panel-body">
-            <div align="center" style="text-align:center">
-                
-                {{ form(edit_form) }}
+{% block path_abm_volver %}
+    {{- path('categoriadiagnostico') -}}
+{% endblock path_abm_volver %}
 
-                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('categoriadiagnostico') }}">Volver</a>
-
-                {{ form(delete_form) }}
-                
-                <a style="float:right" class="btn btn-primary" href="{{- path('categoriadiagnostico_new') -}}">Nuevo</a>
-                
-            </div>
-        </div>
-    </div>
-    
-            
-{% endblock %}
+{% block path_abm_nuevo %}
+   {{- path('categoriadiagnostico_new') -}}
+{% endblock path_abm_nuevo %}

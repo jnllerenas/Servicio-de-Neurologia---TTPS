@@ -10,6 +10,20 @@
             <h3 class="panel-title">Sexos</h3>
         </div>
         <div class="panel-body">
+            {% for flashMessage in app.session.flashbag.get('mensaje') %}
+
+                <div class="alert alert-success" role="alert" style="display:block">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+
+                <div class="alert alert-danger" role="alert" style="display:block">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}            
             <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
                 <thead>
                     <tr>
@@ -33,6 +47,6 @@
         </div>
     </div>
 
-    <a style="float:right" class="btn btn-primary" href="{{- path('sexo_new') -}}">Nuevo</a>
+    <a style="float:right" class="btn btn-primary" href="{{- path('sexo_new') -}}">Nuevo Sexo</a>
             
 {% endblock %}

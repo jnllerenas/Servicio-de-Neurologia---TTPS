@@ -1,25 +1,13 @@
-{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+{% extends 'NeurologiaGenericosBundle:Default:edit.html.twig' %}
 
-{% block container %}
-    
-    <div class="panel panel-primary">
+{% block titulo_modulo %}
+    Edici&oacute;n de una droga
+{% endblock titulo_modulo %}
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Edici&oacute;n de una droga</h3>
-        </div>
-        <div class="panel-body">
-            <div align="center" style="text-align:center">
-                
-                {{ form(edit_form) }}
+{% block path_abm_volver %}
+    {{- path('droga') -}}
+{% endblock path_abm_volver %}
 
-                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('droga') }}">Volver</a>
-
-                {{ form(delete_form) }}
-                
-                <a style="float:right" class="btn btn-primary" href="{{- path('droga_new') -}}">Nuevo</a>
-                
-            </div>
-        </div>
-    </div>
-           
-{% endblock %}
+{% block path_abm_nuevo %}
+   {{- path('droga_new') -}}
+{% endblock path_abm_nuevo %}

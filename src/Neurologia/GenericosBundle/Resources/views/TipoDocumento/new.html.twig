@@ -1,21 +1,9 @@
-{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+{% extends 'NeurologiaGenericosBundle:Default:new.html.twig' %}
 
-{% block container %}
-    
-    <div class="panel panel-primary">
+{% block titulo_modulo %}
+    Nuevo tipo de documento
+{% endblock titulo_modulo %}
 
-        <div class="panel-heading">
-            <h3 class="panel-title">Nuevo tipo de documento</h3>
-        </div>
-        <div class="panel-body">
-            <div align="center" style="text-align:center">
-                
-                {{ form(form) }}
-
-                <a style="margin-bottom: 20px;" class="btn btn-primary" href="{{ path('tipodocumento') }}">Volver</a>
-
-            </div>
-        </div>
-    </div>    
-            
-{% endblock %}
+{% block path_abm_volver %}
+    {{ path('tipodocumento') }}
+{% endblock path_abm_volver %}

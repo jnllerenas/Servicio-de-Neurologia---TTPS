@@ -1,0 +1,41 @@
+{% extends 'NeurologiaGenericosBundle:Default:abm.html.twig' %}
+
+{% block container %}
+    
+    <div class="panel panel-primary" style="margin: auto; width: 300px;">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {% block titulo_modulo %}{% endblock titulo_modulo %}
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div align="center" style="text-align:left;">
+                
+                {% block form_abm %}
+                    
+                    {{ form_start(form, {'method': 'POST'}) }}
+
+                        <div style="width:auto; text-align: center;">
+                            {{ form_label(form.descripcion) }}
+                            {{ form_widget(form.descripcion,{ 'attr': {'class': 'form-control'} }) }}
+                            {{ form_errors(form.descripcion) }}
+                        </div>
+                        <br><br><br>
+                        <div style="clear: both; text-align: center;">
+                            <a class="btn btn-primary" href="{% block path_abm_volver %}{% endblock path_abm_volver %}">
+                                Volver
+                            </a>
+                            {{ form_widget(form.submit,{ 'attr': {'class': 'btn btn-success'} }) }}
+                        </div>
+
+                    {{ form_end(form) }}
+                    
+                {% endblock form_abm %}
+                
+            </div>
+        </div>
+    </div>
+    
+            
+{% endblock %}
