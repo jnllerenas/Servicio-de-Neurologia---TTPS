@@ -1,40 +1,44 @@
 <div id="example">
-    <div class="ui vertical wide inverted sidebar menu left" id="menu">
-        <div class="item segment ui black inverted" style="margin-bottom: 0px">
+    <div class="ui vertical very wide sidebar menu left" id="menu">
+        <div class="item" style="text-align: left;">
+            <a class="ui logo icon image" href="#">
+              <img src="{{ asset('public/images/Logo.png') }}">
+              <span style="color: black">Nahu tiene que subir 'public/images/Logo.png' con las letras invertidas para que se vea</span>
+            </a>
+        </div>
+        <div class="item">
             <a class="item" href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank" >
                 <i class="file pdf icon"></i>
                 Generar epicrisis
-                {#<img src="{{ asset('public/images/Logo.png') }}">#}
             </a>
-            <!-- <a href="#"><b>Neurolog&iacute;a</b></a> -->
         </div>
 
         <div class="item">
-            <span class="ui small  inverted header">Enfermedad actual: </span>
+            <span class="ui small header">Enfermedad actual: </span>
             <span class="menu">
             <a class="item" style="display: inline" href="#">{{ historia.enfermedad|capitalize }}</a>
             </span>
         </div>
         <div class="item">
-            <span class="ui small  inverted header">Admitido por: </span>
+            <span class="ui small header">Admitido por: </span>
             <span class="menu">
                 <a class="item" style="display: inline" href="#">{{ historia.usuario|capitalize }}</a>
             </span>
         </div>
         <div class="item">
-            <span class="ui small  inverted header">Motivo: </span>
+            <span class="ui small header">Motivo: </span>
             <span class="menu">
                 <a class="item" style="display: inline" href="#">{{ historia.motivo|capitalize }}</a>
             </span>
         </div>
         <div class="item">
-            <span class="ui small  inverted header">Derivado por: </span>
+            <span class="ui small header">Derivado por: </span>
             <span class="menu">
                 <a class="item" style="display: inline" href="#">{{ historia.departamento|capitalize }}</a>
             </span>
         </div>
         <div class="item">
-            <div class="ui small  inverted header">Historial</div>
+            <div class="ui small header">Historial</div>
             {% for i in listado %}
                 {% if loop.first %}
                  {% set date = i.fecha|date('d/m/Y') %}
@@ -50,7 +54,7 @@
                      {{ i.fecha|date('d/m/Y') }}
                  {% endif %}
                      <a class="item" href="#">
-                         <u>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</u>: <i> {{i.descripcion|capitalize}}</i>
+                         <u><strong>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}</strong></u>: <i> {{i.descripcion|capitalize}}</i>
                      </a>
                      {% if i.droga %}
                          <a class="item" href="#">
@@ -70,7 +74,7 @@
         </div>
     </div>
 
-    <div class="ui black big launch right attached fixed button">
+    <div class="ui white big launch right attached fixed button">
         <i class="content icon"></i>
         <span class="text">Historia Cl&iacute;nica</span>
     </div>
