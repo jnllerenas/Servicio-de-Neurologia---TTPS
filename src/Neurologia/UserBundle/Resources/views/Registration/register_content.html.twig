@@ -6,9 +6,10 @@
         <h3 class="panel-title">Registro de usuarios</h3>
     </div>
     <div class="panel-body">
-        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-            {{ form_start(form) }}
-
+        {{ form_start(form) }}
+        
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+            
                 {{ form_errors(form) }}
                 {{ form_errors(form.nombre) }}
                 {{ form_errors(form.apellido) }}
@@ -127,13 +128,14 @@
                         
                         <div style="float: right; margin-top: 20px;">
                             <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
-                            <input class="btn btn-primary" type="button" value="Volver" onclick="window.history.back()"/>
+                            <a class="btn btn-primary" href="{{- path('neurologia_busqueda_usuario') -}}">
+                                Volver
+                            </a>
                         </div>
                     </div>
                 </div>
 
-            {{ form_end(form) }}
-            
-        </form>
+            </form>
+        {{ form_end(form) }}
     </div>
 </div>

@@ -6,12 +6,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Neurologia\BDBundle\Entity\User;
-use Neurologia\UserBundle\Form\Type\UserEditFormType;
+use Neurologia\UserBundle\Form\Type\AdminEditFormType;
 /**
  * User controller.
  *
  */
-class UserController extends Controller
+class AdminController extends Controller
 {
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
 
         $editForm = $this->createEditForm($entity);
 
-        return $this->render('NeurologiaUserBundle:User:userEdit.html.twig', array(
+        return $this->render('NeurologiaUserBundle:User:adminEdit.html.twig', array(
             'entity' => $entity,
             'form'   => $editForm->createView()
         ));
@@ -53,8 +53,8 @@ class UserController extends Controller
     */
     private function createEditForm(User $entity)
     {
-        $form = $this->createForm(new UserEditFormType(), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new AdminEditFormType(), $entity, array(
+            'action' => $this->generateUrl('admin_update', array('id' => $entity->getId())),
             'method' => 'POST',
         ))->remove('plainPassword')->remove('username');
 
@@ -75,19 +75,21 @@ class UserController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('No se pudo encontrar al usuario seleccionado.');
         }
-
+                
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
                 'mensaje', 'Se ha modificado exitósamente el usuario.'
             );
-            return $this->redirect($this->generateUrl('neurologia_main_homepage'));
+            
+            return $this->redirect($this->generateUrl('neurologia_busqueda_usuario'));
         }
 
-        return $this->render('NeurologiaUserBundle:User:userEdit.html.twig', array(
+        return $this->render('NeurologiaUserBundle:User:adminEdit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView()
         ));

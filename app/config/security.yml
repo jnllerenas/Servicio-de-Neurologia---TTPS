@@ -24,7 +24,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: ROLE_ADMIN  }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, role: ROLE_ADMIN }
+        - { path: ^/user, role: [ROLE_ADMIN, ROLE_DOCTOR, ROLE_SECRETARY] }
         - { path: ^/abm, role: ROLE_ADMIN }
         - { path: ^/tratamiento, role: [ROLE_ADMIN, ROLE_DOCTOR] }
         - { path: ^/evolucion, role: [ROLE_ADMIN, ROLE_DOCTOR] }

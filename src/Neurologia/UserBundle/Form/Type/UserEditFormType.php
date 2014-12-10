@@ -4,15 +4,12 @@ namespace Neurologia\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Neurologia\UserBundle\Form\DataTransformer\StringToArrayTransformer;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
-class EditFormType extends AbstractType
+class UserEditFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $transformer = new StringToArrayTransformer();
-        // add your custom field
+        
         $builder->add('nombre', 'text', array( 'attr' => array( 'class' => 'form-control')));
         $builder->add('apellido', 'text', array( 'attr' => array( 'class' => 'form-control')));
         $builder->add('sexo',null, array( 'attr' => array( 'class' => 'form-control')));
@@ -40,6 +37,6 @@ class EditFormType extends AbstractType
 
     public function getName()
     {
-        return 'neurologia_user_registration';
+        return 'neurologia_user_edit';
     }
 }
