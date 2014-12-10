@@ -81,7 +81,6 @@ class User extends BaseUser
      */
     private $sexo;
     
-    
     public function __construct()
     {
         parent::__construct();
