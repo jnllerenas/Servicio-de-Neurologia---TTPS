@@ -42,18 +42,17 @@ class TratamientoInternoController extends Controller {
     }
 
     public function newAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-
-        $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
-        $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
-        $evolucion = $_SESSION['evolucion'][0];
-
-        $tratamientoInterno = new TratamientoInterno();
-        $tratamientoInterno->setEvolucion($evolucion);
-        $tratamientoInterno->setInicio(new \Datetime());
         
-        $droga_tratamiento = new DrogaTratamiento();
-        $droga_tratamiento->setTratamiento($tratamientoInterno);
+//        $medicamentos = $em->getRepository('Neurologia\BDBundle\Entity\Droga')->findAll();
+//        $efectos_adversos = $em->getRepository('Neurologia\BDBundle\Entity\EfectoAdverso')->findAll();
+//        $evolucion = $_SESSION['evolucion'][0];
+//
+        $tratamientoInterno = new TratamientoInterno();
+//        $tratamientoInterno->setEvolucion($evolucion);
+//        $tratamientoInterno->setInicio(new \Datetime());
+//        
+//        $droga_tratamiento = new DrogaTratamiento();
+//        $droga_tratamiento->setTratamiento($tratamientoInterno);
 
 
         $form = $this->createForm(new TratamientoInternoType(), $tratamientoInterno);
@@ -61,27 +60,12 @@ class TratamientoInternoController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            $idevo = $_SESSION['evolucion'][0]->getId();
+            $em = $this->getDoctrine()->getManager();
             $evolucion = $em->merge($_SESSION['evolucion'][0]);
             $tratamientoInterno->agregarTratamientoADrogas();
             $tratamientoInterno->setEvolucion($evolucion);
             $em->persist($tratamientoInterno);
             $em->flush();
-                    $drogas = $tratamientoInterno->getDrogaTratamiento();
-                    foreach ($drogas as $value) {
-                        $droga = $em->merge($value);
-                        $droga->addTratamiento($tratamientoInterno);
-                        $em->persist($droga);
-                        $em->flush();
-            }
-
- 
-
-            
-            
-            
-            
             return $this->redirect($this->generateUrl('neurologia_historia_clinica_homepage', array('accion' => 'evolucion_modificar', 'id' => $evolucion->getId(), 'tab' => 'Evolucion')));
         }
         return $this->render('TratamientoBundle:Tratamiento:tratamientoInterno.html.twig', array('form' => $form->createView(),)

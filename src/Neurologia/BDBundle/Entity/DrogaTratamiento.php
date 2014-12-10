@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="droga_tratamiento", indexes={@ORM\Index(name="FK_droga_tratamiento", columns={"efecto_adverso_id"}), @ORM\Index(name="FK_droga_tratamiento3", columns={"tratamiento_id"}), @ORM\Index(name="IDX_F9CB63A7825E2ABC", columns={"droga_id"})})
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class DrogaTratamiento
 {
@@ -47,16 +48,22 @@ class DrogaTratamiento
      * })
      */
     private $droga;
-
+//
+//    /**
+//     * @var \TratamientoInterno
+//     *
+//     * @ORM\GeneratedValue(strategy="NONE")
+//     * @ORM\Id
+//     * @ORM\ManyToOne(targetEntity="TratamientoInterno",inversedBy="drogaTratamiento")
+//     * @ORM\JoinColumns({
+//     *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
+//     * })
+//     */
+    
     /**
-     * @var \TratamientoInterno
+     * Bidirectional - Many Comments are authored by one user (OWNING SIDE)
      *
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="TratamientoInterno",inversedBy="drogaTratamiento")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tratamiento_id", referencedColumnName="id")
-     * })
      */
     private $tratamiento;
 
@@ -64,7 +71,7 @@ class DrogaTratamiento
     
     public function addTratamiento(TratamientoInterno $trat)
     {            
-        $this ->setTratamiento($trat);
+        $this -> setTratamiento($trat);
     }
 
     /**
@@ -149,13 +156,13 @@ class DrogaTratamiento
         return $this;
     }
 
-    /**
-     * Get tratamiento
-     *
-     * @return \Neurologia\BDBundle\Entity\TratamientoInterno 
-     */
-    public function getTratamiento()
-    {
-        return $this->tratamiento;
-    }
+//    /**
+//     * Get tratamiento
+//     *
+//     * @return \Neurologia\BDBundle\Entity\TratamientoInterno 
+//     */
+//    public function getTratamiento()
+//    {
+//        return $this->tratamiento;
+//    }
 }
