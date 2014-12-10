@@ -2,102 +2,71 @@
 
 {% block menubusqueda %}
     
-<div class="panel panel-primary">
+    <div class="panel panel-primary" style="margin: auto; width: 1000px;">
 
-    <div class="panel-heading">
-        <h3 class="panel-title">B&uacute;squeda de usuarios</h3>
-    </div>
-    <div class="panel-body">
-<!--
-            {# form_start(form, {'method': 'GET'}) #}
-                <table>
+        <div class="panel-heading">
+            <h3 class="panel-title">B&uacute;squeda de usuarios</h3>
+        </div>
+        <div class="panel-body">
+
+            {% for flashMessage in app.session.flashbag.get('mensaje') %}
+
+                <div class="alert alert-success" role="alert" style="display:block">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}        
+
+            {% block lista %}
+
+                <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Documento</th>
+                            <th>Nombre de usuario</th>
+                            <th>Activo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <th>{# form_label(form.nombre) }}</th>
-                            <th>{{ form_label(form.apellido) }}</th>
-                            <th>{{ form_label(form.documento) }}</th>
-                            <th>{{ form_label(form.usuario) }}</th>
-                            <th>{{ form_label(form.activo, 'Estado') }}</th>
-                            <th>{{ form_errors(form) #}</th>
-                        </tr>
-                        <tr>
-                            <td>{# form_widget(form.nombre,{ 'attr': {'placeholder': 'Nombre'} }) }}</td>
-                            <td>{{ form_widget(form.apellido,{ 'attr': {'placeholder': 'Apellido'} }) }}</td>
-                            <td>{{ form_widget(form.documento,{ 'attr': {'placeholder': 'Nro. de documento'} }) }}</td>
-                            <td>{{ form_widget(form.usuario,{ 'attr': {'placeholder': 'Usuario'} }) }}</td>
-                            <td>{{ form_widget(form.activo,{ 'attr': {'checked': 'checked'} }) #}</td>
-                            <td>
-                                {# form_widget(form.search,{ 'attr': {'class': 'btn btn-primary'} }) }}
-                                {{ form_widget(form.reset,{ 'attr': {'class': 'btn btn-primary'} }) #}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{# form_errors(form.nombre) }}</td>
-                            <td>{{ form_errors(form.apellido) }}</td>
-                            <td>{{ form_errors(form.documento) }}</td>
-                            <td>{{ form_errors(form.usuario) }}</td>
-                            <td>{{ form_errors(form.activo) #}</td>
-                            <td></td>
-                        </tr>
+                        {% for tupla in lista %}
+                            <tr>
+                                <td>{{ tupla.nombre }}</td>
+                                <td>{{ tupla.apellido }}</td>
+                                <td>{{ tupla.documento }}</td>
+                                <td>{{ tupla.username }}</td>
+                                <td>
+                                    <span style="display:none;">{{ tupla.enabled }}</span>
+                                    {% if tupla.enabled %}
+                                        <img src="{{- asset('public/images/glyphicons/glyphicons-4-user.png') -}}" alt="Usuario activo" title="Usuario activo"/>
+                                    {% else %}
+                                        <img src="{{- asset('public/images/glyphicons/glyphicons-521-user-ban.png') -}}" alt="Usuario inactivo" title="Usuario inactivo"/>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{- path('user_edit', { 'id': tupla.id }) -}}">
+                                        <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                            <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar usuario" title="Editar usuario"/>
+                                        </buton>
+                                    </a>
+                                    <form method="POST" action="{{- path('fos_user_resetting_send_email') -}}">
+                                        <input type="hidden" name="username" value="{{- tupla.username -}}" />
+                                        <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                            <img src="{{- asset('public/images/glyphicons/glyphicons-241-rotation-lock.png') -}}" alt="Reestablecer contraseña" title="Reestablecer contraseña"/>
+                                        </buton>
+                                    </form>
+                                </td>
+
+                             </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
-            {# form_end(form) #}
 
--->
-        {% block mensaje %}
-            <span>
-                {% if valoreselegidos %}
-                    {{ valoreselegidos }}
-                {% endif %}
-            </span>
-        {% endblock %}
-
-        {% block lista %}
-
-            <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Documento</th>
-                        <th>Nombre de usuario</th>
-                        <th>Activo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for tupla in lista %}
-                        <tr>
-                            <td>{{ tupla.nombre }}</td>
-                            <td>{{ tupla.apellido }}</td>
-                            <td>{{ tupla.documento }}</td>
-                            <td>{{ tupla.username }}</td>
-                            <td>
-                                {% if tupla.enabled %}
-                                    <img src="{{- asset('public/images/glyphicons/glyphicons-4-user.png') -}}" alt="Usuario activo" title="Usuario activo"/>
-                                {% else %}
-                                    <img src="{{- asset('public/images/glyphicons/glyphicons-521-user-ban.png') -}}" alt="Usuario inactivo" title="Usuario inactivo"/>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <a href="{{- path('user_show', { 'id': tupla.id }) -}}">
-                                    <img src="{{- asset('public/images/glyphicons/glyphicons-237-zoom-in.png') -}}" alt="Ver" title="Ver"/>
-                                </a>
-                                <a href="{{- path('user_edit', { 'id': tupla.id }) -}}">
-                                    <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar" title="Editar"/>
-                                </a>
-                            </td>
-
-                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-        {% endblock %}
+            {% endblock %}
         </div>
+        <a style="float:right;margin-top:20px;" class="btn btn-primary" href="{{- path('neurologia_register') -}}">Nuevo usuario</a>
     </div>
 
-
-    <a style="float:right" class="btn btn-primary" href="{{- path('neurologia_register') -}}">Nuevo Usuario</a>
-            
 {% endblock %}
