@@ -109,35 +109,24 @@
                         {{ form_widget(edit_form.numeroCarnet, { 'attr': { 'style': 'float: left;' } }) }}
                     </div>
                     <br><br><br>
-                                     
-                </div>
-                    
-                <div style="width: 850px; float: left; margin: 25px; margin-top: 0px;">                    
-                    
                     <div>
                         {{ form_label(edit_form.otros) }}
                         <br>
-                        {{ form_widget(edit_form.otros, { 'attr': { 'style': 'float: left;width: 800px;' } }) }}
-                    </div>
-                    
+                        {{ form_widget(edit_form.otros, { 'attr': { 'style': 'float: left;width: 180px; height: 115px;' } }) }}
+                    </div>   
                 </div>
-                <div style="width: 100px;float: left;margin-left: 45px;margin-top: 50px;">
+
+                <div style="float: right;">
                     
                     <div>
-                        {{ form_row(edit_form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'margin-top: -75px;' } }) }}
+                        {{ form_row(edit_form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'' } }) }}
                     </div>
 					
-					<div>
-						<input class="btn btn-primary" style="margin-top:-15px" type="button" onclick=" window.history.back()" value='Volver' />
-                    </div>
-                    
                 </div>
                     
-            {{ form_end(edit_form) }}
-            
-			</edit_form>
-		</div>
-	</div>
+            </div>
+        {{ form_end(edit_form) }}
+    </div>
 </div>
 
 

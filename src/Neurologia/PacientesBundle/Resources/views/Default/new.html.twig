@@ -2,7 +2,7 @@
 
 {% block body -%}
 
-<div class="panel panel-primary" style="margin: auto; width: 1150px;">
+<div class="panel panel-primary" style="margin: auto; width: 1200px;">
 
     <div class="panel-heading">
         <h3 class="panel-title">Registro de pacientes</h3>
@@ -95,7 +95,7 @@
                     
                 </div>
 
-                <div style="width: 150px; float: left; margin: 25px;">
+                <div style="width: 200px; float: left; margin: 25px;">
 
                     <div>
                         {{ form_label(form.obraSocial) }}
@@ -108,46 +108,23 @@
                         <br>
                         {{ form_widget(form.numeroCarnet, { 'attr': { 'style': 'float: left;' } }) }}
                     </div>
-                    {#<br><br><br>
-                    <div>
-                        {{ form_label(form.admitidoPor) }}
-                        <br>
-                        {{ form_widget(form.admitidoPor, { 'attr': { 'style': 'float: left;' } }) }}
-                    </div>
                     <br><br><br>
-                    <div>
-                        {{ form_label(form.derivadoPor) }}
-                        <br>
-                        {{ form_widget(form.derivadoPor, { 'attr': { 'style': 'float: left;' } }) }}
-                    </div>#}
-                    
-                </div>
-                    
-                <div style="width: 850px; float: left; margin: 25px; margin-top: 0px;">                    
-                    
                     <div>
                         {{ form_label(form.otros) }}
                         <br>
-                        {{ form_widget(form.otros, { 'attr': { 'style': 'float: left;width: 800px;' } }) }}
+                        {{ form_widget(form.otros, { 'attr': { 'style': 'float: left;width: 180px; height: 115px;' } }) }}
                     </div>
-                    
+
                 </div>
-                <div style="width: 100px;float: left;margin-left: 45px;margin-top: 50px;">
-                    
-                    <div>
-                        {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'margin-top: -75px;' } }) }}
-                    </div>
-                    
-					<div>
-						<input class="btn btn-primary" style="margin-top:-15px" type="button" onclick=" window.history.back()" value='Volver' />
-                    </div>
-					
-                </div>
-                    
-            {{ form_end(form) }}
-            
-        </form>
-    </div>
-</div>
+                   
             </div>
+            
+            <div style="float: right;">
+                {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'' } }) }}
+            </div>
+            
+        {{ form_end(form) }}
+    </div>    
+</div>
+        
 {% endblock %}
