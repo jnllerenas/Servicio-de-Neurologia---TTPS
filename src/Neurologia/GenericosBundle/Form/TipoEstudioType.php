@@ -15,8 +15,8 @@ class TipoEstudioType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
-            ->add('siglas')
+            ->add('descripcion', 'text', array('max_length' => '40'))
+            ->add('siglas', 'text', array('max_length' => '8'))
         ;
     }
     

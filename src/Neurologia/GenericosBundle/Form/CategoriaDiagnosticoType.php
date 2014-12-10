@@ -15,7 +15,7 @@ class CategoriaDiagnosticoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion')
+            ->add('descripcion', 'text', array('max_length' => '40'))
         ;
     }
     
