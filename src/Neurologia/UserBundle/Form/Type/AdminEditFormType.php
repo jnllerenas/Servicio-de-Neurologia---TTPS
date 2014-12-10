@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Neurologia\UserBundle\Form\DataTransformer\StringToArrayTransformer;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
-class RegistrationFormType extends AbstractType
+class EditFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -52,14 +52,6 @@ class RegistrationFormType extends AbstractType
                                             'label' => 'form.email',
                                             'attr' => array( 'class' => 'form-control'),
                                             'translation_domain' => 'FOSUserBundle'));
-        $builder->add('plainPassword', 'repeated', array(
-                        'type' => 'password',
-                        'attr' => array( 'class' => 'form-control'),
-                        'options' => array('translation_domain' => 'FOSUserBundle'),
-                        'first_options' => array('label' => 'Contraseña'),
-                        'second_options' => array('label' => 'Repetir contraseña'),
-                        'invalid_message' => 'fos_user.password.mismatch'
-                    )); 
             
             
                    
