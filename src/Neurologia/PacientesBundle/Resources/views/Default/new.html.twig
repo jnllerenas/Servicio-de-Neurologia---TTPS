@@ -116,11 +116,13 @@
                     </div>
 
                 </div>
-                   
-            </div>
-            
-            <div style="float: right;">
-                {{ form_row(form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'' } }) }}
+                <div style="float: right; margin-top: 20px;">
+                     {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary'} }) }}
+                     <a class="btn btn-primary" href="{{- path('neurologia_busqueda_paciente') -}}">
+                         Volver
+                     </a>
+                 </div>
+                         
             </div>
             
         {{ form_end(form) }}

@@ -115,13 +115,11 @@
                         {{ form_widget(edit_form.otros, { 'attr': { 'style': 'float: left;width: 180px; height: 115px;' } }) }}
                     </div>   
                 </div>
-
-                <div style="float: right;">
-                    
-                    <div>
-                        {{ form_row(edit_form.submit, { 'attr': { 'class': 'btn btn-primary', 'style':'' } }) }}
-                    </div>
-					
+                <div style="float: right; margin-top: 20px;">
+                     {{ form_widget(edit_form.submit, { 'attr': { 'class': 'btn btn-primary'} }) }}
+                     <a class="btn btn-primary" href="{{- path('neurologia_busqueda_paciente') -}}">
+                         Volver
+                     </a>
                 </div>
                     
             </div>
