@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Neurologia\BDBundle\Entity\User;
 use Neurologia\UserBundle\Form\Type\RegistrationFormType;
-
+use Neurologia\UserBundle\Form\Type\PasswordFormType;
 /**
  * User controller.
  *
@@ -120,7 +120,7 @@ class UserController extends Controller
         $entity = $em->getRepository('NeurologiaBDBundle:User')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find User entity.');
+            throw $this->createNotFoundException('No se pudo encontrar al usuario.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -130,6 +130,37 @@ class UserController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+    
+    public function passAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('NeurologiaBDBundle:User')->find($id);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('No se ha encontrado el usuario seleccionado.');
+        }
+        $nombre_usuario = $entity->getUsername();
+        $form = $this->createForm(new PasswordFormType());
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                    'mensaje', 'Se ha modificado exitósamente la contraseña para el usuario seleccionado.'
+            );
+            
+            return $this->redirect($this->generateUrl('neurologia_busqueda_usuario'));
+        }
+
+        return $this->render('NeurologiaUserBundle:Registration:password.html.twig', array(
+            'form'   => $form->createView(),
+            'nombre_usuario'   => $nombre_usuario
         ));
     }
 

@@ -46,7 +46,12 @@ class RegistrationController extends BaseController
             $userManager->updateUser($user);
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
+                
+                $this->get('session')->getFlashBag()->add(
+                    'mensaje', 'Se ha agregado exitósamente un usuario.'
+                );
+                
+                $url = $this->generateUrl('neurologia_busqueda_usuario');
                 $response = new RedirectResponse($url);
             }
 
