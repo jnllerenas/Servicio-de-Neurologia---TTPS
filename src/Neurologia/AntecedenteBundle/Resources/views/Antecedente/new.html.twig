@@ -1,29 +1,33 @@
 {% block contenido %}
-<h1>Agregar nuevo antecedente</h1>
 {% if mensaje %}
 <span class="">{{ mensaje }}</span>
 {% endif %}
+<div class="panel panel-primary" style="margin: auto; width: 650px;">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Agregar un Antecedente</h3>
+    </div>
+    <div class="panel-body">
+
 {{ form_start(form) }}
-<div>
-    {{ form_label(form.tipoAntecedente,'Tipo de antecedente:') }}
+<div style="width: 250px; float: left; margin: 25px;">
+    {{ form_label(form.tipoAntecedente,'Tipo de antecedente:', { 'attr': {'class': 'form-control'} }) }}
     <div>
     {% for child in form.tipoAntecedente %}
         {{ form_widget(child) }}
         {{ form_label(child) }}
     {% endfor %}
-    </div>
-</div>  
-<div>
-    {{ form_label(form.descripcion,'Descripción:') }}
+    </div>  
+    {{ form_label(form.descripcion,'Descripción:', { 'attr': {'class': 'form-control'} }) }}
     {{ form_widget(form.descripcion) }}
     {{ form_errors(form.descripcion) }}
 </div>  
-<div>
+<div style="float: right; margin-top: 20px;">
     {{ form_errors(form.tipoAntecedente) }}
-    {{ form_widget(form.submit) }}
+    {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+    <button type="submit" class="btn btn-primary" onclick="history.back();" label="VOLVER">Volver</button>
 </div>
 {{ form_end(form) }}
-    
-        <button type="submit" onclick="history.back();" label="VOLVER">Volver</button>
-
+</div>
+</div>
 {% endblock %}

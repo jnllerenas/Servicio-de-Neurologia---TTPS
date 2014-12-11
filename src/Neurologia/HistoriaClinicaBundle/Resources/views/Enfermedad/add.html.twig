@@ -1,11 +1,19 @@
 {% block contenido %}
+<div class="panel panel-primary" style="margin: auto; width: 650px;">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Agregar una Enfermedad</h3>
+    </div>
+    <div class="panel-body">
 {{ form_start(enfermedad) }}
-    
+    <div style="width: 250px; float: left; margin: 25px;">
     {{ form_row(enfermedad.detalle, { 'attr': {'class': 'form-control'} }) }}
-    
+    </div>
+    <div style="float: right; margin-top: 20px;">
     {{ form_row(enfermedad.enviar, { 'attr': {'class': 'btn btn-primary'} }) }}   
-    
-    
+    <button type="submit" class="btn btn-primary" onclick="history.back();" label="VOLVER">Volver</button>
+    </div>
 {{ form_end(enfermedad) }}
-<button type="submit" class="btn btn-primary" onclick="history.back();" label="VOLVER">Volver</button>
+    </div>
+</div>
 {% endblock %}

@@ -33,8 +33,8 @@ class Formularios {
                                  'choice_list' => new SimpleChoiceList($list),
                                   'label' => 'Derivado por: '  
             ))
-        ->add('motivo', 'text',array('required' => true,'label' => 'Motivo: '))
-        ->add('enfermedad', 'textarea',array('required' => true,'label' => 'Enfermedad Actual: '))
+        ->add('motivo', 'text',array('required' => true,'label' => 'Motivo : ','max_length' => '40'))
+        ->add('enfermedad', 'text',array('required' => true,'label' => 'Enfermedad Actual: ','max_length' => '40'))
         ->add('enviar', 'submit', array('label' => 'Crear'))
         ->getForm();
     }
@@ -50,7 +50,7 @@ class Formularios {
      public static function nuevoMotivoForm($a) {
         return $a->createFormBuilder()
         ->setAction($a->generateUrl('motivo_nuevo'))
-        ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle del Motivo: '))
+        ->add('detalle', 'text',array('required' => true,'label' => 'Detalle del Motivo: ','max_length' => '40'))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
         ->getForm();
     }
@@ -66,7 +66,7 @@ class Formularios {
      public static function nuevaEnfermedadForm($a) {
         return $a->createFormBuilder()
         ->setAction($a->generateUrl('enfermedad_nuevo'))
-        ->add('detalle', 'textarea',array('required' => true,'label' => 'Detalle de la Enfermedad: '))
+        ->add('detalle', 'text',array('required' => true,'label' => 'Detalle de la Enfermedad: ','max_length' => '40'))
         ->add('enviar', 'submit', array('label' => 'Enviar'))
         ->getForm();
     }
