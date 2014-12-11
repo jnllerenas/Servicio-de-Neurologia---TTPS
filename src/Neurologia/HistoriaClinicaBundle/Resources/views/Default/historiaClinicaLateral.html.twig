@@ -1,18 +1,21 @@
 <div id="example">
-    <div class="ui vertical very wide sidebar menu left" id="menu">
+    <div class="ui vertical very wide sidebar menu right" id="menu">
         <div class="item" style="text-align: left;">
-            <a class="ui logo icon image" href="#">
-              <img src="{{ asset('public/images/Logo.png') }}">
-            </a>
-        </div>
-        <div class="item">
-            <a class="item" href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank" >
-                <i class="file pdf icon"></i>
-                Generar epicrisis
-            </a>
-        </div>
+            <div style="float:left;width: 120px;">
+                <a class="ui logo icon image" href="#">
+                  <img src="{{ asset('public/images/Logo.png') }}">
+                </a>
+            </div>
+            <div style="float:right;width: 150px;text-align:center;">
+                <a style="float:right;" class="item" href="{{ url('neurologia_historia_clinica_epicrisis') }}" target="_blank" >
 
-        <div class="item">
+                    <strong>Generar epicrisis</strong>
+                    <img src="{{ asset('public/images/images.jpg') }}" style="width: 130px">
+                </a>
+            </div>
+        </div>
+        
+        <div class="item" style="clear:both;">
             <span class="ui small header">Enfermedad actual: </span>
             <span class="menu">
             <a class="item" style="display: inline" href="#">{{ historia.enfermedad|capitalize }}</a>
@@ -72,7 +75,7 @@
             {% endfor %}
         </div>
     </div>
-    <div style="position:fixed;bottom:0px;left:0px;" class="ui white big launch right attached button">
+    <div style="position:fixed;right:0px;" class="ui white big launch right attached button">
         <i class="content icon"></i>
         <span class="text">Historia Cl&iacute;nica</span>
     </div>

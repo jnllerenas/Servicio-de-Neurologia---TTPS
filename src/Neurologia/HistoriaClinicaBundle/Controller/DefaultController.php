@@ -45,6 +45,13 @@ class DefaultController extends Controller {
             $contenido = $this->forward($this->routeToControllerName($_GET['accion']), array());
             $params['contenido'] = $contenido->getContent();
             $params['tab'] = $_GET['tab'];
+            
+        }else{
+            
+            $contenido = $this->forward($this->routeToControllerName('evolucion_listar'), array());
+            $params['contenido'] = $contenido->getContent();
+            $params['tab'] = 'Evolucion';
+            
         }
         
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);

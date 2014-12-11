@@ -14484,7 +14484,7 @@ ol.ui.horizontal.list li:before,
 }
 
 .ui.menu .item .item {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 /* Hover */
