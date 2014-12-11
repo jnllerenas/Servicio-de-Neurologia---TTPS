@@ -17,13 +17,13 @@ class RegistrationFormType extends AbstractType
         $builder->add('apellido', 'text', array( 'attr' => array( 'class' => 'form-control', 'maxlength' => '20')));
         $builder->add('sexo',null, array( 'attr' => array( 'class' => 'form-control')));
         $builder->add('tipoDocumento',null, array( 'attr' => array( 'class' => 'form-control')));
-        $builder->add('numero_documento',null, array( 'attr' => array( 'class' => 'form-control')));
+        $builder->add('numero_documento','text', array( 'attr' => array( 'class' => 'form-control')));
         $builder->add('estadoCivil',null, array( 'attr' => array( 'class' => 'form-control')));
-        $builder->add('telefono',null, array( 'attr' => array( 'class' => 'form-control', 'maxlength' => '25')));
+        $builder->add('telefono','text', array( 'attr' => array( 'class' => 'form-control', 'maxlength' => '25')));
         $builder->add('fecha_de_nacimiento', 'date',array(
                                                         'widget' => 'single_text',
                                                         'attr' => array( 'class' => 'form-control')));
-        $builder->add('direccion',null, array( 'attr' => array( 'class' => 'form-control', 'maxlength' => '20')));
+        $builder->add('direccion','text', array( 'attr' => array( 'class' => 'form-control', 'maxlength' => '20')));
         
         $builder->add('username', 'text', array(
                                             'label' => 'Usuario',
