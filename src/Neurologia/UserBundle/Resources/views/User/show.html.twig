@@ -83,6 +83,9 @@
                         <a class="btn btn-primary" href="{{- path('neurologia_busqueda_usuario') -}}">
                             Volver
                         </a>
+                        <a class="btn btn-primary" href="{{- path('admin_edit', { 'id': entity.id }) -}}">
+                            Editar usuario
+                        </a>
                     </div>
 
                 {% else %}

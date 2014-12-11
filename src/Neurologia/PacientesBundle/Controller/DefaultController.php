@@ -80,13 +80,13 @@ class DefaultController extends Controller {
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('NeurologiaBDBundle:Paciente')->find($id);
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paciente entity.');
         }
-        $deleteForm = $this->createDeleteForm($id);
+        
         return $this->render('NeurologiaPacientesBundle:Default:show.html.twig', array(
-            'estudio'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'entity' => $entity
         ));
     }
     /**

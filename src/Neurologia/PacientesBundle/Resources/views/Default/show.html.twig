@@ -1,68 +1,104 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Pacientes</h1>
+{% block body %}
+    
+    <div class="panel panel-primary" style="margin: auto; width: 950px;">
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ entity.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Apellido</th>
-                <td>{{ entity.apellido }}</td>
-            </tr>
-            <tr>
-                <th>Direccion</th>
-                <td>{{ entity.direccion }}</td>
-            </tr>
-            <tr>
-                <th>Documento</th>
-                <td>{{ entity.documento }}</td>
-            </tr>
-            <tr>
-                <th>Fechanacimiento</th>
-                <td>{{ entity.fechaNacimiento|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Telefono</th>
-                <td>{{ entity.telefono }}</td>
-            </tr>
-            <tr>
-                <th>Ocupacion</th>
-                <td>{{ entity.ocupacion }}</td>
-            </tr>
-            <tr>
-                <th>Otros</th>
-                <td>{{ entity.otros }}</td>
-            </tr>
-            <tr>
-                <th>Numerocarnet</th>
-                <td>{{ entity.numeroCarnet }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ entity.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="panel-heading">
+            <h3 class="panel-title">Detalle de los datos del paciente seleccionado</h3>
+        </div>
+        <div class="panel-body">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('paciente') }}">
-            Volver
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('paciente_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <div>
+                {% if entity is not empty %}
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                        <div>
+                            <strong>Nombre:</strong>&nbsp;{{ entity.nombre }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Apellido:</strong>&nbsp;{{ entity.apellido }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Sexo:</strong>&nbsp;{{ entity.sexo }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Tipo de documento:</strong>&nbsp;{{ entity.tipoDocumento }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>N&uacute;mero de documento:</strong>&nbsp;{{ entity.documento }}
+                        </div>
+                        <br><br><br> 
+
+                    </div>
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                                               
+                        <div>
+                            <strong>Fecha de nacimiento:</strong>&nbsp;{{ entity.fechaNacimiento|date('d/m/Y') }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Estado civil:</strong>&nbsp;{{ entity.estadoCivil }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Tel&eacute;fono:</strong>&nbsp;{{ entity.telefono }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Direcci&oacute;n:</strong>&nbsp;{{ entity.direccion }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Nivel educacional:</strong>&nbsp;{{ entity.nivelEducacional }}
+                        </div>
+                        <br><br><br>
+
+                    </div>
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                        <div>
+                            <strong>Ocupaci&oacute;n:</strong>&nbsp;{{ entity.ocupacion }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Obral Social:</strong>&nbsp;{{ entity.obraSocial }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Nro. de carnet:</strong>&nbsp;{{ entity.numeroCarnet }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Email:</strong>&nbsp;{{ entity.email }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Comentarios:</strong>&nbsp;{{ entity.otros }}
+                        </div>
+
+                    </div>
+                    <div style="float: right; margin-top: 20px;">
+                        <a class="btn btn-primary" href="{{- path('neurologia_busqueda_usuario') -}}">
+                            Volver
+                        </a>
+                        <a class="btn btn-primary" href="{{- path('paciente_edit', { 'id': entity.id }) -}}">
+                            Editar paciente
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    <label>El usuario seleccionado no se encuentra disponible.</label>
+
+                {% endif %}
+            </div>            
+        </div>
+    </div>
+
 {% endblock %}

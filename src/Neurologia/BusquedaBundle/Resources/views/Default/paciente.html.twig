@@ -39,6 +39,11 @@
                                 <td>{{ tupla.fechaNacimiento|date('d/m/Y') }}</td>
                                 <td>{{ tupla.telefono }}</td>
                                 <td>
+                                    <a href="{{- path('paciente_show', { 'id': tupla.id }) -}}">
+                                        <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                            <img src="{{- asset('public/images/glyphicons/glyphicons-237-zoom-in.png') -}}" alt="Detalle de paciente" title="Detalle de paciente"/>
+                                        </buton>
+                                    </a>
                                     <a href="{{- path('paciente_edit', { 'id': tupla.id }) -}}">
                                         <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
                                             <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar usuario" title="Editar usuario"/>
