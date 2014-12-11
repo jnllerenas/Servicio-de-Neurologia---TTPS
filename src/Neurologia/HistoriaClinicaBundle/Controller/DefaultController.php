@@ -105,7 +105,7 @@ class DefaultController extends Controller {
             $em->getConnection()->beginTransaction();
             //paciente        
             $paciente = $em->merge($_SESSION['paciente']);
-            $usuario = $em->merge($_SESSION['user']); //agrego nahuel motivo: para que se pueda usar con el entity manager se debe mergear la variable
+            $usuario = $em->merge($_SESSION['user']); //guarda con esto no funciona
             $paciente->setAdmitidoPor($usuario); // modifico para usar $usuario
             if ($form->get('derivado')->getData()) {
                 $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
