@@ -2,7 +2,7 @@
 
 {% block menubusqueda %}
     
-    <div class="panel panel-primary" style="margin: auto; width: 1000px;">
+    <div class="panel panel-primary" style="margin: auto; width: 1150px;">
 
         <div class="panel-heading">
             <h3 class="panel-title">B&uacute;squeda de usuarios</h3>
@@ -46,6 +46,12 @@
                                     {% endif %}
                                 </td>
                                 <td>
+                                    
+                                    <a href="{{- path('admin_show', { 'id': tupla.id }) -}}">
+                                        <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                            <img src="{{- asset('public/images/glyphicons/glyphicons-237-zoom-in.png') -}}" alt="Editar usuario" title="Editar usuario"/>
+                                        </buton>
+                                    </a>
                                     <a href="{{- path('admin_edit', { 'id': tupla.id }) -}}">
                                         <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
                                             <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar usuario" title="Editar usuario"/>
