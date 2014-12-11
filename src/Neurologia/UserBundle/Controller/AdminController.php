@@ -26,6 +26,25 @@ class AdminController extends Controller
      * Displays a form to edit an existing User entity.
      *
      */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('NeurologiaBDBundle:User')->find($id);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('No se pudo encontrar al usuario seleccionado.');
+        }
+        
+        return $this->render('NeurologiaUserBundle:User:show.html.twig', array(
+            'entity' => $entity
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing User entity.
+     *
+     */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();

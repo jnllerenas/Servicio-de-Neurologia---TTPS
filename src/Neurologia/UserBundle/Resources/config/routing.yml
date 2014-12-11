@@ -37,3 +37,7 @@ admin_update:
     path:     /admin/{id}/update
     defaults: { _controller: "NeurologiaUserBundle:Admin:update" }
     requirements: { _method: post|put }
+
+admin_show:
+    path:     /admin/{id}/show
+    defaults: { _controller: "NeurologiaUserBundle:Admin:show" }
