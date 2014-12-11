@@ -8,9 +8,23 @@ and open the template in the editor.
     Author     : Wodan
 */
 
-.pacienteHistoria{
-    margin-left: 5%;
+.navbar {
+    margin-bottom: 0px !important;
 }
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+.oculto{
+    display: none;
+}
+/*
 .contenidoHistoria{
     float: left;
     max-width: 30%;
@@ -24,8 +38,9 @@ and open the template in the editor.
 .solapaHistoria{
     background-color: whitesmoke;
     /*float: right;*/
-    margin: auto;
+    /*margin: auto;
     width: 65%;
     border: 1px solid graytext;
     margin-top: -9px;
 }
+*/

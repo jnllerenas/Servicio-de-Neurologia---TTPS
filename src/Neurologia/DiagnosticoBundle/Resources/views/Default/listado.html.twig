@@ -1,53 +1,74 @@
 {% include 'NeurologiaGenericosBundle:Default:mensajes.html.twig' %}
-{% if (datosB or datos) %}
-<div class="table-responsive">
-	<table class="table">
-		<tr>
-			<th>Descripcion</th>
-			<th>Tipo</th>
-			<th>Categoria</th>
-			<th>Fecha</th>
-		</tr>
-		{% for dato in datosB %}
-			<tr>
-				<td>
-					{{ dato.Descripcion }}
-				</td>
-				<td>
-					Definitivo
-				</td>
-				<td>
-					{% if dato.categoriaDiagnostico.id is defined %}
-						{{ dato.categoriaDiagnostico.descripcion }}
-					{% endif %}
-				</td>
-				<td>
-					{{ dato.Fecha|date("d/m/Y") }}
-				</td>
+{% block contenido %}
+    <div class="tab-pane">
+        <div class="row-fluid">    
+            <h2> Diagn&oacute;sticos </h2>
+            
+            {% if (datosB or datos) %}
 
-			</tr>
-		{% endfor %}
-		{% for dato in datos %}
-			<tr>
-				<td>
-					{{ dato.Descripcion }}
-				</td>
-				<td>
-					Presuntivo
-				</td>
-				<td>
-					{% if dato.Categoria is defined %}
-						{{ dato.Categoria }}
-					{% endif %}
-				</td>
-				<td>
-					{{ dato.Fecha|date("d/m/Y") }}
-				</td>
+                {% for flashMessage in app.session.flashbag.get('mensaje') %}
+                    <div class="alert alert-success" role="alert" style="display:block">
+                        {{ flashMessage }}
+                    </div>
 
-			</tr>
-		{% endfor %}
-	</table>
-{% else %}
-    no se encontraron diagnosticos
-{% endif %}
-</div>
+                {% endfor %}
+
+                <div class="table-responsive">
+                    <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Descripci&oacute;n</th>
+                                <th>Tipo</th>
+                                <th>Categor&iacute;a</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dato in datosB %}
+                                <tr>
+                                    <td>
+                                        {{ dato.Descripcion }}
+                                    </td>
+                                    <td>
+                                        Definitivo
+                                    </td>
+                                    <td>
+                                        {% if dato.categoriaDiagnostico.id is defined %}
+                                            {{ dato.categoriaDiagnostico.descripcion }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ dato.Fecha|date("d/m/Y") }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% for dato in datos %}
+                                <tr>
+                                    <td>
+                                        {{ dato.Descripcion }}
+                                    </td>
+                                    <td>
+                                        Presuntivo
+                                    </td>
+                                    <td>
+                                        {% if dato.Categoria is defined %}
+                                            {{ dato.Categoria }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ dato.Fecha|date("d/m/Y") }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+
+                <label> No existen diagn&oacute;sticos para el paciente seleccionado. </label>
+
+            {% endif %}    
+
+        </div>
+    </div>            
+{% endblock %}

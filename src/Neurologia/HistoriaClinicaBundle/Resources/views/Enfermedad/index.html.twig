@@ -1,14 +1,25 @@
 {% block contenido %}
-<div class="table-responsive">
-	<table class="table">
-        {% for m in enfermedad %}
-            <tr>
-                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
+    <div class="tab-pane">
+        <div class="row-fluid">
+            <h2> Enfermedad </h2>
+            <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in enfermedad %}
+                        <tr>
+                            <td>{{ m.fecha|date('d/m/Y') }}</td>
+                            <td>{{ m.detalle }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>    
+            <a class="btn btn-primary" href="{{ url('neurologia_historia_clinica_homepage', {'accion':'enfermedad_nuevo', 'tab':'Enfermedad'}) }}">Nueva enfermedad</a>
             
-            </tr>
-        {% endfor %}
-        </table>
-</div>
-
-<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'enfermedad_nuevo', 'tab':'Enfermedad'}) }}">Nueva enfermedad</a>   
+        </div>
+    </div>
 {% endblock %}
