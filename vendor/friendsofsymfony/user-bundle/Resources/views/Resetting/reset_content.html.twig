@@ -1,8 +1,10 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+<div class="clase_reset_pass">
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST">
     {{ form_widget(form) }}
     <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+        <input class="btn btn-primary" style="margin-top:10px" type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
     </div>
 </form>
+</div>
