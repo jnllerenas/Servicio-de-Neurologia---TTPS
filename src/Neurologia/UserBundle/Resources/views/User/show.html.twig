@@ -1,0 +1,97 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    
+    <div class="panel panel-primary" style="margin: auto; width: 950px;">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Detalle de los datos del usuario seleccionado</h3>
+        </div>
+        <div class="panel-body">
+
+            <div>
+                {% if entity is not empty %}
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                        <div>
+                            <strong>Nombre:</strong>&nbsp;{{ entity.nombre }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Apellido:</strong>&nbsp;{{ entity.apellido }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Sexo:</strong>&nbsp;{{ entity.sexo }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Tipo de documento:</strong>&nbsp;{{ entity.tipoDocumento }}
+                        </div>
+                        <br><br><br>
+
+                    </div>
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                        <div>
+                            <strong>N&uacute;mero de documento:</strong>&nbsp;{{ entity.numeroDocumento }}
+                        </div>
+                        <br><br><br>                        
+                        <div>
+                            <strong>Fecha de nacimiento:</strong>&nbsp;{{ entity.fechaDeNacimiento|date('d/m/Y') }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Estado civil:</strong>&nbsp;{{ entity.estadoCivil }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Tel&eacute;fono:</strong>&nbsp;{{ entity.telefono }}
+                        </div>
+                        <br><br><br>
+
+                    </div>
+
+                    <div style="width: 250px; float: left; margin: 25px;">
+                        <div>
+                            <strong>Direcci&oacute;n:</strong>&nbsp;{{ entity.direccion }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Rol actual:</strong>&nbsp;
+                            {% if entity.roles[0] == 'ROLE_SUPER_ADMIN' or entity.roles[0] == 'ROLE_ADMIN' %}
+                                Administrador
+                            {% elseif entity.roles[0] == 'ROLE_DOCTOR' %}
+                                M&eacute;dico
+                            {% elseif entity.roles[0] == 'ROLE_SECRETARY' %}
+                                Secretario
+                            {% else %}
+                                El usuario no posee un rol asignado
+                            {% endif %}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Email:</strong>&nbsp;{{ entity.email }}
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <strong>Estado del usuario:</strong>&nbsp;{% if entity.enabled == 1 %}Activo{% else %}Inactivo{% endif %}
+                        </div>
+
+                    </div>
+                    <div style="float: right; margin-top: 20px;">
+                        <a class="btn btn-primary" href="{{- path('neurologia_busqueda_usuario') -}}">
+                            Volver
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    <label>El usuario seleccionado no se encuentra disponible.</label>
+
+                {% endif %}
+            </div>            
+        </div>
+    </div>
+
+{% endblock %}
