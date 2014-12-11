@@ -29,7 +29,18 @@
                                     <td>{{ e.fechaHora|date('d-m-Y H:i:s') }}</td>
                                     <td>{{ e.evolucion }}</td>
                                     <td>{{ e.usuario }}</td>
-                                    <td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_modificar', 'id':e.id , 'tab':'Evolucion'}) }}">Editar</a><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_modificar','id':e.id, 'tab':'Evolucion'}) }}"> Ver</a></td>
+                                    <td>
+                                        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_modificar', 'id':e.id , 'tab':'Evolucion'}) }}">
+                                            <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                                <img src="{{- asset('public/images/glyphicons/glyphicons-151-edit.png') -}}" alt="Editar usuario" title="Editar usuario"/>
+                                            </buton>
+                                        </a>
+                                        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_modificar', 'id':e.id , 'tab':'Evolucion'}) }}">
+                                            <button type="submit" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;">
+                                                <img src="{{- asset('public/images/glyphicons/glyphicons-237-zoom-in.png') -}}" alt="Editar usuario" title="Editar usuario"/>
+                                            </buton>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
