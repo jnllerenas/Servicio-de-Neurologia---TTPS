@@ -1,13 +1,26 @@
 {% block contenido %}
-<div class="table-responsive">
-	<table class="table">
-        {% for m in motivo %}
-            <tr>
-                <td>{{ m.fecha|date('Y-m-d') }} - {{ m.detalle }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>       
+    <div class="tab-pane">
+        <div class="row-fluid">
+            <h2> Motivo </h2>
+            <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in motivo %}
+                        <tr>
+                            <td>{{ m.fecha|date('d/m/Y') }}</td>
+                            <td>{{ m.detalle }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>    
+            <a class="btn btn-primary" href="{{ url('neurologia_historia_clinica_homepage', {'accion':'motivo_nuevo', 'tab':'Motivo'}) }}">Nuevo motivo</a>  
 
-<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'motivo_nuevo', 'tab':'Motivo'}) }}">Nuevo motivo</a>  
+        </div>
+    </div>
+   
 {% endblock %}

@@ -1,33 +1,55 @@
+{% block contenido %}
+    <div class="tab-pane">
+        <div class="row-fluid">    
+            <h2> Estudios </h2>
+            
+            {% if estudios is not empty %}
 
-    
-<h3>Estudios > Listado </h3>
-{% if estudios %}
-<table class="table table-condensed table-hover">  
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Tipo Estudio</th>
-            <th>Cantidad imagenes</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>    
-    
-{% for estudio in estudios %}
-    <tr>
-    <td>{{estudio.fecha|date('d-m-Y')}}</td>
-    <td>{{estudio.getTipoEstudioSiglas}}</td>
-    
-    {% if estudio.imagenes %}
-    
-    <td>{{ estudio.imagenes|length }}</td>
-    
-    {% endif %}
+                {% for flashMessage in app.session.flashbag.get('mensaje') %}
+                    <div class="alert alert-success" role="alert" style="display:block">
+                        {{ flashMessage }}
+                    </div>
 
-    <td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_show','id': estudio.id, 'tab':'Estudio'}) }}">Ver</a></td>
-    </tr>
-{% endfor %}
-{% else %}
-    No se encontraron estudios para esta paciente.
-{% endif %}
-</table>
-  <a id="" class="button" href='javascript:history.back()'>Volver</a>
+                {% endfor %}
+
+                <div class="table-responsive">
+                    <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo Estudio</th>
+                                <th>Cantidad imagenes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for estudio in estudios %}
+                                <tr>
+                                    <td>{{estudio.fecha|date('d/m/Y')}}</td>
+                                    <td>{{estudio.getTipoEstudioSiglas}}</td>
+
+                                    {% if estudio.imagenes %}
+
+                                        <td>{{ estudio.imagenes|length }}</td>
+
+                                    {% else %}
+                                        
+                                        <td>0</td>
+                                        
+                                    {% endif %}
+
+                                    <td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_show','id': estudio.id, 'tab':'Estudio'}) }}">Ver</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+
+                <label> No existen estudios para el paciente seleccionado. </label>
+
+            {% endif %}    
+
+        </div>
+    </div>            
+{% endblock %}

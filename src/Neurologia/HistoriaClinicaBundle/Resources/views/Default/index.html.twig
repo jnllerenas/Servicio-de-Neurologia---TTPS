@@ -5,8 +5,9 @@
     {{ parent() }}
 
     <link href="{{ asset('public/css/estilo.css') }}" rel="stylesheet">   
-    <link class="ui" href="{{ asset('public/css/semantic.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/docs.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/preview.min.css') }}" rel="stylesheet">
+    <link class="ui" href="{{ asset('public/css/semantic.css') }}" rel="stylesheet">
 
 {% endblock stylesheets %}
 
@@ -16,7 +17,7 @@
 
     <script src="{{ asset('public/js/lib/highlight.min.js') }}"></script>
     <script src="{{ asset('public/js/lib/semantic.min.js') }}"></script>
-
+    <script src="{{ asset('public/js/tabs-addon.js') }}"></script>
     <script src="{{ asset('public/js/lib/docs.js') }}"></script>
 
 
@@ -39,10 +40,21 @@
         {% if historia %}
 
             {{ include('NeurologiaHistoriaClinicaBundle:Default:historiaClinicaLateral.html.twig') }} 
-            {{ include('NeurologiaHistoriaClinicaBundle:Default:solapas.html.twig') }} 
-            {% block contenido %}
-            {% endblock %}
-			
+            
+            <div class="tabbable custom-tabs tabs-animated  flat flat-all hide-label-980 shadow track-url auto-scroll"> 
+                
+                {{ include('NeurologiaHistoriaClinicaBundle:Default:solapas.html.twig') }}
+                
+                <div class="tab-content ">   
+                    {% block contenido %}
+                        
+                    {% endblock %}
+                
+                </div>
+                
+                
+            </div>
+            
         {% else %}
 
             {{ form(iniciar) }}

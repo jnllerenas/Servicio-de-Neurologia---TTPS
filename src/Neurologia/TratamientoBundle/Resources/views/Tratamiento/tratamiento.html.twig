@@ -1,81 +1,59 @@
-
-   
-
-
-{% block body %}
- <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Tratamientos internos</div>
-    {% if tratamientos is not empty %}
-        
-        {% for flashMessage in app.session.flashbag.get('mensaje') %}
-        <div class="alert alert-success" role="alert" style="display:block">
-            {{ flashMessage }}
-        </div>
+{% block contenido %}
+    <div class="tab-pane">
+        <div class="row-fluid">    
+            <h2> Tratamientos </h2>
             
-        {% endfor %}
-        
-       
+            {% if tratamientos is not empty or tratamientosex is not empty %}
 
-            <!-- Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Descripci&oacute;n</th>
-                        <th>Fecha de inicio</th>
-                        <th>Activo</th>
-                        <th>Drogas</th>
-						<th>Ver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {% for t in tratamientos %}
-                        <tr>
-                            <td>{{ t.descripcion }}</td>
-                            <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d-m-Y') }}{% endif %}</td>
-                            <td>{% if t.activo %}Sí{% else %}No{% endif %}</td>
-                            <td>{{ t.drogas }}</td>
-							<td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_show','id': t.id, 'tab':'Tratamiento'}) }}">Ver</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-                
-                {% else %}
-        
-        <label> No existen tratamientos internos para este paciente. </label>
-        
-    {% endif %}
+                {% for flashMessage in app.session.flashbag.get('mensaje') %}
+                    <div class="alert alert-success" role="alert" style="display:block">
+                        {{ flashMessage }}
+                    </div>
+
+                {% endfor %}
+
+                <div class="table-responsive">
+                    <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tipo de tratamiento</th>
+                                <th>Descripci&oacute;n</th>
+                                <th>Fecha de inicio</th>
+                                <th>Activo</th>
+                                <th>Drogas</th>
+                                <th>Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for t in tratamientos %}
+                                <tr>
+                                    <td>Interno</td>
+                                    <td>{{ t.descripcion }}</td>
+                                    <td>{% if t.inicio=='-' %}{{ t.inicio }}{% else %}{{ t.inicio|date('d-m-Y') }}{% endif %}</td>
+                                    <td>{% if t.activo %}Sí{% else %}No{% endif %}</td>
+                                    <td>{{ t.drogas }}</td>
+                                    <td><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_show','id': t.id, 'tab':'Tratamiento'}) }}">Ver</a></td>
+                                </tr>
+                            {% endfor %}
+                            {% for tex in tratamientosex %}
+                                <tr>
+                                    <td>Externo</td>
+                                    <td>{{ tex.descripcion }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+
+                <label> No existen tratamientos para el paciente seleccionado. </label>
+
+            {% endif %}    
+
         </div>
-    <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Tratamientos externos</div>
-    {% if tratamientosex is not empty %}
-                
-
-            <!-- Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Descripci&oacute;n</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {% for tex in tratamientosex %}
-                        <tr>
-                            <td>{{ tex.descripcion }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        
-              
-    {% else %}
-        
-        <label> No existen tratamientos externos para este paciente. </label>
-        
-    {% endif %}
-    </div>
+    </div>            
 {% endblock %}

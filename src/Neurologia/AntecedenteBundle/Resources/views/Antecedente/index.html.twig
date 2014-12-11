@@ -1,46 +1,37 @@
 {% block contenido %}
-{% if personales %}
-<h2> Personales </h2>
- <div class="table-responsive">
-	<table class="table">
-        <thead>
-           {# <tr>
-                <th>Descripcion</th> 
-                <th>Agregado el</th> 
-            </tr>#}
-        </thead>
-        <tbody>
+    <div class="tab-pane">
+        <div class="row-fluid">    
+            <h2> Antecedentes </h2>
+            <div class="table-responsive">
+                <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Descripci&oacute;n</th>
+                            <th>Tipo de antecedente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for antecedente in personales %}
+                            <tr>
+                                <td>{{ antecedente.fecha|date('d/m/Y') }}</td>
+                                <td>{{ antecedente.descripcion }}</td>
+                                <td> Personal</td>
+                            </tr>
+                        {% endfor %}
+                        {% for antecedente in familiares %}
+                            <tr>
+                                <td>{{ antecedente.fecha|date('d/m/Y') }}</td>
+                                <td>{{ antecedente.descripcion }}</td>
+                                <td> Familiar </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-        {% for antecedente in personales %}
-            <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
-            
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-	</div>
-    {% endif %}
-    {% if familiares %}
-    <h2> Familiares </h2>
-    <div class="table-responsive">
-	<table class="table">
-        <thead>
-         {#   <tr>
-                <th>Descripcion</th>
-                <th>Agregado el</th> 
-            </tr> #}
-        </thead>
-        <tbody>
-        {% for antecedente in familiares %}
-            <tr>
-                <td>{{ antecedente.fecha|date('Y-m-d') }} - {{ antecedente.descripcion }}</td>
-            
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-	</div>
-{% endif %}
-<a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'antecedente_nuevo', 'tab':'Antecedente'}) }}">Nuevo antecedente</a>   
+            <a class="btn btn-primary" href="{{ url('neurologia_historia_clinica_homepage', {'accion':'antecedente_nuevo', 'tab':'Antecedente'}) }}">Nuevo antecedente</a>   
+        
+        </div>
+    </div>
 {% endblock contenido %}
