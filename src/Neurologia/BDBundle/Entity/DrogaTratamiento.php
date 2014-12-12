@@ -19,7 +19,7 @@ class DrogaTratamiento
     /**
      * @var string
      *
-     * @ORM\Column(name="dosis", type="string", length=25, nullable=false)
+     * @ORM\Column(name="dosis", type="string", length=30, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
