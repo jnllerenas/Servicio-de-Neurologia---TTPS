@@ -87,7 +87,7 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=25, nullable=true)
+     * @ORM\Column(name="email", type="string", length=35, nullable=true)
      */
     private $email;
 
