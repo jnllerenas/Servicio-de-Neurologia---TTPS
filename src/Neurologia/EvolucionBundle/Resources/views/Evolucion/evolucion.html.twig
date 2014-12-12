@@ -5,12 +5,7 @@
             
             {% if evoluciones is not empty %}
 
-                {% for flashMessage in app.session.flashbag.get('mensaje') %}
-                    <div class="alert alert-success" role="alert" style="display:block">
-                        {{ flashMessage }}
-                    </div>
-
-                {% endfor %}
+                
 
                 <div class="table-responsive">
                     <table class="datatable_bootstrap table table-striped table-bordered" cellspacing="0">

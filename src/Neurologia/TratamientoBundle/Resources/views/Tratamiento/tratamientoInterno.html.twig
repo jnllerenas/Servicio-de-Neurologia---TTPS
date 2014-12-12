@@ -73,27 +73,15 @@
           <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
     </div>-->
 
-    <legend>Tratamiento Interno:</legend>
+    <h3>Evoluci&oacute;n > Tratamiento Interno > Nuevo</h3>
 
     {{ form_start(form) }}
 
-    {{ form_errors(form) }}
-    <div>
-        {{ form_label(form.descripcion) }}
-        {{ form_errors(form.descripcion) }}
-        {{ form_widget(form.descripcion) }}
-    </div>
-
-    <div>
-        {{ form_label(form.inicio) }}
-        {{ form_errors(form.inicio) }}
-        {{ form_widget(form.inicio) }}
-    </div>
-    <div>
-        {{ form_label(form.activo) }}
-        {{ form_errors(form.activo) }}
-        {{ form_widget(form.activo) }}
-    </div>
+    <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
+        <tr><td>{{ form_label(form.inicio) }}</td><td>{{ form_widget(form.inicio) }}</td><td>{{ form_errors(form.inicio) }}</td></tr>
+        <tr><td>{{ form_label(form.activo) }}</td><td>{{ form_widget(form.activo) }}</td><td>{{ form_errors(form.activo) }}</td></tr>
+    </table>
+    
     <div>
         <ul class="list-group" id="drogaTratamiento"
             data-prototype="{{ include('TratamientoBundle:Tratamiento:prototype.html.twig', { 'form': form.drogaTratamiento.vars.prototype })}}"         

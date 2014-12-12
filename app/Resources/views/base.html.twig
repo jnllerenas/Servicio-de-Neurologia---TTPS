@@ -14,6 +14,7 @@
         {%endblock javascripts%}
 
         {% block stylesheets %}
+            <link href="{{ asset('public/css/estilo.css') }}" rel="stylesheet"> 
             <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('public/css/bootstrap-theme.min.css') }}">
             <link href="{{asset('public/css/jquery-ui-1.11.2.custom/jquery-ui.css')}}" rel="stylesheet">
@@ -46,7 +47,12 @@
     {% block datosPaciente %}
         
     {% endblock %}
+{% for flashMessage in app.session.flashbag.get('mensaje') %}
+                    <div class="alert alert-success centro" role="alert" style="display:block">
+                        {{ flashMessage }}
+                    </div>
 
+                {% endfor %}
     {% block body %}
   
         <div class="bienvenida">

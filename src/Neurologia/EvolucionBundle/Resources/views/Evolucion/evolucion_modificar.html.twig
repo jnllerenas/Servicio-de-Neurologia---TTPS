@@ -3,7 +3,9 @@
   
         <h3>Evolución</h3>
 
-        <h3>Descripción: {{evolucion[0].getEvolucion}}</h3>
+        <h3 style="display:inline-block">Descripción: {{evolucion[0].getEvolucion}}</h3>
+        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_descripcion_edit','id':evolucion[0].getId,'tab':'Evolucion'}) }}">Modificar descripción</a>
+        <br>
         <script>
             $('form').submit(function () {
                 return confirm('¿Desea guardar la evolución?\nNo se podrá modificar o eliminar la información guardada.');
@@ -92,13 +94,16 @@
 
 
 
-    <div  class="alert alert-success" role="alert" >
-        Acciones<br>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_descripcion_edit','id':evolucion[0].getId,'tab':'Evolucion'}) }}">Modificar descripción</a><br>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Acciones:<br>
+            <nav>
         <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_nuevo','tab':'Evolucion'}) }}">Agregar estudio</a><br>
         <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Agregar tratamiento Interno</a><br>
         <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Agregar tratamiento Externo</a><br>
         <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'diagnostico_nuevo','tab':'Evolucion'}) }}">Agregar diagn&oacute;stico</a><br>
+            </nav>
+        </div>
     </div>
 
 

@@ -1,5 +1,5 @@
 {% block contenido %}    
-<h1>Nuevo Diagnostico</h1>
+<h3>Evoluci&oacute;n > Diagn&oacute;stico >Nuevo</h3>
 		<form id="fDiagnostico" action="{{ path('diagnostico_nuevo') }}" method="POST" role="form">
 			
                     
@@ -33,7 +33,9 @@
 					<textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui.."></textarea>
 				</div>
 				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico();" />
-				<a class="btn btn-primary" href="{{ path('evolucion_nuevo') }}">Cancelar</a>
+				<div>
+			<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+		</div>
                                
                         
                 </form>

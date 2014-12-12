@@ -47,6 +47,7 @@
         <ul class="nav navbar-nav navbar-right" style="float: right;">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <b title="Nombre y Apellido de Usuario" style="margin-left:10px; font-size: 1.3em">{{ app.user.nombre~' '~app.user.apellido }}</b>
                     <img src="{{- asset('public/images/glyphicons/glyphicons-4-user.png') -}}" alt="Datos de usuario" title="Datos de usuario"/>
                     <img src="{{- asset('public/images/glyphicons/glyphicons-602-chevron-down.png') -}}" alt="Datos de usuario" title="Datos de usuario"/>
                 </a>
@@ -60,7 +61,7 @@
                                     </p>
                                 </div>
                                 <div class="col-lg-8">
-                                    <p class="text-left"><strong>{{ app.user.nombre~' '~app.user.apellido }}</strong></p>
+                                    <p class="text-left">{#<strong>{{ app.user.nombre~' '~app.user.apellido }}#}</strong></p>
                                     <p class="text-left small">{{ app.user.email }}</p>
                                     <p class="text-left">
                                         <a href="{{ path('user_edit', {'id' : app.user.id } ) }}" class="btn btn-primary btn-sm">Actualizar Datos</a>

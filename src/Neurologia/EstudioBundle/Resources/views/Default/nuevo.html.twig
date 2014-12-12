@@ -71,11 +71,11 @@
 
 
     {{ form_start(form) }}
-		{{ form_row(form.descripcion) }}
-		{{ form_row(form.fecha) }}
-		{{ form_row(form.institucion) }}
-		{{ form_row(form.tipoEstudio) }}
-
+    <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
+        <tr><td>{{ form_label(form.fecha) }}</td><td>{{ form_widget(form.fecha) }}</td><td>{{ form_errors(form.fecha) }}</td></tr>
+        <tr><td>{{ form_label(form.institucion) }}</td><td>{{ form_widget(form.institucion) }}</td><td>{{ form_errors(form.institucion) }}</td></tr>
+        <tr><td>{{ form_label(form.tipoEstudio) }}</td><td>{{ form_widget(form.tipoEstudio) }}</td><td>{{ form_errors(form.tipoEstudio) }}</td></tr>
+    </table>
     <ul class="list-group" id="imagenes"
         data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
         ></ul>

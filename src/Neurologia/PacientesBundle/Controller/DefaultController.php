@@ -34,7 +34,7 @@ class DefaultController extends Controller {
             $this->get('session')
                 ->getFlashBag()
                 ->add(
-                    'mensaje', 'Se ha agregado exitósamente un paciente.'
+                    'mensaje', 'Se ha agregado exitosamente el paciente.'
                 );
             return $this->redirect($this->generateUrl('neurologia_busqueda_paciente'));
         }
