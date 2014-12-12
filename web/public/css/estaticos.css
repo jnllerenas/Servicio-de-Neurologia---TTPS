@@ -25,18 +25,24 @@
 }
 
 .clase_reset_pass{
-	width: 223px;
-	height: 170px;
-	margin: 7% 0% 0% 40%;
-	padding: 15px 20px;
+    width: 223px;
+    height: 170px;
+    margin: 7% 0% 0% 40%;
+    padding: 15px 20px;
 }
 
 .clase_reset_pass input{
-	border-radius:4px;
-	border: 1px solid #ccc;
+    border-radius:4px;
+    border: 1px solid #ccc;
 }
 
 input{
-	border-radius:4px;
-	border: 1px solid #ccc;
+    border-radius:4px;
+    border: 1px solid #ccc;
 }
+
+.texto {
+    word-wrap: break-word;
+    width:100%;   
+}
+
