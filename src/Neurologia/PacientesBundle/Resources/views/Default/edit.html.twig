@@ -117,7 +117,7 @@
                 </div>
                 <div style="float: right; margin-top: 20px;">
                      {{ form_widget(edit_form.submit, { 'attr': { 'class': 'btn btn-primary'} }) }}
-                     <a class="btn btn-primary" href="{{- path('neurologia_busqueda_paciente') -}}">
+                     <a class="btn btn-primary" href="{% if actual %}{{ path('neurologia_historia_clinica_homepage') }}{% else %}{{- path('neurologia_busqueda_paciente') -}}{% endif %}">
                          Volver
                      </a>
                 </div>

@@ -24,6 +24,9 @@ and open the template in the editor.
 .oculto{
     display: none;
 }
+.boton{
+    cursor: pointer;
+}
 /*
 .contenidoHistoria{
     float: left;

@@ -12,12 +12,12 @@
 
     <div class="panel panel-default">
 
-        <div class="panel-heading">
-            <b>{{paciente.apellido}}, {{paciente.nombre}}</b>
-            <div style="float:right;">
-                <img id="down" src="{{ asset('public/images/down.png') }}" alt="Mostrar" class="boton oculto" />
-                <img id="up" src="{{ asset('public/images/up.png') }}" alt="Mostrar" class="boton oculto" />
-            </div>
+        <div class="panel-heading boton">
+            <span style="float:left">
+                <img id="down" src="{{ asset('public/images/down.png') }}" alt="Mostrar" class="oculto" />
+                <img id="up" src="{{ asset('public/images/up.png') }}" alt="Mostrar" class="oculto" />
+            </span>
+            <b title="Apellido/s, Nombre/s" style="margin-left:10px; font-size: 1.3em">{{paciente.apellido| capitalize}}, {{paciente.nombre|capitalize}}</b>
         </div>
 
         <div class="oculto">
