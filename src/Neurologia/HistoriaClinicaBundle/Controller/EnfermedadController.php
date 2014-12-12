@@ -26,7 +26,7 @@ class EnfermedadController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $params = array();
         $historia = $em->merge($_SESSION['historia']);
-        $usuario = $em->merge($_SESSION['user']);
+        $usuario = $em->getRepository('NeurologiaBDBundle:User')->find($_SESSION['user']->getId()); 
         $form = Formularios::nuevaEnfermedadForm($this);
         $form->handleRequest($request);
         if ($form->isValid()) {

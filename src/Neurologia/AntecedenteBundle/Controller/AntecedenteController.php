@@ -52,7 +52,7 @@ class AntecedenteController extends Controller
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $historia = $em->merge($_SESSION['historia']);
-        $usuario = $em->merge($_SESSION['user']);
+        $usuario = $em->getRepository('NeurologiaBDBundle:User')->find($_SESSION['user']->getId()); 
         if ($form->isValid()) {
             $tipoAntecedente=$antecedente->getTipoAntecedente();
             $existe = $em->getRepository('NeurologiaBDBundle:Antecedente')

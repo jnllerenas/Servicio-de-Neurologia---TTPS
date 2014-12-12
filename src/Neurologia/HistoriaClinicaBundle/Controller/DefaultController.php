@@ -112,7 +112,7 @@ class DefaultController extends Controller {
             $em->getConnection()->beginTransaction();
             //paciente        
             $paciente = $em->merge($_SESSION['paciente']);
-            $usuario = $em->merge($_SESSION['user']); //guarda con esto no funciona
+            $usuario = $em->getRepository('NeurologiaBDBundle:User')->find($_SESSION['user']->getId()); 
             $paciente->setAdmitidoPor($usuario); // modifico para usar $usuario
             if ($form->get('derivado')->getData()) {
                 $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());

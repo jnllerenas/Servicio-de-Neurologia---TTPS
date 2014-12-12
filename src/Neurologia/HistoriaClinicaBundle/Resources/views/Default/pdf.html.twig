@@ -19,6 +19,7 @@
 	
 	<h3>Historial:</h3>
         
+        {% if historia %}
         <div>Enfermedad Actual: {{ historia.enfermedad }}</div>
 	<div>Admitido Por: {{ historia.usuario }}</div>
 	<div>Motivo: {{ historia.motivo }}</div>
@@ -26,6 +27,7 @@
         <br></br>
         <br></br>
         
+        {% if listado|length == 0 %}
 	<table>
 	{% for i in listado %}
 		<tr>
@@ -45,5 +47,8 @@
 		</tr>
 	{% endfor %}
 	</table>
-	
+        {% endif %}
+	{% else %}
+            <p>No tiene una historia generada</p>
+        {% endif %}
 </div>
