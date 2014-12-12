@@ -48,7 +48,7 @@ class RegistrationController extends BaseController
             if (null === $response = $event->getResponse()) {
                 
                 $this->get('session')->getFlashBag()->add(
-                    'mensaje', 'Se ha agregado exitósamente un usuario.'
+                    'mensaje', 'Se ha agregado exitosamente el usuario.'
                 );
                 
                 $url = $this->generateUrl('neurologia_busqueda_usuario');

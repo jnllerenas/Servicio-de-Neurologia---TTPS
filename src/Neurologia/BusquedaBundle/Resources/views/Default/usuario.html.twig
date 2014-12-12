@@ -2,7 +2,7 @@
 
 {% block menubusqueda %}
     
-    <div class="panel panel-primary" style="margin: auto; width: 1150px;">
+    <div class="panel panel-primary centro" >
 
         <div class="panel-heading">
             <h3 class="panel-title">B&uacute;squeda de usuarios</h3>
@@ -40,7 +40,7 @@
                                 <td>
                                     <span style="display:none;">{{ tupla.enabled }}</span>
                                     {% if tupla.enabled %}
-                                        <img src="{{- asset('public/images/glyphicons/glyphicons-4-user.png') -}}" alt="Usuario activo" title="Usuario activo"/>
+                                        <img src="{{- asset('public/images/glyphicons/glyphicons-153-check.png') -}}" alt="Usuario activo" title="Usuario activo"/>
                                     {% else %}
                                         <img src="{{- asset('public/images/glyphicons/glyphicons-521-user-ban.png') -}}" alt="Usuario inactivo" title="Usuario inactivo"/>
                                     {% endif %}

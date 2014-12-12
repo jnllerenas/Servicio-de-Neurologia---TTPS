@@ -102,7 +102,7 @@ class AdminController extends Controller
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-                'mensaje', 'Se ha modificado exitósamente el usuario.'
+                'mensaje', 'Se ha modificado exitosamente el usuario.'
             );
             
             return $this->redirect($this->generateUrl('neurologia_busqueda_usuario'));

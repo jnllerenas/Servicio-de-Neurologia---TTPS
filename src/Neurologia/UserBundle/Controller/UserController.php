@@ -82,7 +82,7 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
             $this->get('session')->getFlashBag()->add(
-                'mensaje', 'Se ha modificado exitósamente el usuario.'
+                'mensaje', 'Se ha modificado exitosamente el usuario.'
             );
             return $this->redirect($this->generateUrl('neurologia_main_homepage'));
         }

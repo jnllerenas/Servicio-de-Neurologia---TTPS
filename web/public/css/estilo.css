@@ -16,7 +16,10 @@ and open the template in the editor.
     border-right: 1px solid #ddd;
     padding: 10px;
 }
-
+.itemmenu{
+    position:relative;
+    top:2px;
+}
 .nav-tabs {
     margin-bottom: 0;
 }

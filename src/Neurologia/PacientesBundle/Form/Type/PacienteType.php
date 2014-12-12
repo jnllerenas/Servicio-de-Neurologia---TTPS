@@ -10,14 +10,14 @@ class PacienteType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 		
-        $builder->add('nombre', 'text', array('attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '30')));
-        $builder->add('apellido', 'text', array('attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '30')));
+        $builder->add('nombre', 'text', array('attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '25')));
+        $builder->add('apellido', 'text', array('attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '25')));
         $builder->add('sexo',null, array( 'attr' => array( 'class' => 'form-control')));
         $builder->add('tipoDocumento',null, array( 'attr' => array( 'class' => 'form-control')));
-        $builder->add('documento', 'text', array('attr'=>array('size'=>10,'class' => 'form-control', 'maxlength' => '20')));
+        $builder->add('documento', 'text', array('attr'=>array('size'=>10,'class' => 'form-control', 'maxlength' => '12')));
         $builder->add('fechaNacimiento', 'date', array(
             'widget' => 'single_text'));
-        $builder->add('telefono', 'text', array('attr'=>array('size'=>12,'class' => 'form-control', 'maxlength' => '20')));
+        $builder->add('telefono', 'text', array('attr'=>array('size'=>12,'class' => 'form-control', 'maxlength' => '15')));
         $builder->add('direccion', 'text', array('required' => false, 'attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '30'))); 
         $builder->add('email', 'email', array('required' => false, 'attr'=>array('size'=>25,'class' => 'form-control', 'maxlength' => '35')));
         $builder->add('ocupacion', 'text', array('required' => false, 'attr'=>array('size'=>20,'class' => 'form-control', 'maxlength' => '30')));

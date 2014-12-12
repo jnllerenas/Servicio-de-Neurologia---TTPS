@@ -1,7 +1,7 @@
 {% block menu %}
 
 <div class="navbar navbar-default">
-    <div class="navbar-header">
+    <div class="navbar-header itemmenu">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -10,7 +10,7 @@
         <a class="navbar-brand" href="{{ path('neurologia_main_homepage') }}" style="padding:5px 25px" ><img src="{{ asset('public/images/Logo-bar.png') }}" alt="Servicio de Neurolog&iacute;a"></a>
     </div>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav">    
+        <ul class="nav navbar-nav itemmenu">    
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administraci&oacute;n <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -47,7 +47,7 @@
         <ul class="nav navbar-nav navbar-right" style="float: right;">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <b title="Nombre y Apellido de Usuario" style="margin-left:10px; font-size: 1.3em">{{ app.user.nombre~' '~app.user.apellido }}</b>
+                    <b title="Nombre y Apellido de Usuario" class="itemmenu" style="padding-right:5px; margin-left:10px; font-size: 1.3em">{{ app.user.nombre~' '~app.user.apellido }}</b>
                     <img src="{{- asset('public/images/glyphicons/glyphicons-4-user.png') -}}" alt="Datos de usuario" title="Datos de usuario"/>
                     <img src="{{- asset('public/images/glyphicons/glyphicons-602-chevron-down.png') -}}" alt="Datos de usuario" title="Datos de usuario"/>
                 </a>
