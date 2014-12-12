@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" id='ulTab' onload='funcion();'>
+<ul class="nav nav-tabs centrado" id='ulTab' onload='funcion();'>
     <li role="presentation" onclick='activar(this);' id='liTabMotivo'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'motivo_listar', 'tab':'Motivo'}) }}">Motivo</a></li>
     <li role="presentation" onclick='activar(this);' id='liTabEnfermedad'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'enfermedad_listar', 'tab':'Enfermedad'}) }}">Enfermedad Actual</a></li>
     <li role="presentation" onclick='activar(this);' id='liTabAntecedente'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'antecedente_listar', 'tab':'Antecedente'}) }}">Antecedente</a></li>
@@ -8,7 +8,12 @@
     <li role="presentation" onclick='activar(this);' id='liTabTratamiento'><a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_listar', 'tab':'Tratamiento'}) }}">Tratamientos</a></li>
 </ul>
    
-
+<div class="tab-content ">   
+                    {% block contenido %}
+                        
+                    {% endblock %}
+                
+               
 {% if contenido is defined %}
 
     {{ contenido|raw }}
@@ -21,10 +26,13 @@
         }
         objeto = document.getElementById('liTab' + tab);
         objeto.setAttribute("class", "active");
+        tabpane= $('.tab-pane');
+        tabpane.attr('class','active');
 
     </script>
     
 {% endif %}
+ </div>
       
                 <!--
                 <div class="tab-content ">

@@ -24,6 +24,13 @@ and open the template in the editor.
 .oculto{
     display: none;
 }
+.centro{
+    margin:auto;
+    width:1150px;
+}
+.centrado{
+    margin:auto
+}
 .boton{
     cursor: pointer;
 }
