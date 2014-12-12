@@ -1,7 +1,14 @@
 {% block contenido -%}
-    <h3>Evolucion > Modificar descripción</h3>
+    
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Evolución / Modificar descripción</h3>
+        </div>
+        <div class="panel-body">    
+   
 
     {{ form(edit_form) }}
 <input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
-
+</div>
+    </div>
 {% endblock %}
