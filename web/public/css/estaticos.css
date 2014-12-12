@@ -41,8 +41,12 @@ input{
     border: 1px solid #ccc;
 }
 
-.texto {
+.textoEvolucion {
     word-wrap: break-word;
     width:100%;   
 }
 
+.texto {
+    word-wrap: break-word;
+    width:100%;   
+}
