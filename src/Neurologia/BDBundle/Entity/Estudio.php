@@ -71,7 +71,7 @@ class Estudio
     /**
      * @var string
      *
-     * @ORM\Column(name="institucion", type="string", length=255, nullable=true)
+     * @ORM\Column(name="institucion", type="string", length=30, nullable=true)
      */
     private $institucion;
 

@@ -24,28 +24,28 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nombre", type="string", length=25, nullable=false)
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="apellido", type="string", length=255, nullable=false)
+     * @ORM\Column(name="apellido", type="string", length=25, nullable=false)
      */
     private $apellido;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="direccion", type="string", length=255, nullable=true)
+     * @ORM\Column(name="direccion", type="string", length=25, nullable=true)
      */
     private $direccion;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="documento", type="string", length=50, nullable=false)
+     * @ORM\Column(name="documento", type="string", length=25, nullable=false)
      */
     private $documento;
 
@@ -59,14 +59,14 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=50, nullable=false)
+     * @ORM\Column(name="telefono", type="string", length=25, nullable=false)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ocupacion", type="string", length=255, nullable=true)
+     * @ORM\Column(name="ocupacion", type="string", length=25, nullable=true)
      */
     private $ocupacion;
 
@@ -80,14 +80,14 @@ class Paciente
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_carnet", type="string", length=255, nullable=false)
+     * @ORM\Column(name="numero_carnet", type="string", length=25, nullable=false)
      */
     private $numeroCarnet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=25, nullable=true)
      */
     private $email;
 
