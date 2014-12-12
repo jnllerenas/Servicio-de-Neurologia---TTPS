@@ -10,10 +10,10 @@ class EstudioType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $builder->add('descripcion', 'textarea');
+        $builder->add('descripcion', 'textarea',array('max_length'=>'80','attr'=>array('class'=>'form-control')));
         $builder->add('fecha', 'date',array(
             'widget' => 'single_text'));
-        $builder->add('institucion');
+        $builder->add('institucion','text',array('max_length'=>'35','attr'=>array('class'=>'form-control')));
         $builder->add('tipoEstudio');
         $builder->add('imagenes', 'collection', array(
             'label' => false,

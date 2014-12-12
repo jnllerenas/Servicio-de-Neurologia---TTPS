@@ -1,7 +1,21 @@
 {% block contenido -%}
-    <h3>Evolucion > Modificar descripción</h3>
+    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: auto;">
 
-    {{ form(edit_form) }}
-<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+    <div class="panel-heading">
+        <h3 class="panel-title">Evolucion > Modificar descripción</h3>
+    </div>
+    <div class="panel-body">
+
+    {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
+        {{ form_label(edit_form.evolucion) }}<br>
+        {{ form_errors(edit_form.evolucion) }}<br>
+                {{ form_widget(edit_form.evolucion,{ 'attr': {'rows':'5','cols':'145'} }) }}
+            
+    
+    {{ form_end(edit_form) }}
+    <input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+    </div></div>
+
 
 {% endblock %}

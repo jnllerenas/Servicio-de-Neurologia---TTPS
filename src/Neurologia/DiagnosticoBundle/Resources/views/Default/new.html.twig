@@ -1,5 +1,5 @@
 {% block contenido %}    
-    <div class="panel panel-default">
+    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 650px;">
         <div class="panel-heading">
             <h3 class="panel-title">Evoluci&oacute;n / Agregar diagnóstico</h3>
         </div>
@@ -14,13 +14,13 @@
 						Presuntivo
 					</label>
 				</div>
-				<div class="radio" onchange="mostrar_ocultar(2);">
+				<div class="radio form-group" onchange="mostrar_ocultar(2);">
 					<label>
 						<input type="radio" name="tipo" id="tipo2" value="Definitivo">
 						Definitivo
 					</label>
-					<div id="div_diagnostico_categoria" style="display:none">
-						<label for="select_diagnostico_categoria">Descripcion</label>
+					<div class="form-group" id="div_diagnostico_categoria" style="display:none">
+                                            <label for="select_diagnostico_categoria">Categor&iacute;a de Diagn&oacute;stico</label><br>
 						<select class="form-control" id="select_diagnostico_categoria" name="select_diagnostico_categoria">
 							<option value="0">Seleccione..</option>
 							{% for categoria in categorias %}
@@ -33,8 +33,8 @@
 				<br>
 				
 				<div class="form-group">
-					<label for="descripcion">Descripcion</label>
-					<textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui.."></textarea>
+                                    <label for="descripcion">Descripci&oacute;n</label><br>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Escriba aqui.."></textarea><br>
 				</div>
 				<input type="button" class="btn btn-primary" value="Aceptar" onclick="validarFormDiagnostico();" />
 				<div>

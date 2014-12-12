@@ -15,7 +15,7 @@ class TratamientoExternoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción'))
+            ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción','max_length'=>'80'))
             ->add('aceptar', 'submit', array('label' => 'Aceptar'))
         ;
     }

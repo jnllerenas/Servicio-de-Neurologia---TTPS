@@ -33,7 +33,7 @@ class DrogaTratamientoType extends AbstractType
             'class' => 'NeurologiaBDBundle:EfectoAdverso',
             'property' => 'descripcion',
               ))
-          ->add('dosis', 'text')  
+          ->add('dosis', 'text',array('max_length'=>'15'))  
         ;
     }
     

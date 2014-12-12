@@ -15,7 +15,7 @@ class TratamientoInternoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción'))
+            ->add('descripcion', 'textarea', array('required'  => true, 'label' => 'Descripción','max_length'=>'80'))
             ->add('inicio', 'date', array('required'  => true, 
                                           'label' => 'Fecha de inicio',
                                             'widget' => 'single_text'))

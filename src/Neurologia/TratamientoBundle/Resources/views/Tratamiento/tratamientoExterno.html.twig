@@ -4,7 +4,7 @@
           <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
     </div>-->
 
-    <div class="panel panel-default">
+    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 650px;">
         <div class="panel-heading">
             <h3 class="panel-title">Evoluci&oacute;n / Agregar tratamiento externo</h3>
         </div>
@@ -13,8 +13,8 @@
 
     {{ form_errors(form) }}
 
-    <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
-        </table>
+    {{ form_label(form.descripcion) }}<br>{{ form_widget(form.descripcion, { 'attr': {'class': 'form-control','cols':'50'} }) }}<br>{{ form_errors(form.descripcion) }}<br>
+        
         <span class="help-block">Debe introducir una descripci&oacute;n para el tratamiento que desea agregar.</span>
     
 

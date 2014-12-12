@@ -9,7 +9,7 @@ class ImagenType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('descripcion');
+        $builder->add('descripcion','text',array('max_length' => 30));
         $builder->add('file', 'file');
     }
 

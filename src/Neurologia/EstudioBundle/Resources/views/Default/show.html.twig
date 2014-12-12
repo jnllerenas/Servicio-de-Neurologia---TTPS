@@ -25,7 +25,7 @@
 
             {% for imagen in estudio.imagenes %}
                 <tr>
-                    <td>{{imagen.descripcion}}</td> <td><a href="{{ asset(imagen.getWebPath)}}" target="_blank"/>Ver imagen<td>
+                    <td>{{imagen.descripcion}}</td> <td><a href="{{ asset(imagen.getWebPath)}}" target="_blank"/><img src='{{ asset(imagen.getWebPath)}}' height='100px'/><td>
                 </tr>   
             {% endfor %}
 

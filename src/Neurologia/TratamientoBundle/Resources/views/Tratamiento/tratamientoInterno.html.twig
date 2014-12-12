@@ -72,7 +72,7 @@
          <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Tratamiento interno</a><br>
           <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
     </div>-->
-    <div class="panel panel-default">
+    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 650px;">
         <div class="panel-heading">
             <h3 class="panel-title">Evoluci&oacute;n / Agregar tratamiento interno</h3>
         </div>
@@ -81,10 +81,10 @@
 
     {{ form_start(form) }}
 
-    <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
-        <tr><td>{{ form_label(form.inicio) }}</td><td>{{ form_widget(form.inicio) }}</td><td>{{ form_errors(form.inicio) }}</td></tr>
-        <tr><td>{{ form_label(form.activo) }}</td><td>{{ form_widget(form.activo) }}</td><td>{{ form_errors(form.activo) }}</td></tr>
-    </table>
+    {{ form_label(form.descripcion) }}<br>{{ form_widget(form.descripcion, { 'attr': {'class': 'form-control','cols':'50'} }) }}<br>{{ form_errors(form.descripcion) }}<br>
+        {{ form_label(form.inicio) }}<br>{{ form_widget(form.inicio, { 'attr': {'class': 'form-control'} }) }}<br>{{ form_errors(form.inicio) }}<br>
+        {{ form_label(form.activo) }}<br>{{ form_widget(form.activo, { 'attr': {'class': 'form-control'} }) }}<br>{{ form_errors(form.activo) }}<br>
+  
     
     <div>
         <ul class="list-group" id="drogaTratamiento"

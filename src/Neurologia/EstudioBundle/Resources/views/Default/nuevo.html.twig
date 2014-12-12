@@ -68,25 +68,44 @@
 
 
 
+<div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 60%;">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Evolución / Agregar estudio</h3>
-        </div>
-        <div class="panel-body">
+    <div class="panel-heading">
+        <h3 class="panel-title">Evolución / Agregar estudio</h3>
+    </div>
+    <div class="panel-body">
+    
 
             {{ form_start(form) }}
-            <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
-                <tr><td>{{ form_label(form.fecha) }}</td><td>{{ form_widget(form.fecha) }}</td><td>{{ form_errors(form.fecha) }}</td></tr>
-                <tr><td>{{ form_label(form.institucion) }}</td><td>{{ form_widget(form.institucion) }}</td><td>{{ form_errors(form.institucion) }}</td></tr>
-                <tr><td>{{ form_label(form.tipoEstudio) }}</td><td>{{ form_widget(form.tipoEstudio) }}</td><td>{{ form_errors(form.tipoEstudio) }}</td></tr>
-            </table>
-            <ul class="list-group" id="imagenes"
+                
+                {{ form_label(form.descripcion) }}<br>
+                {{ form_widget(form.descripcion,{ 'attr': {'cols':'50'} })}}<br>
+                {{ form_errors(form.descripcion) }}
+                
+                <br>
+                {{ form_label(form.fecha) }}<br>
+                {{ form_widget(form.fecha,{'attr':{'class':'form-control'} }) }}<br>
+                {{ form_errors(form.fecha) }}
+                <br>
+                {{ form_label(form.institucion) }}<br>
+                {{ form_widget(form.institucion,{'attr':{'class':'form-control'} }) }}<br>
+                {{ form_errors(form.institucion) }}
+                <br>
+                
+                {{ form_label(form.tipoEstudio) }}<br>
+                {{ form_widget(form.tipoEstudio,{'attr':{'class':'form-control'} }) }}<br>
+                {{ form_errors(form.tipoEstudio) }}
+                <br>
+                
+                 <ul class="list-group" id="imagenes"
                 data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
                 ></ul>
-
+           
+           
+                
             {{ form_row(form.save, { 'attr': {'class': 'btn btn-primary'} }) }}
-
+             <input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+            
             {{ form_end(form) }} 
 
 
@@ -101,9 +120,9 @@
             {% endif %}
 
         {% endblock %}
-        <div>
-            <input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
-        </div> 
+       
+           
+        
 
     </div>
 </div>
