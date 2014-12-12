@@ -66,37 +66,46 @@
 
     </script>
 
-<h3>Evolucion > Estudio > Nuevo </h3>
 
 
 
-    {{ form_start(form) }}
-    <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
-        <tr><td>{{ form_label(form.fecha) }}</td><td>{{ form_widget(form.fecha) }}</td><td>{{ form_errors(form.fecha) }}</td></tr>
-        <tr><td>{{ form_label(form.institucion) }}</td><td>{{ form_widget(form.institucion) }}</td><td>{{ form_errors(form.institucion) }}</td></tr>
-        <tr><td>{{ form_label(form.tipoEstudio) }}</td><td>{{ form_widget(form.tipoEstudio) }}</td><td>{{ form_errors(form.tipoEstudio) }}</td></tr>
-    </table>
-    <ul class="list-group" id="imagenes"
-        data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
-        ></ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Evolución / Agregar estudio</h3>
+        </div>
+        <div class="panel-body">
 
-    {{ form_row(form.save, { 'attr': {'class': 'btn btn-primary'} }) }}
-    
-    {{ form_end(form) }} 
+            {{ form_start(form) }}
+            <table><tr><td>{{ form_label(form.descripcion) }}</td><td>{{ form_widget(form.descripcion) }}</td><td>{{ form_errors(form.descripcion) }}</td></tr>
+                <tr><td>{{ form_label(form.fecha) }}</td><td>{{ form_widget(form.fecha) }}</td><td>{{ form_errors(form.fecha) }}</td></tr>
+                <tr><td>{{ form_label(form.institucion) }}</td><td>{{ form_widget(form.institucion) }}</td><td>{{ form_errors(form.institucion) }}</td></tr>
+                <tr><td>{{ form_label(form.tipoEstudio) }}</td><td>{{ form_widget(form.tipoEstudio) }}</td><td>{{ form_errors(form.tipoEstudio) }}</td></tr>
+            </table>
+            <ul class="list-group" id="imagenes"
+                data-prototype="{{ include('NeurologiaEstudioBundle:Default:prototype.html.twig', { 'form': form.imagenes.vars.prototype })}}"         
+                ></ul>
+
+            {{ form_row(form.save, { 'attr': {'class': 'btn btn-primary'} }) }}
+
+            {{ form_end(form) }} 
 
 
-    {% if error is not empty %}
-    <br>
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        {{ error }}
+            {% if error is not empty %}
+                <br>
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+        {% endblock %}
+        <div>
+            <input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
+        </div> 
+
     </div>
-
-{% endif %}
-
-{% endblock %}
-  <div>
-	<input class="btn btn-primary" style="margin-top:10px" type="button" onclick=" window.history.back()" value='Volver' />
 </div>
-                    
+
+

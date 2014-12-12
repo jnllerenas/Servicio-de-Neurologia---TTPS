@@ -1,110 +1,140 @@
 {% block contenido %}
 
-  
-        <h3>Evolución</h3>
-
-        <h3 style="display:inline-block">Descripción: {{evolucion[0].getEvolucion}}</h3>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_descripcion_edit','id':evolucion[0].getId,'tab':'Evolucion'}) }}">Modificar descripción</a>
-        <br>
-        <script>
-            $('form').submit(function () {
-                return confirm('¿Desea guardar la evolución?\nNo se podrá modificar o eliminar la información guardada.');
-            })
-        </script>
-        <br>
- 
-
-    <div class="panel panel-default">
-        <div class="panel-heading">Datos agregados a la evolución:</div>
-
-
-        {% if tratinterno %}
-            <h4>Tratamientos Internos</h4>
-            <table class="table">
-                <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Drogas</th><!--<th>Acciones</th>-->
-                        {% for key,ti in tratinterno %}
-                    <tr><td>{{ ti.descripcion }}</td>
-                        <td>{{ ti.inicio|date('d-m-Y') }}</td>
-                        <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
-                        <td>{{ ti.drogaTratamiento | length }}</td>
-                       <!-- <td><a href="{{ path('tratamiento_interno_editar',{'key':key}) }}" onclick="return confirm('¿Desea editar la información del tratamiento?\nLas drogas deberán ser cargadas nuevamente.');">Editar</a>
-                            <a href="{{ path('tratamiento_interno_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');" >Eliminar</a>--></tr>
-                        {% endfor %}
-            </table>
-            <br>
-        {% endif %}
-        {% if tratexterno %}
-            <h4>Tratamientos Externos</h4>
-            <table class="table">
-                <tr><th>Descripci&oacute;n</th><!--<th>Acciones</th>--></tr>
-                        {% for key,te in tratexterno %}
-                    <tr><td>{{ te.descripcion }}</td>
-                       <!-- <td><a href="{{ path('tratamiento_externo_editar',{'key':key}) }}" >Editar</a>
-                            <a href="{{ path('tratamiento_externo_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');"  >Eliminar</a>--></tr>
-                        {% endfor %}
-            </table>
-            <br>
-        {% endif %}
-
-        {% if diagnosticosDefinitivos %}
-            <h4>Diagnosticos Definitivos</h4>
-            <table class="table">
-                <tr><th>Descripci&oacute;n</th><th>Categoría</th><!--<th>Acciones</th>-->
-                        {% for key,d in diagnosticosDefinitivos %}
-                    <tr><td>{{ d.descripcion }}</td>
-                        <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
-                        <!--<td><a href="{{ path('diagnostico_editar', { 'key' : key }) }}" >Editar</a>
-                            <a href="{{ path('diagnostico_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el diagnóstico?');" >Eliminar</a>-->
-                    </tr>
-                {% endfor %}
-            </table>
-            <br>
-        {% endif %}
-                {% if diagnosticosPresuntivos %}
-            <h4>Diagnosticos</h4>
-            <table class="table">
-                <tr><th>Descripci&oacute;n</th><th>Categoría</th><!--<th>Acciones</th>-->
-                        {% for key,d in diagnosticosPresuntivos %}
-                    <tr><td>{{ d.descripcion }}</td>
-                        <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
-                        <!--<td><a href="{{ path('diagnostico_editar', { 'key' : key }) }}" >Editar</a>
-                            <a href="{{ path('diagnostico_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el diagnóstico?');" >Eliminar</a>-->
-                    </tr>
-                {% endfor %}
-            </table>
-            <br>
-        {% endif %}
-        {% if estudios %}
-            <h4>Estudios</h4>
-            <table class="table">
-                <tr><th>Descripci&oacute;n</th><th>Tipo</th><th>Im&aacute;genes</th><!--<th>Acciones</th>-->
-                        {% for key,e in estudios %}
-                    <tr><td>{{ e.descripcion }}</td>
-                        <td>{{ e.tipoEstudio }}</td>
-                        <td>{{ e.imagenes | length }}</td>
-                        <!--<td><a href="{{ path('estudio_editar', { 'key' : key }) }}" onclick="return confirm('¿Desea editar la información del estudio?\nLas imágenes deberán ser cargadas nuevamente.');">Editar</a>
-                            <a href="{{ path('estudio_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el estudio?');" >Eliminar</a>-->
-                    </tr>
-                {% endfor %}
-            </table>
-            <br>
-        {% endif %}
-
-    </div>
 
 
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Acciones:<br>
-            <nav>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_nuevo','tab':'Evolucion'}) }}">Agregar estudio</a><br>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Agregar tratamiento Interno</a><br>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Agregar tratamiento Externo</a><br>
-        <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'diagnostico_nuevo','tab':'Evolucion'}) }}">Agregar diagn&oacute;stico</a><br>
-            </nav>
+            <h3 class="panel-title">Evolución creada por {{evolucion[0].getUsuario}} el día {{evolucion[0].getfechaHora|date('d-m-Y')}}</h3>
         </div>
+        <div class="panel-body">
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Descripción</h3>
+                </div>
+                <div class="panel-body">
+                   <textarea readonly rows="15" cols="145"> {{evolucion[0].getEvolucion}}</textarea><br><br>
+                    <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'evolucion_descripcion_edit','id':evolucion[0].getId,'tab':'Evolucion'}) }}">Modificar descripción</a>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <script>
+                $('form').submit(function () {
+                    return confirm('¿Desea guardar la evolución?\nNo se podrá modificar o eliminar la información guardada.');
+                })
+            </script>
+
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">  <h3 class="panel-title">Datos agregados a la evolución</h3></div>
+<div class="panel-body">
+
+                {% if tratinterno %}
+                    <h4>Tratamientos Internos</h4>
+                    <table class="table">
+                        <tr><th>Descripci&oacute;n</th><th>Inicio</th><th>Activo</th><th>Drogas</th><!--<th>Acciones</th>-->
+                                {% for key,ti in tratinterno %}
+                            <tr><td>{{ ti.descripcion }}</td>
+                                <td>{{ ti.inicio|date('d-m-Y') }}</td>
+                                <td>{% if ti.activo %}Sí{% else %}No{% endif %}</td>
+                                <td>{{ ti.drogaTratamiento | length }}</td>
+                               <!-- <td><a href="{{ path('tratamiento_interno_editar',{'key':key}) }}" onclick="return confirm('¿Desea editar la información del tratamiento?\nLas drogas deberán ser cargadas nuevamente.');">Editar</a>
+                                    <a href="{{ path('tratamiento_interno_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');" >Eliminar</a>--></tr>
+                            {% endfor %}
+                    </table>
+                    <br>
+                {% endif %}
+                {% if tratexterno %}
+                    <h4>Tratamientos Externos</h4>
+                    <table class="table">
+                        <tr><th>Descripci&oacute;n</th><!--<th>Acciones</th>--></tr>
+                                {% for key,te in tratexterno %}
+                            <tr><td>{{ te.descripcion }}</td>
+                               <!-- <td><a href="{{ path('tratamiento_externo_editar',{'key':key}) }}" >Editar</a>
+                                    <a href="{{ path('tratamiento_externo_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el tratamiento?');"  >Eliminar</a>--></tr>
+                            {% endfor %}
+                    </table>
+                    <br>
+                {% endif %}
+
+                {% if diagnosticosDefinitivos %}
+                    <h4>Diagnosticos Definitivos</h4>
+                    <table class="table">
+                        <tr><th>Descripci&oacute;n</th><th>Categoría</th><!--<th>Acciones</th>-->
+                                {% for key,d in diagnosticosDefinitivos %}
+                            <tr><td>{{ d.descripcion }}</td>
+                                <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
+                                <!--<td><a href="{{ path('diagnostico_editar', { 'key' : key }) }}" >Editar</a>
+                                    <a href="{{ path('diagnostico_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el diagnóstico?');" >Eliminar</a>-->
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                {% endif %}
+                {% if diagnosticosPresuntivos %}
+                    <h4> Diagnosticos</h4>
+                    <table class="table">
+                        <tr><th>Descripci&oacute;n</th><th>Categoría</th><!--<th>Acciones</th>-->
+                                {% for key,d in diagnosticosPresuntivos %}
+                            <tr><td>{{ d.descripcion }}</td>
+                                <td>{% if d.categoriaDiagnostico is defined %}{{ d.categoriaDiagnostico.descripcion }}{% endif %}</td>
+                                <!--<td><a href="{{ path('diagnostico_editar', { 'key' : key }) }}" >Editar</a>
+                                    <a href="{{ path('diagnostico_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el diagnóstico?');" >Eliminar</a>-->
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                {% endif %}
+                {% if estudios %}
+                    <h4>Estudios</h4>
+                    <table class="table">
+                        <tr><th>Descripci&oacute;n</th><th>Tipo</th><th>Im&aacute;genes</th><!--<th>Acciones</th>-->
+                                {% for key,e in estudios %}
+                            <tr><td>{{ e.descripcion }}</td>
+                                <td>{{ e.tipoEstudio }}</td>
+                                <td>{{ e.imagenes | length }}</td>
+                                <!--<td><a href="{{ path('estudio_editar', { 'key' : key }) }}" onclick="return confirm('¿Desea editar la información del estudio?\nLas imágenes deberán ser cargadas nuevamente.');">Editar</a>
+                                    <a href="{{ path('estudio_borrar', { 'key' : key }) }}" onclick="return confirm('¿Desea eliminar el estudio?');" >Eliminar</a>-->
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                {% endif %}
+</div>
+            </div>
+
+
+        </div>        
+
+        <div class="panel-footer">
+            <div class="btn-group" role="group" aria-label="">
+                <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'estudio_nuevo','tab':'Evolucion'}) }}" type="button" class="btn btn-default">Nuevo estudio</a>
+                <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}" type="button" class="btn btn-default">Nuevo tratamiento interno</a>
+                <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}" type="button" class="btn btn-default">Nuevo tratamiento externo</a>
+                <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'diagnostico_nuevo','tab':'Evolucion'}) }}" type="button" class="btn btn-default">Nuevo diagnóstico</a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
     </div>
+</div>
+
 
 
 {% endblock %}

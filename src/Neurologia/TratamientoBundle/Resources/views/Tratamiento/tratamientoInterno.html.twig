@@ -72,8 +72,12 @@
          <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_interno_nuevo','tab':'Evolucion'}) }}">Tratamiento interno</a><br>
           <a href="{{ url('neurologia_historia_clinica_homepage', {'accion':'tratamiento_externo_nuevo','tab':'Evolucion'}) }}">Tratamiento externo</a><br>
     </div>-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Evoluci&oacute;n / Agregar tratamiento interno</h3>
+        </div>
+     <div class="panel-body">
 
-    <h3>Evoluci&oacute;n > Tratamiento Interno > Nuevo</h3>
 
     {{ form_start(form) }}
 
@@ -96,5 +100,6 @@
 
     {{ form_end(form) }}    
 
-
+</div>
+    </div>
 {% endblock %}

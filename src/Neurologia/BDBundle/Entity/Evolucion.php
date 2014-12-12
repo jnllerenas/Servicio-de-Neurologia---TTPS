@@ -24,7 +24,7 @@ class Evolucion
     /**
      * @var string
      *
-     * @ORM\Column(name="evolucion", type="string", length=255, nullable=false)
+     * @ORM\Column(name="evolucion", type="text", nullable=false)
      */
     private $evolucion;
 
