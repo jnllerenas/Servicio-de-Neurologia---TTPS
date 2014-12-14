@@ -359,7 +359,7 @@ class DefaultController extends Controller {
         }
         $aux['motivo'] = $motivo->getDetalle();
 
-        if ($paciente->getDerivadoPor()) {
+        if ($paciente->getDerivadoPor()!==NULL) {
             $departamento = $em->getRepository('NeurologiaBDBundle:Departamento')->find($paciente->getDerivadoPor());
             $aux['departamento'] = $departamento->getDescripcion();
         } else {

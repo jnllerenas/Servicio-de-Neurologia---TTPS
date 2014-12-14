@@ -79,10 +79,12 @@
                         </div>
                         <br><br><br>
                         <div>
-                            <strong>Comentarios:</strong>&nbsp;{{ entity.otros }}
+                            <strong>Comentarios:</strong><br>
+                            <textarea cols="30" rows="5">{{ entity.otros }}</textarea>
                         </div>
 
                     </div>
+                        
                     <div style="float: right; margin-top: 20px;">
                         <a class="btn btn-primary" href="{{- path('neurologia_busqueda_paciente') -}}">
                             Volver

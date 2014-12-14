@@ -125,7 +125,7 @@
                             <br>
                             {{ form_widget(form.enabled, { 'attr': { 'style': 'float: left;', 'class': 'form-control' } }) }}
                         </div>
-                        
+                        {{ form_widget(form._token) }}
                         <div style="float: right; margin-top: 20px;">
                             <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans }}"/>
                             <a class="btn btn-primary" href="{{- path('neurologia_busqueda_usuario') -}}">
