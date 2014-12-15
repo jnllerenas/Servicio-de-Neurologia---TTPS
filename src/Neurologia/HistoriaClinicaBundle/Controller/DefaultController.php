@@ -46,12 +46,10 @@ class DefaultController extends Controller {
             $params['contenido'] = $contenido->getContent();
             $params['tab'] = $_GET['tab'];
             
-        }else{
-            
+        }else{            
             $contenido = $this->forward($this->routeToControllerName('evolucion_listar'), array());
             $params['contenido'] = $contenido->getContent();
             $params['tab'] = 'Evolucion';
-            
         }
         
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
@@ -110,12 +108,8 @@ class DefaultController extends Controller {
             $paciente = $em->merge($_SESSION['paciente']);
             $usuario = $em->getRepository('NeurologiaBDBundle:User')->find($_SESSION['user']->getId()); 
             $paciente->setAdmitidoPor($usuario); // modifico para usar $usuario
-            if ($form->get('derivado')->getData()) {
-                $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
-                $paciente->setDerivadoPor($derivado);
-            } else {
-                $paciente->setDerivadoPor(NULL);
-            }
+            $derivado = $em->getRepository('NeurologiaBDBundle:Departamento')->find($form->get('derivado')->getData());
+            $paciente->setDerivadoPor($derivado);
             $em->persist($paciente);
             $em->flush();
             //historia

@@ -30,7 +30,6 @@ class Formularios {
         ->setAction($a->generateUrl('neurologia_historia_clinica_iniciar'))
         
         ->add('derivado', 'choice', array(
-                                'attr' =>array('required' => true,),
                                 'choice_list' => new SimpleChoiceList($list),
                                 'label' => 'Derivado por: '  
             ))
