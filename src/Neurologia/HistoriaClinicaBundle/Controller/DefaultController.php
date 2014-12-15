@@ -105,9 +105,6 @@ class DefaultController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         try {
-
-
-
             $em->getConnection()->beginTransaction();
             //paciente        
             $paciente = $em->merge($_SESSION['paciente']);
