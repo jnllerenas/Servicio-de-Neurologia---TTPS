@@ -52,8 +52,10 @@
             
         {% else %}
 
-            {{ form(iniciar) }}
-
+            <div style="margin:auto;text-align:center;">
+                <input class="btn btn-primary" type="button" onclick=" window.history.back()" value='Volver' />
+                {{ form(iniciar) }}
+            </div>
         {% endif %}
 
     {% else %}

@@ -62,7 +62,7 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $idpaciente = $_SESSION['paciente']->getId();
         $departamentos = $em->getRepository('NeurologiaBDBundle:Departamento')->findAll();
-        $list = array(0 => 'Ninguno');
+        $list = array();
         foreach ($departamentos as $row) {
             $list[$row->getId()] = $row->getDescripcion();
         }
@@ -90,17 +90,16 @@ class DefaultController extends Controller {
         $params['paciente'] = $em->merge($paciente);
         $params['historia'] = $this->vistaHistoria();
         $params['listado']= $this->vistaListado( $params['historia']['id']);
-      		
-
-	  
-		$facade = $this->get('ps_pdf.facade');
-		$response = new Response();
-		$this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', $params ,$response);
-		$xml = $response->getContent();
-		$content = $facade->render($xml);
-		return new Response($content, 200, array('content-type' => 'application/pdf'));
+      	
+        $facade = $this->get('ps_pdf.facade');
+        $response = new Response();
+        $this->render('NeurologiaHistoriaClinicaBundle:Default:pdf.pdf.twig', $params ,$response);
+        $xml = $response->getContent();
+        $content = $facade->render($xml);
+        
+        return new Response($content, 200, array('content-type' => 'application/pdf'));
  
-	}
+    }
 
     public function guardarHistoria($form) {
 
@@ -225,6 +224,7 @@ class DefaultController extends Controller {
                 $droga = array();
             }
             $t['droga'] = $droga;
+            
         }
 
 

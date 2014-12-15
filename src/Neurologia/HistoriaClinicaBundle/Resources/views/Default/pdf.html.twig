@@ -1,5 +1,5 @@
 <div>
-
+    {% if paciente is not empty %}
 	<h2>Epicrisis de: {{paciente.apellido}}, {{paciente.nombre}} ({{ "now"|date("d/m/Y") }})</h2>		
         
         <h3>Datos del Paciente</h3>
@@ -19,34 +19,56 @@
 	
 	<h3>Historial:</h3>
         
-        {% if historia %}
-        <div>Enfermedad Actual: {{ historia.enfermedad }}</div>
-	<div>Admitido Por: {{ historia.usuario }}</div>
-	<div>Motivo: {{ historia.motivo }}</div>
-	<div>Derivado por: {{ historia.departamento }}</div>
-        <br></br>
-        <br></br>
-        
-        {% if listado|length > 0 %}
-	<table>
-	{% for i in listado %}
-		<tr>
-			<td width='80px'>{{ i.fecha|date('d/m/Y') }}</td>
-				
-			{% if i.droga %}
-				<td>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}:  {{i.descripcion|capitalize}}</td>
-				<td>Droga(dosis):
-				
-				{% for d in i.droga %}
-						{{ d.droga }} ({{d.dosis}})
-				{% endfor %}
-				</td>
-			{% else %}
-				<td colspan='2'>{{ i.tipo }}{% if i.tipoDetalle %} {{ i.tipoDetalle }}{% endif %}:  {{i.descripcion|capitalize}}</td>
-			{% endif %}
-		</tr>
-	{% endfor %}
-	</table>
+        {% if historia is not empty %}
+            <div><strong>Enfermedad Actual: </strong>{{ historia.enfermedad }}</div>
+            <div><strong>Admitido Por: </strong>{{ historia.usuario }}</div>
+            <div><strong>Motivo: </strong>{{ historia.motivo }}</div>
+            <div><strong>Derivado por: </strong>{{ historia.departamento }}</div>
+            <br></br>
+            <br></br>
+
+            {% if listado|length > 0 %}
+                <table>
+                    {% for i in listado %}
+                        <tr>
+                            <td width='80px'>{{ i.fecha|date('d/m/Y') }}</td>
+
+                            {% if i.droga is not empty %}
+                                
+                                <td>
+                                    {{ i.tipo }}
+                                    {% if i.tipoDetalle %} 
+                                        {{ i.tipoDetalle }}
+                                    {% endif %}: 
+                                    {{ i.descripcion|capitalize }}
+                                </td>
+                                <td>
+                                    Droga(dosis):
+                                    {% for d in i.droga %}
+                                        {{ d.droga }} ({{ d.dosis }})
+                                    {% endfor %}
+
+                                </td>
+                                
+                            {% else %}
+
+                                <td>
+                                    {{ i.tipo }}
+                                    {% if i.tipoDetalle %} 
+                                        {{ i.tipoDetalle }}
+                                    {% endif %}:  
+                                    {{ i.descripcion|capitalize }}
+                                </td>
+
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        {% else %}
+            <label> No existen datos para la historia cl&iacute;nica del paciente.</label>
         {% endif %}
-        {% endif %}
+    {% else %}
+        <label> No existen datos del paciente.</label>
+    {% endif %}
 </div>
