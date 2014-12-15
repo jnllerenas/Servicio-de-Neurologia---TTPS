@@ -33,8 +33,9 @@ class DefaultController extends Controller {
         $form = Formularios::createIniciarForm($this);
         $params['iniciar'] = $form->createView();
         //historial
-        $params['listado'] = $this->vistaListado($params['historia']['id']);
-
+        if($params['historia']){
+            $params['listado'] = $this->vistaListado($params['historia']['id']);
+        
         // deberia dirigirme a NeurologiaHistoriaClinicaBundle:Default:tabs
         // y que me devuelva el render de la vista que le pase como parámetro(por defecto va a ser null)
         // usando el script de jona marco como actual y luego todas la peticiones van a caer aca.
@@ -53,7 +54,7 @@ class DefaultController extends Controller {
             $params['tab'] = 'Evolucion';
             
         }
-        
+        }
         return $this->render('NeurologiaHistoriaClinicaBundle:Default:index.html.twig', $params);
     }
 
