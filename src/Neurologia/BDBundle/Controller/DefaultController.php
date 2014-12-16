@@ -23,7 +23,7 @@ class DefaultController extends Controller
         if(!is_dir($folder)){
             mkdir($folder);
         }
-        $path='c:\\xampp\\mysql\\bin\\';
+        $path='C:\wamp\bin\mysql\mysql5.6.12\bin';
 //		$path = getenv("PATHMYSL");
 //		if ($path==false){
 //			$mensaje="Cree la variable de entorno PATHMYSQL como variable de entorno escribiendo en la consola -> set PATHMYSQ='elpath'";

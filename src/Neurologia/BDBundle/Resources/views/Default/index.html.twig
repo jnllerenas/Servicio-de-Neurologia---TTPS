@@ -1,10 +1,22 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <div>Para realizar una copia de seguridad de la base de datos</div>
-    <div>Haga click en el siguiente botón</div>
-    <form action="{{ path('neurologia_bd_create_backup') }}" method="post" >
+     <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 650px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">Backup</h3>
+        </div>
+     <div class="panel-body">
+		<span>Para realizar una copia de seguridad de la base de datos</span>
+		<span>Haga click en botón "Realizar copia de seguridad"</span>
+	</div>
+    
+	
+	<form action="{{ path('neurologia_bd_create_backup') }}" method="post" >
         <input type="hidden" name="backup" value="1">
-    <button type="submit" >Realizar copia de seguridad</button>
+    <button class="btn btn-primary" type="submit" >Realizar copia de seguridad</button>
+	
+	<input class="btn btn-primary" style="margin-top:2px" type="button" onclick=" window.history.back()" value='Volver' />
     </form>
-    <div>{% if mensaje is defined %}{{ mensaje }}{% endif %}</div>
+    {% if mensaje is defined %}
+		<div class="alert alert-info">{{ mensaje }}</div>
+	{% endif %}
     {% endblock %}

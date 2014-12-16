@@ -1,9 +1,6 @@
 <?php
-
 namespace Neurologia\BDBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * DrogaTratamiento
  *
@@ -24,7 +21,6 @@ class DrogaTratamiento
      * @ORM\GeneratedValue(strategy="NONE")
      */
     private $dosis;
-
     /**
      * @var \EfectoAdverso
      *
@@ -36,7 +32,6 @@ class DrogaTratamiento
      * })
      */
     private $efectoAdverso;
-
     /**
      * @var \Droga
      *
@@ -66,14 +61,12 @@ class DrogaTratamiento
      * @ORM\ManyToOne(targetEntity="TratamientoInterno",inversedBy="drogaTratamiento")
      */
     private $tratamiento;
-
     
     
     public function addTratamiento(TratamientoInterno $trat)
     {            
         $this -> setTratamiento($trat);
     }
-
     /**
      * Set dosis
      *
@@ -83,10 +76,8 @@ class DrogaTratamiento
     public function setDosis($dosis)
     {
         $this->dosis = $dosis;
-
         return $this;
     }
-
     /**
      * Get dosis
      *
@@ -96,7 +87,6 @@ class DrogaTratamiento
     {
         return $this->dosis;
     }
-
     /**
      * Set efectoAdverso
      *
@@ -106,10 +96,8 @@ class DrogaTratamiento
     public function setEfectoAdverso(\Neurologia\BDBundle\Entity\EfectoAdverso $efectoAdverso)
     {
         $this->efectoAdverso = $efectoAdverso;
-
         return $this;
     }
-
     /**
      * Get efectoAdverso
      *
@@ -119,7 +107,6 @@ class DrogaTratamiento
     {
         return $this->efectoAdverso;
     }
-
     /**
      * Set droga
      *
@@ -129,10 +116,8 @@ class DrogaTratamiento
     public function setDroga(\Neurologia\BDBundle\Entity\Droga $droga)
     {
         $this->droga = $droga;
-
         return $this;
     }
-
     /**
      * Get droga
      *
@@ -142,7 +127,6 @@ class DrogaTratamiento
     {
         return $this->droga;
     }
-
     /**
      * Set tratamiento
      *
@@ -152,10 +136,8 @@ class DrogaTratamiento
     public function setTratamiento(\Neurologia\BDBundle\Entity\TratamientoInterno $tratamiento)
     {
         $this->tratamiento = $tratamiento;
-
         return $this;
     }
-
 //    /**
 //     * Get tratamiento
 //     *

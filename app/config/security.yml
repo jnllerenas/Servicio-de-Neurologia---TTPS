@@ -29,6 +29,7 @@ security:
         - { path: ^/tratamiento, role: [ROLE_ADMIN, ROLE_DOCTOR] }
         - { path: ^/evolucion, role: [ROLE_ADMIN, ROLE_DOCTOR] }
         - { path: ^/home, role: [ROLE_ADMIN, ROLE_DOCTOR, ROLE_SECRETARY] }
+        - { path: ^/backup, role: [ROLE_ADMIN, ROLE_SECRETARY] }
         - { path: ^/busqueda/paciente, role: [ROLE_ADMIN, ROLE_DOCTOR, ROLE_SECRETARY] }
         - { path: ^/busqueda/usuario, role: [ROLE_ADMIN, ROLE_DOCTOR] }
         - { path: ^/busqueda/avanzada, role: [ROLE_ADMIN, ROLE_DOCTOR] }
