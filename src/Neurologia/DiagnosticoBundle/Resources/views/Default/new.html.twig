@@ -1,5 +1,5 @@
-{% block contenido %}    
-    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px; width: 650px;">
+﻿{% block contenido %}    
+    <div class="panel panel-primary" style="margin: auto; margin-top:15px; margin-bottom:15px;">
         <div class="panel-heading">
             <h3 class="panel-title">Evoluci&oacute;n / Agregar diagnóstico</h3>
         </div>
@@ -21,7 +21,7 @@
 					</label>
 					<div class="form-group" id="div_diagnostico_categoria" style="display:none">
                                             <label for="select_diagnostico_categoria">Categor&iacute;a de Diagn&oacute;stico</label><br>
-						<select class="form-control" id="select_diagnostico_categoria" name="select_diagnostico_categoria">
+						<select class="form-control" id="select_diagnostico_categoria" name="select_diagnostico_categoria" style="width:100%;font-size:12px;">
 							<option value="0">Seleccione..</option>
 							{% for categoria in categorias %}
 								<option value="{{ categoria.id }}">{{ categoria.descripcion }}</option>
