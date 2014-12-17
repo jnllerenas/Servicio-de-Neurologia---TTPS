@@ -15,7 +15,7 @@ class EvolucionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('evolucion','textarea', array('label' => 'Descripción: ', 'max_length'=>'255'))
+            ->add('evolucion','textarea', array('label' => 'Descripción: '))
             
         ;
     }
