@@ -9,6 +9,6 @@ parameters:
     mailer_transport: smtp
     mailer_host: smtp.gmail.com
     mailer_user: sirhchsm@gmail.com
-    mailer_password: aA12345678
+    mailer_password: aA123789
     locale: es
     secret: b9cad633ea8b89a0a10bd3ee4797e10d1c

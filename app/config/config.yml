@@ -70,7 +70,7 @@ swiftmailer:
     auth_mode:  login
     host:       smtp.gmail.com
     username:   sirhchsm@gmail.com
-    password:   aA12345678
+    password:   aA123789
     
 fos_user:
     registration:
