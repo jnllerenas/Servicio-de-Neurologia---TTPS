@@ -7,7 +7,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="detalle" type="string" column="detalle" length="255" nullable="false"/>
+    <field name="detalle" type="text" column="detalle" nullable="false"/>
     <many-to-one field="historiaClinica" target-entity="HistoriaClinica">
       <join-columns>
         <join-column name="historia_clinica_id" referenced-column-name="id"/>

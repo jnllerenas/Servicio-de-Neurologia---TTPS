@@ -24,6 +24,9 @@ class DefaultController extends Controller {
         //si llegamos acá supuestamente tenemos seleccionado un paciente
         $params = array();
         //Cargo datos paciente
+        if(!isset($_SESSION['paciente'])){
+            return $this->redirect($this->generateUrl('neurologia_main_homepage'));
+        }
         $paciente = $_SESSION['paciente'];
         $em = $this->getDoctrine()->getManager();
         $params['paciente'] = $em->merge($paciente);
@@ -334,7 +337,6 @@ class DefaultController extends Controller {
         }
         $aux['id'] = $historia->getId();
         $aux['enfermedad'] = $enfermedad->getDetalle();
-
 
         $aux['usuario'] = $_SESSION['user']->getUsername();
         $dql = "select MAX(m.id) as id from NeurologiaBDBundle:Motivo m where m.historiaClinica=:id";

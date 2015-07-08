@@ -24,7 +24,7 @@ class Motivo
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=255, nullable=false)
+     * @ORM\Column(name="detalle", type="text", nullable=false)
      */
     private $detalle;
 

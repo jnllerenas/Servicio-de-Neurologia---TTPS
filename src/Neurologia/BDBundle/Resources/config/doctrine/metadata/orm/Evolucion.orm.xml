@@ -8,7 +8,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="evolucion" type="string" column="evolucion" length="255" nullable="false"/>
+    <field name="evolucion" type="text" column="evolucion" nullable="false"/>
     <field name="fechaHora" type="datetime" column="fecha_hora" nullable="false"/>
     <many-to-one field="historiaClinica" target-entity="HistoriaClinica">
       <join-columns>
